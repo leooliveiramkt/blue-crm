@@ -9,8 +9,20 @@ import {
   Link, 
   Settings, 
   Database,
-  FileText 
+  FileText,
+  ChevronLeft
 } from 'lucide-react';
+import {
+  Sidebar as SidebarComponent,
+  SidebarContent,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarTrigger,
+  useSidebar
+} from '@/components/ui/sidebar';
 
 type NavItem = {
   title: string;
@@ -57,32 +69,42 @@ const navItems: NavItem[] = [
 ];
 
 const Sidebar = () => {
+  const { state } = useSidebar();
+  
   return (
-    <aside className="hidden md:flex h-screen w-64 flex-col bg-sidebar fixed inset-y-0 z-10">
-      <div className="flex h-14 items-center border-b border-sidebar-border px-4">
+    <SidebarComponent>
+      <SidebarHeader className="flex h-14 items-center px-4 border-b border-sidebar-border">
         <span className="text-xl font-bold text-white">AffiFlow CRM</span>
-      </div>
-      <nav className="flex-1 overflow-y-auto py-4">
-        <ul className="space-y-1 px-2">
+        <div className="flex-1"></div>
+        <SidebarTrigger />
+      </SidebarHeader>
+      
+      <SidebarContent className="py-4">
+        <SidebarMenu>
           {navItems.map((item) => (
-            <li key={item.href}>
-              <NavLink 
-                to={item.href}
-                className={({ isActive }) => cn(
-                  "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-                  isActive 
-                    ? "bg-sidebar-accent text-sidebar-accent-foreground" 
-                    : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground"
-                )}
+            <SidebarMenuItem key={item.href}>
+              <SidebarMenuButton 
+                asChild 
+                tooltip={state === "collapsed" ? item.title : undefined}
               >
-                <item.icon className="h-4 w-4" />
-                <span>{item.title}</span>
-              </NavLink>
-            </li>
+                <NavLink 
+                  to={item.href}
+                  className={({ isActive }) => cn(
+                    isActive 
+                      ? "data-[active=true]" 
+                      : ""
+                  )}
+                >
+                  <item.icon className="h-4 w-4" />
+                  <span>{item.title}</span>
+                </NavLink>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           ))}
-        </ul>
-      </nav>
-      <div className="border-t border-sidebar-border p-4">
+        </SidebarMenu>
+      </SidebarContent>
+      
+      <SidebarFooter className="border-t border-sidebar-border p-4">
         <div className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-full bg-sidebar-accent flex items-center justify-center">
             <span className="text-xs font-medium text-sidebar-accent-foreground">AD</span>
@@ -92,8 +114,8 @@ const Sidebar = () => {
             <p className="text-xs text-sidebar-foreground/60">admin@exemplo.com</p>
           </div>
         </div>
-      </div>
-    </aside>
+      </SidebarFooter>
+    </SidebarComponent>
   );
 };
 
