@@ -1,8 +1,8 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowUp, ArrowDown, DollarSign, Users, ShoppingCart, BarChart3 } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const data = [
@@ -112,7 +112,7 @@ const Dashboard = () => {
                   </div>
                   <span className="text-sm font-medium">35%</span>
                 </div>
-                <Progress value={35} className="h-2 bg-muted" indicatorClassName="bg-sky-500" />
+                <Progress value={35} className="h-2 bg-muted" />
               </div>
               
               <div className="space-y-2">
@@ -123,7 +123,7 @@ const Dashboard = () => {
                   </div>
                   <span className="text-sm font-medium">25%</span>
                 </div>
-                <Progress value={25} className="h-2 bg-muted" indicatorClassName="bg-orange-500" />
+                <Progress value={25} className="h-2 bg-muted" />
               </div>
               
               <div className="pt-4 flex justify-center">

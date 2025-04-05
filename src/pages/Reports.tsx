@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -10,6 +9,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
+import { DateRange } from 'react-day-picker';
 
 const salesData = [
   { name: 'Jan', comercial: 4000, marketing: 2400, afiliados: 1800 },
@@ -50,7 +50,7 @@ const revenueData = [
 ];
 
 const Reports = () => {
-  const [date, setDate] = useState({
+  const [date, setDate] = useState<DateRange>({
     from: new Date(2025, 0, 1),
     to: new Date(),
   });
@@ -85,9 +85,11 @@ const Reports = () => {
               <Calendar
                 initialFocus
                 mode="range"
+                defaultMonth={date?.from}
                 selected={date}
                 onSelect={setDate}
                 locale={ptBR}
+                className="pointer-events-auto"
               />
             </PopoverContent>
           </Popover>
@@ -298,7 +300,7 @@ const Reports = () => {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip formatter={(value) => [`R$ ${(value/1000).toFixed(0)}k`, ""]} />
+                    <Tooltip formatter={(value) => [`R$ ${(Number(value)/1000).toFixed(0)}k`, ""]} />
                     <Legend />
                     <Area type="monotone" dataKey="comercial" name="Comercial" stackId="1" stroke="#8b5cf6" fill="#8b5cf6" />
                     <Area type="monotone" dataKey="marketing" name="Marketing" stackId="1" stroke="#0ea5e9" fill="#0ea5e9" />
