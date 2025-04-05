@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,6 +11,7 @@ import {
   BarChart, Bar, PieChart, Pie, Cell
 } from 'recharts';
 import { useToast } from "@/components/ui/use-toast";
+import { Input } from "@/components/ui/input";
 
 const revenueData = [
   { month: 'Jan', valor: 15000, previsao: 14000 },
@@ -76,41 +78,85 @@ const AIAnalytics = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [aiInsights, setAiInsights] = useState<string | null>(null);
+  const [serverUrl, setServerUrl] = useState<string>(localStorage.getItem('aiderServerUrl') || '');
+  const [showConfig, setShowConfig] = useState(false);
+  
+  const saveServerConfig = () => {
+    if (serverUrl) {
+      localStorage.setItem('aiderServerUrl', serverUrl);
+      setShowConfig(false);
+      toast({
+        title: "Configuração salva",
+        description: "URL do servidor AIDER salva com sucesso.",
+      });
+    } else {
+      toast({
+        title: "Erro na configuração",
+        description: "Por favor, informe a URL do servidor AIDER.",
+        variant: "destructive"
+      });
+    }
+  };
   
   const runAdvancedAIAnalysis = async () => {
+    if (!serverUrl) {
+      toast({
+        title: "Servidor não configurado",
+        description: "Por favor, configure a URL do servidor AIDER primeiro.",
+        variant: "destructive"
+      });
+      setShowConfig(true);
+      return;
+    }
+    
     setLoading(true);
     toast({
       title: "Análise Avançada de IA iniciada",
-      description: "Processando insights profundos com AIDER.",
+      description: "Processando insights profundos com AIDER no seu servidor VPS.",
     });
     
     try {
-      const response = await fetch('/api/ai-analysis', {
+      // Construa a URL completa para a API do AIDER no seu servidor VPS
+      const apiUrl = `${serverUrl.endsWith('/') ? serverUrl.slice(0, -1) : serverUrl}/api/aider/analyze`;
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           context: 'Análise de dados de vendas, atribuições e previsões',
+          data: {
+            revenue: revenueData,
+            attribution: attributionData,
+            products: topProducts
+          },
           questions: [
             'Quais são os produtos mais vendáveis?',
             'Qual a previsão de crescimento para o próximo trimestre?',
-            'Existem padrões de sazonalidade relevantes?'
+            'Existe alguma discrepância nas atribuições de marketing?',
+            'Existem padrões de sazonalidade relevantes?',
+            'Quais produtos deveriam ter o estoque aumentado?'
           ]
         })
       });
 
+      if (!response.ok) {
+        throw new Error(`Erro na API: ${response.status}`);
+      }
+
       const data = await response.json();
-      setAiInsights(data.insights);
+      setAiInsights(data.insights || data.result || data.response || JSON.stringify(data));
       
       toast({
         title: "Análise Concluída",
-        description: "Novos insights gerados com sucesso.",
+        description: "Novos insights gerados com sucesso pelo AIDER.",
       });
     } catch (error) {
+      console.error("Erro na análise:", error);
       toast({
         title: "Erro na Análise",
-        description: "Não foi possível gerar insights.",
+        description: `Não foi possível conectar ao servidor AIDER: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
         variant: "destructive"
       });
     } finally {
@@ -128,7 +174,14 @@ const AIAnalytics = () => {
           </div>
           <p className="text-muted-foreground">Análise inteligente de dados e recomendações para seu negócio.</p>
         </div>
-        <div className="mt-4 md:mt-0">
+        <div className="mt-4 md:mt-0 flex gap-2">
+          <Button 
+            onClick={() => setShowConfig(!showConfig)} 
+            variant="outline"
+            className="flex items-center gap-2"
+          >
+            {showConfig ? "Cancelar" : "Configurar Servidor"}
+          </Button>
           <Button 
             onClick={runAdvancedAIAnalysis} 
             disabled={loading} 
@@ -140,13 +193,38 @@ const AIAnalytics = () => {
         </div>
       </div>
 
+      {showConfig && (
+        <Card className="mt-6">
+          <CardHeader>
+            <CardTitle>Configuração do Servidor AIDER</CardTitle>
+            <CardDescription>
+              Informe a URL do seu servidor VPS onde o AIDER está instalado
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex gap-4">
+              <Input
+                value={serverUrl}
+                onChange={(e) => setServerUrl(e.target.value)}
+                placeholder="https://seu-servidor-vps.com"
+                className="flex-1"
+              />
+              <Button onClick={saveServerConfig}>Salvar</Button>
+            </div>
+            <p className="text-sm text-muted-foreground mt-2">
+              Exemplo: https://seu-servidor-vps.com ou http://123.456.789.10:3000
+            </p>
+          </CardContent>
+        </Card>
+      )}
+
       {aiInsights && (
         <Card className="mt-6">
           <CardHeader>
             <CardTitle>Insights Avançados da IA</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-muted-foreground">{aiInsights}</p>
+            <p className="whitespace-pre-line text-muted-foreground">{aiInsights}</p>
           </CardContent>
         </Card>
       )}
