@@ -81,13 +81,13 @@ const Login = () => {
             {ThemeConfig.logo ? (
               <img 
                 src={ThemeConfig.logo} 
-                alt={ThemeConfig.companyName || "AffiFlow CRM"} 
+                alt={ThemeConfig.companyName} 
                 className="h-16 mx-auto mb-4"
               />
             ) : (
               <div className="h-16 flex items-center justify-center mb-4">
                 <span className="text-2xl font-bold" style={{ color: ThemeConfig.primaryColor }}>
-                  {ThemeConfig.companyName || "AffiFlow CRM"}
+                  {ThemeConfig.companyName}
                 </span>
               </div>
             )}

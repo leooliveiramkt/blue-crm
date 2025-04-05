@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -23,6 +22,7 @@ import {
   SidebarTrigger,
   useSidebar
 } from '@/components/ui/sidebar';
+import { ThemeConfig } from '@/config/theme';
 
 type NavItem = {
   title: string;
@@ -74,7 +74,7 @@ const Sidebar = () => {
   return (
     <SidebarComponent>
       <SidebarHeader className="flex h-14 items-center px-4 border-b border-sidebar-border">
-        <span className="text-xl font-bold text-white">AffiFlow CRM</span>
+        <span className="text-xl font-bold text-white">{ThemeConfig.companyName}</span>
         <div className="flex-1"></div>
         <SidebarTrigger />
       </SidebarHeader>

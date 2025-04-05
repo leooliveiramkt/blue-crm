@@ -24,7 +24,7 @@ export interface ThemeConfigType {
 
 // Default configuration
 export const ThemeConfig: ThemeConfigType = {
-  companyName: "AffiFlow CRM",
+  companyName: "Bela Blue CRM",
   logo: "/logo.svg", // Default logo path
   
   // Default colors using the existing color scheme
