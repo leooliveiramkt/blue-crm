@@ -9,7 +9,7 @@
   <!-- Fundo azul retangular com cantos arredondados -->
   <rect width="40" height="40" x="5" y="5" rx="8" class="background" />
   
-  <!-- Borboleta elegante conforme imagem fornecida -->
+  <!-- Borboleta elegante exatamente como na imagem fornecida -->
   <path d="M12,25 
          C14,13 22,10 28,18
          C32,10 40,13 42,25
