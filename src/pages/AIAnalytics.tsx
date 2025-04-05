@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -12,7 +11,6 @@ import {
 } from 'recharts';
 import { useToast } from "@/components/ui/use-toast";
 
-// Dados de exemplo
 const revenueData = [
   { month: 'Jan', valor: 15000, previsao: 14000 },
   { month: 'Fev', valor: 18000, previsao: 17500 },
@@ -77,22 +75,47 @@ const suggestoes = [
 const AIAnalytics = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [aiInsights, setAiInsights] = useState<string | null>(null);
   
-  const runAnalysis = () => {
+  const runAdvancedAIAnalysis = async () => {
     setLoading(true);
     toast({
-      title: "Análise de IA iniciada",
-      description: "Os dados estão sendo processados. Isso pode levar alguns minutos.",
+      title: "Análise Avançada de IA iniciada",
+      description: "Processando insights profundos com AIDER.",
     });
     
-    // Simulação de processamento
-    setTimeout(() => {
-      setLoading(false);
-      toast({
-        title: "Análise concluída",
-        description: "Novos insights e recomendações disponíveis.",
+    try {
+      const response = await fetch('/api/ai-analysis', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          context: 'Análise de dados de vendas, atribuições e previsões',
+          questions: [
+            'Quais são os produtos mais vendáveis?',
+            'Qual a previsão de crescimento para o próximo trimestre?',
+            'Existem padrões de sazonalidade relevantes?'
+          ]
+        })
       });
-    }, 3000);
+
+      const data = await response.json();
+      setAiInsights(data.insights);
+      
+      toast({
+        title: "Análise Concluída",
+        description: "Novos insights gerados com sucesso.",
+      });
+    } catch (error) {
+      toast({
+        title: "Erro na Análise",
+        description: "Não foi possível gerar insights.",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -106,12 +129,27 @@ const AIAnalytics = () => {
           <p className="text-muted-foreground">Análise inteligente de dados e recomendações para seu negócio.</p>
         </div>
         <div className="mt-4 md:mt-0">
-          <Button onClick={runAnalysis} disabled={loading} className="flex items-center gap-2">
+          <Button 
+            onClick={runAdvancedAIAnalysis} 
+            disabled={loading} 
+            className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700"
+          >
             <Brain className="h-4 w-4" />
-            {loading ? "Processando..." : "Executar Nova Análise"}
+            {loading ? "Processando..." : "Análise Avançada AIDER"}
           </Button>
         </div>
       </div>
+
+      {aiInsights && (
+        <Card className="mt-6">
+          <CardHeader>
+            <CardTitle>Insights Avançados da IA</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground">{aiInsights}</p>
+          </CardContent>
+        </Card>
+      )}
 
       <Tabs defaultValue="insights" className="w-full">
         <TabsList className="w-full md:w-auto">
