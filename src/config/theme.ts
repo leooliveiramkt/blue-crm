@@ -1,3 +1,4 @@
+
 // Theme configuration for white-labeling the app
 export interface ThemeConfigType {
   // Company details
@@ -26,12 +27,13 @@ export interface ThemeConfigType {
 export const ThemeConfig: ThemeConfigType = {
   companyName: "Blue CRM",
   logo: "/logo.svg", // Default logo path
+  favicon: "/favicon.svg", // Favicon path
   
-  // Cores Bela Blue conforme a paleta
-  primaryColor: "#131b40", // Azul Profundo
-  primaryColorHover: "#192e59", // Azul Clássico
+  // Cores ajustadas conforme a nova paleta da Blue
+  primaryColor: "#001440", // Azul marinho profundo (da imagem)
+  primaryColorHover: "#00215e", // Uma versão mais clara para hover
   primaryForeground: "#ffffff", // Branco para contraste
-  accentColor: "#ddcdc0", // Bege Neutro (cor da borboleta)
+  accentColor: "#ddcdc0", // Bege da borboleta
   
   // Login page content
   tagline: "Gerencie seus negócios com eficiência",
