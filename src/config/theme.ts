@@ -1,3 +1,4 @@
+
 // Theme configuration for white-labeling the app
 export interface ThemeConfigType {
   // Company details
@@ -24,7 +25,7 @@ export interface ThemeConfigType {
 
 // Default configuration
 export const ThemeConfig: ThemeConfigType = {
-  companyName: "Bela Blue CRM",
+  companyName: "Blue CRM",
   logo: "/logo.svg", // Default logo path
   
   // Default colors using the existing color scheme
