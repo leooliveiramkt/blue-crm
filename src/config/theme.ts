@@ -31,7 +31,7 @@ export const ThemeConfig: ThemeConfigType = {
   primaryColor: "#131b40", // Azul Profundo
   primaryColorHover: "#192e59", // Azul Clássico
   primaryForeground: "#ffffff", // Branco para contraste
-  accentColor: "#ddcdc0", // Bege Neutro
+  accentColor: "#ddcdc0", // Bege Neutro (cor da borboleta)
   
   // Login page content
   tagline: "Gerencie seus negócios com eficiência",

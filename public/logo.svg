@@ -2,9 +2,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="50" viewBox="0 0 200 50">
   <style>
     .text { font: bold 24px sans-serif; fill: #131b40; }
-    .accent { fill: #131b40; }
+    .background { fill: #131b40; }
+    .butterfly { fill: none; stroke: #ddcdc0; stroke-width: 1.5; }
   </style>
-  <rect width="40" height="40" x="5" y="5" rx="8" class="accent" opacity="0.2" />
-  <path d="M15 20L25 30L35 20" stroke="#131b40" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Fundo azul retangular com cantos arredondados -->
+  <rect width="40" height="40" x="5" y="5" rx="8" class="background" />
+  
+  <!-- Borboleta simples em traço bege -->
+  <path d="M15,25 C18,18 25,15 30,20 C35,25 30,30 25,28 C20,30 15,25 20,20 C25,15 32,18 35,25" 
+        class="butterfly" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Texto "Blue CRM" -->
   <text x="50" y="33" class="text">Blue CRM</text>
 </svg>
