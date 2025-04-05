@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Reports";
 import ApiIntegrations from "./pages/ApiIntegrations";
 import NotFound from "./pages/NotFound";
+import AIAnalytics from "./pages/AIAnalytics";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="reports" element={<Reports />} />
             <Route path="api-integrations" element={<ApiIntegrations />} />
+            <Route path="ai-analytics" element={<AIAnalytics />} />
             {/* Placeholder routes for future implementation */}
             <Route path="affiliates" element={<ComingSoon title="Afiliados" />} />
             <Route path="tracking" element={<ComingSoon title="Rastreamento" />} />
