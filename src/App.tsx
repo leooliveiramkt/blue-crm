@@ -3,13 +3,18 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import MainLayout from "./components/layout/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Reports";
 import ApiIntegrations from "./pages/ApiIntegrations";
-import NotFound from "./pages/NotFound";
 import AIAnalytics from "./pages/AIAnalytics";
+import Settings from "./pages/Settings";
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
+import Unauthorized from "./pages/Unauthorized";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -19,21 +24,35 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="reports" element={<Reports />} />
-            <Route path="api-integrations" element={<ApiIntegrations />} />
-            <Route path="ai-analytics" element={<AIAnalytics />} />
-            {/* Placeholder routes for future implementation */}
-            <Route path="affiliates" element={<ComingSoon title="Afiliados" />} />
-            <Route path="tracking" element={<ComingSoon title="Rastreamento" />} />
-            <Route path="orders" element={<ComingSoon title="Pedidos" />} />
-            <Route path="settings" element={<ComingSoon title="Configurações" />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            {/* Public routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
+            
+            {/* Protected routes - require authentication */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/" element={<MainLayout />}>
+                <Route index element={<Navigate to="/dashboard" replace />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="reports" element={<Reports />} />
+                <Route path="api-integrations" element={<ApiIntegrations />} />
+                <Route path="ai-analytics" element={<AIAnalytics />} />
+
+                {/* Admin only routes */}
+                <Route path="settings" element={<Settings />} />
+                
+                {/* Placeholder routes for future implementation */}
+                <Route path="affiliates" element={<ComingSoon title="Afiliados" />} />
+                <Route path="tracking" element={<ComingSoon title="Rastreamento" />} />
+                <Route path="orders" element={<ComingSoon title="Pedidos" />} />
+              </Route>
+            </Route>
+            
+            {/* 404 route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
