@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { ThemeConfig } from '@/config/theme';
+import { useAuth } from '@/context/AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -16,29 +17,16 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { login } = useAuth();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // This is a mock authentication - in a real app, integrate with your backend
-    setTimeout(() => {
-      // Simple mock validation - replace with actual auth
-      if (email === 'admin@example.com' && password === 'admin') {
-        // Store user role in localStorage 
-        localStorage.setItem('userRole', 'admin');
-        localStorage.setItem('userName', 'Admin User');
-        localStorage.setItem('isAuthenticated', 'true');
-        navigate('/dashboard');
-      } else if (email === 'director@example.com' && password === 'director') {
-        localStorage.setItem('userRole', 'director');
-        localStorage.setItem('userName', 'Director User');
-        localStorage.setItem('isAuthenticated', 'true');
-        navigate('/dashboard');
-      } else if (email === 'consultant@example.com' && password === 'consultant') {
-        localStorage.setItem('userRole', 'consultant');
-        localStorage.setItem('userName', 'Consultant User');
-        localStorage.setItem('isAuthenticated', 'true');
+    try {
+      const success = await login(email, password);
+      
+      if (success) {
         navigate('/dashboard');
       } else {
         toast({
@@ -47,8 +35,16 @@ const Login = () => {
           variant: "destructive",
         });
       }
+    } catch (error) {
+      toast({
+        title: "Erro de login",
+        description: "Ocorreu um erro ao tentar fazer login. Tente novamente.",
+        variant: "destructive",
+      });
+      console.error("Login error:", error);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (

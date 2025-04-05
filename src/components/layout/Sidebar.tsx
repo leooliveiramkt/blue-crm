@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -23,6 +24,7 @@ import {
   useSidebar
 } from '@/components/ui/sidebar';
 import { ThemeConfig } from '@/config/theme';
+import { useAuth } from '@/context/AuthContext';
 
 type NavItem = {
   title: string;
@@ -70,6 +72,18 @@ const navItems: NavItem[] = [
 
 const Sidebar = () => {
   const { state } = useSidebar();
+  const { userName, userRole } = useAuth();
+  
+  // Obter as iniciais do nome do usuário para o avatar
+  const getUserInitials = () => {
+    if (!userName) return "U";
+    return userName
+      .split(' ')
+      .map(name => name[0])
+      .join('')
+      .toUpperCase()
+      .substring(0, 2);
+  };
   
   return (
     <SidebarComponent>
@@ -107,11 +121,11 @@ const Sidebar = () => {
       <SidebarFooter className="border-t border-sidebar-border p-4">
         <div className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-full bg-sidebar-accent flex items-center justify-center">
-            <span className="text-xs font-medium text-sidebar-accent-foreground">AD</span>
+            <span className="text-xs font-medium text-sidebar-accent-foreground">{getUserInitials()}</span>
           </div>
           <div>
-            <p className="text-xs font-medium text-sidebar-foreground">Admin User</p>
-            <p className="text-xs text-sidebar-foreground/60">admin@exemplo.com</p>
+            <p className="text-xs font-medium text-sidebar-foreground">{userName || 'Usuário'}</p>
+            <p className="text-xs text-sidebar-foreground/60">{userRole ? `Perfil: ${userRole}` : 'Sem perfil'}</p>
           </div>
         </div>
       </SidebarFooter>

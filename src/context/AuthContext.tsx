@@ -16,9 +16,9 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(localStorage.getItem('isAuthenticated') === 'true');
-  const [userRole, setUserRole] = useState<UserRole | null>(localStorage.getItem('userRole') as UserRole || null);
-  const [userName, setUserName] = useState<string | null>(localStorage.getItem('userName') || null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [userRole, setUserRole] = useState<UserRole | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,39 +27,55 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const storedRole = localStorage.getItem('userRole') as UserRole;
     const storedName = localStorage.getItem('userName');
 
-    setIsAuthenticated(storedAuth);
-    setUserRole(storedRole || null);
-    setUserName(storedName || null);
+    if (storedAuth && storedRole && storedName) {
+      setIsAuthenticated(true);
+      setUserRole(storedRole);
+      setUserName(storedName);
+    } else {
+      // Limpar dados inválidos ou incompletos
+      localStorage.removeItem('isAuthenticated');
+      localStorage.removeItem('userRole');
+      localStorage.removeItem('userName');
+      
+      setIsAuthenticated(false);
+      setUserRole(null);
+      setUserName(null);
+    }
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    // This is a mock authentication - replace with actual authentication logic
-    if (email === 'admin@example.com' && password === 'admin') {
-      setUserRole('admin');
-      setUserName('Admin User');
-      setIsAuthenticated(true);
-      localStorage.setItem('userRole', 'admin');
-      localStorage.setItem('userName', 'Admin User');
-      localStorage.setItem('isAuthenticated', 'true');
-      return true;
-    } else if (email === 'director@example.com' && password === 'director') {
-      setUserRole('director');
-      setUserName('Director User');
-      setIsAuthenticated(true);
-      localStorage.setItem('userRole', 'director');
-      localStorage.setItem('userName', 'Director User');
-      localStorage.setItem('isAuthenticated', 'true');
-      return true;
-    } else if (email === 'consultant@example.com' && password === 'consultant') {
-      setUserRole('consultant');
-      setUserName('Consultant User');
-      setIsAuthenticated(true);
-      localStorage.setItem('userRole', 'consultant');
-      localStorage.setItem('userName', 'Consultant User');
-      localStorage.setItem('isAuthenticated', 'true');
-      return true;
+    try {
+      // Esta é uma autenticação simulada - substitua pela lógica de autenticação real
+      if (email === 'admin@example.com' && password === 'admin') {
+        setUserRole('admin');
+        setUserName('Admin User');
+        setIsAuthenticated(true);
+        localStorage.setItem('userRole', 'admin');
+        localStorage.setItem('userName', 'Admin User');
+        localStorage.setItem('isAuthenticated', 'true');
+        return true;
+      } else if (email === 'director@example.com' && password === 'director') {
+        setUserRole('director');
+        setUserName('Director User');
+        setIsAuthenticated(true);
+        localStorage.setItem('userRole', 'director');
+        localStorage.setItem('userName', 'Director User');
+        localStorage.setItem('isAuthenticated', 'true');
+        return true;
+      } else if (email === 'consultant@example.com' && password === 'consultant') {
+        setUserRole('consultant');
+        setUserName('Consultant User');
+        setIsAuthenticated(true);
+        localStorage.setItem('userRole', 'consultant');
+        localStorage.setItem('userName', 'Consultant User');
+        localStorage.setItem('isAuthenticated', 'true');
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Erro durante login:", error);
+      return false;
     }
-    return false;
   };
 
   const logout = () => {
