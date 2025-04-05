@@ -153,14 +153,11 @@ const Login = () => {
               <CardFooter>
                 <Button 
                   type="submit" 
-                  className="w-full" 
+                  className="w-full hover:opacity-90" 
                   disabled={isLoading}
                   style={{ 
                     backgroundColor: ThemeConfig.primaryColor || 'hsl(var(--primary))',
-                    color: ThemeConfig.primaryForeground || 'hsl(var(--primary-foreground))',
-                    "&:hover": {
-                      backgroundColor: ThemeConfig.primaryColorHover || undefined
-                    }
+                    color: ThemeConfig.primaryForeground || 'hsl(var(--primary-foreground))'
                   }}
                 >
                   {isLoading ? "Entrando..." : "Entrar"}
