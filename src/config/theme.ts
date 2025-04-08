@@ -1,6 +1,5 @@
-
 // Theme configuration for white-labeling the app
-import { supabaseClient } from "@/lib/supabase";
+import { supabaseClient, isSupabaseConfigured } from "@/lib/supabase";
 
 export interface ThemeConfigType {
   // Company details
@@ -29,22 +28,28 @@ export interface ThemeConfigType {
 // Carrega as configurações do Supabase ou localStorage como fallback
 const loadSavedThemeConfig = async (): Promise<ThemeConfigType> => {
   try {
-    // Tenta buscar do Supabase primeiro
-    const { data, error } = await supabaseClient
-      .from('theme_config')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .single();
+    // Verifica se o Supabase está configurado
+    if (isSupabaseConfigured) {
+      // Tenta buscar do Supabase primeiro
+      const { data, error } = await supabaseClient
+        .from('theme_config')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
 
-    if (error) {
-      console.warn('Erro ao carregar configurações do Supabase:', error);
-      // Fallback para localStorage se o Supabase falhar
+      if (error) {
+        console.warn('Erro ao carregar configurações do Supabase:', error);
+        // Fallback para localStorage se o Supabase falhar
+        return loadFromLocalStorage();
+      }
+
+      if (data) {
+        return data.config as ThemeConfigType;
+      }
+    } else {
+      console.warn('Supabase não configurado, usando localStorage para configurações de tema');
       return loadFromLocalStorage();
-    }
-
-    if (data) {
-      return data.config as ThemeConfigType;
     }
   } catch (error) {
     console.error('Erro ao carregar configurações do tema:', error);
@@ -99,40 +104,49 @@ const getDefaultConfig = (): ThemeConfigType => {
 // Inicializa com um estado padrão, depois será atualizado assincronamente
 export const ThemeConfig: ThemeConfigType = getDefaultConfig();
 
-// Upload de imagem para o Supabase Storage
+// Upload de imagem para o Supabase Storage ou localStorage como fallback
 export const uploadImageToSupabase = async (imageDataUrl: string, path: string): Promise<string | null> => {
   try {
-    // Converte base64 para blob
-    const res = await fetch(imageDataUrl);
-    const blob = await res.blob();
-    
-    // Nome do arquivo único
-    const fileName = `${path}_${Date.now()}`;
-    
-    // Upload para o Supabase
-    const { data, error } = await supabaseClient
-      .storage
-      .from('theme_assets')
-      .upload(fileName, blob, {
-        contentType: blob.type,
-        upsert: true
-      });
+    // Verifica se o Supabase está configurado
+    if (isSupabaseConfigured) {
+      // Converte base64 para blob
+      const res = await fetch(imageDataUrl);
+      const blob = await res.blob();
       
-    if (error) {
-      console.error('Erro ao fazer upload da imagem:', error);
-      return null;
+      // Nome do arquivo único
+      const fileName = `${path}_${Date.now()}`;
+      
+      // Upload para o Supabase
+      const { data, error } = await supabaseClient
+        .storage
+        .from('theme_assets')
+        .upload(fileName, blob, {
+          contentType: blob.type,
+          upsert: true
+        });
+        
+      if (error) {
+        console.error('Erro ao fazer upload da imagem:', error);
+        // Fallback: salva como Data URL no localStorage
+        return imageDataUrl;
+      }
+      
+      // Retorna a URL pública da imagem
+      const { data: urlData } = supabaseClient
+        .storage
+        .from('theme_assets')
+        .getPublicUrl(data.path);
+        
+      return urlData.publicUrl;
+    } else {
+      console.warn('Supabase não configurado, salvando imagem como Data URL');
+      // Fallback: retorna a própria Data URL quando o Supabase não está disponível
+      return imageDataUrl;
     }
-    
-    // Retorna a URL pública da imagem
-    const { data: urlData } = supabaseClient
-      .storage
-      .from('theme_assets')
-      .getPublicUrl(data.path);
-      
-    return urlData.publicUrl;
   } catch (error) {
     console.error('Erro ao processar o upload da imagem:', error);
-    return null;
+    // Fallback: retorna a própria Data URL em caso de erro
+    return imageDataUrl;
   }
 };
 
@@ -204,17 +218,23 @@ export const updateThemeConfig = async (newConfig: Partial<ThemeConfigType>): Pr
     const updatedConfig = { ...ThemeConfig, ...newConfig };
     Object.assign(ThemeConfig, newConfig);
     
-    // Salva no Supabase
-    const { error } = await supabaseClient
-      .from('theme_config')
-      .insert({
-        config: updatedConfig,
-        created_at: new Date().toISOString()
-      });
-      
-    if (error) {
-      console.error('Erro ao salvar configurações no Supabase:', error);
-      // Fallback para localStorage
+    // Salva no Supabase se estiver configurado
+    if (isSupabaseConfigured) {
+      const { error } = await supabaseClient
+        .from('theme_config')
+        .insert({
+          config: updatedConfig,
+          created_at: new Date().toISOString()
+        });
+        
+      if (error) {
+        console.error('Erro ao salvar configurações no Supabase:', error);
+        // Fallback para localStorage
+        localStorage.setItem('themeConfig', JSON.stringify(updatedConfig));
+      }
+    } else {
+      // Salva diretamente no localStorage se o Supabase não estiver disponível
+      console.warn('Supabase não configurado, salvando configurações no localStorage');
       localStorage.setItem('themeConfig', JSON.stringify(updatedConfig));
     }
     
