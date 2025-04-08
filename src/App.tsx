@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Unauthorized from "./pages/Unauthorized";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import { BASE_PATH } from "./config/deployment";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +24,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename={BASE_PATH}>
         <AuthProvider>
           <Routes>
             {/* Public routes */}
