@@ -66,6 +66,12 @@ const Login = () => {
             <p className="text-lg opacity-90 mb-4">
               {ThemeConfig.description || "Plataforma completa de gestão para aumentar sua produtividade e acelerar resultados."}
             </p>
+            
+            {ThemeConfig.philosophicalQuote && (
+              <blockquote className="border-l-4 border-white/30 pl-4 mt-6 italic opacity-90">
+                {ThemeConfig.philosophicalQuote}
+              </blockquote>
+            )}
           </div>
         </div>
       </div>
@@ -78,7 +84,7 @@ const Login = () => {
               <img 
                 src={ThemeConfig.logo} 
                 alt={ThemeConfig.companyName} 
-                className="h-16 mx-auto mb-4"
+                className="h-16 mx-auto mb-4 object-contain"
               />
             ) : (
               <div className="h-16 flex items-center justify-center mb-4">

@@ -1,4 +1,3 @@
-
 // Theme configuration for white-labeling the app
 export interface ThemeConfigType {
   // Company details
@@ -17,6 +16,7 @@ export interface ThemeConfigType {
   loginBackground?: string; // URL to background image
   tagline?: string;
   description?: string;
+  philosophicalQuote?: string; // Citação filosófica
   
   // Other UI customizations
   fontFamily?: string;
@@ -38,6 +38,9 @@ export const ThemeConfig: ThemeConfigType = {
   // Login page content
   tagline: "Gerencie seus negócios com eficiência",
   description: "Plataforma completa de gestão para aumentar sua produtividade e acelerar resultados.",
+  
+  // Citação filosófica sobre conhecimento
+  philosophicalQuote: "O conhecimento é o único bem que se multiplica quando compartilhado. — Francis Bacon",
   
   // Optional login background (can be a gradient or image)
   loginBackground: undefined,
