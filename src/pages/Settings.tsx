@@ -1,5 +1,4 @@
-
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -8,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ThemeConfig, updateThemeConfig } from "@/config/theme";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from '@/context/AuthContext';
-import { Upload, ImageIcon } from "lucide-react";
+import { Upload, ImageIcon, Loader2 } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 
 const Settings = () => {
@@ -19,6 +18,13 @@ const Settings = () => {
   const bgInputRef = useRef<HTMLInputElement>(null);
   const [logoPreview, setLogoPreview] = useState<string | undefined>(config.logo);
   const [bgPreview, setBgPreview] = useState<string | undefined>(config.loginBackground);
+  const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    setConfig({...ThemeConfig});
+    setLogoPreview(ThemeConfig.logo);
+    setBgPreview(ThemeConfig.loginBackground);
+  }, [ThemeConfig.logo, ThemeConfig.loginBackground]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -32,7 +38,6 @@ const Settings = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Verificar o tamanho do arquivo (limite de 2MB)
     if (file.size > 2 * 1024 * 1024) {
       toast({
         title: "Erro de upload",
@@ -42,7 +47,6 @@ const Settings = () => {
       return;
     }
 
-    // Verificar o tipo do arquivo
     if (!file.type.match('image.*')) {
       toast({
         title: "Erro de upload",
@@ -75,14 +79,35 @@ const Settings = () => {
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    updateThemeConfig(config);
-    toast({
-      title: "Configurações salvas",
-      description: "As alterações foram aplicadas com sucesso.",
-    });
-    // In a real app, this would send the config to a backend API
+    setIsSaving(true);
+    
+    try {
+      const success = await updateThemeConfig(config);
+      
+      if (success) {
+        toast({
+          title: "Configurações salvas",
+          description: "As alterações foram aplicadas e salvas no Supabase com sucesso.",
+        });
+      } else {
+        toast({
+          title: "Erro ao salvar",
+          description: "Houve um problema ao salvar as configurações no Supabase.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Erro ao salvar configurações:', error);
+      toast({
+        title: "Erro ao salvar",
+        description: "Houve um problema ao processar sua solicitação.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   if (!hasPermission('admin')) {
@@ -304,7 +329,16 @@ const Settings = () => {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button type="submit">Salvar Alterações</Button>
+                <Button type="submit" disabled={isSaving}>
+                  {isSaving ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Salvando...
+                    </>
+                  ) : (
+                    'Salvar Alterações'
+                  )}
+                </Button>
               </CardFooter>
             </Card>
           </form>

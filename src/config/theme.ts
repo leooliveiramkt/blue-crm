@@ -1,5 +1,7 @@
 
 // Theme configuration for white-labeling the app
+import { supabaseClient } from "@/lib/supabase";
+
 export interface ThemeConfigType {
   // Company details
   companyName: string;
@@ -24,18 +26,53 @@ export interface ThemeConfigType {
   borderRadius?: string;
 }
 
-// Carrega as configurações do localStorage, se disponíveis
-const loadSavedThemeConfig = (): ThemeConfigType => {
+// Carrega as configurações do Supabase ou localStorage como fallback
+const loadSavedThemeConfig = async (): Promise<ThemeConfigType> => {
+  try {
+    // Tenta buscar do Supabase primeiro
+    const { data, error } = await supabaseClient
+      .from('theme_config')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single();
+
+    if (error) {
+      console.warn('Erro ao carregar configurações do Supabase:', error);
+      // Fallback para localStorage se o Supabase falhar
+      return loadFromLocalStorage();
+    }
+
+    if (data) {
+      return data.config as ThemeConfigType;
+    }
+  } catch (error) {
+    console.error('Erro ao carregar configurações do tema:', error);
+    // Fallback para localStorage
+    return loadFromLocalStorage();
+  }
+  
+  // Se não conseguir do Supabase, tenta do localStorage
+  return loadFromLocalStorage();
+};
+
+// Função de carregamento do localStorage (fallback)
+const loadFromLocalStorage = (): ThemeConfigType => {
   const savedConfig = localStorage.getItem('themeConfig');
   if (savedConfig) {
     try {
       return JSON.parse(savedConfig);
     } catch (error) {
-      console.error('Erro ao carregar configurações do tema:', error);
+      console.error('Erro ao carregar configurações do localStorage:', error);
     }
   }
   
   // Retorna as configurações padrão se não houver configurações salvas
+  return getDefaultConfig();
+};
+
+// Configurações padrão
+const getDefaultConfig = (): ThemeConfigType => {
   return {
     companyName: "Blue CRM",
     logo: "/logo.svg", // Default logo path
@@ -59,8 +96,45 @@ const loadSavedThemeConfig = (): ThemeConfigType => {
   };
 };
 
-// Default configuration
-export const ThemeConfig: ThemeConfigType = loadSavedThemeConfig();
+// Inicializa com um estado padrão, depois será atualizado assincronamente
+export const ThemeConfig: ThemeConfigType = getDefaultConfig();
+
+// Upload de imagem para o Supabase Storage
+export const uploadImageToSupabase = async (imageDataUrl: string, path: string): Promise<string | null> => {
+  try {
+    // Converte base64 para blob
+    const res = await fetch(imageDataUrl);
+    const blob = await res.blob();
+    
+    // Nome do arquivo único
+    const fileName = `${path}_${Date.now()}`;
+    
+    // Upload para o Supabase
+    const { data, error } = await supabaseClient
+      .storage
+      .from('theme_assets')
+      .upload(fileName, blob, {
+        contentType: blob.type,
+        upsert: true
+      });
+      
+    if (error) {
+      console.error('Erro ao fazer upload da imagem:', error);
+      return null;
+    }
+    
+    // Retorna a URL pública da imagem
+    const { data: urlData } = supabaseClient
+      .storage
+      .from('theme_assets')
+      .getPublicUrl(data.path);
+      
+    return urlData.publicUrl;
+  } catch (error) {
+    console.error('Erro ao processar o upload da imagem:', error);
+    return null;
+  }
+};
 
 // Aplica as configurações do tema às variáveis CSS ao carregar
 const applyThemeToDOM = () => {
@@ -93,47 +167,90 @@ const applyThemeToDOM = () => {
   }
 };
 
-// Aplica tema ao carregar a página
+// Carrega as configurações iniciais de forma assíncrona
 if (typeof window !== 'undefined') {
   // Executa apenas no cliente, não durante SSR
-  setTimeout(applyThemeToDOM, 0);
+  loadSavedThemeConfig().then(config => {
+    // Atualiza o objeto ThemeConfig com os valores carregados
+    Object.assign(ThemeConfig, config);
+    // Aplica as configurações ao DOM
+    setTimeout(applyThemeToDOM, 0);
+  }).catch(error => {
+    console.error('Erro ao inicializar o tema:', error);
+    // Ainda assim, tenta aplicar as configurações padrão
+    setTimeout(applyThemeToDOM, 0);
+  });
 }
 
 // Function to update theme config (would be used in admin settings)
-export const updateThemeConfig = (newConfig: Partial<ThemeConfigType>) => {
-  // Atualiza a configuração do tema
-  Object.assign(ThemeConfig, newConfig);
-  
-  // Salva no localStorage para persistência
-  localStorage.setItem('themeConfig', JSON.stringify(ThemeConfig));
-  
-  // Update CSS variables based on theme config
-  if (newConfig.primaryColor) {
-    document.documentElement.style.setProperty('--theme-primary', newConfig.primaryColor);
-  }
-  
-  if (newConfig.accentColor) {
-    document.documentElement.style.setProperty('--theme-accent', newConfig.accentColor);
-  }
-  
-  // Atualizar favicon dinamicamente
-  if (newConfig.logo) {
-    const faviconLink = document.querySelector("link[rel~='icon']");
-    if (faviconLink) {
-      // Converte logo para favicon (tratando a Promise corretamente)
-      createFaviconFromLogo(newConfig.logo)
-        .then(faviconUrl => {
-          (faviconLink as HTMLLinkElement).href = faviconUrl;
-        })
-        .catch(error => {
-          console.error("Erro ao converter logo para favicon:", error);
-        });
+export const updateThemeConfig = async (newConfig: Partial<ThemeConfigType>): Promise<boolean> => {
+  try {
+    // Processa as imagens que são data URLs para upload no Supabase
+    if (newConfig.logo && newConfig.logo.startsWith('data:')) {
+      const logoUrl = await uploadImageToSupabase(newConfig.logo, 'logo');
+      if (logoUrl) {
+        newConfig.logo = logoUrl;
+      }
     }
-  }
-  
-  // Atualiza o título da página
-  if (newConfig.companyName) {
-    document.title = newConfig.companyName;
+    
+    if (newConfig.loginBackground && newConfig.loginBackground.startsWith('data:')) {
+      const bgUrl = await uploadImageToSupabase(newConfig.loginBackground, 'background');
+      if (bgUrl) {
+        newConfig.loginBackground = bgUrl;
+      }
+    }
+    
+    // Atualiza a configuração do tema localmente
+    const updatedConfig = { ...ThemeConfig, ...newConfig };
+    Object.assign(ThemeConfig, newConfig);
+    
+    // Salva no Supabase
+    const { error } = await supabaseClient
+      .from('theme_config')
+      .insert({
+        config: updatedConfig,
+        created_at: new Date().toISOString()
+      });
+      
+    if (error) {
+      console.error('Erro ao salvar configurações no Supabase:', error);
+      // Fallback para localStorage
+      localStorage.setItem('themeConfig', JSON.stringify(updatedConfig));
+    }
+    
+    // Update CSS variables based on theme config
+    if (newConfig.primaryColor) {
+      document.documentElement.style.setProperty('--theme-primary', newConfig.primaryColor);
+    }
+    
+    if (newConfig.accentColor) {
+      document.documentElement.style.setProperty('--theme-accent', newConfig.accentColor);
+    }
+    
+    // Atualizar favicon dinamicamente
+    if (newConfig.logo) {
+      const faviconLink = document.querySelector("link[rel~='icon']");
+      if (faviconLink) {
+        // Converte logo para favicon (tratando a Promise corretamente)
+        createFaviconFromLogo(newConfig.logo)
+          .then(faviconUrl => {
+            (faviconLink as HTMLLinkElement).href = faviconUrl;
+          })
+          .catch(error => {
+            console.error("Erro ao converter logo para favicon:", error);
+          });
+      }
+    }
+    
+    // Atualiza o título da página
+    if (newConfig.companyName) {
+      document.title = newConfig.companyName;
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('Erro ao atualizar configurações:', error);
+    return false;
   }
 };
 
