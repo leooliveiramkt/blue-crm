@@ -37,7 +37,6 @@ if (!isSupabaseConfigured) {
   // Sobrescreve as funções que usam o Supabase para mostrar um aviso ao invés de quebrar a aplicação
   const wrapSupabaseMethods = (client: any) => {
     const originalFrom = client.from.bind(client);
-    const originalStorage = client.storage;
     
     // Wrapper para operações de banco de dados
     client.from = (table: string) => {
@@ -57,21 +56,29 @@ if (!isSupabaseConfigured) {
       };
     };
     
-    // Wrapper para operações de storage
-    if (originalStorage) {
-      client.storage = {
-        from: (bucket: string) => {
-          console.warn(`⚠️ Tentativa de acessar o bucket "${bucket}" com o Supabase não configurado.`);
-          
-          return {
-            upload: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-            download: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-            getPublicUrl: () => ({ data: { publicUrl: '' } }),
-            list: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-            remove: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-          };
-        },
+    // Ao invés de tentar definir storage, vamos adicionar um método storage.from mock
+    // usando Object.defineProperty para lidar com o getter da propriedade storage
+    const originalStorageFrom = client.storage?.from?.bind(client.storage);
+    
+    // Criaos um proxy para o método storage.from
+    const mockStorageFrom = (bucket: string) => {
+      console.warn(`⚠️ Tentativa de acessar o bucket "${bucket}" com o Supabase não configurado.`);
+      
+      return {
+        upload: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
+        download: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
+        getPublicUrl: () => ({ data: { publicUrl: '' } }),
+        list: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
+        remove: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
       };
+    };
+    
+    // Verifica se storage existe antes de modificar
+    if (client.storage) {
+      // Não podemos sobrescrever storage diretamente, mas podemos sobrescrever o método 'from'
+      if (typeof client.storage === 'object') {
+        client.storage.from = mockStorageFrom;
+      }
     }
   };
   
