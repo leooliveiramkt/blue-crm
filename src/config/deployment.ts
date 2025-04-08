@@ -5,10 +5,8 @@
  */
 
 // Define o caminho base para a aplicação
-// Se a aplicação estiver hospedada em um subdiretório, como belablue.io/crm,
-// defina esta constante como '/crm'
-// Se estiver em um subdomínio ou raiz do domínio, deixe como '/'
-export const BASE_PATH = '/';  // Altere para '/crm' se for usar em um subdiretório
+// Como estamos usando um subdomínio, manteremos o BASE_PATH como '/'
+export const BASE_PATH = '/';
 
 // URL completa do servidor, útil para APIs absolutas
 export const SERVER_URL = window.location.origin + BASE_PATH;
@@ -19,4 +17,3 @@ export const buildPath = (path: string): string => {
   const cleanPath = path.startsWith('/') ? path.substring(1) : path;
   return `${BASE_PATH}${BASE_PATH.endsWith('/') ? '' : '/'}${cleanPath}`;
 };
-
