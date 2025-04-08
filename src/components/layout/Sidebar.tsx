@@ -10,7 +10,8 @@ import {
   Settings, 
   Database,
   FileText,
-  ChevronLeft
+  ChevronLeft,
+  Tag
 } from 'lucide-react';
 import {
   Sidebar as SidebarComponent,
@@ -62,6 +63,11 @@ const navItems: NavItem[] = [
     title: "Integrações API",
     href: "/api-integrations",
     icon: Database,
+  },
+  {
+    title: "Afiliação Wbuy",
+    href: "/wbuy-affiliation",
+    icon: Tag,
   },
   {
     title: "Configurações",
