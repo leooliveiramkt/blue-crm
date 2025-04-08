@@ -59,4 +59,39 @@ export const updateThemeConfig = (newConfig: Partial<ThemeConfigType>) => {
   if (newConfig.accentColor) {
     document.documentElement.style.setProperty('--theme-accent', newConfig.accentColor);
   }
+  
+  // Atualizar favicon dinamicamente
+  if (newConfig.logo) {
+    const faviconLink = document.querySelector("link[rel~='icon']");
+    if (faviconLink) {
+      // Converte logo para favicon
+      const faviconUrl = createFaviconFromLogo(newConfig.logo);
+      (faviconLink as HTMLLinkElement).href = faviconUrl;
+    }
+  }
+};
+
+// Função para converter logo em favicon
+export const createFaviconFromLogo = (logoUrl: string): string => {
+  // Cria um canvas para redimensionar a imagem
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = 48;
+  canvas.height = 48;
+
+  return new Promise<string>((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = () => {
+      // Redimensiona e centraliza a imagem
+      ctx?.drawImage(
+        img, 
+        0, 0, img.width, img.height, // source rectangle
+        0, 0, 48, 48 // destination rectangle
+      );
+      resolve(canvas.toDataURL('image/png'));
+    };
+    img.onerror = reject;
+    img.src = logoUrl;
+  });
 };
