@@ -1,17 +1,16 @@
-
 import { useState } from 'react';
+import { DateRange } from 'react-day-picker';
 import { revenueData, quarterlyData, biannualData, annualData } from '../data/mockData';
 
+export type PeriodView = "monthly" | "bimonthly" | "quarterly" | "biannual" | "annual";
+
 export const useMarketingData = () => {
-  const [dateRange, setDateRange] = useState<{
-    from: Date;
-    to: Date;
-  }>({
+  const [dateRange, setDateRange] = useState<DateRange>({
     from: new Date(2025, 0, 1),
     to: new Date(2025, 5, 30),
   });
 
-  const [periodView, setPeriodView] = useState("monthly");
+  const [periodView, setPeriodView] = useState<PeriodView>("monthly");
 
   // Função para determinar quais dados usar com base no período selecionado
   const getTimeData = () => {

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -9,6 +8,7 @@ import { Calendar as CalendarIcon, Download, BarChart3, PieChart, TrendingUp, Li
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { toast } from "@/hooks/use-toast";
+import { type DateRange } from 'react-day-picker';
 
 import MetricCard from './marketing/components/MetricCard';
 import OverviewTab from './marketing/components/tabs/OverviewTab';
@@ -29,7 +29,6 @@ const Marketing = () => {
     calculateGrowth,
   } = useMarketingData();
 
-  // Formatar para valores em reais
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', { 
       style: 'currency', 
@@ -38,7 +37,6 @@ const Marketing = () => {
     }).format(value);
   };
 
-  // Função para exportar dados
   const handleExportData = () => {
     toast({
       title: "Exportação iniciada",
