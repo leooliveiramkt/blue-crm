@@ -54,18 +54,18 @@ const InfluencersTab = () => {
                   <NavigationMenuContent>
                     <div className="grid gap-3 p-4 w-[400px]">
                       <div className="grid grid-cols-2 gap-3">
-                        <NavigationMenuLink asChild>
-                          <Button variant="outline" className="justify-start">Faturamento</Button>
-                        </NavigationMenuLink>
-                        <NavigationMenuLink asChild>
-                          <Button variant="outline" className="justify-start">Engajamento</Button>
-                        </NavigationMenuLink>
-                        <NavigationMenuLink asChild>
-                          <Button variant="outline" className="justify-start">ROI</Button>
-                        </NavigationMenuLink>
-                        <NavigationMenuLink asChild>
-                          <Button variant="outline" className="justify-start">Seguidores</Button>
-                        </NavigationMenuLink>
+                        <Button variant="outline" className="justify-start">
+                          Faturamento
+                        </Button>
+                        <Button variant="outline" className="justify-start">
+                          Engajamento
+                        </Button>
+                        <Button variant="outline" className="justify-start">
+                          ROI
+                        </Button>
+                        <Button variant="outline" className="justify-start">
+                          Seguidores
+                        </Button>
                       </div>
                     </div>
                   </NavigationMenuContent>

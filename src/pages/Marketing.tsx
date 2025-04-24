@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -8,7 +9,6 @@ import { Calendar as CalendarIcon, Download, BarChart3, PieChart, TrendingUp, Li
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { toast } from "@/hooks/use-toast";
-import { type DateRange } from 'react-day-picker';
 
 import MetricCard from './marketing/components/MetricCard';
 import OverviewTab from './marketing/components/tabs/OverviewTab';
@@ -16,7 +16,7 @@ import PlatformsTab from './marketing/components/tabs/PlatformsTab';
 import CampaignsTab from './marketing/components/tabs/CampaignsTab';
 import InfluencersTab from './marketing/components/tabs/InfluencersTab';
 import ProjectionsTab from './marketing/components/tabs/ProjectionsTab';
-import { useMarketingData } from './marketing/hooks/useMarketingData';
+import { useMarketingData, PeriodView } from './marketing/hooks/useMarketingData';
 
 const Marketing = () => {
   const {
@@ -182,11 +182,11 @@ const Marketing = () => {
               <p className="text-sm text-muted-foreground mr-2">Visualização:</p>
               <div className="inline-flex gap-1 items-center">
                 {[
-                  { value: "monthly", label: "Mensal" },
-                  { value: "bimonthly", label: "Bimestral" },
-                  { value: "quarterly", label: "Trimestral" },
-                  { value: "biannual", label: "Semestral" },
-                  { value: "annual", label: "Anual" }
+                  { value: "monthly" as PeriodView, label: "Mensal" },
+                  { value: "bimonthly" as PeriodView, label: "Bimestral" },
+                  { value: "quarterly" as PeriodView, label: "Trimestral" },
+                  { value: "biannual" as PeriodView, label: "Semestral" },
+                  { value: "annual" as PeriodView, label: "Anual" }
                 ].map((item) => (
                   <Button
                     key={item.value}

@@ -5,9 +5,13 @@ import RevenueVsInvestmentChart from '../charts/RevenueVsInvestmentChart';
 import InvestmentDistributionChart from '../charts/InvestmentDistributionChart';
 import TopInfluencersTable from '../tables/TopInfluencersTable';
 import CampaignsTable from '../tables/CampaignsTable';
-import { campaignData, influencerData } from '../../data/mockData';
+import { campaignData, influencerData, investmentData } from '../../data/mockData';
+import { useMarketingData } from '../../hooks/useMarketingData';
 
 const OverviewTab = () => {
+  const { getTimeData } = useMarketingData();
+  const revenueData = getTimeData();
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
