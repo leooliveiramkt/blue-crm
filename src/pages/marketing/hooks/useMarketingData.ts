@@ -39,14 +39,14 @@ export const useMarketingData = () => {
     }
   };
 
-  const calculateTotalROI = () => {
+  const calculateTotalROI = (): string => {
     const totalRevenue = revenueData.reduce((sum, item) => sum + item.revenue, 0);
     const totalInvestment = revenueData.reduce((sum, item) => sum + item.investment, 0);
     return (totalRevenue / totalInvestment).toFixed(2);
   };
 
-  const calculateGrowth = () => {
-    if (revenueData.length < 2) return 0;
+  const calculateGrowth = (): string => {
+    if (revenueData.length < 2) return "0.0";
     const firstMonth = revenueData[0].revenue;
     const lastMonth = revenueData[revenueData.length - 1].revenue;
     return (((lastMonth - firstMonth) / firstMonth) * 100).toFixed(1);
