@@ -21,7 +21,7 @@ const ColorPickerField = ({
   return (
     <div className="space-y-2">
       <Label htmlFor={name}>{label}</Label>
-      <div className="flex gap-2">
+      <div className="flex gap-2 items-center">
         <Input 
           id={name} 
           name={name} 
@@ -32,10 +32,18 @@ const ColorPickerField = ({
         />
         <Input 
           type="color" 
-          className="w-12 p-1" 
+          className="w-12 p-1 h-10 cursor-pointer" 
           value={value} 
           onChange={(e) => onChange(e.target.value)} 
+          aria-label={`Seletor de cor para ${label}`}
         />
+        {value && (
+          <div 
+            className="w-6 h-6 rounded-full border border-gray-300" 
+            style={{ backgroundColor: value }} 
+            title={value}
+          />
+        )}
       </div>
     </div>
   );
