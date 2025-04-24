@@ -181,41 +181,22 @@ const Marketing = () => {
             <div className="flex flex-col sm:flex-row items-center justify-end mb-4 gap-3">
               <p className="text-sm text-muted-foreground mr-2">Visualização:</p>
               <div className="inline-flex gap-1 items-center">
-                <Button 
-                  variant={periodView === "monthly" ? "default" : "outline"} 
-                  size="sm" 
-                  onClick={() => setPeriodView("monthly")}
-                >
-                  Mensal
-                </Button>
-                <Button 
-                  variant={periodView === "bimonthly" ? "default" : "outline"} 
-                  size="sm" 
-                  onClick={() => setPeriodView("bimonthly")}
-                >
-                  Bimestral
-                </Button>
-                <Button 
-                  variant={periodView === "quarterly" ? "default" : "outline"} 
-                  size="sm" 
-                  onClick={() => setPeriodView("quarterly")}
-                >
-                  Trimestral
-                </Button>
-                <Button 
-                  variant={periodView === "biannual" ? "default" : "outline"} 
-                  size="sm" 
-                  onClick={() => setPeriodView("biannual")}
-                >
-                  Semestral
-                </Button>
-                <Button 
-                  variant={periodView === "annual" ? "default" : "outline"} 
-                  size="sm" 
-                  onClick={() => setPeriodView("annual")}
-                >
-                  Anual
-                </Button>
+                {[
+                  { value: "monthly", label: "Mensal" },
+                  { value: "bimonthly", label: "Bimestral" },
+                  { value: "quarterly", label: "Trimestral" },
+                  { value: "biannual", label: "Semestral" },
+                  { value: "annual", label: "Anual" }
+                ].map((item) => (
+                  <Button
+                    key={item.value}
+                    variant={periodView === item.value ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setPeriodView(item.value)}
+                  >
+                    {item.label}
+                  </Button>
+                ))}
               </div>
             </div>
           )}

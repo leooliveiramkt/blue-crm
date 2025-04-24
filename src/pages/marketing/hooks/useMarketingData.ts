@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
 import { revenueData, quarterlyData, biannualData, annualData } from '../data/mockData';
@@ -15,6 +16,7 @@ export const useMarketingData = () => {
   const getTimeData = () => {
     switch(periodView) {
       case "monthly":
+      case "projections":
         return revenueData;
       case "bimonthly":
         return revenueData.filter((_, index) => index % 2 === 0)
@@ -32,8 +34,6 @@ export const useMarketingData = () => {
         return biannualData;
       case "annual":
         return annualData;
-      case "projections":
-        return revenueData;
       default:
         return revenueData;
     }
