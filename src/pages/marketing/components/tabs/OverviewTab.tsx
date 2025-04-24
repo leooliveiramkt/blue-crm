@@ -1,19 +1,13 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import RevenueVsInvestmentChart from '../charts/RevenueVsInvestmentChart';
 import InvestmentDistributionChart from '../charts/InvestmentDistributionChart';
+import TopInfluencersTable from '../tables/TopInfluencersTable';
 import CampaignsTable from '../tables/CampaignsTable';
-import { campaignData, influencerData, investmentData, revenueData } from '../../data/mockData';
+import { campaignData, influencerData } from '../../data/mockData';
 
 const OverviewTab = () => {
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('pt-BR', { 
-      style: 'currency', 
-      currency: 'BRL',
-      maximumFractionDigits: 0
-    }).format(value);
-  };
-
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -38,26 +32,7 @@ const OverviewTab = () => {
             <CardDescription>Por volume de vendas</CardDescription>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Influenciador</TableHead>
-                  <TableHead>Plataforma</TableHead>
-                  <TableHead className="text-right">Seguidores</TableHead>
-                  <TableHead className="text-right">Faturamento</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {influencerData.slice(0, 5).map((influencer) => (
-                  <TableRow key={influencer.id}>
-                    <TableCell className="font-medium">{influencer.name}</TableCell>
-                    <TableCell>{influencer.platform}</TableCell>
-                    <TableCell className="text-right">{(influencer.followers / 1000000).toFixed(1)}M</TableCell>
-                    <TableCell className="text-right">{formatCurrency(influencer.revenue)}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <TopInfluencersTable data={influencerData.slice(0, 5)} />
           </CardContent>
         </Card>
       </div>

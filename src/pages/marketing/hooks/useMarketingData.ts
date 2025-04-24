@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
 import { revenueData, quarterlyData, biannualData, annualData } from '../data/mockData';
 
-export type PeriodView = "monthly" | "bimonthly" | "quarterly" | "biannual" | "annual";
+export type PeriodView = "monthly" | "bimonthly" | "quarterly" | "biannual" | "annual" | "projections";
 
 export const useMarketingData = () => {
   const [dateRange, setDateRange] = useState<DateRange>({
@@ -12,7 +12,6 @@ export const useMarketingData = () => {
 
   const [periodView, setPeriodView] = useState<PeriodView>("monthly");
 
-  // Função para determinar quais dados usar com base no período selecionado
   const getTimeData = () => {
     switch(periodView) {
       case "monthly":
@@ -33,19 +32,19 @@ export const useMarketingData = () => {
         return biannualData;
       case "annual":
         return annualData;
+      case "projections":
+        return revenueData;
       default:
         return revenueData;
     }
   };
 
-  // Calcular ROI total
   const calculateTotalROI = () => {
     const totalRevenue = revenueData.reduce((sum, item) => sum + item.revenue, 0);
     const totalInvestment = revenueData.reduce((sum, item) => sum + item.investment, 0);
     return (totalRevenue / totalInvestment).toFixed(2);
   };
 
-  // Calcular crescimento percentual
   const calculateGrowth = () => {
     if (revenueData.length < 2) return 0;
     const firstMonth = revenueData[0].revenue;
