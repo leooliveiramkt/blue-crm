@@ -4,8 +4,8 @@ import { ThemeConfigType } from "@/types/theme";
 export const getDefaultConfig = (): ThemeConfigType => {
   return {
     companyName: "Blue CRM",
-    logo: "/logo.svg",
-    favicon: "/favicon.svg",
+    logo: "/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png",
+    favicon: "/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png",
     
     primaryColor: "#001440",
     primaryColorHover: "#00215e",
