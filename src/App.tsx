@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,7 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Reports";
 import ApiIntegrations from "./pages/ApiIntegrations";
 import AIAnalytics from "./pages/AIAnalytics";
-import Settings from "./pages/Settings";
+import Settings from "./pages/settings";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Unauthorized from "./pages/Unauthorized";
