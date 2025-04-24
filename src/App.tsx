@@ -17,6 +17,7 @@ import NotFound from "./pages/NotFound";
 import Unauthorized from "./pages/Unauthorized";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import WbuyAffiliation from "./pages/WbuyAffiliation";
+import Marketing from "./pages/Marketing";
 import { BASE_PATH } from "./config/deployment";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
                   <Route path="reports" element={<Reports />} />
                   <Route path="api-integrations" element={<ApiIntegrations />} />
                   <Route path="ai-analytics" element={<AIAnalytics />} />
+                  <Route path="marketing" element={<Marketing />} />
                   <Route path="wbuy-affiliation" element={<WbuyAffiliation />} />
 
                   {/* Admin only routes */}

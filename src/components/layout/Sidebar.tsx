@@ -11,7 +11,8 @@ import {
   Database,
   FileText,
   ChevronLeft,
-  Tag
+  Tag,
+  TrendingUp
 } from 'lucide-react';
 import {
   Sidebar as SidebarComponent,
@@ -43,6 +44,11 @@ const navItems: NavItem[] = [
     title: "Relatórios",
     href: "/reports",
     icon: BarChart3,
+  },
+  {
+    title: "Marketing",
+    href: "/marketing",
+    icon: TrendingUp,
   },
   {
     title: "Afiliados",
