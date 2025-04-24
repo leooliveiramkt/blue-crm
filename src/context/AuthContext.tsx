@@ -1,6 +1,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { tenantManager } from '@/lib/tenancy/tenantManager';
 
 type UserRole = 'admin' | 'director' | 'consultant';
 
@@ -8,6 +9,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   userRole: UserRole | null;
   userName: string | null;
+  userId: string | null;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   hasPermission: (requiredRole: UserRole | UserRole[]) => boolean;
@@ -19,6 +21,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userRole, setUserRole] = useState<UserRole | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,49 +29,65 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const storedAuth = localStorage.getItem('isAuthenticated') === 'true';
     const storedRole = localStorage.getItem('userRole') as UserRole;
     const storedName = localStorage.getItem('userName');
+    const storedId = localStorage.getItem('userId');
 
     if (storedAuth && storedRole && storedName) {
       setIsAuthenticated(true);
       setUserRole(storedRole);
       setUserName(storedName);
+      setUserId(storedId || 'current_user_id');
     } else {
       // Limpar dados inválidos ou incompletos
       localStorage.removeItem('isAuthenticated');
       localStorage.removeItem('userRole');
       localStorage.removeItem('userName');
+      localStorage.removeItem('userId');
       
       setIsAuthenticated(false);
       setUserRole(null);
       setUserName(null);
+      setUserId(null);
     }
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       // Esta é uma autenticação simulada - substitua pela lógica de autenticação real
+      let success = false;
+      let role: UserRole | null = null;
+      let name: string | null = null;
+      let id: string | null = null;
+
       if (email === 'admin@example.com' && password === 'admin') {
-        setUserRole('admin');
-        setUserName('Admin User');
-        setIsAuthenticated(true);
-        localStorage.setItem('userRole', 'admin');
-        localStorage.setItem('userName', 'Admin User');
-        localStorage.setItem('isAuthenticated', 'true');
-        return true;
+        role = 'admin';
+        name = 'Admin User';
+        id = 'admin_user_id';
+        success = true;
       } else if (email === 'director@example.com' && password === 'director') {
-        setUserRole('director');
-        setUserName('Director User');
-        setIsAuthenticated(true);
-        localStorage.setItem('userRole', 'director');
-        localStorage.setItem('userName', 'Director User');
-        localStorage.setItem('isAuthenticated', 'true');
-        return true;
+        role = 'director';
+        name = 'Director User';
+        id = 'director_user_id';
+        success = true;
       } else if (email === 'consultant@example.com' && password === 'consultant') {
-        setUserRole('consultant');
-        setUserName('Consultant User');
+        role = 'consultant';
+        name = 'Consultant User';
+        id = 'consultant_user_id';
+        success = true;
+      }
+
+      if (success) {
+        setUserRole(role);
+        setUserName(name);
+        setUserId(id);
         setIsAuthenticated(true);
-        localStorage.setItem('userRole', 'consultant');
-        localStorage.setItem('userName', 'Consultant User');
+        localStorage.setItem('userRole', role as string);
+        localStorage.setItem('userName', name as string);
+        localStorage.setItem('userId', id as string);
         localStorage.setItem('isAuthenticated', 'true');
+
+        // Inicializa o tenant para o usuário após o login
+        await tenantManager.loadCurrentTenant();
+        
         return true;
       }
       return false;
@@ -82,9 +101,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsAuthenticated(false);
     setUserRole(null);
     setUserName(null);
+    setUserId(null);
     localStorage.removeItem('userRole');
     localStorage.removeItem('userName');
+    localStorage.removeItem('userId');
     localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('currentTenantId');
     navigate('/login');
   };
 
@@ -110,7 +132,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, userRole, userName, login, logout, hasPermission }}>
+    <AuthContext.Provider value={{ 
+      isAuthenticated, 
+      userRole, 
+      userName, 
+      userId,
+      login, 
+      logout, 
+      hasPermission 
+    }}>
       {children}
     </AuthContext.Provider>
   );

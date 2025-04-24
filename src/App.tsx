@@ -1,9 +1,11 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { TenantProvider } from "./hooks/useTenant";
 import MainLayout from "./components/layout/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Reports";
@@ -26,34 +28,36 @@ const App = () => (
       <Sonner />
       <BrowserRouter basename={BASE_PATH}>
         <AuthProvider>
-          <Routes>
-            {/* Public routes */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/unauthorized" element={<Unauthorized />} />
-            
-            {/* Protected routes - require authentication */}
-            <Route element={<ProtectedRoute />}>
-              <Route path="/" element={<MainLayout />}>
-                <Route index element={<Navigate to="/dashboard" replace />} />
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="reports" element={<Reports />} />
-                <Route path="api-integrations" element={<ApiIntegrations />} />
-                <Route path="ai-analytics" element={<AIAnalytics />} />
-                <Route path="wbuy-affiliation" element={<WbuyAffiliation />} />
+          <TenantProvider>
+            <Routes>
+              {/* Public routes */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/unauthorized" element={<Unauthorized />} />
+              
+              {/* Protected routes - require authentication */}
+              <Route element={<ProtectedRoute />}>
+                <Route path="/" element={<MainLayout />}>
+                  <Route index element={<Navigate to="/dashboard" replace />} />
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="reports" element={<Reports />} />
+                  <Route path="api-integrations" element={<ApiIntegrations />} />
+                  <Route path="ai-analytics" element={<AIAnalytics />} />
+                  <Route path="wbuy-affiliation" element={<WbuyAffiliation />} />
 
-                {/* Admin only routes */}
-                <Route path="settings" element={<Settings />} />
-                
-                {/* Placeholder routes for future implementation */}
-                <Route path="affiliates" element={<ComingSoon title="Afiliados" />} />
-                <Route path="tracking" element={<ComingSoon title="Rastreamento" />} />
-                <Route path="orders" element={<ComingSoon title="Pedidos" />} />
+                  {/* Admin only routes */}
+                  <Route path="settings" element={<Settings />} />
+                  
+                  {/* Placeholder routes for future implementation */}
+                  <Route path="affiliates" element={<ComingSoon title="Afiliados" />} />
+                  <Route path="tracking" element={<ComingSoon title="Rastreamento" />} />
+                  <Route path="orders" element={<ComingSoon title="Pedidos" />} />
+                </Route>
               </Route>
-            </Route>
-            
-            {/* 404 route */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+              
+              {/* 404 route */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </TenantProvider>
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
