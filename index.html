@@ -8,6 +8,8 @@
     <meta name="description" content="Sistema de gerenciamento para afiliados" />
     <meta name="author" content="Léo Oliveira" />
     <link id="dynamic-favicon" rel="icon" href="/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png" type="image/png">
+    <!-- Fallback favicon se o dinâmico não funcionar -->
+    <link rel="alternate icon" href="/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png" type="image/png">
 
     <meta property="og:title" content="Blue CRM" />
     <meta property="og:description" content="Sistema de gerenciamento para afiliados" />
@@ -24,5 +26,16 @@
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <script>
+      // Garante que o favicon seja carregado corretamente
+      document.addEventListener('DOMContentLoaded', () => {
+        const faviconPath = '/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png';
+        const dynamicFavicon = document.getElementById('dynamic-favicon');
+        if (dynamicFavicon) {
+          dynamicFavicon.href = faviconPath;
+        }
+      });
+    </script>
   </body>
 </html>

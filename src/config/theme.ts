@@ -75,15 +75,40 @@ const loadSavedThemeConfig = async (): Promise<ThemeConfigType> => {
 
 // Aplica as configurações do tema às variáveis CSS
 const applyThemeToDOM = () => {
+  // Adiciona todas as cores ao root para garantir consistência em todo o sistema
   if (ThemeConfig.primaryColor) {
     document.documentElement.style.setProperty('--theme-primary', ThemeConfig.primaryColor);
+    document.documentElement.style.setProperty('--primary', ThemeConfig.primaryColor);
+  }
+  
+  if (ThemeConfig.primaryColorHover) {
+    document.documentElement.style.setProperty('--theme-primary-hover', ThemeConfig.primaryColorHover);
+  }
+  
+  if (ThemeConfig.primaryForeground) {
+    document.documentElement.style.setProperty('--theme-primary-foreground', ThemeConfig.primaryForeground);
+    document.documentElement.style.setProperty('--primary-foreground', ThemeConfig.primaryForeground);
   }
   
   if (ThemeConfig.accentColor) {
     document.documentElement.style.setProperty('--theme-accent', ThemeConfig.accentColor);
+    document.documentElement.style.setProperty('--accent', ThemeConfig.accentColor);
   }
   
-  if (ThemeConfig.logo) {
+  if (ThemeConfig.accentForeground) {
+    document.documentElement.style.setProperty('--theme-accent-foreground', ThemeConfig.accentForeground);
+    document.documentElement.style.setProperty('--accent-foreground', ThemeConfig.accentForeground);
+  }
+  
+  // Configura o favicon e título da página
+  if (ThemeConfig.favicon) {
+    const faviconLink = document.querySelector("link[rel~='icon']") as HTMLLinkElement;
+    if (faviconLink) {
+      faviconLink.href = ThemeConfig.favicon;
+      faviconLink.type = ThemeConfig.favicon.endsWith('.svg') ? 'image/svg+xml' : 'image/png';
+    }
+  } else if (ThemeConfig.logo) {
+    // Usa o logo como favicon se o favicon não estiver definido
     const faviconLink = document.querySelector("link[rel~='icon']");
     if (faviconLink) {
       createFaviconFromLogo(ThemeConfig.logo)
@@ -96,8 +121,46 @@ const applyThemeToDOM = () => {
     }
   }
   
+  // Atualiza o título da página
   if (ThemeConfig.companyName) {
     document.title = ThemeConfig.companyName;
+    
+    // Atualiza também as meta tags
+    const ogTitle = document.querySelector("meta[property='og:title']");
+    if (ogTitle) {
+      ogTitle.setAttribute("content", ThemeConfig.companyName);
+    }
+    
+    const twitterTitle = document.querySelector("meta[property='twitter:title']");
+    if (twitterTitle) {
+      twitterTitle.setAttribute("content", ThemeConfig.companyName);
+    }
+  }
+  
+  // Atualiza descrição nas meta tags se disponível
+  if (ThemeConfig.description) {
+    const metaDesc = document.querySelector("meta[name='description']");
+    if (metaDesc) {
+      metaDesc.setAttribute("content", ThemeConfig.description);
+    }
+    
+    const ogDesc = document.querySelector("meta[property='og:description']");
+    if (ogDesc) {
+      ogDesc.setAttribute("content", ThemeConfig.description);
+    }
+  }
+  
+  // Atualiza imagens nas meta tags
+  if (ThemeConfig.logo) {
+    const ogImage = document.querySelector("meta[property='og:image']");
+    if (ogImage) {
+      ogImage.setAttribute("content", ThemeConfig.logo);
+    }
+    
+    const twitterImage = document.querySelector("meta[name='twitter:image']");
+    if (twitterImage) {
+      twitterImage.setAttribute("content", ThemeConfig.logo);
+    }
   }
 };
 
@@ -116,6 +179,11 @@ export const updateThemeConfig = async (newConfig: Partial<ThemeConfigType>): Pr
       if (bgUrl) {
         newConfig.loginBackground = bgUrl;
       }
+    }
+    
+    // Configura o favicon automaticamente a partir do logo se não for especificado
+    if (newConfig.logo && !newConfig.favicon) {
+      newConfig.favicon = newConfig.logo;
     }
     
     const updatedConfig = { ...ThemeConfig, ...newConfig };

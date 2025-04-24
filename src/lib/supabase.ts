@@ -1,21 +1,46 @@
 
 import { createClient } from '@supabase/supabase-js';
+import { toast } from '@/hooks/use-toast';
 
 // Variáveis para conexão com o Supabase
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+// Flag para verificar se o Supabase está corretamente configurado
+export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
+
 // Verificação das credenciais antes de criar o cliente
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error(`
-    🔴 Credenciais do Supabase não configuradas corretamente!
+if (!isSupabaseConfigured) {
+  console.warn(`
+    ⚠️ Supabase não configurado corretamente!
     
-    Por favor, certifique-se de que as seguintes variáveis de ambiente estão definidas:
+    Para habilitar as funcionalidades completas do sistema, configure as seguintes variáveis de ambiente:
     - VITE_SUPABASE_URL
     - VITE_SUPABASE_ANON_KEY
     
     Você pode adicioná-las criando um arquivo .env.local na raiz do projeto.
+    Por enquanto, o sistema funcionará com funcionalidades limitadas e salvará dados apenas no localStorage.
   `);
+  
+  // Notifica o usuário apenas uma vez na inicialização da aplicação
+  if (typeof window !== 'undefined') {
+    // Verifica se já notificou hoje
+    const lastNotified = localStorage.getItem('supabase_warning_shown');
+    const today = new Date().toDateString();
+    
+    if (lastNotified !== today) {
+      // Atrasa a notificação para garantir que o sistema de toast esteja disponível
+      setTimeout(() => {
+        toast({
+          title: "⚠️ Supabase não configurado",
+          description: "O sistema está funcionando com funcionalidades limitadas. Configure o Supabase para acesso completo às funcionalidades.",
+          variant: "warning",
+          duration: 7000
+        });
+        localStorage.setItem('supabase_warning_shown', today);
+      }, 2000);
+    }
+  }
 }
 
 // Usar valores mock para desenvolvimento quando as credenciais não estiverem disponíveis
@@ -28,9 +53,6 @@ export const supabaseClient = createClient(
   supabaseUrl || fallbackUrl,
   supabaseAnonKey || fallbackKey
 );
-
-// Flag para verificar se o Supabase está corretamente configurado
-export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
 // Modifica o comportamento dos métodos do Supabase quando não configurado
 if (!isSupabaseConfigured) {
@@ -56,10 +78,6 @@ if (!isSupabaseConfigured) {
       };
     };
     
-    // Ao invés de tentar definir storage, vamos adicionar um método storage.from mock
-    // usando Object.defineProperty para lidar com o getter da propriedade storage
-    const originalStorageFrom = client.storage?.from?.bind(client.storage);
-    
     // Criaos um proxy para o método storage.from
     const mockStorageFrom = (bucket: string) => {
       console.warn(`⚠️ Tentativa de acessar o bucket "${bucket}" com o Supabase não configurado.`);
@@ -84,3 +102,24 @@ if (!isSupabaseConfigured) {
   
   wrapSupabaseMethods(supabaseClient);
 }
+
+// Função utilitária para verificar a conexão com Supabase
+export const testSupabaseConnection = async (): Promise<boolean> => {
+  if (!isSupabaseConfigured) return false;
+  
+  try {
+    // Tenta fazer uma operação simples para testar a conexão
+    const { error } = await supabaseClient.from('theme_config').select('count', { count: 'exact', head: true });
+    return !error;
+  } catch {
+    return false;
+  }
+};
+
+// Exporta uma função para detectar mudanças na configuração do Supabase
+export const checkSupabaseConfig = () => {
+  return {
+    url: supabaseUrl || null,
+    isConfigured: isSupabaseConfigured
+  };
+};

@@ -9,6 +9,7 @@ interface ColorPickerFieldProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  description?: string;
 }
 
 const ColorPickerField = ({ 
@@ -16,8 +17,16 @@ const ColorPickerField = ({
   name, 
   value, 
   onChange,
-  placeholder 
+  placeholder,
+  description
 }: ColorPickerFieldProps) => {
+  // Utiliza o valor default para o color picker se o valor atual não for válido
+  const safeValue = React.useMemo(() => {
+    // Verifica se o valor é uma cor hexadecimal válida
+    const isValidHex = /^#([0-9A-F]{3}){1,2}$/i.test(value);
+    return isValidHex ? value : "#ffffff";
+  }, [value]);
+
   return (
     <div className="space-y-2">
       <Label htmlFor={name}>{label}</Label>
@@ -33,7 +42,7 @@ const ColorPickerField = ({
         <Input 
           type="color" 
           className="w-12 p-1 h-10 cursor-pointer" 
-          value={value} 
+          value={safeValue} 
           onChange={(e) => onChange(e.target.value)} 
           aria-label={`Seletor de cor para ${label}`}
         />
@@ -42,9 +51,13 @@ const ColorPickerField = ({
             className="w-6 h-6 rounded-full border border-gray-300" 
             style={{ backgroundColor: value }} 
             title={value}
+            aria-hidden="true"
           />
         )}
       </div>
+      {description && (
+        <p className="text-xs text-muted-foreground">{description}</p>
+      )}
     </div>
   );
 };
