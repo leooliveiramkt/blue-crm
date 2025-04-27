@@ -1,17 +1,27 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
+import { Session, User } from '@supabase/supabase-js';
 import { tenantManager } from '@/lib/tenancy/tenantManager';
+import { toast } from '@/components/ui/use-toast';
 
 type UserRole = 'admin' | 'director' | 'consultant';
+
+interface Profile {
+  first_name: string | null;
+  last_name: string | null;
+  avatar_url: string | null;
+}
 
 interface AuthContextType {
   isAuthenticated: boolean;
   userRole: UserRole | null;
   userName: string | null;
   userId: string | null;
+  profile: Profile | null;
   login: (email: string, password: string) => Promise<boolean>;
-  logout: () => void;
+  logout: () => Promise<void>;
   hasPermission: (requiredRole: UserRole | UserRole[]) => boolean;
 }
 
@@ -22,92 +32,109 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [userRole, setUserRole] = useState<UserRole | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check authentication status on initial load
-    const storedAuth = localStorage.getItem('isAuthenticated') === 'true';
-    const storedRole = localStorage.getItem('userRole') as UserRole;
-    const storedName = localStorage.getItem('userName');
-    const storedId = localStorage.getItem('userId');
+    // Configura o listener de mudança de estado de autenticação
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setSession(session);
+        setIsAuthenticated(!!session);
+        setUserId(session?.user?.id || null);
 
-    if (storedAuth && storedRole && storedName) {
-      setIsAuthenticated(true);
-      setUserRole(storedRole);
-      setUserName(storedName);
-      setUserId(storedId || 'current_user_id');
-    } else {
-      // Limpar dados inválidos ou incompletos
-      localStorage.removeItem('isAuthenticated');
-      localStorage.removeItem('userRole');
-      localStorage.removeItem('userName');
-      localStorage.removeItem('userId');
-      
-      setIsAuthenticated(false);
-      setUserRole(null);
-      setUserName(null);
-      setUserId(null);
-    }
+        if (session?.user) {
+          // Busca o perfil do usuário
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('first_name, last_name, avatar_url')
+            .eq('id', session.user.id)
+            .single();
+
+          setProfile(profile);
+          setUserName(profile?.first_name ? `${profile.first_name} ${profile.last_name || ''}`.trim() : 'Usuário');
+          
+          // Por enquanto, vamos manter o userRole como 'admin' para desenvolvimento
+          setUserRole('admin');
+        } else {
+          setProfile(null);
+          setUserName(null);
+          setUserRole(null);
+        }
+      }
+    );
+
+    // Verifica sessão atual
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setIsAuthenticated(!!session);
+      setUserId(session?.user?.id || null);
+
+      if (session?.user) {
+        // Busca o perfil do usuário
+        supabase
+          .from('profiles')
+          .select('first_name, last_name, avatar_url')
+          .eq('id', session.user.id)
+          .single()
+          .then(({ data: profile }) => {
+            setProfile(profile);
+            setUserName(profile?.first_name ? `${profile.first_name} ${profile.last_name || ''}`.trim() : 'Usuário');
+            // Por enquanto, vamos manter o userRole como 'admin' para desenvolvimento
+            setUserRole('admin');
+          });
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      // Esta é uma autenticação simulada - substitua pela lógica de autenticação real
-      let success = false;
-      let role: UserRole | null = null;
-      let name: string | null = null;
-      let id: string | null = null;
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
 
-      if (email === 'admin@example.com' && password === 'admin') {
-        role = 'admin';
-        name = 'Admin User';
-        id = 'admin_user_id';
-        success = true;
-      } else if (email === 'director@example.com' && password === 'director') {
-        role = 'director';
-        name = 'Director User';
-        id = 'director_user_id';
-        success = true;
-      } else if (email === 'consultant@example.com' && password === 'consultant') {
-        role = 'consultant';
-        name = 'Consultant User';
-        id = 'consultant_user_id';
-        success = true;
+      if (error) {
+        toast({
+          title: "Erro ao fazer login",
+          description: error.message,
+          variant: "destructive",
+        });
+        return false;
       }
 
-      if (success) {
-        setUserRole(role);
-        setUserName(name);
-        setUserId(id);
-        setIsAuthenticated(true);
-        localStorage.setItem('userRole', role as string);
-        localStorage.setItem('userName', name as string);
-        localStorage.setItem('userId', id as string);
-        localStorage.setItem('isAuthenticated', 'true');
-
-        // Inicializa o tenant para o usuário após o login
-        await tenantManager.loadCurrentTenant();
-        
-        return true;
-      }
-      return false;
+      // Inicializa o tenant para o usuário após o login
+      await tenantManager.loadCurrentTenant();
+      return true;
     } catch (error) {
       console.error("Erro durante login:", error);
+      toast({
+        title: "Erro ao fazer login",
+        description: "Ocorreu um erro inesperado. Tente novamente.",
+        variant: "destructive",
+      });
       return false;
     }
   };
 
-  const logout = () => {
-    setIsAuthenticated(false);
-    setUserRole(null);
-    setUserName(null);
-    setUserId(null);
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('currentTenantId');
-    navigate('/login');
+  const logout = async () => {
+    try {
+      await supabase.auth.signOut();
+      localStorage.removeItem('currentTenantId');
+      navigate('/login');
+    } catch (error) {
+      console.error("Erro ao fazer logout:", error);
+      toast({
+        title: "Erro ao fazer logout",
+        description: "Ocorreu um erro inesperado. Tente novamente.",
+        variant: "destructive",
+      });
+    }
   };
 
   const hasPermission = (requiredRole: UserRole | UserRole[]): boolean => {
@@ -137,6 +164,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       userRole, 
       userName, 
       userId,
+      profile,
       login, 
       logout, 
       hasPermission 
