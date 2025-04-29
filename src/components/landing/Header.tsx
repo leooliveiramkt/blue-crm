@@ -2,10 +2,11 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { ThemeConfig } from '@/config/theme';
+import { useTheme } from '@/context/ThemeContext';
 
 export const Header = () => {
   const navigate = useNavigate();
+  const { themeConfig } = useTheme();
 
   const handleNavigateToLogin = () => {
     navigate('/login');
@@ -14,22 +15,24 @@ export const Header = () => {
   return (
     <header className="container mx-auto px-4 py-6 flex justify-between items-center">
       <div className="flex items-center">
-        {ThemeConfig.logo ? (
-          <img 
-            src={ThemeConfig.logo} 
-            alt={ThemeConfig.companyName} 
-            className="h-10 w-auto object-contain" 
-          />
+        {themeConfig.logo ? (
+          <div className="logo-animated">
+            <img 
+              src={themeConfig.logo} 
+              alt={themeConfig.companyName} 
+              className="h-10 w-auto object-contain" 
+            />
+          </div>
         ) : (
-          <span className="text-2xl font-bold" style={{ color: ThemeConfig.primaryColor }}>
-            {ThemeConfig.companyName || "Bela Blue"}
+          <span className="text-2xl font-bold" style={{ color: themeConfig.primaryColor }}>
+            {themeConfig.companyName || "Blue CRM"}
           </span>
         )}
       </div>
       <Button 
         variant="outline" 
         onClick={handleNavigateToLogin}
-        style={{ borderColor: ThemeConfig.primaryColor, color: ThemeConfig.primaryColor }}
+        style={{ borderColor: themeConfig.primaryColor, color: themeConfig.primaryColor }}
       >
         Entrar
       </Button>

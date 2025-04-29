@@ -26,7 +26,7 @@ import {
   SidebarTrigger,
   useSidebar
 } from '@/components/ui/sidebar';
-import { ThemeConfig } from '@/config/theme';
+import { useTheme } from '@/context/ThemeContext';
 import { useAuth } from '@/context/AuthContext';
 
 type NavItem = {
@@ -86,6 +86,7 @@ const navItems: NavItem[] = [
 const Sidebar = () => {
   const { state } = useSidebar();
   const { userName, userRole } = useAuth();
+  const { themeConfig } = useTheme();
   
   // Obter as iniciais do nome do usuário para o avatar
   const getUserInitials = () => {
@@ -101,7 +102,7 @@ const Sidebar = () => {
   return (
     <SidebarComponent>
       <SidebarHeader className="flex h-14 items-center px-4 border-b border-sidebar-border">
-        <span className="text-xl font-bold text-white">{ThemeConfig.companyName}</span>
+        <span className="text-xl font-bold text-white logo-animated">{themeConfig.companyName}</span>
         <div className="flex-1"></div>
         <SidebarTrigger />
       </SidebarHeader>
