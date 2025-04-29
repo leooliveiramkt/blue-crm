@@ -2,6 +2,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { toast } from '@/hooks/use-toast';
 import { supabase as supabaseClient } from '@/integrations/supabase/client';
+import { Database } from '@/integrations/supabase/types';
 
 // Flag para verificar se o Supabase está corretamente configurado
 const supabaseUrl = "https://zkjpzwrcuauieaaktzbk.supabase.co";
@@ -44,6 +45,9 @@ if (!isSupabaseConfigured) {
 
 // Exporta o cliente do arquivo client.ts para evitar duplicação de instâncias
 export { supabaseClient };
+
+// Criamos um cliente tipado para uso em arquivos que precisam de tipos
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
 
 // Função utilitária para verificar a conexão com Supabase
 export const testSupabaseConnection = async (): Promise<boolean> => {

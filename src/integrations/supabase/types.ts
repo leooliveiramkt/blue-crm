@@ -105,6 +105,39 @@ export type Database = {
         }
         Relationships: []
       }
+      integrations: {
+        Row: {
+          created_at: string
+          credentials: Json
+          id: string
+          last_sync: string | null
+          metadata: Json | null
+          status: string
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at: string
+          credentials: Json
+          id: string
+          last_sync?: string | null
+          metadata?: Json | null
+          status: string
+          tenant_id: string
+          updated_at: string
+        }
+        Update: {
+          created_at?: string
+          credentials?: Json
+          id?: string
+          last_sync?: string | null
+          metadata?: Json | null
+          status?: string
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -203,6 +236,24 @@ export type Database = {
             referencedColumns: ["affiliate_id"]
           },
         ]
+      }
+      theme_config: {
+        Row: {
+          config: Json
+          created_at: string | null
+          id: number
+        }
+        Insert: {
+          config: Json
+          created_at?: string | null
+          id?: number
+        }
+        Update: {
+          config?: Json
+          created_at?: string | null
+          id?: number
+        }
+        Relationships: []
       }
     }
     Views: {

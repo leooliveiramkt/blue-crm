@@ -1,5 +1,5 @@
 
-import { supabaseClient, isSupabaseConfigured } from '@/lib/supabase';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { IntegrationType, IntegrationData, IntegrationConfig, IntegrationStatus } from './types';
 import { getIntegrationConfig } from './integrationConfigs';
 
@@ -62,19 +62,31 @@ class IntegrationManager {
 
     try {
       // Consulta Supabase para obter todas as integrações do tenant
-      const { data, error } = await supabaseClient
+      const { data, error } = await supabase
         .from('integrations')
         .select('*')
-        .eq('tenantId', tid);
+        .eq('tenant_id', tid);
 
       if (error) throw error;
 
       if (data && data.length > 0) {
-        const integrations = data as IntegrationData[];
+        // Converte os dados para o formato IntegrationData
+        const integrations: IntegrationData[] = data.map(item => ({
+          id: item.id as IntegrationType,
+          tenantId: item.tenant_id,
+          status: item.status as IntegrationStatus,
+          credentials: item.credentials as Record<string, string>,
+          metadata: item.metadata as Record<string, any> || {},
+          lastSync: item.last_sync,
+          createdAt: item.created_at,
+          updatedAt: item.updated_at
+        }));
+        
         // Atualiza o cache
         integrations.forEach(integration => {
           this.integrationsCache.set(`${tid}_${integration.id}`, integration);
         });
+        
         return integrations;
       }
       
@@ -115,18 +127,30 @@ class IntegrationManager {
     }
 
     try {
-      const { data, error } = await supabaseClient
+      const { data, error } = await supabase
         .from('integrations')
         .select('*')
-        .eq('tenantId', tid)
+        .eq('tenant_id', tid)
         .eq('id', integrationId)
         .single();
 
       if (error) throw error;
 
       if (data) {
-        this.integrationsCache.set(cacheKey, data as IntegrationData);
-        return data as IntegrationData;
+        // Converte para o formato IntegrationData
+        const integration: IntegrationData = {
+          id: data.id as IntegrationType,
+          tenantId: data.tenant_id,
+          status: data.status as IntegrationStatus,
+          credentials: data.credentials as Record<string, string>,
+          metadata: data.metadata as Record<string, any> || {},
+          lastSync: data.last_sync,
+          createdAt: data.created_at,
+          updatedAt: data.updated_at
+        };
+        
+        this.integrationsCache.set(cacheKey, integration);
+        return integration;
       }
       
       return null;
@@ -184,17 +208,41 @@ class IntegrationManager {
     }
 
     try {
-      const { data, error } = await supabaseClient
+      // Preparando dados para o formato da tabela
+      const dbData = {
+        id: completeIntegration.id,
+        tenant_id: completeIntegration.tenantId,
+        status: completeIntegration.status,
+        credentials: completeIntegration.credentials,
+        metadata: completeIntegration.metadata,
+        last_sync: completeIntegration.lastSync,
+        created_at: completeIntegration.createdAt,
+        updated_at: completeIntegration.updatedAt
+      };
+
+      const { data, error } = await supabase
         .from('integrations')
-        .upsert(completeIntegration, { onConflict: 'tenantId, id' })
+        .upsert(dbData)
         .select()
         .single();
 
       if (error) throw error;
 
       if (data) {
-        this.integrationsCache.set(`${tid}_${integration.id}`, data as IntegrationData);
-        return data as IntegrationData;
+        // Converte de volta para o formato IntegrationData
+        const savedIntegration: IntegrationData = {
+          id: data.id as IntegrationType,
+          tenantId: data.tenant_id,
+          status: data.status as IntegrationStatus,
+          credentials: data.credentials as Record<string, string>,
+          metadata: data.metadata as Record<string, any> || {},
+          lastSync: data.last_sync,
+          createdAt: data.created_at,
+          updatedAt: data.updated_at
+        };
+        
+        this.integrationsCache.set(`${tid}_${integration.id}`, savedIntegration);
+        return savedIntegration;
       }
       
       return null;
@@ -227,10 +275,10 @@ class IntegrationManager {
     }
 
     try {
-      const { error } = await supabaseClient
+      const { error } = await supabase
         .from('integrations')
         .delete()
-        .eq('tenantId', tid)
+        .eq('tenant_id', tid)
         .eq('id', integrationId);
 
       if (error) throw error;

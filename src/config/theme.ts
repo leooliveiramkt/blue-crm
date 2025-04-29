@@ -3,7 +3,7 @@ import { ThemeConfigType } from "@/types/theme";
 import { getDefaultConfig } from "./defaultTheme";
 import { createFaviconFromLogo } from "@/utils/imageUtils";
 import { saveThemeToStorage, loadFromLocalStorage } from "@/utils/themeStorage";
-import { supabaseClient, isSupabaseConfigured } from "@/lib/supabase";
+import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 
 // Inicializa com configuração padrão
 export const ThemeConfig: ThemeConfigType = getDefaultConfig();
@@ -16,7 +16,7 @@ export const uploadImageToSupabase = async (imageDataUrl: string, path: string):
       const blob = await res.blob();
       const fileName = `${path}_${Date.now()}`;
       
-      const { data, error } = await supabaseClient
+      const { data, error } = await supabase
         .storage
         .from('theme_assets')
         .upload(fileName, blob, {
@@ -29,7 +29,7 @@ export const uploadImageToSupabase = async (imageDataUrl: string, path: string):
         return imageDataUrl;
       }
       
-      const { data: urlData } = supabaseClient
+      const { data: urlData } = supabase
         .storage
         .from('theme_assets')
         .getPublicUrl(data.path);
@@ -47,7 +47,7 @@ export const uploadImageToSupabase = async (imageDataUrl: string, path: string):
 const loadSavedThemeConfig = async (): Promise<ThemeConfigType> => {
   try {
     if (isSupabaseConfigured) {
-      const { data, error } = await supabaseClient
+      const { data, error } = await supabase
         .from('theme_config')
         .select('*')
         .order('created_at', { ascending: false })
@@ -60,7 +60,7 @@ const loadSavedThemeConfig = async (): Promise<ThemeConfigType> => {
         return localConfig || getDefaultConfig();
       }
 
-      if (data) {
+      if (data && data.config) {
         return data.config as ThemeConfigType;
       }
     }

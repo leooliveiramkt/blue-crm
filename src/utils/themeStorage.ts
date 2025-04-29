@@ -1,11 +1,11 @@
 
 import { ThemeConfigType } from "@/types/theme";
-import { supabaseClient, isSupabaseConfigured } from "@/lib/supabase";
+import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 
 export const saveThemeToStorage = async (config: ThemeConfigType): Promise<boolean> => {
   try {
     if (isSupabaseConfigured) {
-      const { error } = await supabaseClient
+      const { error } = await supabase
         .from('theme_config')
         .insert({
           config: config,
