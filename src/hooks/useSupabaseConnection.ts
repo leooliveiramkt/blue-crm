@@ -8,6 +8,14 @@ export const useSupabaseConnection = () => {
   useEffect(() => {
     const checkSupabaseConnection = async () => {
       try {
+        // Verificar se estamos usando um usuário de demonstração
+        const demoType = localStorage.getItem('demo_user_type');
+        if (demoType) {
+          console.log("Usando usuário de demonstração:", demoType);
+          setDebugInfo(null);
+          return;
+        }
+
         // Vamos tentar uma operação mais simples para verificar a conexão
         const { data, error } = await supabase.auth.getSession();
         

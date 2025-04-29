@@ -23,20 +23,26 @@ export function useAuthActions(
       // Usuários de demonstração para fins de desenvolvimento
       if (email === 'admin@example.com' && password === 'admin') {
         console.log("Login com usuário de demonstração (admin)");
+        
+        // Define o estado de autenticação
         setIsAuthenticated(true);
         setUserRole('admin');
         setUserName('Admin');
         setUserId('demo-admin-id');
+        
+        // Salva uma marca no localStorage para identificar que é um usuário demo
+        localStorage.setItem('demo_user_type', 'admin');
         
         toast({
           title: "Login de demonstração",
           description: "Você entrou como administrador de demonstração.",
         });
         
-        // Pequeno delay para garantir que o estado seja atualizado
+        // Pequeno delay para garantir que o estado seja atualizado antes do redirecionamento
         setTimeout(() => {
+          console.log("Redirecionando para o dashboard após login do admin");
           navigate('/dashboard');
-        }, 100);
+        }, 300);
         
         return true;
       }
@@ -47,6 +53,7 @@ export function useAuthActions(
         setUserRole('director');
         setUserName('Diretor');
         setUserId('demo-director-id');
+        localStorage.setItem('demo_user_type', 'director');
         
         toast({
           title: "Login de demonstração",
@@ -56,7 +63,7 @@ export function useAuthActions(
         // Pequeno delay para garantir que o estado seja atualizado
         setTimeout(() => {
           navigate('/dashboard');
-        }, 100);
+        }, 300);
         
         return true;
       }
@@ -67,6 +74,7 @@ export function useAuthActions(
         setUserRole('consultant');
         setUserName('Consultor');
         setUserId('demo-consultant-id');
+        localStorage.setItem('demo_user_type', 'consultant');
         
         toast({
           title: "Login de demonstração",
@@ -76,7 +84,7 @@ export function useAuthActions(
         // Pequeno delay para garantir que o estado seja atualizado
         setTimeout(() => {
           navigate('/dashboard');
-        }, 100);
+        }, 300);
         
         return true;
       }
@@ -146,13 +154,15 @@ export function useAuthActions(
       console.log("Realizando logout...");
       
       // Se for um usuário de demonstração
-      if (setUserId && document.cookie.includes('demo-')) {
+      if (localStorage.getItem('demo_user_type')) {
+        console.log("Logout de usuário de demonstração");
         setIsAuthenticated(false);
         setUserRole(null);
         setUserName(null);
         setUserId(null);
         setProfile(null);
         setSession(null);
+        localStorage.removeItem('demo_user_type');
         localStorage.removeItem('currentTenantId');
         
         toast({

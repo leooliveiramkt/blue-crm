@@ -15,9 +15,21 @@ import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import MainLayout from "@/components/layout/MainLayout";
 import WbuyAffiliation from "@/pages/wbuy-affiliation/WbuyAffiliation";
 import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 
 export const Routes = () => {
   const { isAuthenticated } = useAuth();
+  
+  // Log para debug
+  useEffect(() => {
+    console.log("Routes: Estado de autenticação:", isAuthenticated);
+    
+    // Verificar se há usuários de demonstração
+    const demoType = localStorage.getItem('demo_user_type');
+    if (demoType) {
+      console.log("Routes: Usuário de demonstração:", demoType);
+    }
+  }, [isAuthenticated]);
   
   return (
     <RouterRoutes>
@@ -32,7 +44,9 @@ export const Routes = () => {
       {/* Rota de login - redireciona para dashboard se autenticado */}
       <Route 
         path="/login" 
-        element={<Login />} 
+        element={
+          isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />
+        } 
       />
       
       {/* Rotas protegidas */}

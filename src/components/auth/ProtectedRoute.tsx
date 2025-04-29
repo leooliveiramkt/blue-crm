@@ -13,6 +13,14 @@ const ProtectedRoute = ({ requiredRole }: ProtectedRouteProps) => {
 
   useEffect(() => {
     console.log("ProtectedRoute verificando autenticação:", isAuthenticated);
+    console.log("Rota atual:", location.pathname);
+    
+    // Verificar se é um usuário de demonstração
+    const demoType = localStorage.getItem('demo_user_type');
+    if (demoType) {
+      console.log("Demo user type:", demoType);
+    }
+    
     if (!isAuthenticated) {
       console.log("Usuário não autenticado, redirecionando para login...");
     } else {

@@ -39,7 +39,40 @@ export function useAuthService() {
 
   // Efeito para configurar o listener de alteração de estado da autenticação
   useEffect(() => {
-    // Configura o listener de mudança de estado de autenticação
+    console.log("useAuthService: Configurando listener de autenticação");
+    
+    // Verificar primeiro se é um usuário de demonstração
+    const demoType = localStorage.getItem('demo_user_type');
+    if (demoType) {
+      console.log("useAuthService: Detectado usuário de demonstração:", demoType);
+      
+      // Configura dados do usuário para demonstração
+      switch (demoType) {
+        case 'admin':
+          setIsAuthenticated(true);
+          setUserRole('admin');
+          setUserName('Admin');
+          setUserId('demo-admin-id');
+          break;
+        case 'director':
+          setIsAuthenticated(true);
+          setUserRole('director');
+          setUserName('Diretor');
+          setUserId('demo-director-id');
+          break;
+        case 'consultant':
+          setIsAuthenticated(true);
+          setUserRole('consultant');
+          setUserName('Consultor');
+          setUserId('demo-consultant-id');
+          break;
+      }
+      
+      // Para usuários de demonstração, não precisamos do listener
+      return;
+    }
+    
+    // Configura o listener de mudança de estado de autenticação para usuários reais
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         console.log("Auth state change event:", event, "Session:", !!session);
@@ -56,7 +89,7 @@ export function useAuthService() {
       }
     );
 
-    // Verifica sessão atual
+    // Verifica sessão atual para usuários reais
     const checkSession = async () => {
       try {
         console.log("Verificando sessão atual...");
@@ -87,7 +120,10 @@ export function useAuthService() {
     checkSession();
 
     return () => {
-      subscription.unsubscribe();
+      // Se não for usuário demo, faz cleanup da subscription
+      if (!demoType && subscription) {
+        subscription.unsubscribe();
+      }
     };
   }, []);
 

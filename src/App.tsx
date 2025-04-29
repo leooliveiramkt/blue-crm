@@ -9,6 +9,12 @@ import "./App.css";
 function App() {
   // Verificar se o cliente está conectando com a API
   console.log("App iniciado - Verificando ambiente");
+  
+  // Verificar se há usuários de demonstração
+  const demoType = localStorage.getItem('demo_user_type');
+  if (demoType) {
+    console.log("Usuário de demonstração detectado:", demoType);
+  }
 
   return (
     <BrowserRouter>

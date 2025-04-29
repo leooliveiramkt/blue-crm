@@ -9,6 +9,10 @@ const supabaseUrl = "https://zkjpzwrcuauieaaktzbk.supabase.co";
 const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpranB6d3JjdWF1aWVhYWt0emJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4OTM0MjQsImV4cCI6MjA1OTQ2OTQyNH0.daIZCGCuaQtH8mewhYRLCFnqOGUYb_ADC7_sfpXGl_M";
 export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
+// Log para diagnosticar configuração
+console.log("Inicializando cliente Supabase em lib/supabase.ts");
+console.log("Supabase configurado:", isSupabaseConfigured);
+
 // Verificação das credenciais antes de criar o cliente
 if (!isSupabaseConfigured) {
   console.warn(`
@@ -44,21 +48,33 @@ if (!isSupabaseConfigured) {
 }
 
 // Exporta o cliente do arquivo client.ts para evitar duplicação de instâncias
-export { supabaseClient };
+export const supabaseClient = supabaseClient;
 
 // Criamos um cliente tipado para uso em arquivos que precisam de tipos
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient<Database>(
+  supabaseUrl, 
+  supabaseAnonKey, 
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      storage: localStorage
+    }
+  }
+);
 
 // Função utilitária para verificar a conexão com Supabase
 export const testSupabaseConnection = async (): Promise<boolean> => {
   if (!isSupabaseConfigured) return false;
   
   try {
+    console.log("Testando conexão com Supabase...");
     // Tenta fazer uma operação simples para testar a conexão
-    // Usamos a tabela 'profiles' que sabemos que existe no schema 'public'
-    const { error } = await supabaseClient.from('profiles').select('count', { count: 'exact', head: true });
+    const { error } = await supabase.auth.getSession();
+    console.log("Teste de conexão:", error ? "Falhou" : "Sucesso");
     return !error;
-  } catch {
+  } catch (e) {
+    console.error("Erro ao testar conexão:", e);
     return false;
   }
 };
