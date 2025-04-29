@@ -1,6 +1,6 @@
 
 import { useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/supabase';
 import { useAuthState } from './auth/useAuthState';
 import { useUserProfile } from './auth/useUserProfile';
 import { useAuthActions } from './auth/useAuthActions';

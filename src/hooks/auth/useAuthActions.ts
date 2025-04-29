@@ -1,6 +1,6 @@
 
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/supabase';
 import { tenantManager } from '@/lib/tenancy/tenantManager';
 import { useToast } from '@/components/ui/use-toast';
 import { UserRole } from '@/types/auth';
