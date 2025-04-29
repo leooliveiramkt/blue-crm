@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,18 +17,28 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
+
+  // Redirecionar para o dashboard se já estiver autenticado
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
+      console.log("Iniciando processo de login...");
       const success = await login(email, password);
       
       if (success) {
+        console.log("Login bem-sucedido, redirecionando...");
         navigate('/dashboard');
       } else {
+        console.log("Login falhou");
         toast({
           title: "Login falhou",
           description: "Email ou senha inválidos. Tente novamente.",
@@ -36,12 +46,12 @@ const Login = () => {
         });
       }
     } catch (error) {
+      console.error("Erro durante o login:", error);
       toast({
         title: "Erro de login",
         description: "Ocorreu um erro ao tentar fazer login. Tente novamente.",
         variant: "destructive",
       });
-      console.error("Login error:", error);
     } finally {
       setIsLoading(false);
     }

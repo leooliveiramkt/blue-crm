@@ -40,23 +40,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Configura o listener de mudança de estado de autenticação
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log("Auth state change event:", event, "Session:", !!session);
         setSession(session);
         setIsAuthenticated(!!session);
         setUserId(session?.user?.id || null);
 
         if (session?.user) {
           // Busca o perfil do usuário
-          const { data: profile } = await supabase
-            .from('profiles')
-            .select('first_name, last_name, avatar_url')
-            .eq('id', session.user.id)
-            .single();
+          try {
+            const { data: profile, error } = await supabase
+              .from('profiles')
+              .select('first_name, last_name, avatar_url')
+              .eq('id', session.user.id)
+              .single();
+            
+            if (error) {
+              console.error("Erro ao buscar perfil:", error);
+            }
 
-          setProfile(profile);
-          setUserName(profile?.first_name ? `${profile.first_name} ${profile.last_name || ''}`.trim() : 'Usuário');
-          
-          // Por enquanto, vamos manter o userRole como 'admin' para desenvolvimento
-          setUserRole('admin');
+            setProfile(profile);
+            setUserName(profile?.first_name ? `${profile.first_name} ${profile.last_name || ''}`.trim() : 'Usuário');
+            
+            // Por enquanto, vamos manter o userRole como 'admin' para desenvolvimento
+            setUserRole('admin');
+          } catch (error) {
+            console.error("Erro ao processar perfil do usuário:", error);
+          }
         } else {
           setProfile(null);
           setUserName(null);
@@ -67,6 +76,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // Verifica sessão atual
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log("Verificando sessão atual:", !!session);
       setSession(session);
       setIsAuthenticated(!!session);
       setUserId(session?.user?.id || null);
@@ -78,13 +88,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           .select('first_name, last_name, avatar_url')
           .eq('id', session.user.id)
           .single()
-          .then(({ data: profile }) => {
+          .then(({ data: profile, error }) => {
+            if (error) {
+              console.error("Erro ao buscar perfil na inicialização:", error);
+            }
+            
             setProfile(profile);
             setUserName(profile?.first_name ? `${profile.first_name} ${profile.last_name || ''}`.trim() : 'Usuário');
             // Por enquanto, vamos manter o userRole como 'admin' para desenvolvimento
             setUserRole('admin');
+          })
+          .catch(error => {
+            console.error("Erro ao buscar perfil do usuário:", error);
           });
       }
+    }).catch(error => {
+      console.error("Erro ao verificar sessão atual:", error);
     });
 
     return () => {
@@ -94,12 +113,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      console.log("Tentando login com:", email);
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
       });
 
       if (error) {
+        console.error("Erro de login:", error.message);
         toast({
           title: "Erro ao fazer login",
           description: error.message,
@@ -108,11 +129,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return false;
       }
 
+      console.log("Login bem-sucedido:", !!data.session);
       // Inicializa o tenant para o usuário após o login
-      await tenantManager.loadCurrentTenant();
+      try {
+        await tenantManager.loadCurrentTenant();
+      } catch (tenantError) {
+        console.error("Erro ao carregar tenant:", tenantError);
+      }
       return true;
     } catch (error) {
-      console.error("Erro durante login:", error);
+      console.error("Erro inesperado durante login:", error);
       toast({
         title: "Erro ao fazer login",
         description: "Ocorreu um erro inesperado. Tente novamente.",
@@ -124,6 +150,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async () => {
     try {
+      console.log("Realizando logout...");
       await supabase.auth.signOut();
       localStorage.removeItem('currentTenantId');
       navigate('/login');
