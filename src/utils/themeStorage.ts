@@ -1,14 +1,16 @@
 
 import { ThemeConfigType } from "@/types/theme";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+import { getDefaultConfig } from "@/config/defaultTheme";
 
 export const saveThemeToStorage = async (config: ThemeConfigType): Promise<boolean> => {
   try {
     if (isSupabaseConfigured) {
+      // Precisamos converter ThemeConfigType para Json compatível com Supabase
       const { error } = await supabase
         .from('theme_config')
         .insert({
-          config: config,
+          config: JSON.parse(JSON.stringify(config)), // Converte para formato JSON compatível
           created_at: new Date().toISOString()
         });
         
@@ -30,7 +32,7 @@ export const loadFromLocalStorage = (): ThemeConfigType | null => {
   const savedConfig = localStorage.getItem('themeConfig');
   if (savedConfig) {
     try {
-      return JSON.parse(savedConfig);
+      return JSON.parse(savedConfig) as ThemeConfigType;
     } catch (error) {
       console.error('Erro ao carregar configurações do localStorage:', error);
       return null;
@@ -58,7 +60,19 @@ export const loadThemeFromDatabase = async (): Promise<ThemeConfigType | null> =
     }
 
     if (data && data.config) {
-      return data.config as ThemeConfigType;
+      // Garantimos que o retorno atende à interface ThemeConfigType
+      const themeConfig = data.config as any;
+      
+      // Verificamos se tem campos obrigatórios
+      if (typeof themeConfig.companyName === 'string' && 
+          typeof themeConfig.primaryColor === 'string') {
+        return themeConfig as ThemeConfigType;
+      } else {
+        console.warn('Tema carregado do banco não possui campos obrigatórios');
+        const localTheme = loadFromLocalStorage();
+        if (localTheme) return localTheme;
+        return getDefaultConfig();
+      }
     }
 
     return loadFromLocalStorage();
