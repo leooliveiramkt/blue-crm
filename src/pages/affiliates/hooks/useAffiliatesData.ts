@@ -1,6 +1,8 @@
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
+import { RankingItem } from '../../wbuy-affiliation/types';
 
 interface Affiliate {
   id: string;
@@ -11,15 +13,6 @@ interface Affiliate {
   registration_date: string;
   target_reached: boolean;
   [key: string]: any;
-}
-
-export interface RankingItem {
-  affiliate_id: string;
-  full_name: string;
-  total_sales: number;
-  total_sale_amount: number;
-  total_commission: number;
-  product_type: string; // Alterando de opcional para obrigatório
 }
 
 export const useAffiliatesData = () => {
@@ -49,7 +42,12 @@ export const useAffiliatesData = () => {
         .select('*');
 
       if (weeklyPhysicalError) throw weeklyPhysicalError;
-      setWeeklyPhysicalRanking(weeklyPhysicalData || []);
+      // Adicionar product_type aos dados retornados
+      const physicalRankingWithType = (weeklyPhysicalData || []).map(item => ({
+        ...item,
+        product_type: 'physical'
+      }));
+      setWeeklyPhysicalRanking(physicalRankingWithType);
 
       // Buscar ranking semanal - produtos digitais
       const { data: weeklyDigitalData, error: weeklyDigitalError } = await supabase
@@ -57,7 +55,12 @@ export const useAffiliatesData = () => {
         .select('*');
 
       if (weeklyDigitalError) throw weeklyDigitalError;
-      setWeeklyDigitalRanking(weeklyDigitalData || []);
+      // Adicionar product_type aos dados retornados
+      const digitalRankingWithType = (weeklyDigitalData || []).map(item => ({
+        ...item,
+        product_type: 'digital'
+      }));
+      setWeeklyDigitalRanking(digitalRankingWithType);
 
       // Buscar ranking mensal
       const { data: monthlyData, error: monthlyError } = await supabase
