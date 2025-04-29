@@ -127,9 +127,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (error) {
         console.error("Erro de login:", error.message);
+        let mensagemErro = "Ocorreu um erro ao fazer login.";
+
+        // Mapear mensagens de erro comuns para português
+        if (error.message.includes("Invalid login credentials")) {
+          mensagemErro = "Credenciais inválidas. Por favor, verifique seu email e senha.";
+        } else if (error.message.includes("Email not confirmed")) {
+          mensagemErro = "Email não confirmado. Por favor, verifique sua caixa de entrada.";
+        } else if (error.message.includes("Too many requests")) {
+          mensagemErro = "Muitas tentativas de login. Por favor, tente novamente mais tarde.";
+        }
+
         toast({
           title: "Erro ao fazer login",
-          description: error.message,
+          description: mensagemErro,
           variant: "destructive",
         });
         return false;

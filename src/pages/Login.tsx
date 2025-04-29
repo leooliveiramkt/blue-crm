@@ -28,6 +28,26 @@ const Login = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validações básicas
+    if (!email.trim()) {
+      toast({
+        title: "Campo obrigatório",
+        description: "Por favor, informe seu email.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!password) {
+      toast({
+        title: "Campo obrigatório",
+        description: "Por favor, informe sua senha.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     setIsLoading(true);
 
     try {
@@ -50,6 +70,26 @@ const Login = () => {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  // Adiciona teste de credenciais para login
+  const setDemoCredentials = (type: string) => {
+    switch(type) {
+      case 'admin':
+        setEmail('admin@example.com');
+        setPassword('admin');
+        break;
+      case 'director':
+        setEmail('director@example.com');
+        setPassword('director');
+        break;
+      case 'consultant':
+        setEmail('consultant@example.com');
+        setPassword('consultant');
+        break;
+      default:
+        break;
     }
   };
 
@@ -176,10 +216,25 @@ const Login = () => {
 
           <div className="mt-8 text-center text-sm text-muted-foreground">
             <p>Níveis de acesso de demonstração:</p>
-            <div className="text-xs mt-1 space-y-1">
-              <p>Admin: admin@example.com / admin</p>
-              <p>Diretor: director@example.com / director</p>
-              <p>Consulta: consultant@example.com / consultant</p>
+            <div className="text-xs mt-1 space-y-1 flex flex-col">
+              <button 
+                className="hover:underline hover:text-primary transition-colors"
+                onClick={() => setDemoCredentials('admin')}
+              >
+                Admin: admin@example.com / admin
+              </button>
+              <button
+                className="hover:underline hover:text-primary transition-colors"
+                onClick={() => setDemoCredentials('director')}
+              >
+                Diretor: director@example.com / director
+              </button>
+              <button
+                className="hover:underline hover:text-primary transition-colors"
+                onClick={() => setDemoCredentials('consultant')}
+              >
+                Consulta: consultant@example.com / consultant
+              </button>
             </div>
           </div>
         </div>
