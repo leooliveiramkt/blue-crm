@@ -9,6 +9,102 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      affiliates: {
+        Row: {
+          affiliate_code: string | null
+          affiliate_link: string | null
+          attends_mentoring: boolean | null
+          campaign_participation: string[] | null
+          content_type: string[] | null
+          created_at: string
+          email: string
+          experience_level: string | null
+          feedback: string | null
+          full_name: string
+          id: string
+          in_support_groups: boolean | null
+          interested_in_upgrade: boolean | null
+          internal_ranking: number | null
+          last_contact_date: string | null
+          last_sale_date: string | null
+          location: string | null
+          promoted_products: string[] | null
+          received_initial_training: boolean | null
+          registration_date: string
+          reported_issues: string | null
+          social_media: string | null
+          status: string | null
+          support_provided: string | null
+          target_reached: boolean | null
+          updated_at: string
+          user_id: string | null
+          username: string | null
+          whatsapp: string | null
+        }
+        Insert: {
+          affiliate_code?: string | null
+          affiliate_link?: string | null
+          attends_mentoring?: boolean | null
+          campaign_participation?: string[] | null
+          content_type?: string[] | null
+          created_at?: string
+          email: string
+          experience_level?: string | null
+          feedback?: string | null
+          full_name: string
+          id?: string
+          in_support_groups?: boolean | null
+          interested_in_upgrade?: boolean | null
+          internal_ranking?: number | null
+          last_contact_date?: string | null
+          last_sale_date?: string | null
+          location?: string | null
+          promoted_products?: string[] | null
+          received_initial_training?: boolean | null
+          registration_date?: string
+          reported_issues?: string | null
+          social_media?: string | null
+          status?: string | null
+          support_provided?: string | null
+          target_reached?: boolean | null
+          updated_at?: string
+          user_id?: string | null
+          username?: string | null
+          whatsapp?: string | null
+        }
+        Update: {
+          affiliate_code?: string | null
+          affiliate_link?: string | null
+          attends_mentoring?: boolean | null
+          campaign_participation?: string[] | null
+          content_type?: string[] | null
+          created_at?: string
+          email?: string
+          experience_level?: string | null
+          feedback?: string | null
+          full_name?: string
+          id?: string
+          in_support_groups?: boolean | null
+          interested_in_upgrade?: boolean | null
+          internal_ranking?: number | null
+          last_contact_date?: string | null
+          last_sale_date?: string | null
+          location?: string | null
+          promoted_products?: string[] | null
+          received_initial_training?: boolean | null
+          registration_date?: string
+          reported_issues?: string | null
+          social_media?: string | null
+          status?: string | null
+          support_provided?: string | null
+          target_reached?: boolean | null
+          updated_at?: string
+          user_id?: string | null
+          username?: string | null
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -36,9 +132,122 @@ export type Database = {
         }
         Relationships: []
       }
+      sales: {
+        Row: {
+          affiliate_id: string
+          commission_amount: number
+          created_at: string
+          id: string
+          platform: string
+          product_name: string
+          product_type: string
+          sale_amount: number
+          sale_date: string
+        }
+        Insert: {
+          affiliate_id: string
+          commission_amount: number
+          created_at?: string
+          id?: string
+          platform: string
+          product_name: string
+          product_type: string
+          sale_amount: number
+          sale_date?: string
+        }
+        Update: {
+          affiliate_id?: string
+          commission_amount?: number
+          created_at?: string
+          id?: string
+          platform?: string
+          product_name?: string
+          product_type?: string
+          sale_amount?: number
+          sale_date?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sales_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sales_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "monthly_ranking"
+            referencedColumns: ["affiliate_id"]
+          },
+          {
+            foreignKeyName: "sales_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "overall_ranking"
+            referencedColumns: ["affiliate_id"]
+          },
+          {
+            foreignKeyName: "sales_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "weekly_digital_ranking"
+            referencedColumns: ["affiliate_id"]
+          },
+          {
+            foreignKeyName: "sales_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "weekly_physical_ranking"
+            referencedColumns: ["affiliate_id"]
+          },
+        ]
+      }
     }
     Views: {
-      [_ in never]: never
+      monthly_ranking: {
+        Row: {
+          affiliate_id: string | null
+          full_name: string | null
+          product_type: string | null
+          total_commission: number | null
+          total_sale_amount: number | null
+          total_sales: number | null
+        }
+        Relationships: []
+      }
+      overall_ranking: {
+        Row: {
+          affiliate_id: string | null
+          full_name: string | null
+          product_type: string | null
+          total_commission: number | null
+          total_sale_amount: number | null
+          total_sales: number | null
+        }
+        Relationships: []
+      }
+      weekly_digital_ranking: {
+        Row: {
+          affiliate_id: string | null
+          full_name: string | null
+          total_commission: number | null
+          total_sale_amount: number | null
+          total_sales: number | null
+        }
+        Relationships: []
+      }
+      weekly_physical_ranking: {
+        Row: {
+          affiliate_id: string | null
+          full_name: string | null
+          total_commission: number | null
+          total_sale_amount: number | null
+          total_sales: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

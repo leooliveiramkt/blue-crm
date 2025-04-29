@@ -12,7 +12,8 @@ import {
   FileText,
   ChevronLeft,
   Tag,
-  TrendingUp
+  TrendingUp,
+  User
 } from 'lucide-react';
 import {
   Sidebar as SidebarComponent,
