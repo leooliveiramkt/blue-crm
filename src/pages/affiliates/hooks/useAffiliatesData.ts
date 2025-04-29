@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
@@ -20,7 +19,7 @@ export interface RankingItem {
   total_sales: number;
   total_sale_amount: number;
   total_commission: number;
-  product_type?: string;
+  product_type: string; // Alterando de opcional para obrigatório
 }
 
 export const useAffiliatesData = () => {

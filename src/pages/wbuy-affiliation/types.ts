@@ -13,3 +13,12 @@ export interface AffiliateAttribute {
   name: string;
   value: string;
 }
+
+export interface RankingItem {
+  affiliate_id: string;
+  full_name: string;
+  total_sales: number;
+  total_sale_amount: number;
+  total_commission: number;
+  product_type: string; // Garantindo que product_type é obrigatório
+}

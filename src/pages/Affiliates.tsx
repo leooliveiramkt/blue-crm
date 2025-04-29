@@ -10,7 +10,7 @@ import AffiliatesTable from './affiliates/AffiliatesTable';
 import WeeklyRankingTab from './affiliates/WeeklyRankingTab';
 import MonthlyRankingTab from './affiliates/MonthlyRankingTab';
 import OverallRankingTab from './affiliates/OverallRankingTab';
-import { useAffiliatesData } from './affiliates/hooks/useAffiliatesData';
+import { useAffiliatesData, RankingItem } from './affiliates/hooks/useAffiliatesData';
 
 const Affiliates = () => {
   const [activeTab, setActiveTab] = useState("overview");

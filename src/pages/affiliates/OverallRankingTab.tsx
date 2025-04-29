@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
@@ -12,15 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Award, TrendingUp } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-
-interface RankingItem {
-  affiliate_id: string;
-  full_name: string;
-  total_sales: number;
-  total_sale_amount: number;
-  total_commission: number;
-  product_type: string;
-}
+import { RankingItem } from '../wbuy-affiliation/types';
 
 interface OverallRankingTabProps {
   rankingData: RankingItem[];

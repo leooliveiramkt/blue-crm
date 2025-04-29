@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
@@ -11,15 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Award, TrendingUp, BadgeCheck } from "lucide-react";
-
-interface RankingItem {
-  affiliate_id: string;
-  full_name: string;
-  total_sales: number;
-  total_sale_amount: number;
-  total_commission: number;
-  product_type?: string;
-}
+import { RankingItem } from '../wbuy-affiliation/types';
 
 interface WeeklyRankingTabProps {
   title: string;
