@@ -1,633 +1,328 @@
 
-import React, { useEffect, useState } from 'react';
-import { 
-  Form, 
-  FormControl, 
-  FormDescription, 
-  FormField, 
-  FormItem, 
-  FormLabel, 
-  FormMessage 
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { 
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { 
-  Card,
-  CardContent,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Loader2 } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { supabase } from "@/integrations/supabase/client";
-
-// Schema de validação
-const affiliateSchema = z.object({
-  fullName: z.string().min(3, "O nome completo deve ter pelo menos 3 caracteres"),
-  username: z.string().optional(),
-  whatsapp: z.string().optional(),
-  email: z.string().email("Email inválido"),
-  location: z.string().optional(),
-  socialMedia: z.string().optional(),
-  affiliateCode: z.string().optional(),
-  affiliateLink: z.string().optional(),
-  status: z.enum(["new", "active", "inactive", "vip", "potential"]),
-  experienceLevel: z.enum(["beginner", "intermediate", "advanced"]),
-  contentType: z.string().optional(),
-  inSupportGroups: z.boolean().default(false),
-  attendsMentoring: z.boolean().default(false),
-  receivedInitialTraining: z.boolean().default(false),
-  promotedProducts: z.string().optional(),
-  targetReached: z.boolean().default(false),
-  internalRanking: z.string().optional(),
-  reportedIssues: z.string().optional(),
-  supportProvided: z.string().optional(),
-  feedback: z.string().optional(),
-  campaignParticipation: z.string().optional(),
-  interestedInUpgrade: z.boolean().default(false),
-});
-
-type AffiliateFormValues = z.infer<typeof affiliateSchema>;
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Loader2, Save } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 interface AffiliateFormProps {
   affiliateId?: string;
   onSave: () => void;
 }
 
+// Esquema de validação
+const affiliateSchema = z.object({
+  full_name: z.string().min(3, { message: "Nome completo deve ter pelo menos 3 caracteres" }),
+  email: z.string().email({ message: "Email inválido" }),
+  status: z.enum(["active", "inactive", "vip", "new", "potential"]),
+  experience_level: z.enum(["iniciante", "intermediário", "avançado", "especialista"]),
+  commission_rate: z.string(),
+  region: z.string()
+});
+
+type AffiliateFormValues = z.infer<typeof affiliateSchema>;
+
+// Dados mockados
+const MOCK_AFFILIATES = [
+  {
+    id: '1',
+    full_name: 'João Silva',
+    email: 'joao.silva@example.com',
+    status: 'active',
+    experience_level: 'avançado',
+    registration_date: '2024-01-15',
+    commission_rate: '15%',
+    region: 'Sudeste',
+    target_reached: true
+  },
+  {
+    id: '2',
+    full_name: 'Maria Oliveira',
+    email: 'maria.oliveira@example.com',
+    status: 'vip',
+    experience_level: 'especialista',
+    registration_date: '2023-08-20',
+    commission_rate: '18%',
+    region: 'Sul',
+    target_reached: true
+  },
+  {
+    id: '3',
+    full_name: 'Carlos Santos',
+    email: 'carlos.santos@example.com',
+    status: 'inactive',
+    experience_level: 'intermediário',
+    registration_date: '2023-11-05',
+    commission_rate: '10%',
+    region: 'Norte',
+    target_reached: false
+  },
+  {
+    id: '4',
+    full_name: 'Ana Paula Ferreira',
+    email: 'ana.ferreira@example.com',
+    status: 'new',
+    experience_level: 'iniciante',
+    registration_date: '2024-04-01',
+    commission_rate: '10%',
+    region: 'Nordeste',
+    target_reached: false
+  },
+  {
+    id: '5',
+    full_name: 'Marcos Pereira',
+    email: 'marcos.pereira@example.com',
+    status: 'active',
+    experience_level: 'intermediário',
+    registration_date: '2023-12-10',
+    commission_rate: '12%',
+    region: 'Centro-Oeste',
+    target_reached: true
+  }
+];
+
 const AffiliateForm: React.FC<AffiliateFormProps> = ({ affiliateId, onSave }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingAffiliate, setIsLoadingAffiliate] = useState(false);
+  const { toast } = useToast();
 
-  // Inicializar formulário
   const form = useForm<AffiliateFormValues>({
     resolver: zodResolver(affiliateSchema),
     defaultValues: {
-      fullName: "",
-      username: "",
-      whatsapp: "",
+      full_name: "",
       email: "",
-      location: "",
-      socialMedia: "",
-      affiliateCode: "",
-      affiliateLink: "",
-      status: "new",
-      experienceLevel: "beginner",
-      contentType: "",
-      inSupportGroups: false,
-      attendsMentoring: false,
-      receivedInitialTraining: false,
-      promotedProducts: "",
-      targetReached: false,
-      internalRanking: "",
-      reportedIssues: "",
-      supportProvided: "",
-      feedback: "",
-      campaignParticipation: "",
-      interestedInUpgrade: false,
-    },
+      status: "active",
+      experience_level: "iniciante",
+      commission_rate: "10%",
+      region: "Sudeste"
+    }
   });
 
-  // Carregar dados do afiliado se for edição
   useEffect(() => {
-    const loadAffiliate = async () => {
-      if (!affiliateId) return;
+    // Se temos um ID, buscamos o afiliado correspondente (simulado)
+    if (affiliateId) {
+      setIsLoading(true);
       
-      setIsLoadingAffiliate(true);
-      try {
-        const { data, error } = await supabase
-          .from('affiliates')
-          .select('*')
-          .eq('id', affiliateId)
-          .single();
-          
-        if (error) throw error;
+      // Simular atraso de rede
+      setTimeout(() => {
+        const affiliate = MOCK_AFFILIATES.find(a => a.id === affiliateId);
         
-        if (data) {
+        if (affiliate) {
           form.reset({
-            fullName: data.full_name,
-            username: data.username || "",
-            whatsapp: data.whatsapp || "",
-            email: data.email,
-            location: data.location || "",
-            socialMedia: data.social_media || "",
-            affiliateCode: data.affiliate_code || "",
-            affiliateLink: data.affiliate_link || "",
-            status: data.status as any || "new",
-            experienceLevel: data.experience_level as any || "beginner",
-            contentType: data.content_type ? data.content_type.join(", ") : "",
-            inSupportGroups: data.in_support_groups || false,
-            attendsMentoring: data.attends_mentoring || false,
-            receivedInitialTraining: data.received_initial_training || false,
-            promotedProducts: data.promoted_products ? data.promoted_products.join(", ") : "",
-            targetReached: data.target_reached || false,
-            internalRanking: data.internal_ranking?.toString() || "",
-            reportedIssues: data.reported_issues || "",
-            supportProvided: data.support_provided || "",
-            feedback: data.feedback || "",
-            campaignParticipation: data.campaign_participation ? data.campaign_participation.join(", ") : "",
-            interestedInUpgrade: data.interested_in_upgrade || false,
+            full_name: affiliate.full_name,
+            email: affiliate.email,
+            status: affiliate.status as any,
+            experience_level: affiliate.experience_level as any,
+            commission_rate: affiliate.commission_rate,
+            region: affiliate.region
           });
         }
-      } catch (error) {
-        console.error('Erro ao carregar afiliado:', error);
-      } finally {
-        setIsLoadingAffiliate(false);
-      }
-    };
-    
-    loadAffiliate();
+        
+        setIsLoading(false);
+      }, 500);
+    }
   }, [affiliateId, form]);
 
-  // Salvar afiliado
-  const onSubmit = async (values: AffiliateFormValues) => {
+  const onSubmit = async (data: AffiliateFormValues) => {
     setIsLoading(true);
+    
     try {
-      // Converter alguns campos para o formato esperado pelo banco
-      const contentTypeArray = values.contentType ? values.contentType.split(',').map(item => item.trim()) : [];
-      const promotedProductsArray = values.promotedProducts ? values.promotedProducts.split(',').map(item => item.trim()) : [];
-      const campaignParticipationArray = values.campaignParticipation ? values.campaignParticipation.split(',').map(item => item.trim()) : [];
+      // Simulando um atraso de rede para a resposta
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       
-      const affiliateData = {
-        full_name: values.fullName,
-        username: values.username || null,
-        whatsapp: values.whatsapp || null,
-        email: values.email,
-        location: values.location || null,
-        social_media: values.socialMedia || null,
-        affiliate_code: values.affiliateCode || null,
-        affiliate_link: values.affiliateLink || null,
-        status: values.status,
-        experience_level: values.experienceLevel,
-        content_type: contentTypeArray,
-        in_support_groups: values.inSupportGroups,
-        attends_mentoring: values.attendsMentoring,
-        received_initial_training: values.receivedInitialTraining,
-        promoted_products: promotedProductsArray,
-        target_reached: values.targetReached,
-        internal_ranking: values.internalRanking ? parseInt(values.internalRanking) : null,
-        reported_issues: values.reportedIssues || null,
-        support_provided: values.supportProvided || null,
-        feedback: values.feedback || null,
-        campaign_participation: campaignParticipationArray,
-        interested_in_upgrade: values.interestedInUpgrade,
-      };
+      // Log dos dados apenas para debug
+      console.log("Dados salvos:", data);
       
-      if (affiliateId) {
-        // Atualizar afiliado existente
-        const { error } = await supabase
-          .from('affiliates')
-          .update(affiliateData)
-          .eq('id', affiliateId);
-          
-        if (error) throw error;
-      } else {
-        // Criar novo afiliado
-        const { error } = await supabase
-          .from('affiliates')
-          .insert([affiliateData]);
-          
-        if (error) throw error;
+      toast({
+        title: "Dados salvos",
+        description: "Os dados do afiliado foram salvos com sucesso.",
+      });
+      
+      // Resetar o formulário se estamos criando um novo afiliado
+      if (!affiliateId) {
+        form.reset();
       }
       
+      // Callback para informar que salvamos com sucesso
       onSave();
     } catch (error) {
-      console.error('Erro ao salvar afiliado:', error);
+      console.error("Erro ao salvar afiliado:", error);
+      toast({
+        title: "Erro ao salvar",
+        description: "Houve um problema ao salvar os dados do afiliado.",
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (isLoadingAffiliate) {
-    return (
-      <div className="flex justify-center py-8">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Dados pessoais */}
-          <Card>
-            <CardContent className="pt-6">
-              <h3 className="text-lg font-medium mb-4">Dados Pessoais</h3>
-              <div className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="fullName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Nome Completo</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Nome do afiliado" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="username"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Nome de usuário (plataforma)</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Username na plataforma" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>E-mail</FormLabel>
-                      <FormControl>
-                        <Input type="email" placeholder="Email do afiliado" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="whatsapp"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>WhatsApp</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Número com DDD" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="location"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Cidade/Estado</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Localização" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="socialMedia"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Instagram/Rede Social</FormLabel>
-                      <FormControl>
-                        <Input placeholder="@usuario" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="affiliateCode"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Código de afiliado</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Código de referência" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="affiliateLink"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Link de afiliado</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Link de referência" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </CardContent>
-          </Card>
-          
-          {/* Status e Engajamento */}
-          <Card>
-            <CardContent className="pt-6">
-              <h3 className="text-lg font-medium mb-4">Status e Engajamento</h3>
-              <div className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="status"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Status</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Selecione o status" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="new">Novo</SelectItem>
-                          <SelectItem value="active">Ativo</SelectItem>
-                          <SelectItem value="inactive">Inativo</SelectItem>
-                          <SelectItem value="vip">VIP</SelectItem>
-                          <SelectItem value="potential">Potencial</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="experienceLevel"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Nível de atuação</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Selecione o nível" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="beginner">Iniciante</SelectItem>
-                          <SelectItem value="intermediate">Intermediário</SelectItem>
-                          <SelectItem value="advanced">Avançado</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="contentType"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Tipo de conteúdo</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Reels, tráfego pago, blog, etc." {...field} />
-                      </FormControl>
-                      <FormDescription>Separe por vírgulas os diferentes tipos</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <div className="grid grid-cols-1 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="inSupportGroups"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel>Está nos grupos de suporte</FormLabel>
-                          <FormDescription>
-                            WhatsApp, Discord ou outros grupos de comunicação
-                          </FormDescription>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="attendsMentoring"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel>Participa das mentorias</FormLabel>
-                          <FormDescription>
-                            Comparece às aulas e sessões de mentoria
-                          </FormDescription>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="receivedInitialTraining"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel>Recebeu treinamento inicial</FormLabel>
-                          <FormDescription>
-                            Passou pelo onboarding/treinamento básico
-                          </FormDescription>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        {/* Nome Completo */}
+        <FormField
+          control={form.control}
+          name="full_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Nome Completo</FormLabel>
+              <FormControl>
+                <Input placeholder="Nome completo do afiliado" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         
-        <Separator />
+        {/* Email */}
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="Email do afiliado" type="email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Desempenho */}
-          <Card>
-            <CardContent className="pt-6">
-              <h3 className="text-lg font-medium mb-4">Desempenho</h3>
-              <div className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="promotedProducts"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Produtos que promove</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Nome dos produtos" {...field} />
-                      </FormControl>
-                      <FormDescription>Separe por vírgulas</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="targetReached"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel>Meta batida</FormLabel>
-                        <FormDescription>
-                          O afiliado atingiu a meta estabelecida
-                        </FormDescription>
-                      </div>
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="internalRanking"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Ranking interno</FormLabel>
-                      <FormControl>
-                        <Input type="number" placeholder="Posição no ranking" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </CardContent>
-          </Card>
-          
-          {/* Relacionamento e Suporte */}
-          <Card>
-            <CardContent className="pt-6">
-              <h3 className="text-lg font-medium mb-4">Relacionamento e Suporte</h3>
-              <div className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="reportedIssues"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Dúvidas ou dificuldades relatadas</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Problemas reportados pelo afiliado" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="supportProvided"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Suporte recebido</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Suporte fornecido ao afiliado" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="feedback"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Feedbacks dados</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Feedbacks enviados ao afiliado" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="campaignParticipation"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Participação em campanhas</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Campanhas ou promoções" {...field} />
-                      </FormControl>
-                      <FormDescription>Separe por vírgulas</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="interestedInUpgrade"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel>Interesse em subir de nível</FormLabel>
-                        <FormDescription>
-                          O afiliado demonstrou interesse em evoluir no plano de carreira
-                        </FormDescription>
-                      </div>
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Status */}
+        <FormField
+          control={form.control}
+          name="status"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Status</FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione o status" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="active">Ativo</SelectItem>
+                  <SelectItem value="inactive">Inativo</SelectItem>
+                  <SelectItem value="vip">VIP</SelectItem>
+                  <SelectItem value="new">Novo</SelectItem>
+                  <SelectItem value="potential">Potencial</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         
-        <div className="flex justify-end">
+        {/* Nível de Experiência */}
+        <FormField
+          control={form.control}
+          name="experience_level"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Nível de Experiência</FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione o nível" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="iniciante">Iniciante</SelectItem>
+                  <SelectItem value="intermediário">Intermediário</SelectItem>
+                  <SelectItem value="avançado">Avançado</SelectItem>
+                  <SelectItem value="especialista">Especialista</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        
+        {/* Taxa de Comissão */}
+        <FormField
+          control={form.control}
+          name="commission_rate"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Taxa de Comissão</FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione a taxa" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="10%">10%</SelectItem>
+                  <SelectItem value="12%">12%</SelectItem>
+                  <SelectItem value="15%">15%</SelectItem>
+                  <SelectItem value="18%">18%</SelectItem>
+                  <SelectItem value="20%">20%</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        
+        {/* Região */}
+        <FormField
+          control={form.control}
+          name="region"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Região</FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione a região" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="Sudeste">Sudeste</SelectItem>
+                  <SelectItem value="Sul">Sul</SelectItem>
+                  <SelectItem value="Norte">Norte</SelectItem>
+                  <SelectItem value="Nordeste">Nordeste</SelectItem>
+                  <SelectItem value="Centro-Oeste">Centro-Oeste</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        
+        {/* Botão de submissão */}
+        <div className="pt-4 flex justify-end">
           <Button type="submit" disabled={isLoading}>
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {affiliateId ? "Atualizar Afiliado" : "Criar Afiliado"}
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Salvando...
+              </>
+            ) : (
+              <>
+                <Save className="mr-2 h-4 w-4" />
+                Salvar
+              </>
+            )}
           </Button>
         </div>
       </form>
