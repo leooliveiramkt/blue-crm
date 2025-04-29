@@ -14,13 +14,26 @@ import ApiIntegrations from "@/pages/ApiIntegrations";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import MainLayout from "@/components/layout/MainLayout";
 import WbuyAffiliation from "@/pages/wbuy-affiliation/WbuyAffiliation";
+import { useAuth } from "@/context/AuthContext";
 
 export const Routes = () => {
+  const { isAuthenticated } = useAuth();
+  
   return (
     <RouterRoutes>
-      {/* Rotas públicas */}
-      <Route path="/" element={<Index />} />
-      <Route path="/login" element={<Login />} />
+      {/* Rota inicial - redireciona para dashboard se autenticado */}
+      <Route 
+        path="/" 
+        element={
+          isAuthenticated ? <Navigate to="/dashboard" replace /> : <Index />
+        } 
+      />
+      
+      {/* Rota de login - redireciona para dashboard se autenticado */}
+      <Route 
+        path="/login" 
+        element={<Login />} 
+      />
       
       {/* Rotas protegidas */}
       <Route element={<ProtectedRoute />}>

@@ -1,7 +1,7 @@
 
+import React, { useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { useEffect } from 'react';
 
 interface ProtectedRouteProps {
   requiredRole?: 'admin' | 'director' | 'consultant' | ('admin' | 'director' | 'consultant')[];
@@ -15,8 +15,10 @@ const ProtectedRoute = ({ requiredRole }: ProtectedRouteProps) => {
     console.log("ProtectedRoute verificando autenticação:", isAuthenticated);
     if (!isAuthenticated) {
       console.log("Usuário não autenticado, redirecionando para login...");
+    } else {
+      console.log("Usuário autenticado, permitindo acesso à rota:", location.pathname);
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, location.pathname]);
 
   // If not authenticated, redirect to login
   if (!isAuthenticated) {

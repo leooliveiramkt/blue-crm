@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Session, User } from '@supabase/supabase-js';
 import { tenantManager } from '@/lib/tenancy/tenantManager';
-import { toast } from '@/components/ui/use-toast';
+import { useToast } from '@/components/ui/use-toast';
 import { Profile, UserRole } from '@/types/auth';
 
 export function useAuthService() {
@@ -14,10 +14,12 @@ export function useAuthService() {
   const [userId, setUserId] = useState<string | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [session, setSession] = useState<Session | null>(null);
+  const { toast } = useToast();
   const navigate = useNavigate();
 
   const fetchUserProfile = async (userId: string) => {
     try {
+      console.log("Buscando perfil do usuário:", userId);
       const { data: profile, error } = await supabase
         .from('profiles')
         .select('first_name, last_name, avatar_url')
@@ -29,6 +31,7 @@ export function useAuthService() {
         return null;
       }
 
+      console.log("Perfil do usuário encontrado:", profile);
       return profile;
     } catch (error) {
       console.error("Erro ao processar perfil do usuário:", error);
@@ -64,6 +67,7 @@ export function useAuthService() {
       
       // Usuários de demonstração para fins de desenvolvimento
       if (email === 'admin@example.com' && password === 'admin') {
+        console.log("Login com usuário de demonstração (admin)");
         setIsAuthenticated(true);
         setUserRole('admin');
         setUserName('Admin');
@@ -73,11 +77,17 @@ export function useAuthService() {
           title: "Login de demonstração",
           description: "Você entrou como administrador de demonstração.",
         });
-        navigate('/dashboard');
+        
+        // Pequeno delay para garantir que o estado seja atualizado
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 100);
+        
         return true;
       }
       
       if (email === 'director@example.com' && password === 'director') {
+        console.log("Login com usuário de demonstração (diretor)");
         setIsAuthenticated(true);
         setUserRole('director');
         setUserName('Diretor');
@@ -87,11 +97,17 @@ export function useAuthService() {
           title: "Login de demonstração",
           description: "Você entrou como diretor de demonstração.",
         });
-        navigate('/dashboard');
+        
+        // Pequeno delay para garantir que o estado seja atualizado
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 100);
+        
         return true;
       }
       
       if (email === 'consultant@example.com' && password === 'consultant') {
+        console.log("Login com usuário de demonstração (consultor)");
         setIsAuthenticated(true);
         setUserRole('consultant');
         setUserName('Consultor');
@@ -101,7 +117,12 @@ export function useAuthService() {
           title: "Login de demonstração",
           description: "Você entrou como consultor de demonstração.",
         });
-        navigate('/dashboard');
+        
+        // Pequeno delay para garantir que o estado seja atualizado
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 100);
+        
         return true;
       }
       
@@ -178,24 +199,34 @@ export function useAuthService() {
         setProfile(null);
         setSession(null);
         localStorage.removeItem('currentTenantId');
-        navigate('/login');
         
         toast({
           title: "Logout realizado",
           description: "Você foi desconectado com sucesso.",
         });
         
+        navigate('/login');
         return;
       }
       
       // Caso contrário, faz logout no Supabase
       await supabase.auth.signOut();
       localStorage.removeItem('currentTenantId');
-      navigate('/login');
+      
+      // Atualiza o estado após o logout
+      setIsAuthenticated(false);
+      setUserRole(null);
+      setUserName(null);
+      setUserId(null);
+      setProfile(null);
+      setSession(null);
+      
       toast({
         title: "Logout realizado",
         description: "Você foi desconectado com sucesso.",
       });
+      
+      navigate('/login');
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
       toast({

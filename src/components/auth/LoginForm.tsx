@@ -8,6 +8,7 @@ import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { ThemeConfig } from '@/config/theme';
 import { useAuth } from '@/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormProps {
   debugInfo: string | null;
@@ -19,7 +20,16 @@ export const LoginForm: React.FC<LoginFormProps> = ({ debugInfo }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  // Se já estiver autenticado, redireciona para o dashboard
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      console.log("Usuário já está autenticado, redirecionando para o dashboard...");
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,7 +59,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ debugInfo }) => {
       console.log("Iniciando processo de login com:", email);
       const success = await login(email, password);
       
-      if (!success) {
+      if (success) {
+        console.log("Login bem-sucedido, redirecionando...");
+        // O redirecionamento é feito na função login ou pelo useEffect acima
+      } else {
         console.log("Login falhou");
         // O toast é exibido dentro da função login em caso de erro
       }
