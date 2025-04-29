@@ -18,6 +18,7 @@ interface RankingItem {
   total_sales: number;
   total_sale_amount: number;
   total_commission: number;
+  product_type?: string;
 }
 
 interface WeeklyRankingTabProps {

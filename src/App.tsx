@@ -16,7 +16,7 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Unauthorized from "./pages/Unauthorized";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import WbuyAffiliation from "./pages/WbuyAffiliation";
+import WbuyAffiliation from "./pages/wbuy-affiliation/WbuyAffiliation";
 import Marketing from "./pages/Marketing";
 import Affiliates from "./pages/Affiliates";
 import { BASE_PATH } from "./config/deployment";

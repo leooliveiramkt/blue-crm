@@ -14,7 +14,7 @@ interface Affiliate {
   [key: string]: any;
 }
 
-interface RankingItem {
+export interface RankingItem {
   affiliate_id: string;
   full_name: string;
   total_sales: number;
