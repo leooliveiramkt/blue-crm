@@ -1,12 +1,11 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { toast } from '@/hooks/use-toast';
-
-// Variáveis para conexão com o Supabase
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+import { supabase as supabaseClient } from '@/integrations/supabase/client';
 
 // Flag para verificar se o Supabase está corretamente configurado
+const supabaseUrl = "https://zkjpzwrcuauieaaktzbk.supabase.co";
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpranB6d3JjdWF1aWVhYWt0emJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4OTM0MjQsImV4cCI6MjA1OTQ2OTQyNH0.daIZCGCuaQtH8mewhYRLCFnqOGUYb_ADC7_sfpXGl_M";
 export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
 // Verificação das credenciais antes de criar o cliente
@@ -43,65 +42,8 @@ if (!isSupabaseConfigured) {
   }
 }
 
-// Usar valores mock para desenvolvimento quando as credenciais não estiverem disponíveis
-// Isso evita que a aplicação quebre completamente, mas as funcionalidades do Supabase não funcionarão
-const fallbackUrl = 'https://example.supabase.co';
-const fallbackKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZha2VrZXkiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMDM0NjI2MCwiZXhwIjoxOTQ1OTIyMjYwfQ.fake-key-for-development';
-
-// Cria o cliente Supabase com fallback para valores mock
-export const supabaseClient = createClient(
-  supabaseUrl || fallbackUrl,
-  supabaseAnonKey || fallbackKey
-);
-
-// Modifica o comportamento dos métodos do Supabase quando não configurado
-if (!isSupabaseConfigured) {
-  // Sobrescreve as funções que usam o Supabase para mostrar um aviso ao invés de quebrar a aplicação
-  const wrapSupabaseMethods = (client: any) => {
-    const originalFrom = client.from.bind(client);
-    
-    // Wrapper para operações de banco de dados
-    client.from = (table: string) => {
-      console.warn(`⚠️ Tentativa de acessar a tabela "${table}" com o Supabase não configurado.`);
-      
-      // Retorna um objeto mock que não faz nada mas não quebra a aplicação
-      return {
-        select: () => ({ data: null, error: { message: 'Supabase não configurado' }, count: null }),
-        insert: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-        update: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-        delete: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-        upsert: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-        on: () => ({ subscribe: () => ({ unsubscribe: () => {} }) }),
-        limit: () => client.from(table),
-        single: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-        order: () => client.from(table),
-      };
-    };
-    
-    // Criaos um proxy para o método storage.from
-    const mockStorageFrom = (bucket: string) => {
-      console.warn(`⚠️ Tentativa de acessar o bucket "${bucket}" com o Supabase não configurado.`);
-      
-      return {
-        upload: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-        download: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-        getPublicUrl: () => ({ data: { publicUrl: '' } }),
-        list: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-        remove: () => ({ data: null, error: { message: 'Supabase não configurado' } }),
-      };
-    };
-    
-    // Verifica se storage existe antes de modificar
-    if (client.storage) {
-      // Não podemos sobrescrever storage diretamente, mas podemos sobrescrever o método 'from'
-      if (typeof client.storage === 'object') {
-        client.storage.from = mockStorageFrom;
-      }
-    }
-  };
-  
-  wrapSupabaseMethods(supabaseClient);
-}
+// Exporta o cliente do arquivo client.ts para evitar duplicação de instâncias
+export { supabaseClient };
 
 // Função utilitária para verificar a conexão com Supabase
 export const testSupabaseConnection = async (): Promise<boolean> => {

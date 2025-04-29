@@ -49,16 +49,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ debugInfo }) => {
       console.log("Iniciando processo de login com:", email);
       const success = await login(email, password);
       
-      if (success) {
-        console.log("Login bem-sucedido, redirecionando...");
-        // O redirecionamento será tratado pelo useEffect que observa isAuthenticated no componente pai
-      } else {
+      if (!success) {
         console.log("Login falhou");
         // O toast é exibido dentro da função login em caso de erro
       }
     } catch (error) {
       console.error("Erro durante o login:", error);
-      const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
       toast({
         title: "Erro de login",
         description: "Ocorreu um erro ao tentar fazer login. Tente novamente.",
@@ -98,7 +94,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ debugInfo }) => {
               className="text-xs text-muted-foreground hover:text-primary"
               onClick={(e) => {
                 e.preventDefault();
-                alert('Funcionalidade de recuperação de senha será implementada em breve');
+                toast({
+                  title: "Funcionalidade em desenvolvimento",
+                  description: "A recuperação de senha será implementada em breve.",
+                });
               }}
             >
               Esqueceu a senha?
@@ -134,6 +133,15 @@ export const LoginForm: React.FC<LoginFormProps> = ({ debugInfo }) => {
             <code className="block whitespace-pre-wrap">{debugInfo}</code>
           </div>
         )}
+        
+        <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-xs text-blue-700 dark:text-blue-300">
+          <p className="font-semibold mb-1">Usuários de demonstração:</p>
+          <code className="block whitespace-pre-wrap">
+            - Admin: admin@example.com / admin<br />
+            - Diretor: director@example.com / director<br />
+            - Consultor: consultant@example.com / consultant
+          </code>
+        </div>
       </CardContent>
       <CardFooter>
         <Button 

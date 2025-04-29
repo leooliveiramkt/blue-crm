@@ -62,9 +62,52 @@ export function useAuthService() {
     try {
       console.log("Tentando login com:", email);
       
+      // Usuários de demonstração para fins de desenvolvimento
+      if (email === 'admin@example.com' && password === 'admin') {
+        setIsAuthenticated(true);
+        setUserRole('admin');
+        setUserName('Admin');
+        setUserId('demo-admin-id');
+        
+        toast({
+          title: "Login de demonstração",
+          description: "Você entrou como administrador de demonstração.",
+        });
+        navigate('/dashboard');
+        return true;
+      }
+      
+      if (email === 'director@example.com' && password === 'director') {
+        setIsAuthenticated(true);
+        setUserRole('director');
+        setUserName('Diretor');
+        setUserId('demo-director-id');
+        
+        toast({
+          title: "Login de demonstração",
+          description: "Você entrou como diretor de demonstração.",
+        });
+        navigate('/dashboard');
+        return true;
+      }
+      
+      if (email === 'consultant@example.com' && password === 'consultant') {
+        setIsAuthenticated(true);
+        setUserRole('consultant');
+        setUserName('Consultor');
+        setUserId('demo-consultant-id');
+        
+        toast({
+          title: "Login de demonstração",
+          description: "Você entrou como consultor de demonstração.",
+        });
+        navigate('/dashboard');
+        return true;
+      }
+      
+      // Login real com Supabase se não for um usuário de demonstração
       console.log("Verificando conexão com Supabase...");
       
-      // Removendo acesso direto às propriedades protegidas
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
@@ -95,7 +138,6 @@ export function useAuthService() {
       }
 
       console.log("Login bem-sucedido:", !!data.session);
-      console.log("Sessão:", data.session);
       
       // Inicializa o tenant para o usuário após o login
       try {
@@ -109,6 +151,8 @@ export function useAuthService() {
         title: "Login bem-sucedido",
         description: "Bem-vindo de volta!",
       });
+      
+      navigate('/dashboard');
       return true;
     } catch (error) {
       console.error("Erro inesperado durante login:", error);
@@ -124,6 +168,27 @@ export function useAuthService() {
   const logout = async () => {
     try {
       console.log("Realizando logout...");
+      
+      // Se for um usuário de demonstração
+      if (userId && userId.startsWith('demo-')) {
+        setIsAuthenticated(false);
+        setUserRole(null);
+        setUserName(null);
+        setUserId(null);
+        setProfile(null);
+        setSession(null);
+        localStorage.removeItem('currentTenantId');
+        navigate('/login');
+        
+        toast({
+          title: "Logout realizado",
+          description: "Você foi desconectado com sucesso.",
+        });
+        
+        return;
+      }
+      
+      // Caso contrário, faz logout no Supabase
       await supabase.auth.signOut();
       localStorage.removeItem('currentTenantId');
       navigate('/login');
