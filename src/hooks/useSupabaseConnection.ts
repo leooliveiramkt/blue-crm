@@ -8,6 +8,7 @@ export const useSupabaseConnection = () => {
   useEffect(() => {
     const checkSupabaseConnection = async () => {
       try {
+        // Usando a tabela 'profiles' que está no schema 'public'
         const { data, error } = await supabase.from('profiles').select('count').limit(1);
         
         if (error) {

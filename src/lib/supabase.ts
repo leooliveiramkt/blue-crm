@@ -109,7 +109,8 @@ export const testSupabaseConnection = async (): Promise<boolean> => {
   
   try {
     // Tenta fazer uma operação simples para testar a conexão
-    const { error } = await supabaseClient.from('theme_config').select('count', { count: 'exact', head: true });
+    // Usamos a tabela 'profiles' que sabemos que existe no schema 'public'
+    const { error } = await supabaseClient.from('profiles').select('count', { count: 'exact', head: true });
     return !error;
   } catch {
     return false;
