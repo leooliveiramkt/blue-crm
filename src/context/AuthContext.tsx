@@ -1,6 +1,6 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/supabase';
 import { AuthContextType } from '@/types/auth';
 import { useAuthService } from '@/hooks/useAuthService';
 import { useToast } from '@/components/ui/use-toast';
@@ -26,25 +26,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const { toast } = useToast();
 
   useEffect(() => {
-    // Configura o listener de mudança de estado de autenticação
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        console.log("Auth state change event:", event, "Session:", !!session);
-        
-        // Não chame outras funções do Supabase diretamente no callback
-        // Use setTimeout para evitar deadlocks
-        updateUserState(session);
-
-        if (session?.user) {
-          setTimeout(async () => {
-            // Busca o perfil do usuário
-            const profile = await fetchUserProfile(session.user.id);
-            processUserProfile(profile);
-          }, 0);
-        }
-      }
-    );
-
+    // Não precisamos configurar o listener aqui, já está no useAuthService
+    
     // Verifica sessão atual
     const checkSession = async () => {
       try {
@@ -89,10 +72,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     checkSession();
-
-    return () => {
-      subscription.unsubscribe();
-    };
   }, []);
 
   // Renderiza um loader enquanto verifica a sessão

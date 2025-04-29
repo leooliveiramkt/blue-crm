@@ -8,14 +8,14 @@ export const useSupabaseConnection = () => {
   useEffect(() => {
     const checkSupabaseConnection = async () => {
       try {
-        // Usando a tabela 'profiles' que está no schema 'public'
-        const { data, error } = await supabase.from('profiles').select('count').limit(1);
+        // Vamos tentar uma operação mais simples para verificar a conexão
+        const { data, error } = await supabase.auth.getSession();
         
         if (error) {
           console.error("Erro ao verificar conexão com Supabase:", error);
           setDebugInfo(`Erro Supabase: ${error.message} (Código ${error.code})`);
         } else {
-          console.log("Conexão com Supabase OK:", data);
+          console.log("Conexão com Supabase OK:", data ? "Sessão encontrada" : "Sem sessão");
           setDebugInfo(null);
         }
       } catch (error) {
