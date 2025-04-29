@@ -78,13 +78,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const checkSession = async () => {
       try {
         console.log("Verificando sessão atual...");
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+          console.error("Erro ao obter sessão:", error);
+        }
+        
         console.log("Sessão atual:", !!session);
+        console.log("Detalhes da sessão:", session);
+        
         setSession(session);
         setIsAuthenticated(!!session);
         setUserId(session?.user?.id || null);
 
         if (session?.user) {
+          console.log("Usuário autenticado:", session.user);
           // Busca o perfil do usuário
           try {
             const { data: profile, error } = await supabase
@@ -120,6 +128,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       console.log("Tentando login com:", email);
+      
+      // Verificação de URL do Supabase
+      const supabaseUrl = supabase.supabaseUrl;
+      const anonKey = supabase.supabaseKey;
+      console.log("Supabase URL:", supabaseUrl);
+      console.log("Supabase Anon Key (primeiros 10 chars):", anonKey.substring(0, 10) + "...");
+      
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
@@ -127,11 +142,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (error) {
         console.error("Erro de login:", error.message);
+        console.error("Código de erro:", error.status);
+        
         let mensagemErro = "Ocorreu um erro ao fazer login.";
 
         // Mapear mensagens de erro comuns para português
         if (error.message.includes("Invalid login credentials")) {
           mensagemErro = "Credenciais inválidas. Por favor, verifique seu email e senha.";
+          console.log("Debug: Usuários demo disponíveis: admin@example.com/admin, director@example.com/director, consultant@example.com/consultant");
         } else if (error.message.includes("Email not confirmed")) {
           mensagemErro = "Email não confirmado. Por favor, verifique sua caixa de entrada.";
         } else if (error.message.includes("Too many requests")) {
@@ -147,6 +165,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       console.log("Login bem-sucedido:", !!data.session);
+      console.log("Sessão:", data.session);
+      
       // Inicializa o tenant para o usuário após o login
       try {
         await tenantManager.loadCurrentTenant();

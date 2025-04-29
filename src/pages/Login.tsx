@@ -9,12 +9,14 @@ import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { ThemeConfig } from '@/config/theme';
 import { useAuth } from '@/context/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [debugInfo, setDebugInfo] = useState<string | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
   const { login, isAuthenticated } = useAuth();
@@ -25,6 +27,28 @@ const Login = () => {
       navigate('/dashboard');
     }
   }, [isAuthenticated, navigate]);
+
+  // Verificar a conexão do Supabase
+  useEffect(() => {
+    const checkSupabaseConnection = async () => {
+      try {
+        const { data, error } = await supabase.from('profiles').select('count').limit(1);
+        
+        if (error) {
+          console.error("Erro ao verificar conexão com Supabase:", error);
+          setDebugInfo(`Erro Supabase: ${error.message} (Código ${error.code})`);
+        } else {
+          console.log("Conexão com Supabase OK:", data);
+          setDebugInfo(null);
+        }
+      } catch (error) {
+        console.error("Exceção ao verificar Supabase:", error);
+        setDebugInfo(`Exceção Supabase: ${error instanceof Error ? error.message : 'Erro desconhecido'}`);
+      }
+    };
+    
+    checkSupabaseConnection();
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,9 +73,10 @@ const Login = () => {
     }
     
     setIsLoading(true);
+    setDebugInfo(null);
 
     try {
-      console.log("Iniciando processo de login...");
+      console.log("Iniciando processo de login com:", email);
       const success = await login(email, password);
       
       if (success) {
@@ -63,6 +88,8 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Erro durante o login:", error);
+      const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
+      setDebugInfo(`Erro no login: ${errorMessage}`);
       toast({
         title: "Erro de login",
         description: "Ocorreu um erro ao tentar fazer login. Tente novamente.",
@@ -159,6 +186,7 @@ const Login = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    autoComplete="username"
                   />
                 </div>
                 <div className="space-y-2">
@@ -183,6 +211,7 @@ const Login = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
+                      autoComplete="current-password"
                     />
                     <button
                       type="button"
@@ -197,6 +226,13 @@ const Login = () => {
                     </button>
                   </div>
                 </div>
+
+                {debugInfo && (
+                  <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded text-xs text-red-700 dark:text-red-300">
+                    <p className="font-semibold mb-1">Informação de diagnóstico (apenas para desenvolvimento):</p>
+                    <code className="block whitespace-pre-wrap">{debugInfo}</code>
+                  </div>
+                )}
               </CardContent>
               <CardFooter>
                 <Button 
