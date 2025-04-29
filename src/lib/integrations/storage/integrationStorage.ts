@@ -1,6 +1,6 @@
 
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
-import { IntegrationType, IntegrationData } from '../types';
+import { IntegrationType, IntegrationData, IntegrationStatus } from '../types';
 
 /**
  * Classe para gerenciar o armazenamento de dados das integrações
@@ -29,13 +29,13 @@ export class IntegrationStorage {
       if (error) throw error;
 
       if (data && data.length > 0) {
-        // Converte os dados para o formato IntegrationData
+        // Converte os dados para o formato IntegrationData com casting adequado
         return data.map(item => ({
           id: item.id as IntegrationType,
           tenantId: item.tenant_id,
-          status: item.status,
-          credentials: item.credentials,
-          metadata: item.metadata || {},
+          status: item.status as IntegrationStatus,
+          credentials: item.credentials as Record<string, string>,
+          metadata: item.metadata as Record<string, any> || {},
           lastSync: item.last_sync,
           createdAt: item.created_at,
           updatedAt: item.updated_at
@@ -73,13 +73,13 @@ export class IntegrationStorage {
       if (error) throw error;
 
       if (data) {
-        // Converte para o formato IntegrationData
+        // Converte para o formato IntegrationData com casting adequado
         return {
           id: data.id as IntegrationType,
           tenantId: data.tenant_id,
-          status: data.status,
-          credentials: data.credentials,
-          metadata: data.metadata || {},
+          status: data.status as IntegrationStatus,
+          credentials: data.credentials as Record<string, string>,
+          metadata: data.metadata as Record<string, any> || {},
           lastSync: data.last_sync,
           createdAt: data.created_at,
           updatedAt: data.updated_at
@@ -138,13 +138,13 @@ export class IntegrationStorage {
       if (error) throw error;
 
       if (data) {
-        // Converte de volta para o formato IntegrationData
+        // Converte de volta para o formato IntegrationData com casting adequado
         return {
           id: data.id as IntegrationType,
           tenantId: data.tenant_id,
-          status: data.status,
-          credentials: data.credentials,
-          metadata: data.metadata || {},
+          status: data.status as IntegrationStatus,
+          credentials: data.credentials as Record<string, string>,
+          metadata: data.metadata as Record<string, any> || {},
           lastSync: data.last_sync,
           createdAt: data.created_at,
           updatedAt: data.updated_at

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
-import { ThemeConfig } from '@/config/theme';
+import { ThemeConfig } from '@/config/theme'; // Mantendo a compatibilidade
 import { useAuth } from '@/context/AuthContext';
 import { LoginForm } from '@/components/auth/LoginForm';
 import { DemoCredentials } from '@/components/auth/DemoCredentials';

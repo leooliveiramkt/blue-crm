@@ -77,3 +77,12 @@ export const mergeWithDefaultTheme = (theme: Partial<ThemeConfigType>): ThemeCon
     ...theme
   };
 };
+
+// Exportamos o ThemeConfig para manter compatibilidade com códigos existentes
+// Isso evita ter que alterar muitos arquivos de uma só vez
+export const ThemeConfig = defaultTheme;
+
+// Função auxiliar para atualizar o tema
+export const updateThemeConfig = async (config: ThemeConfigType): Promise<boolean> => {
+  return await saveThemeToStorage(config);
+};

@@ -1,6 +1,7 @@
 
 import { ThemeConfigType } from "@/types/theme";
 
+// Definimos a função para obter a configuração padrão do tema
 export const getDefaultConfig = (): ThemeConfigType => {
   return {
     companyName: "Blue CRM",
@@ -19,3 +20,6 @@ export const getDefaultConfig = (): ThemeConfigType => {
     loginBackground: undefined,
   };
 };
+
+// Exportamos diretamente o tema padrão para compatibilidade
+export const defaultTheme = getDefaultConfig();

@@ -1,5 +1,5 @@
 
-import { supabaseClient, isSupabaseConfigured } from '@/lib/supabase';
+import { supabase as supabaseClient, isSupabaseConfigured } from '@/lib/supabase';
 import { Tenant, TenantUser } from './types';
 
 /**
@@ -90,20 +90,17 @@ class TenantManager {
     }
 
     try {
-      const { data, error } = await supabaseClient
-        .from('tenants')
-        .select('*')
-        .eq('id', tenantId)
-        .single();
-
-      if (error) throw error;
-
-      if (data) {
-        const tenant = data as Tenant;
-        this.tenantsCache.set(tenantId, tenant);
-        return tenant;
+      // Usando localStorage como fallback quando não temos a tabela no Supabase
+      // Em um ambiente de produção, precisaríamos criar as tabelas no Supabase
+      const savedTenants = localStorage.getItem('tenants');
+      if (savedTenants) {
+        const tenants = JSON.parse(savedTenants) as Tenant[];
+        const tenant = tenants.find(t => t.id === tenantId);
+        if (tenant) {
+          this.tenantsCache.set(tenantId, tenant);
+          return tenant;
+        }
       }
-      
       return null;
     } catch (error) {
       console.error(`Erro ao buscar tenant ${tenantId}:`, error);
@@ -132,19 +129,13 @@ class TenantManager {
     }
 
     try {
-      const { data, error } = await supabaseClient
-        .from('tenant_users')
-        .select('*')
-        .eq('userId', userId);
-
-      if (error) throw error;
-
-      if (data && data.length > 0) {
-        const tenantUsers = data as TenantUser[];
+      // Usando localStorage como fallback quando não temos a tabela no Supabase
+      const savedTenantUsers = localStorage.getItem(`tenant_users_${userId}`);
+      if (savedTenantUsers) {
+        const tenantUsers = JSON.parse(savedTenantUsers) as TenantUser[];
         this.userTenantsCache.set(userId, tenantUsers);
         return tenantUsers;
       }
-      
       return [];
     } catch (error) {
       console.error(`Erro ao buscar tenants do usuário ${userId}:`, error);
@@ -199,21 +190,14 @@ class TenantManager {
     }
 
     try {
-      const { data, error } = await supabaseClient
-        .from('tenants')
-        .insert(newTenant)
-        .select()
-        .single();
-
-      if (error) throw error;
-
-      if (data) {
-        const createdTenant = data as Tenant;
-        this.tenantsCache.set(createdTenant.id, createdTenant);
-        return createdTenant;
-      }
+      // Salva no localStorage como fallback
+      const savedTenants = localStorage.getItem('tenants');
+      const tenants = savedTenants ? JSON.parse(savedTenants) as Tenant[] : [];
+      tenants.push(newTenant);
+      localStorage.setItem('tenants', JSON.stringify(tenants));
       
-      return null;
+      this.tenantsCache.set(newTenant.id, newTenant);
+      return newTenant;
     } catch (error) {
       console.error('Erro ao criar tenant:', error);
       return null;
@@ -260,23 +244,22 @@ class TenantManager {
     }
 
     try {
-      const { error } = await supabaseClient
-        .from('tenant_users')
-        .upsert(tenantUser, { onConflict: 'userId, tenantId' });
-
-      if (error) throw error;
-
-      // Atualiza o cache
-      const cachedTenantUsers = this.userTenantsCache.get(userId) || [];
-      const existingIndex = cachedTenantUsers.findIndex(tu => tu.tenantId === tenantId);
+      // Salva no localStorage como fallback
+      const savedTenantUsers = localStorage.getItem(`tenant_users_${userId}`);
+      const tenantUsers = savedTenantUsers ? JSON.parse(savedTenantUsers) as TenantUser[] : [];
       
+      // Verifica se já existe
+      const existingIndex = tenantUsers.findIndex(tu => tu.tenantId === tenantId);
       if (existingIndex >= 0) {
-        cachedTenantUsers[existingIndex] = tenantUser;
+        tenantUsers[existingIndex] = tenantUser;
       } else {
-        cachedTenantUsers.push(tenantUser);
+        tenantUsers.push(tenantUser);
       }
       
-      this.userTenantsCache.set(userId, cachedTenantUsers);
+      localStorage.setItem(`tenant_users_${userId}`, JSON.stringify(tenantUsers));
+      
+      // Atualiza o cache
+      this.userTenantsCache.set(userId, tenantUsers);
       return true;
     } catch (error) {
       console.error(`Erro ao adicionar usuário ${userId} ao tenant ${tenantId}:`, error);
@@ -295,14 +278,9 @@ class TenantManager {
     }
 
     try {
-      const { data, error } = await supabaseClient
-        .from('tenants')
-        .select('*')
-        .order('name');
-
-      if (error) throw error;
-
-      return data as Tenant[] || [];
+      // Fallback para localStorage
+      const savedTenants = localStorage.getItem('tenants');
+      return savedTenants ? JSON.parse(savedTenants) as Tenant[] : [];
     } catch (error) {
       console.error('Erro ao listar tenants:', error);
       return [];
