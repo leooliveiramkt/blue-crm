@@ -16,11 +16,11 @@ export const Header = () => {
     <header className="container mx-auto px-4 py-6 flex justify-between items-center">
       <div className="flex items-center">
         {themeConfig.logo ? (
-          <div className="logo-animated">
+          <div className="logo-animated h-10">
             <img 
               src={themeConfig.logo} 
               alt={themeConfig.companyName} 
-              className="h-10 w-auto object-contain" 
+              className="h-full w-auto object-contain" 
             />
           </div>
         ) : (
