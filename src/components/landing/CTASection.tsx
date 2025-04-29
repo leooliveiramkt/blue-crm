@@ -2,17 +2,22 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { ThemeConfig } from '@/config/theme';
+import { useTheme } from '@/context/ThemeContext';
 
 export const CTASection = () => {
   const navigate = useNavigate();
+  const { themeConfig } = useTheme();
 
   const handleStartFreeDemo = () => {
     navigate('/login');
   };
 
   return (
-    <section className="bg-gradient-to-r from-blue-100/80 to-purple-100/80 dark:from-blue-900/30 dark:to-purple-900/30 py-16">
+    <section className="py-16"
+      style={{
+        background: `linear-gradient(to right, ${themeConfig.primaryColor}20, ${themeConfig.accentColor}30)`,
+      }}
+    >
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-6">Pronto para revolucionar seu negócio?</h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
@@ -23,8 +28,8 @@ export const CTASection = () => {
           onClick={handleStartFreeDemo}
           className="text-lg px-10"
           style={{ 
-            backgroundColor: ThemeConfig.primaryColor || 'hsl(var(--primary))',
-            color: ThemeConfig.primaryForeground || 'hsl(var(--primary-foreground))'
+            backgroundColor: themeConfig.primaryColor || 'hsl(var(--primary))',
+            color: themeConfig.primaryForeground || 'hsl(var(--primary-foreground))'
           }}
         >
           Começar Demonstração

@@ -1,9 +1,17 @@
 
 import React from 'react';
+import { useTheme } from '@/context/ThemeContext';
 
 export const SubheadlineSection = () => {
+  const { themeConfig } = useTheme();
+  
   return (
-    <section className="bg-blue-50 dark:bg-blue-950/20 py-16">
+    <section 
+      className="py-16"
+      style={{
+        backgroundColor: `${themeConfig.primaryColor}10`,
+      }}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-semibold mb-6">

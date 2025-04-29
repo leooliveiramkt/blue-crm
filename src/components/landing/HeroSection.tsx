@@ -2,10 +2,11 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { ThemeConfig } from '@/config/theme';
+import { useTheme } from '@/context/ThemeContext';
 
 export const HeroSection = () => {
   const navigate = useNavigate();
+  const { themeConfig } = useTheme();
 
   const handleStartFreeDemo = () => {
     navigate('/login');
@@ -16,7 +17,7 @@ export const HeroSection = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-            Transforme sua gestão com <span style={{ color: ThemeConfig.primaryColor }}>Inteligência Artificial</span>
+            Transforme sua gestão com <span style={{ color: themeConfig.primaryColor }}>Inteligência Artificial</span>
           </h1>
           <p className="text-xl text-muted-foreground">
             Otimize processos, aumente a produtividade e tome decisões estratégicas com o CRM da Bela Blue.
@@ -27,8 +28,8 @@ export const HeroSection = () => {
               onClick={handleStartFreeDemo}
               className="text-lg px-8"
               style={{ 
-                backgroundColor: ThemeConfig.primaryColor || 'hsl(var(--primary))',
-                color: ThemeConfig.primaryForeground || 'hsl(var(--primary-foreground))'
+                backgroundColor: themeConfig.primaryColor || 'hsl(var(--primary))',
+                color: themeConfig.primaryForeground || 'hsl(var(--primary-foreground))'
               }}
             >
               Experimente Agora
@@ -37,14 +38,19 @@ export const HeroSection = () => {
               variant="outline" 
               size="lg" 
               className="text-lg px-8"
-              style={{ borderColor: ThemeConfig.primaryColor, color: ThemeConfig.primaryColor }}
+              style={{ borderColor: themeConfig.primaryColor, color: themeConfig.primaryColor }}
             >
               Saiba Mais
             </Button>
           </div>
         </div>
         <div className="relative rounded-lg overflow-hidden shadow-xl hidden md:block">
-          <div className="aspect-video bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+          <div 
+            className="aspect-video flex items-center justify-center"
+            style={{
+              background: `linear-gradient(135deg, ${themeConfig.primaryColor}15 0%, ${themeConfig.accentColor}25 100%)`,
+            }}
+          >
             <img
               src="/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png"
               alt="Bela Blue CRM Dashboard"

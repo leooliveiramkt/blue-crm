@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -39,4 +40,13 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Gradientes personalizados para Bela Blue */
+.bg-bela-gradient-main {
+  background: linear-gradient(135deg, #001440 0%, #ddcdc0 100%);
+}
+
+.bg-bela-gradient-light {
+  background: linear-gradient(135deg, #00144015 0%, #ddcdc035 100%);
 }
