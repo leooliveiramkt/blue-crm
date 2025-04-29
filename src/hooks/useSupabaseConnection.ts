@@ -11,7 +11,7 @@ export const useSupabaseConnection = () => {
         // Verificar se estamos usando um usuário de demonstração
         const demoType = localStorage.getItem('demo_user_type');
         if (demoType) {
-          console.log("Usando usuário de demonstração:", demoType);
+          console.log("[useSupabaseConnection] Usando usuário de demonstração:", demoType);
           setDebugInfo(null);
           return;
         }
@@ -20,14 +20,14 @@ export const useSupabaseConnection = () => {
         const { data, error } = await supabase.auth.getSession();
         
         if (error) {
-          console.error("Erro ao verificar conexão com Supabase:", error);
+          console.error("[useSupabaseConnection] Erro ao verificar conexão com Supabase:", error);
           setDebugInfo(`Erro Supabase: ${error.message} (Código ${error.code})`);
         } else {
-          console.log("Conexão com Supabase OK:", data ? "Sessão encontrada" : "Sem sessão");
+          console.log("[useSupabaseConnection] Conexão com Supabase OK:", data ? "Sessão encontrada" : "Sem sessão");
           setDebugInfo(null);
         }
       } catch (error) {
-        console.error("Exceção ao verificar Supabase:", error);
+        console.error("[useSupabaseConnection] Exceção ao verificar Supabase:", error);
         setDebugInfo(`Exceção Supabase: ${error instanceof Error ? error.message : 'Erro desconhecido'}`);
       }
     };

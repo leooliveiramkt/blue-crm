@@ -1,7 +1,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { toast } from '@/hooks/use-toast';
-import { supabase as supabaseClient } from '@/integrations/supabase/client';
+import { supabase as supabaseFromClient } from '@/integrations/supabase/client';
 import { Database } from '@/integrations/supabase/types';
 
 // Flag para verificar se o Supabase está corretamente configurado
@@ -48,7 +48,7 @@ if (!isSupabaseConfigured) {
 }
 
 // Exporta o cliente do arquivo client.ts para evitar duplicação de instâncias
-export const supabaseClient = supabaseClient;
+export const supabaseClient = supabaseFromClient;
 
 // Criamos um cliente tipado para uso em arquivos que precisam de tipos
 export const supabase = createClient<Database>(
