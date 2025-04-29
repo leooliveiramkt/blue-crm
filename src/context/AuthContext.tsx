@@ -141,7 +141,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         await tenantManager.loadCurrentTenant();
       } catch (tenantError) {
         console.error("Erro ao carregar tenant:", tenantError);
+        // Não vamos falhar o login se o tenant não carregar
       }
+      
+      toast({
+        title: "Login bem-sucedido",
+        description: "Bem-vindo de volta!",
+      });
       return true;
     } catch (error) {
       console.error("Erro inesperado durante login:", error);
@@ -160,6 +166,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       await supabase.auth.signOut();
       localStorage.removeItem('currentTenantId');
       navigate('/login');
+      toast({
+        title: "Logout realizado",
+        description: "Você foi desconectado com sucesso.",
+      });
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
       toast({

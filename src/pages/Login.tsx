@@ -36,14 +36,10 @@ const Login = () => {
       
       if (success) {
         console.log("Login bem-sucedido, redirecionando...");
-        navigate('/dashboard');
+        // O redirecionamento será tratado pelo useEffect que observa isAuthenticated
       } else {
         console.log("Login falhou");
-        toast({
-          title: "Login falhou",
-          description: "Email ou senha inválidos. Tente novamente.",
-          variant: "destructive",
-        });
+        // O toast é exibido dentro da função login em caso de erro
       }
     } catch (error) {
       console.error("Erro durante o login:", error);
