@@ -75,20 +75,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
 
     // Verifica sessão atual
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log("Verificando sessão atual:", !!session);
-      setSession(session);
-      setIsAuthenticated(!!session);
-      setUserId(session?.user?.id || null);
+    const checkSession = async () => {
+      try {
+        console.log("Verificando sessão atual...");
+        const { data: { session } } = await supabase.auth.getSession();
+        console.log("Sessão atual:", !!session);
+        setSession(session);
+        setIsAuthenticated(!!session);
+        setUserId(session?.user?.id || null);
 
-      if (session?.user) {
-        // Busca o perfil do usuário
-        supabase
-          .from('profiles')
-          .select('first_name, last_name, avatar_url')
-          .eq('id', session.user.id)
-          .single()
-          .then(({ data: profile, error }) => {
+        if (session?.user) {
+          // Busca o perfil do usuário
+          try {
+            const { data: profile, error } = await supabase
+              .from('profiles')
+              .select('first_name, last_name, avatar_url')
+              .eq('id', session.user.id)
+              .single();
+            
             if (error) {
               console.error("Erro ao buscar perfil na inicialização:", error);
             }
@@ -97,14 +101,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setUserName(profile?.first_name ? `${profile.first_name} ${profile.last_name || ''}`.trim() : 'Usuário');
             // Por enquanto, vamos manter o userRole como 'admin' para desenvolvimento
             setUserRole('admin');
-          })
-          .catch(error => {
+          } catch (error) {
             console.error("Erro ao buscar perfil do usuário:", error);
-          });
+          }
+        }
+      } catch (error) {
+        console.error("Erro ao verificar sessão atual:", error);
       }
-    }).catch(error => {
-      console.error("Erro ao verificar sessão atual:", error);
-    });
+    };
+
+    checkSession();
 
     return () => {
       subscription.unsubscribe();
