@@ -38,3 +38,32 @@ export const loadFromLocalStorage = (): ThemeConfigType | null => {
   }
   return null;
 };
+
+export const loadThemeFromDatabase = async (): Promise<ThemeConfigType | null> => {
+  if (!isSupabaseConfigured) {
+    return loadFromLocalStorage();
+  }
+  
+  try {
+    const { data, error } = await supabase
+      .from('theme_config')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single();
+
+    if (error) {
+      console.error('Erro ao carregar tema do Supabase:', error);
+      return loadFromLocalStorage();
+    }
+
+    if (data && data.config) {
+      return data.config as ThemeConfigType;
+    }
+
+    return loadFromLocalStorage();
+  } catch (error) {
+    console.error('Erro ao carregar tema:', error);
+    return loadFromLocalStorage();
+  }
+};

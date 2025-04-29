@@ -1,16 +1,15 @@
 
-import { supabase, isSupabaseConfigured } from '@/lib/supabase';
-import { IntegrationType, IntegrationData, IntegrationConfig, IntegrationStatus } from './types';
+import { IntegrationType, IntegrationData, IntegrationStatus, IntegrationConfig } from './types';
 import { getIntegrationConfig } from './integrationConfigs';
+import { integrationStorage } from './storage/integrationStorage';
+import { connectionService } from './services/connectionService';
+import { integrationCache } from './cache/integrationCache';
 
 /**
  * Gerenciador centralizado de integrações API
  */
 class IntegrationManager {
   private static instance: IntegrationManager;
-
-  // Cache para reduzir consultas ao Supabase
-  private integrationsCache: Map<string, IntegrationData> = new Map();
   private tenantId: string = '';
 
   private constructor() {}
@@ -46,51 +45,11 @@ class IntegrationManager {
       throw new Error('Tenant ID não especificado');
     }
 
-    if (!isSupabaseConfigured) {
-      // Fallback para localStorage quando o Supabase não estiver configurado
-      const savedIntegrations = localStorage.getItem(`integrations_${tid}`);
-      if (savedIntegrations) {
-        const integrations = JSON.parse(savedIntegrations) as IntegrationData[];
-        // Atualiza o cache
-        integrations.forEach(integration => {
-          this.integrationsCache.set(`${tid}_${integration.id}`, integration);
-        });
-        return integrations;
-      }
-      return [];
-    }
-
     try {
-      // Consulta Supabase para obter todas as integrações do tenant
-      const { data, error } = await supabase
-        .from('integrations')
-        .select('*')
-        .eq('tenant_id', tid);
-
-      if (error) throw error;
-
-      if (data && data.length > 0) {
-        // Converte os dados para o formato IntegrationData
-        const integrations: IntegrationData[] = data.map(item => ({
-          id: item.id as IntegrationType,
-          tenantId: item.tenant_id,
-          status: item.status as IntegrationStatus,
-          credentials: item.credentials as Record<string, string>,
-          metadata: item.metadata as Record<string, any> || {},
-          lastSync: item.last_sync,
-          createdAt: item.created_at,
-          updatedAt: item.updated_at
-        }));
-        
-        // Atualiza o cache
-        integrations.forEach(integration => {
-          this.integrationsCache.set(`${tid}_${integration.id}`, integration);
-        });
-        
-        return integrations;
-      }
-      
-      return [];
+      const integrations = await integrationStorage.loadIntegrations(tid);
+      // Atualiza o cache com as integrações carregadas
+      integrationCache.setMany(tid, integrations);
+      return integrations;
     } catch (error) {
       console.error('Erro ao carregar integrações:', error);
       return [];
@@ -108,52 +67,16 @@ class IntegrationManager {
     }
 
     // Verifica o cache primeiro
-    const cacheKey = `${tid}_${integrationId}`;
-    if (this.integrationsCache.has(cacheKey)) {
-      return this.integrationsCache.get(cacheKey) || null;
-    }
-
-    if (!isSupabaseConfigured) {
-      const savedIntegrations = localStorage.getItem(`integrations_${tid}`);
-      if (savedIntegrations) {
-        const integrations = JSON.parse(savedIntegrations) as IntegrationData[];
-        const integration = integrations.find(i => i.id === integrationId);
-        if (integration) {
-          this.integrationsCache.set(cacheKey, integration);
-          return integration;
-        }
-      }
-      return null;
+    if (integrationCache.has(tid, integrationId)) {
+      return integrationCache.get(tid, integrationId) || null;
     }
 
     try {
-      const { data, error } = await supabase
-        .from('integrations')
-        .select('*')
-        .eq('tenant_id', tid)
-        .eq('id', integrationId)
-        .single();
-
-      if (error) throw error;
-
-      if (data) {
-        // Converte para o formato IntegrationData
-        const integration: IntegrationData = {
-          id: data.id as IntegrationType,
-          tenantId: data.tenant_id,
-          status: data.status as IntegrationStatus,
-          credentials: data.credentials as Record<string, string>,
-          metadata: data.metadata as Record<string, any> || {},
-          lastSync: data.last_sync,
-          createdAt: data.created_at,
-          updatedAt: data.updated_at
-        };
-        
-        this.integrationsCache.set(cacheKey, integration);
-        return integration;
+      const integration = await integrationStorage.getIntegration(integrationId, tid);
+      if (integration) {
+        integrationCache.set(tid, integration);
       }
-      
-      return null;
+      return integration;
     } catch (error) {
       console.error(`Erro ao buscar integração ${integrationId}:`, error);
       return null;
@@ -187,65 +110,12 @@ class IntegrationManager {
       updatedAt: now
     };
 
-    if (!isSupabaseConfigured) {
-      // Salva no localStorage
-      const savedIntegrations = localStorage.getItem(`integrations_${tid}`);
-      let integrations = savedIntegrations ? JSON.parse(savedIntegrations) as IntegrationData[] : [];
-      
-      const existingIndex = integrations.findIndex(i => i.id === integration.id);
-      
-      if (existingIndex >= 0) {
-        // Atualiza integração existente
-        integrations[existingIndex] = completeIntegration;
-      } else {
-        // Adiciona nova integração
-        integrations.push(completeIntegration);
-      }
-      
-      localStorage.setItem(`integrations_${tid}`, JSON.stringify(integrations));
-      this.integrationsCache.set(`${tid}_${integration.id}`, completeIntegration);
-      return completeIntegration;
-    }
-
     try {
-      // Preparando dados para o formato da tabela
-      const dbData = {
-        id: completeIntegration.id,
-        tenant_id: completeIntegration.tenantId,
-        status: completeIntegration.status,
-        credentials: completeIntegration.credentials,
-        metadata: completeIntegration.metadata,
-        last_sync: completeIntegration.lastSync,
-        created_at: completeIntegration.createdAt,
-        updated_at: completeIntegration.updatedAt
-      };
-
-      const { data, error } = await supabase
-        .from('integrations')
-        .upsert(dbData)
-        .select()
-        .single();
-
-      if (error) throw error;
-
-      if (data) {
-        // Converte de volta para o formato IntegrationData
-        const savedIntegration: IntegrationData = {
-          id: data.id as IntegrationType,
-          tenantId: data.tenant_id,
-          status: data.status as IntegrationStatus,
-          credentials: data.credentials as Record<string, string>,
-          metadata: data.metadata as Record<string, any> || {},
-          lastSync: data.last_sync,
-          createdAt: data.created_at,
-          updatedAt: data.updated_at
-        };
-        
-        this.integrationsCache.set(`${tid}_${integration.id}`, savedIntegration);
-        return savedIntegration;
+      const savedIntegration = await integrationStorage.saveIntegration(completeIntegration);
+      if (savedIntegration) {
+        integrationCache.set(tid, savedIntegration);
       }
-      
-      return null;
+      return savedIntegration;
     } catch (error) {
       console.error('Erro ao salvar integração:', error);
       return null;
@@ -262,29 +132,12 @@ class IntegrationManager {
       throw new Error('Tenant ID não especificado');
     }
 
-    if (!isSupabaseConfigured) {
-      // Remove do localStorage
-      const savedIntegrations = localStorage.getItem(`integrations_${tid}`);
-      if (savedIntegrations) {
-        let integrations = JSON.parse(savedIntegrations) as IntegrationData[];
-        integrations = integrations.filter(i => i.id !== integrationId);
-        localStorage.setItem(`integrations_${tid}`, JSON.stringify(integrations));
-      }
-      this.integrationsCache.delete(`${tid}_${integrationId}`);
-      return true;
-    }
-
     try {
-      const { error } = await supabase
-        .from('integrations')
-        .delete()
-        .eq('tenant_id', tid)
-        .eq('id', integrationId);
-
-      if (error) throw error;
-
-      this.integrationsCache.delete(`${tid}_${integrationId}`);
-      return true;
+      const result = await integrationStorage.deleteIntegration(integrationId, tid);
+      if (result) {
+        integrationCache.delete(tid, integrationId);
+      }
+      return result;
     } catch (error) {
       console.error(`Erro ao excluir integração ${integrationId}:`, error);
       return false;
@@ -315,20 +168,7 @@ class IntegrationManager {
    * Testa uma conexão de API com base nas credenciais fornecidas
    */
   public async testConnection(integrationId: IntegrationType, credentials: Record<string, string>): Promise<boolean> {
-    const config = getIntegrationConfig(integrationId);
-    if (!config) return false;
-
-    // Implementação simulada - em produção, isso faria uma chamada real à API
-    // baseada na configuração da integração
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // Simula sucesso se todas as credenciais necessárias estiverem presentes
-        const allFieldsFilled = config.requiredFields.every(
-          field => field.required ? !!credentials[field.name] : true
-        );
-        resolve(allFieldsFilled);
-      }, 1000);
-    });
+    return connectionService.testConnection(integrationId, credentials);
   }
 
   /**
