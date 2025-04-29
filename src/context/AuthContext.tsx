@@ -129,12 +129,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       console.log("Tentando login com:", email);
       
-      // Verificação de URL do Supabase
-      const supabaseUrl = supabase.supabaseUrl;
-      const anonKey = supabase.supabaseKey;
-      console.log("Supabase URL:", supabaseUrl);
-      console.log("Supabase Anon Key (primeiros 10 chars):", anonKey.substring(0, 10) + "...");
+      // Verificação de conexão do Supabase - usando valores do arquivo de configuração
+      console.log("Verificando conexão com Supabase...");
       
+      // Removendo acesso direto às propriedades protegidas
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
