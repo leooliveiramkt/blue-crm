@@ -50,3 +50,36 @@
 .bg-bela-gradient-light {
   background: linear-gradient(135deg, #00144015 0%, #ddcdc035 100%);
 }
+
+/* Animações para elementos flutuantes */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(20px) rotate(-5deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.1); opacity: 0.4; }
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Cores do tema */
+:root {
+  --primary-color: #001440;
+  --primary-color-light: #00215e;
+  --accent-color: #ddcdc0;
+  --text-color: #ffffff;
+  --text-color-muted: rgba(255, 255, 255, 0.7);
+}
