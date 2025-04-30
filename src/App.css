@@ -1,8 +1,9 @@
 
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
@@ -82,4 +83,13 @@
   --accent-color: #ddcdc0;
   --text-color: #ffffff;
   --text-color-muted: rgba(255, 255, 255, 0.7);
+}
+
+/* Garantir que o body também não tenha margens */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100vw;
+  background-color: #001440;
 }

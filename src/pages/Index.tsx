@@ -19,7 +19,7 @@ const Index = () => {
   
   return (
     <div 
-      className="min-h-screen bg-[#001440] relative overflow-hidden"
+      className="min-h-screen w-screen bg-[#001440] relative overflow-hidden"
     >
       {/* Elementos flutuantes decorativos */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
