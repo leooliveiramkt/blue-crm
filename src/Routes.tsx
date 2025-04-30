@@ -34,13 +34,8 @@ export const Routes = () => {
   
   return (
     <RouterRoutes>
-      {/* Rota inicial - redireciona para dashboard se autenticado */}
-      <Route 
-        path="/" 
-        element={
-          isAuthenticated ? <Navigate to="/dashboard" replace /> : <Index />
-        } 
-      />
+      {/* Rota inicial - sempre mostra a página Index, independente do estado de autenticação */}
+      <Route path="/" element={<Index />} />
       
       {/* Rota de login - redireciona para dashboard se autenticado */}
       <Route 
