@@ -8,11 +8,12 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ requiredRole }: ProtectedRouteProps) => {
-  const { isAuthenticated, hasPermission } = useAuth();
+  const { isAuthenticated, hasPermission, userRole } = useAuth();
   const location = useLocation();
 
   useEffect(() => {
     console.log("[ProtectedRoute] Verificando autenticação:", isAuthenticated);
+    console.log("[ProtectedRoute] Papel do usuário:", userRole);
     console.log("[ProtectedRoute] Rota atual:", location.pathname);
     
     // Verificar se é um usuário de demonstração
@@ -27,7 +28,7 @@ const ProtectedRoute = ({ requiredRole }: ProtectedRouteProps) => {
     } else {
       console.log("[ProtectedRoute] Usuário autenticado, permitindo acesso à rota:", location.pathname);
     }
-  }, [isAuthenticated, location.pathname]);
+  }, [isAuthenticated, location.pathname, userRole]);
 
   // If not authenticated, redirect to login
   if (!isAuthenticated) {

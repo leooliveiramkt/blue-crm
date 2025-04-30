@@ -1,9 +1,11 @@
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowUp, ArrowDown, DollarSign, Users, ShoppingCart, BarChart3 } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useAuth } from '@/context/AuthContext';
 
 const data = [
   { name: 'Jan', vendas: 40, marketing: 24, afiliados: 20 },
@@ -16,6 +18,13 @@ const data = [
 ];
 
 const Dashboard = () => {
+  const { userRole } = useAuth();
+  
+  useEffect(() => {
+    console.log("Dashboard renderizado");
+    console.log("Papel do usuário:", userRole);
+  }, [userRole]);
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center">

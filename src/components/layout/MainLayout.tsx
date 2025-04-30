@@ -1,14 +1,22 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import TenantPanel from './TenantPanel';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { useTenant } from '@/hooks/useTenant';
+import { useAuth } from '@/context/AuthContext';
 
 const MainLayout = () => {
   const { isLoading } = useTenant();
+  const { userRole, userName } = useAuth();
+
+  useEffect(() => {
+    console.log("MainLayout renderizado");
+    console.log("Usuário:", userName);
+    console.log("Papel do usuário:", userRole);
+  }, [userRole, userName]);
 
   if (isLoading) {
     return (

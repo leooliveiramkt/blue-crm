@@ -18,18 +18,19 @@ import { useAuth } from "@/context/AuthContext";
 import { useEffect } from "react";
 
 export const Routes = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, userRole } = useAuth();
   
   // Log para debug
   useEffect(() => {
     console.log("Routes: Estado de autenticação:", isAuthenticated);
+    console.log("Routes: Papel do usuário:", userRole);
     
     // Verificar se há usuários de demonstração
     const demoType = localStorage.getItem('demo_user_type');
     if (demoType) {
       console.log("Routes: Usuário de demonstração:", demoType);
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, userRole]);
   
   return (
     <RouterRoutes>
