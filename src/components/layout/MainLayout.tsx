@@ -29,7 +29,6 @@ const MainLayout = () => {
         description: "Por favor, faça login novamente."
       });
       navigate('/login');
-      return;
     }
   }, [userRole, userName, isAuthenticated, navigate, toast]);
 
@@ -41,10 +40,10 @@ const MainLayout = () => {
     );
   }
 
-  // Adicione verificação para garantir que o layout só seja renderizado se estiver autenticado
+  // Verifica se está autenticado antes de renderizar
   if (!isAuthenticated) {
     console.log("MainLayout: Usuário não autenticado, retornando null");
-    return null; // Não renderiza nada até que o redirecionamento ocorra
+    return null;
   }
 
   console.log("MainLayout: Renderizando layout completo");

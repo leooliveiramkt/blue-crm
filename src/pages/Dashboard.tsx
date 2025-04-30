@@ -6,7 +6,9 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/components/ui/use-toast';
 
+// Dados mockados para o gráfico
 const data = [
   { name: 'Jan', vendas: 40, marketing: 24, afiliados: 20 },
   { name: 'Fev', vendas: 30, marketing: 28, afiliados: 27 },
@@ -18,24 +20,32 @@ const data = [
 ];
 
 const Dashboard = () => {
-  const { userRole } = useAuth();
+  const { userRole, isAuthenticated } = useAuth();
+  const { toast } = useToast();
   
   useEffect(() => {
     console.log("Dashboard renderizado");
     console.log("Papel do usuário:", userRole);
-    console.log("Dados para o gráfico:", data);
+    console.log("Estado de autenticação:", isAuthenticated);
     
-    // Verifica se há elementos no DOM para depuração
+    // Log para depuração
+    document.getElementById('dashboard-debug').textContent = 
+      `Dashboard carregado: ${new Date().toLocaleTimeString()}, Auth: ${isAuthenticated}, Role: ${userRole}`;
+    
+    // Verificamos se há elementos no DOM após o render
     setTimeout(() => {
-      console.log("Elementos no Dashboard:", document.querySelectorAll('.space-y-6').length);
-      console.log("Elementos de card no Dashboard:", document.querySelectorAll('.card').length);
-    }, 100);
-  }, [userRole]);
+      const cards = document.querySelectorAll('.card');
+      const container = document.getElementById('dashboard-container');
+      console.log("Elementos no Dashboard:", container ? "Contêiner encontrado" : "Contêiner não encontrado");
+      console.log("Cards no Dashboard:", cards.length);
+    }, 200);
+  }, [userRole, isAuthenticated]);
 
-  console.log("Renderizando Dashboard com dados:", data);
-  
   return (
     <div className="space-y-6" id="dashboard-container">
+      {/* Elemento de debug invisível */}
+      <div id="dashboard-debug" className="sr-only"></div>
+      
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
