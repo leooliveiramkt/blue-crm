@@ -23,7 +23,7 @@ export const HeroSection = () => {
             Novo CRM da Bela Blue Beauty
           </div>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight text-white">
-            Transforme a Gestão da Empresa com Acesso a todos os Dados da Empresa, Relatórios Atualizados automaticamente de todos setores e Otimização com <span style={{ color: themeConfig.accentColor || '#ddcdc0' }}>Inteligência Artificial</span>
+            Gerencie todos os dados e relatórios com <span style={{ color: themeConfig.accentColor || '#ddcdc0' }}>Inteligência Artificial</span>
           </h1>
           <p className="text-xl text-white/70">
             Otimize processos, aumente a produtividade e tome decisões estratégicas com o CRM da Bela Blue.
