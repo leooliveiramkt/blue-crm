@@ -36,7 +36,7 @@ const ProtectedRoute = ({ requiredRole }: ProtectedRouteProps) => {
     } else {
       console.log("[ProtectedRoute] Usuário autenticado, permitindo acesso à rota:", location.pathname);
     }
-  }, [isAuthenticated, location.pathname, userRole]);
+  }, [isAuthenticated, location.pathname, userRole, toast]);
 
   // If not authenticated, redirect to login
   if (!isAuthenticated) {
@@ -51,6 +51,7 @@ const ProtectedRoute = ({ requiredRole }: ProtectedRouteProps) => {
   }
 
   // User is authenticated and has required permission
+  console.log("[ProtectedRoute] Usuário autorizado, renderizando rota protegida:", location.pathname);
   return <Outlet />;
 };
 

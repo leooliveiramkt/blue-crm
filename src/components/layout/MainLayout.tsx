@@ -29,8 +29,9 @@ const MainLayout = () => {
         description: "Por favor, faça login novamente."
       });
       navigate('/login');
+      return;
     }
-  }, [userRole, userName, isAuthenticated, navigate]);
+  }, [userRole, userName, isAuthenticated, navigate, toast]);
 
   if (isLoading) {
     return (
@@ -46,6 +47,8 @@ const MainLayout = () => {
     return null; // Não renderiza nada até que o redirecionamento ocorra
   }
 
+  console.log("MainLayout: Renderizando layout completo");
+  
   return (
     <SidebarProvider>
       <div className="flex h-screen bg-background overflow-hidden">

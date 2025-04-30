@@ -23,16 +23,19 @@ const Dashboard = () => {
   useEffect(() => {
     console.log("Dashboard renderizado");
     console.log("Papel do usuário:", userRole);
+    console.log("Dados para o gráfico:", data);
     
     // Verifica se há elementos no DOM para depuração
-    console.log("Elementos no Dashboard:", document.querySelectorAll('.space-y-6').length);
+    setTimeout(() => {
+      console.log("Elementos no Dashboard:", document.querySelectorAll('.space-y-6').length);
+      console.log("Elementos de card no Dashboard:", document.querySelectorAll('.card').length);
+    }, 100);
   }, [userRole]);
 
-  // Verificar se há erros de renderização
   console.log("Renderizando Dashboard com dados:", data);
   
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" id="dashboard-container">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>

@@ -43,7 +43,18 @@ export const Routes = () => {
       {/* Rotas protegidas */}
       <Route element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route 
+            path="/dashboard" 
+            element={
+              <React.Suspense fallback={
+                <div className="flex h-full items-center justify-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                </div>
+              }>
+                <Dashboard />
+              </React.Suspense>
+            } 
+          />
           <Route path="/marketing" element={<Marketing />} />
           <Route path="/affiliates" element={<Affiliates />} />
           <Route path="/analytics" element={<AIAnalytics />} />
