@@ -23,8 +23,14 @@ const Dashboard = () => {
   useEffect(() => {
     console.log("Dashboard renderizado");
     console.log("Papel do usuário:", userRole);
+    
+    // Verifica se há elementos no DOM para depuração
+    console.log("Elementos no Dashboard:", document.querySelectorAll('.space-y-6').length);
   }, [userRole]);
 
+  // Verificar se há erros de renderização
+  console.log("Renderizando Dashboard com dados:", data);
+  
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center">

@@ -23,13 +23,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ debugInfo }) => {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  // Se já estiver autenticado, redireciona para o dashboard
-  React.useEffect(() => {
-    if (isAuthenticated) {
-      console.log("Usuário já está autenticado, redirecionando para o dashboard...");
-      navigate('/dashboard');
-    }
-  }, [isAuthenticated, navigate]);
+  // Removido o redirecionamento automático para o dashboard
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,7 +55,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ debugInfo }) => {
       
       if (success) {
         console.log("Login bem-sucedido, redirecionando...");
-        // O redirecionamento é feito na função login ou pelo useEffect acima
+        // Após login bem-sucedido, redirecionamos manualmente para o dashboard
+        navigate('/dashboard');
       } else {
         console.log("Login falhou");
         // O toast é exibido dentro da função login em caso de erro

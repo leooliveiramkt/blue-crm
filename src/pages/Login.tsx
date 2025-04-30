@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { ThemeConfig } from '@/config/theme'; // Mantendo a compatibilidade
@@ -16,13 +16,7 @@ const Login = () => {
   const { isAuthenticated } = useAuth();
   const { debugInfo } = useSupabaseConnection();
 
-  // Redirecionar para o dashboard se já estiver autenticado
-  useEffect(() => {
-    if (isAuthenticated) {
-      console.log("Login: Usuário já autenticado, redirecionando para o dashboard");
-      navigate('/dashboard');
-    }
-  }, [isAuthenticated, navigate]);
+  // Removido o redirecionamento automático para o dashboard
 
   // Adiciona teste de credenciais para login
   const setDemoCredentials = (type: string) => {

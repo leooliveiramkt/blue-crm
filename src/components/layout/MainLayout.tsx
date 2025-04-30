@@ -1,22 +1,36 @@
 
 import React, { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import TenantPanel from './TenantPanel';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { useTenant } from '@/hooks/useTenant';
 import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/components/ui/use-toast';
 
 const MainLayout = () => {
   const { isLoading } = useTenant();
-  const { userRole, userName } = useAuth();
+  const { userRole, userName, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     console.log("MainLayout renderizado");
     console.log("Usuário:", userName);
     console.log("Papel do usuário:", userRole);
-  }, [userRole, userName]);
+    console.log("Estado de autenticação:", isAuthenticated);
+    
+    // Verificar se o usuário está autenticado
+    if (!isAuthenticated) {
+      console.log("Usuário não autenticado no MainLayout, redirecionando...");
+      toast({
+        title: "Sessão expirada",
+        description: "Por favor, faça login novamente."
+      });
+      navigate('/login');
+    }
+  }, [userRole, userName, isAuthenticated, navigate]);
 
   if (isLoading) {
     return (
@@ -24,6 +38,12 @@ const MainLayout = () => {
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
     );
+  }
+
+  // Adicione verificação para garantir que o layout só seja renderizado se estiver autenticado
+  if (!isAuthenticated) {
+    console.log("MainLayout: Usuário não autenticado, retornando null");
+    return null; // Não renderiza nada até que o redirecionamento ocorra
   }
 
   return (

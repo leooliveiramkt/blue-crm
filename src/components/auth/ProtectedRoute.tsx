@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/components/ui/use-toast';
 
 interface ProtectedRouteProps {
   requiredRole?: 'admin' | 'director' | 'consultant' | ('admin' | 'director' | 'consultant')[];
@@ -10,6 +11,7 @@ interface ProtectedRouteProps {
 const ProtectedRoute = ({ requiredRole }: ProtectedRouteProps) => {
   const { isAuthenticated, hasPermission, userRole } = useAuth();
   const location = useLocation();
+  const { toast } = useToast();
 
   useEffect(() => {
     console.log("[ProtectedRoute] Verificando autenticação:", isAuthenticated);
@@ -25,6 +27,12 @@ const ProtectedRoute = ({ requiredRole }: ProtectedRouteProps) => {
     
     if (!isAuthenticated) {
       console.log("[ProtectedRoute] Usuário não autenticado, redirecionando para login...");
+      
+      // Mostrar toast informando sobre redirecionamento
+      toast({
+        title: "Acesso restrito",
+        description: "Você precisa fazer login para acessar esta página.",
+      });
     } else {
       console.log("[ProtectedRoute] Usuário autenticado, permitindo acesso à rota:", location.pathname);
     }
