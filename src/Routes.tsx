@@ -1,4 +1,5 @@
 
+import React, { useEffect } from "react";
 import { Route, Routes as RouterRoutes, Navigate } from "react-router-dom";
 import Index from "@/pages/Index";
 import Login from "@/pages/Login";
@@ -15,7 +16,6 @@ import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import MainLayout from "@/components/layout/MainLayout";
 import WbuyAffiliation from "@/pages/wbuy-affiliation/WbuyAffiliation";
 import { useAuth } from "@/context/AuthContext";
-import { useEffect } from "react";
 
 export const Routes = () => {
   const { isAuthenticated, userRole } = useAuth();
