@@ -45,7 +45,7 @@ export const HeroSection = () => {
             <Button 
               variant="outline" 
               size="lg" 
-              className="text-lg px-8 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm"
+              className="text-lg px-8 bg-white/20 border-white/50 text-white hover:bg-white/30 backdrop-blur-sm"
             >
               Saiba Mais
             </Button>
