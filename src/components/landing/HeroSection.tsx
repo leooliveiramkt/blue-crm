@@ -20,10 +20,10 @@ export const HeroSection = () => {
           <div 
             className="inline-block px-4 py-1 rounded-full text-sm bg-white/10 backdrop-blur-sm border border-white/20 text-white"
           >
-            Nova plataforma com inteligência artificial
+            Novo CRM da Bela Blue Beauty
           </div>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight text-white">
-            Transforme sua gestão com <span style={{ color: themeConfig.accentColor || '#ddcdc0' }}>Inteligência Artificial</span>
+            Transforme a Gestão da Empresa com Acesso a todos os Dados da Empresa, Relatórios Atualizados automaticamente de todos setores e Otimização com <span style={{ color: themeConfig.accentColor || '#ddcdc0' }}>Inteligência Artificial</span>
           </h1>
           <p className="text-xl text-white/70">
             Otimize processos, aumente a produtividade e tome decisões estratégicas com o CRM da Bela Blue.
