@@ -85,75 +85,83 @@ const AffiliateOverview: React.FC<AffiliateOverviewProps> = ({
     <div className="space-y-6">
       {/* Métricas */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
+        <Card className="border-none shadow-md bg-gradient-to-br from-background to-primary/5">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total de Afiliados</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <Users className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalAffiliates}</div>
+            <div className="text-3xl font-bold">{stats.totalAffiliates}</div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-none shadow-md bg-gradient-to-br from-background to-green-500/5">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Afiliados Ativos</CardTitle>
-            <BadgeCheck className="h-4 w-4 text-muted-foreground" />
+            <BadgeCheck className="h-4 w-4 text-green-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.activeAffiliates}</div>
+            <div className="text-3xl font-bold">{stats.activeAffiliates}</div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-none shadow-md bg-gradient-to-br from-background to-blue-500/5">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Novos (30 dias)</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <Users className="h-4 w-4 text-blue-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.newAffiliates}</div>
+            <div className="text-3xl font-bold">{stats.newAffiliates}</div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-none shadow-md bg-gradient-to-br from-background to-amber-500/5">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Metas Batidas</CardTitle>
-            <Award className="h-4 w-4 text-muted-foreground" />
+            <Award className="h-4 w-4 text-amber-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.targetReached}</div>
+            <div className="text-3xl font-bold">{stats.targetReached}</div>
           </CardContent>
         </Card>
       </div>
 
       {/* Top Performers */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Top Performers da Semana</CardTitle>
+      <Card className="border-none shadow-md overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-background to-background/80 pb-6 border-b">
+          <CardTitle className="text-lg flex items-center">
+            <Award className="mr-2 h-5 w-5 text-amber-500" />
+            Top Performers da Semana
+          </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="bg-gradient-to-br from-background to-amber-500/5 p-6">
           <div className="space-y-4">
             {topPerformers.map((performer, index) => (
-              <div key={performer.affiliate_id} className="flex items-center">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                  <span className="font-bold">{index + 1}</span>
+              <div key={performer.affiliate_id} className="flex items-center p-3 rounded-lg bg-background/40 hover:bg-background/80 transition-all border border-muted">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-3
+                  ${index === 0 ? 'bg-yellow-100 text-yellow-700 border border-yellow-300' : 
+                  index === 1 ? 'bg-gray-100 text-gray-700 border border-gray-300' : 
+                  index === 2 ? 'bg-orange-100 text-orange-700 border border-orange-300' :
+                  'bg-muted text-muted-foreground'}`}>
+                  <span className="font-bold text-xl">{index + 1}</span>
                 </div>
                 <div className="flex-1">
                   <h4 className="font-medium">{performer.full_name}</h4>
                   <div className="text-sm text-muted-foreground flex items-center">
                     <TrendingUp className="h-3 w-3 mr-1" />
-                    R$ {performer.total_sale_amount.toLocaleString('pt-BR', {minimumFractionDigits: 2})}
+                    <span className="font-mono">R$ {performer.total_sale_amount.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
                   </div>
                 </div>
-                <Button variant="outline" size="sm" onClick={() => onSelectAffiliate(performer.affiliate_id)}>
+                <Button variant="outline" size="sm" onClick={() => onSelectAffiliate(performer.affiliate_id)} className="ml-2">
                   Ver detalhes
                 </Button>
               </div>
             ))}
             
             {topPerformers.length === 0 && (
-              <div className="text-center py-6 text-muted-foreground">
-                Nenhuma venda registrada na semana atual
+              <div className="text-center py-12 text-muted-foreground">
+                <TrendingUp className="h-12 w-12 mx-auto mb-3 opacity-20" />
+                <p className="text-lg">Nenhuma venda registrada na semana atual</p>
               </div>
             )}
           </div>
@@ -161,11 +169,14 @@ const AffiliateOverview: React.FC<AffiliateOverviewProps> = ({
       </Card>
 
       {/* Tabela de Afiliados */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Lista de Afiliados</CardTitle>
+      <Card className="border-none shadow-md overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-background to-background/80 pb-6 border-b">
+          <CardTitle className="text-lg flex items-center">
+            <Users className="mr-2 h-5 w-5 text-primary" />
+            Lista de Afiliados
+          </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="bg-gradient-to-br from-background to-primary/5 p-0">
           <AffiliatesTable affiliates={affiliates} onSelectAffiliate={onSelectAffiliate} />
         </CardContent>
       </Card>

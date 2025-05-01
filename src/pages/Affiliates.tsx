@@ -10,6 +10,7 @@ import AffiliatesTable from './affiliates/AffiliatesTable';
 import WeeklyRankingTab from './affiliates/WeeklyRankingTab';
 import MonthlyRankingTab from './affiliates/MonthlyRankingTab';
 import OverallRankingTab from './affiliates/OverallRankingTab';
+import BulkCommissionTab from './affiliates/BulkCommissionTab';
 import { useAffiliatesData } from './affiliates/hooks/useAffiliatesData';
 import { RankingItem } from './wbuy-affiliation/types';
 
@@ -59,12 +60,13 @@ const Affiliates = () => {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-        <TabsList className="grid grid-cols-6 sm:grid-cols-6">
+        <TabsList className="grid grid-cols-7 sm:grid-cols-7">
           <TabsTrigger value="overview">Visão Geral</TabsTrigger>
           <TabsTrigger value="weekly-phys">Ranking Físico</TabsTrigger>
           <TabsTrigger value="weekly-dig">Ranking Digital</TabsTrigger>
           <TabsTrigger value="monthly">Ranking Mensal</TabsTrigger>
           <TabsTrigger value="overall">Ranking Geral</TabsTrigger>
+          <TabsTrigger value="bulk-commission">Comissões</TabsTrigger>
           <TabsTrigger value="new-affiliate">Novo Afiliado</TabsTrigger>
         </TabsList>
 
@@ -101,29 +103,33 @@ const Affiliates = () => {
           <OverallRankingTab rankingData={overallRanking} />
         </TabsContent>
 
+        <TabsContent value="bulk-commission">
+          <BulkCommissionTab />
+        </TabsContent>
+
         <TabsContent value="new-affiliate">
-          <Card>
-            <CardHeader>
+          <Card className="border-none shadow-lg overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-background to-background/80 pb-6 border-b">
               <CardTitle>Novo Afiliado</CardTitle>
               <CardDescription>
                 Adicione um novo afiliado ao seu sistema
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="bg-gradient-to-br from-background to-primary/5 p-6">
               <AffiliateForm onSave={handleAffiliateSaved} />
             </CardContent>
           </Card>
         </TabsContent>
 
         <TabsContent value="edit">
-          <Card>
-            <CardHeader>
+          <Card className="border-none shadow-lg overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-background to-background/80 pb-6 border-b">
               <CardTitle>Editar Afiliado</CardTitle>
               <CardDescription>
                 Modifique os dados do afiliado selecionado
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="bg-gradient-to-br from-background to-primary/5 p-6">
               <AffiliateForm 
                 affiliateId={selectedAffiliateId as string} 
                 onSave={handleAffiliateSaved} 
