@@ -14,6 +14,8 @@ import {
   Tag,
   TrendingUp,
   Search,
+  Package,
+  Store,
 } from 'lucide-react';
 import {
   Sidebar as SidebarComponent,
@@ -62,9 +64,14 @@ const navItems: NavItem[] = [
     icon: Search,
   },
   {
-    title: "Pedidos",
+    title: "Pipeline",
     href: "/orders",
     icon: FileText,
+  },
+  {
+    title: "Comercial",
+    href: "/commercial",
+    icon: Store,
   },
   {
     title: "Integrações API",
