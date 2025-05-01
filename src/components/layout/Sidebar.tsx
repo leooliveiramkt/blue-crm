@@ -13,7 +13,7 @@ import {
   ChevronLeft,
   Tag,
   TrendingUp,
-  User
+  Search,
 } from 'lucide-react';
 import {
   Sidebar as SidebarComponent,
@@ -58,8 +58,8 @@ const navItems: NavItem[] = [
   },
   {
     title: "Rastreamento",
-    href: "/tracking",
-    icon: Link,
+    href: "/order-tracking",
+    icon: Search,
   },
   {
     title: "Pedidos",
@@ -68,7 +68,7 @@ const navItems: NavItem[] = [
   },
   {
     title: "Integrações API",
-    href: "/api-integrations",
+    href: "/integrations",
     icon: Database,
   },
   {
