@@ -12,6 +12,7 @@ import Reports from "@/pages/Reports";
 import AIAnalytics from "@/pages/AIAnalytics";
 import Affiliates from "@/pages/Affiliates";
 import ApiIntegrations from "@/pages/ApiIntegrations";
+import OrderTracking from "@/pages/OrderTracking";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import MainLayout from "@/components/layout/MainLayout";
 import WbuyAffiliation from "@/pages/wbuy-affiliation/WbuyAffiliation";
@@ -51,6 +52,7 @@ export const Routes = () => {
           <Route path="/settings" element={<Settings />} />
           <Route path="/integrations" element={<ApiIntegrations />} />
           <Route path="/wbuy-affiliation" element={<WbuyAffiliation />} />
+          <Route path="/order-tracking" element={<OrderTracking />} />
         </Route>
       </Route>
 
