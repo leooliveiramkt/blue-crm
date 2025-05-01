@@ -23,12 +23,6 @@ const ProtectedRoute = ({ requiredRole }: ProtectedRouteProps) => {
     if (demoType) {
       console.log("[ProtectedRoute] Demo user type:", demoType);
     }
-    
-    if (!isAuthenticated) {
-      console.log("[ProtectedRoute] Usuário não autenticado, redirecionando para login...");
-    } else {
-      console.log("[ProtectedRoute] Usuário autenticado, permitindo acesso à rota:", location.pathname);
-    }
   }, [isAuthenticated, location.pathname, userRole]);
 
   // Se não estiver autenticado, redireciona para login

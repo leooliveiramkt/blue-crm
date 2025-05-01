@@ -29,6 +29,7 @@ const MainLayout = () => {
         description: "Por favor, faça login novamente."
       });
       navigate('/login');
+      return;
     }
   }, [userRole, userName, isAuthenticated, navigate, toast]);
 
