@@ -40,8 +40,8 @@ const Index = () => {
           style={{ animationDuration: '12s', animationName: 'pulse', animationIterationCount: 'infinite', animationDirection: 'alternate' }}
         ></div>
         
-        {/* Grade/linhas de dados */}
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/grid-pattern.png')] bg-repeat opacity-5"></div>
+        {/* Grade/linhas de dados - Removendo o grid-pattern.png que causa erro 404 */}
+        <div className="absolute inset-0 opacity-5 bg-[radial-gradient(circle,_rgba(255,255,255,0.1)_1px,_transparent_1px)] bg-[length:20px_20px]"></div>
         
         {/* Raio de luz */}
         <div className="absolute -top-[30%] -right-[10%] w-[70%] h-[70%] bg-gradient-to-b from-blue-400/5 to-transparent rotate-12 rounded-full blur-3xl"></div>

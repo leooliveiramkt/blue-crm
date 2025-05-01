@@ -20,7 +20,7 @@ export const CTASection = () => {
       }}
     >
       {/* Elementos de fundo */}
-      <div className="absolute inset-0 bg-[url('/lovable-uploads/grid-pattern.png')] bg-repeat opacity-5"></div>
+      <div className="absolute inset-0 opacity-5 bg-[radial-gradient(circle,_rgba(255,255,255,0.1)_1px,_transparent_1px)] bg-[length:20px_20px]"></div>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
       
       {/* Círculos flutuantes */}
