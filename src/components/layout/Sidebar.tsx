@@ -16,12 +16,13 @@ import {
   Search,
   Package,
   Store,
+  Box
 } from 'lucide-react';
 import {
   Sidebar as SidebarComponent,
   SidebarContent,
-  SidebarHeader,
   SidebarFooter,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
@@ -72,6 +73,11 @@ const navItems: NavItem[] = [
     title: "Comercial",
     href: "/commercial",
     icon: Store,
+  },
+  {
+    title: "Expedição",
+    href: "/shipping",
+    icon: Box,
   },
   {
     title: "Integrações API",
