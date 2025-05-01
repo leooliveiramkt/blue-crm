@@ -58,8 +58,9 @@ export const ClientDetail = ({ leadId, onClose }: ClientDetailProps) => {
   // Verificar se alguma integração está disponível
   const checkIntegration = async (type: string) => {
     try {
-      const hasIntegration = await integrationManager.hasIntegration(type);
-      return hasIntegration;
+      // Usando o método getIntegration em vez de hasIntegration
+      const integration = await integrationManager.getIntegration(type as any);
+      return integration !== null;
     } catch (error) {
       console.error(`Erro ao verificar integração ${type}:`, error);
       return false;

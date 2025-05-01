@@ -57,8 +57,14 @@ export const AddLeadDialog = ({ open, onOpenChange }: AddLeadDialogProps) => {
   
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     addLead({
-      ...values,
-      tags: [],
+      name: values.name,
+      email: values.email,
+      phone: values.phone || '',  // Garantindo que phone sempre tenha um valor
+      source: values.source,
+      stageId: values.stageId,
+      priority: values.priority,
+      assignedTo: values.assignedTo,
+      tags: [],                   // Definindo valores obrigatórios
       potentialValue: 0,
       lastContactDays: 0,
       unreadMessages: 0,
