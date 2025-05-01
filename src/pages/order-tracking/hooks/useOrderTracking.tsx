@@ -1,27 +1,8 @@
 
 import { useState } from 'react';
-import { TrackingService } from '@/services/trackingService';
+import { TrackingData } from '../models/types';
+import { trackingService } from '../services/trackingService';
 import { useToast } from '@/hooks/use-toast';
-
-export interface TrackingData {
-  wbuy: any;
-  activeCampaign: any;
-  googleAnalytics: any;
-  stape: any;
-  summary: {
-    firstClick: string;
-    lastClick: string;
-    affiliateCode: string;
-    confidence: number;
-    matchingPlatforms: string[];
-  } | null;
-  aiAnalysis?: {
-    conclusion: string;
-    attribution: string;
-    confidence: string;
-    recommendedAction: string;
-  };
-}
 
 export const useOrderTracking = () => {
   const [orderCode, setOrderCode] = useState('');
@@ -41,34 +22,10 @@ export const useOrderTracking = () => {
     setError(null);
     
     try {
-      // Buscar dados em todas as plataformas
-      const wbuyData = await TrackingService.getWbuyOrderData(orderCode);
+      // Buscar dados em todas as plataformas usando o novo serviço
+      const data = await trackingService.getOrderTrackingData(orderCode);
       
-      // Só continua se encontrar o pedido na Wbuy
-      if (!wbuyData) {
-        throw new Error("Pedido não encontrado na Wbuy");
-      }
-      
-      // Buscar nas outras plataformas usando o email do cliente
-      const activeCampaignData = await TrackingService.getActiveCampaignData(wbuyData.customerEmail);
-      const googleAnalyticsData = await TrackingService.getGoogleAnalyticsData(orderCode);
-      const stapeData = await TrackingService.getStapeData(orderCode);
-      
-      // Criar o objeto de dados consolidado
-      const consolidatedData = {
-        wbuy: wbuyData,
-        activeCampaign: activeCampaignData,
-        googleAnalytics: googleAnalyticsData,
-        stape: stapeData
-      };
-      
-      // Análise de correspondência entre plataformas
-      const summary = TrackingService.analyzeCorrelation(consolidatedData);
-
-      setTrackingData({
-        ...consolidatedData,
-        summary
-      });
+      setTrackingData(data);
 
       toast({
         title: "Dados encontrados",
@@ -77,8 +34,8 @@ export const useOrderTracking = () => {
       });
 
       // Após ter os dados básicos, iniciar análise da IA
-      if (summary) {
-        analyzeWithAI(consolidatedData, summary);
+      if (data.summary) {
+        analyzeWithAI();
       }
 
     } catch (err: any) {
@@ -94,12 +51,14 @@ export const useOrderTracking = () => {
     }
   };
   
-  const analyzeWithAI = async (data: any, summary: any) => {
+  const analyzeWithAI = async () => {
+    if (!trackingData) return;
+    
     setIsAnalyzing(true);
     
     try {
       // Chamar o serviço da IA para análise dos dados
-      const aiResult = await TrackingService.analyzeWithOpenAI({ ...data, summary });
+      const aiResult = await trackingService.analyzeOrderWithAI(trackingData);
       
       setTrackingData(prevData => {
         if (!prevData) return null;
@@ -128,17 +87,7 @@ export const useOrderTracking = () => {
   };
 
   const manualAnalyzeWithAI = () => {
-    if (!trackingData || !trackingData.summary) return;
-    
-    analyzeWithAI(
-      {
-        wbuy: trackingData.wbuy,
-        activeCampaign: trackingData.activeCampaign,
-        googleAnalytics: trackingData.googleAnalytics,
-        stape: trackingData.stape
-      },
-      trackingData.summary
-    );
+    analyzeWithAI();
   };
 
   return {
