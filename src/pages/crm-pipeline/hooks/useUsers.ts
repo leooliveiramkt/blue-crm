@@ -72,11 +72,16 @@ export const useUsers = () => {
       let success = false;
       
       try {
+        // Separando o nome completo em primeiro nome e sobrenome
+        const nameParts = userData.name.split(' ');
+        const firstName = nameParts[0];
+        const lastName = nameParts.slice(1).join(' ');
+        
         const { data, error } = await supabase
           .from('profiles')
           .insert({
-            first_name: userData.name.split(' ')[0],
-            last_name: userData.name.split(' ').slice(1).join(' '),
+            first_name: firstName,
+            last_name: lastName,
             role: userData.role
           })
           .select('id')
