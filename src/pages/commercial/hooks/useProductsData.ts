@@ -24,40 +24,40 @@ interface AbcProduct {
 
 export const useProductsData = () => {
   const [topProducts, setTopProducts] = useState<Product[]>([
-    { name: 'Curso Avançado de Marketing', quantity: 45, value: 67500, percentage: 22.5 },
-    { name: 'Formação Completa em Vendas', quantity: 38, value: 57000, percentage: 19 },
-    { name: 'E-book Estratégias Digitais', quantity: 120, value: 36000, percentage: 12 },
-    { name: 'Consultoria Personalizada', quantity: 15, value: 30000, percentage: 10 },
-    { name: 'Workshop de Liderança', quantity: 25, value: 25000, percentage: 8.3 }
+    { name: 'Detox Slim Caps', quantity: 145, value: 58000, percentage: 21.5 },
+    { name: 'Colágeno Hidrolisado', quantity: 128, value: 51200, percentage: 19 },
+    { name: 'Mentoria Premium 90 dias', quantity: 32, value: 48000, percentage: 17.8 },
+    { name: 'Thermogenics Plus', quantity: 94, value: 32900, percentage: 12.2 },
+    { name: 'Curso Online Emagrecimento Saudável', quantity: 45, value: 22500, percentage: 8.3 }
   ]);
 
   const [lowProducts, setLowProducts] = useState<Product[]>([
-    { name: 'Curso Básico de Vendas', quantity: 5, value: 5000, percentage: 1.7, daysSinceLastSale: 45 },
-    { name: 'Manual de Processos', quantity: 8, value: 4800, percentage: 1.6, daysSinceLastSale: 38 },
-    { name: 'Assinatura Mensal', quantity: 3, value: 3000, percentage: 1, daysSinceLastSale: 30 },
-    { name: 'Planilhas de Gestão', quantity: 12, value: 3600, percentage: 1.2, daysSinceLastSale: 28 },
-    { name: 'Guia de Negociação', quantity: 10, value: 3000, percentage: 1, daysSinceLastSale: 25 }
+    { name: 'Shake Proteico Baunilha', quantity: 12, value: 4800, percentage: 1.8, daysSinceLastSale: 35 },
+    { name: 'Fibras Naturais Mix', quantity: 8, value: 3200, percentage: 1.2, daysSinceLastSale: 28 },
+    { name: 'Chá Verde em Cápsulas', quantity: 15, value: 3000, percentage: 1.1, daysSinceLastSale: 22 },
+    { name: 'Guia de Receitas Saudáveis', quantity: 5, value: 1000, percentage: 0.4, daysSinceLastSale: 42 },
+    { name: 'Berinjela em Cápsulas', quantity: 7, value: 1400, percentage: 0.5, daysSinceLastSale: 25 }
   ]);
 
   const [productCategories, setProductCategories] = useState<CategoryProduct[]>([
-    { name: 'Cursos Online', value: 150000, percentage: 50 },
-    { name: 'Consultorias', value: 60000, percentage: 20 },
-    { name: 'E-books', value: 45000, percentage: 15 },
-    { name: 'Planilhas', value: 18000, percentage: 6 },
-    { name: 'Assinaturas', value: 27000, percentage: 9 }
+    { name: 'Suplementos Termogênicos', value: 120000, percentage: 38 },
+    { name: 'Suplementos Naturais', value: 85000, percentage: 27 },
+    { name: 'Cursos e Mentorias', value: 70000, percentage: 22 },
+    { name: 'Shakes e Bebidas', value: 28000, percentage: 9 },
+    { name: 'Materiais Digitais', value: 12000, percentage: 4 }
   ]);
 
   const [abcAnalysis, setAbcAnalysis] = useState<AbcProduct[]>([
-    { name: 'Curso Avançado de Marketing', value: 67500, accumPercentage: 22.5, classification: 'A' },
-    { name: 'Formação Completa em Vendas', value: 57000, accumPercentage: 41.5, classification: 'A' },
-    { name: 'E-book Estratégias Digitais', value: 36000, accumPercentage: 53.5, classification: 'A' },
-    { name: 'Consultoria Personalizada', value: 30000, accumPercentage: 63.5, classification: 'A' },
-    { name: 'Workshop de Liderança', value: 25000, accumPercentage: 71.8, classification: 'B' },
-    { name: 'Mentoria em Gestão', value: 22000, accumPercentage: 79.2, classification: 'B' },
-    { name: 'Treinamento de Equipes', value: 18000, accumPercentage: 85.2, classification: 'B' },
-    { name: 'Curso Básico de Vendas', value: 15000, accumPercentage: 90.2, classification: 'C' },
-    { name: 'Manual de Processos', value: 12000, accumPercentage: 94.2, classification: 'C' },
-    { name: 'Assinatura Mensal', value: 9000, accumPercentage: 97.2, classification: 'C' }
+    { name: 'Detox Slim Caps', value: 58000, accumPercentage: 21.5, classification: 'A' },
+    { name: 'Colágeno Hidrolisado', value: 51200, accumPercentage: 40.5, classification: 'A' },
+    { name: 'Mentoria Premium 90 dias', value: 48000, accumPercentage: 58.3, classification: 'A' },
+    { name: 'Thermogenics Plus', value: 32900, accumPercentage: 70.5, classification: 'A' },
+    { name: 'Curso Online Emagrecimento Saudável', value: 22500, accumPercentage: 78.8, classification: 'B' },
+    { name: 'Kit Completo Emagrecimento', value: 18000, accumPercentage: 85.5, classification: 'B' },
+    { name: 'Ômega 3 Premium', value: 12000, accumPercentage: 90.0, classification: 'B' },
+    { name: 'Shake Proteico Chocolate', value: 9500, accumPercentage: 93.5, classification: 'C' },
+    { name: 'Fibras Naturais Mix', value: 8200, accumPercentage: 96.5, classification: 'C' },
+    { name: 'Chá Verde em Cápsulas', value: 7500, accumPercentage: 99.0, classification: 'C' }
   ]);
 
   return {

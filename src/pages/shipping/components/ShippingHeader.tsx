@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Package, TrendingUp, FileText, Download } from "lucide-react";
+import { Package, TrendingUp, FileText, Download, ShoppingCart } from "lucide-react";
 
 export const ShippingHeader: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ export const ShippingHeader: React.FC = () => {
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Expedição</h1>
         <p className="text-muted-foreground">
-          Controle de estoque, análise de produtos e logística
+          Controle de estoque de suplementos, mentorias e cursos
         </p>
       </div>
       
@@ -27,8 +27,8 @@ export const ShippingHeader: React.FC = () => {
           Exportar Dados
         </Button>
         <Button className="h-9">
-          <TrendingUp className="mr-2 h-4 w-4" />
-          Nova Entrada
+          <ShoppingCart className="mr-2 h-4 w-4" />
+          Novo Produto
         </Button>
       </div>
     </div>
