@@ -24,8 +24,8 @@ export const useInventoryData = () => {
   const [inventory, setInventory] = useState<InventoryItem[]>([
     {
       id: '1',
-      name: 'Detox Slim Caps',
-      sku: 'DSC-001',
+      name: 'BELA POWER',
+      sku: 'BLP-001',
       category: 'Suplementos Termogênicos',
       quantity: 145,
       minQuantity: 50,
@@ -33,8 +33,8 @@ export const useInventoryData = () => {
     },
     {
       id: '2',
-      name: 'Colágeno Hidrolisado',
-      sku: 'COL-002',
+      name: 'BELA GUMMY',
+      sku: 'BLG-002',
       category: 'Suplementos Naturais',
       quantity: 128,
       minQuantity: 40,
@@ -42,8 +42,8 @@ export const useInventoryData = () => {
     },
     {
       id: '3',
-      name: 'Thermogenics Plus',
-      sku: 'THP-003',
+      name: 'NATURAL FIT TURBO',
+      sku: 'NFT-003',
       category: 'Suplementos Termogênicos',
       quantity: 94,
       minQuantity: 30,
@@ -51,8 +51,8 @@ export const useInventoryData = () => {
     },
     {
       id: '4',
-      name: 'Ômega 3 Premium',
-      sku: 'OMG-004',
+      name: 'BELA REDTOX',
+      sku: 'BRD-004',
       category: 'Suplementos Naturais',
       quantity: 62,
       minQuantity: 25,
@@ -60,35 +60,35 @@ export const useInventoryData = () => {
     },
     {
       id: '5',
-      name: 'Kit Completo Emagrecimento',
-      sku: 'KCE-005',
-      category: 'Kits Promocionais',
+      name: 'FITTOX TURBO',
+      sku: 'FTT-005',
+      category: 'Suplementos Termogênicos',
       quantity: 38,
       minQuantity: 15,
       lastUpdated: '27/04/2025'
     },
     {
       id: '6',
-      name: 'Shake Proteico Chocolate',
-      sku: 'SPC-006',
-      category: 'Shakes e Bebidas',
+      name: 'NATURAL FIT TRADICIONAL',
+      sku: 'NFT-006',
+      category: 'Suplementos Naturais',
       quantity: 24,
       minQuantity: 20,
       lastUpdated: '25/04/2025'
     },
     {
       id: '7',
-      name: 'Shake Proteico Baunilha',
-      sku: 'SPB-007',
-      category: 'Shakes e Bebidas',
+      name: 'BEAUTY CHÁ POWER',
+      sku: 'BCP-007',
+      category: 'Chás e Bebidas',
       quantity: 12,
       minQuantity: 20,
       lastUpdated: '26/04/2025'
     },
     {
       id: '8',
-      name: 'Fibras Naturais Mix',
-      sku: 'FNM-008',
+      name: 'BELA FLORA',
+      sku: 'BLF-008',
       category: 'Suplementos Naturais',
       quantity: 8,
       minQuantity: 18,
@@ -96,8 +96,8 @@ export const useInventoryData = () => {
     },
     {
       id: '9',
-      name: 'Chá Verde em Cápsulas',
-      sku: 'CVC-009',
+      name: 'BELATONINA',
+      sku: 'BLT-009',
       category: 'Suplementos Naturais',
       quantity: 15,
       minQuantity: 25,
@@ -108,7 +108,7 @@ export const useInventoryData = () => {
   const [lowStockItems, setLowStockItems] = useState<LowStockItem[]>([
     {
       id: '7',
-      name: 'Shake Proteico Baunilha',
+      name: 'BEAUTY CHÁ POWER',
       quantity: 12,
       supplier: 'Nutri Suplementos Ltda',
       restockTime: 7,
@@ -116,7 +116,7 @@ export const useInventoryData = () => {
     },
     {
       id: '8',
-      name: 'Fibras Naturais Mix',
+      name: 'BELA FLORA',
       quantity: 8,
       supplier: 'Naturais Brasil S.A.',
       restockTime: 10,
@@ -124,7 +124,7 @@ export const useInventoryData = () => {
     },
     {
       id: '9',
-      name: 'Chá Verde em Cápsulas',
+      name: 'BELATONINA',
       quantity: 15,
       supplier: 'Herbal Supplements Inc.',
       restockTime: 12,
@@ -132,7 +132,7 @@ export const useInventoryData = () => {
     },
     {
       id: '10',
-      name: 'Berinjela em Cápsulas',
+      name: 'BELASEX',
       quantity: 7,
       supplier: 'NutriVerde Suplementos',
       restockTime: 8,

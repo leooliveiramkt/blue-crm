@@ -9,7 +9,7 @@ export const ShippingHeader: React.FC = () => {
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Expedição</h1>
         <p className="text-muted-foreground">
-          Controle de estoque de suplementos, mentorias e cursos
+          Controle de estoque de suplementos, produtos naturais e conteúdos digitais
         </p>
       </div>
       
