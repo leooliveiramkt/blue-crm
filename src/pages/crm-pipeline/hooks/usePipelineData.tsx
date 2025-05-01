@@ -6,6 +6,7 @@ import { useMessages } from './useMessages';
 import { useHistory } from './useHistory';
 import { useTasks } from './useTasks';
 import { useNotes } from './useNotes';
+// Aqui a importação continua igual, pois mantemos o arquivo de redirecionamento
 import { useUsers } from './useUsers';
 
 // Contexto
