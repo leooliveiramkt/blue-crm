@@ -1,10 +1,18 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 
 const SalesDistributionChart = () => {
+  const navigate = useNavigate();
+
+  const handleViewDetailedReport = () => {
+    // Navegar para a página de relatórios
+    navigate('/reports');
+  };
+
   return (
     <Card className="lg:col-span-3">
       <CardHeader>
@@ -47,7 +55,13 @@ const SalesDistributionChart = () => {
           </div>
           
           <div className="pt-4 flex justify-center">
-            <Button variant="outline" className="w-full">Ver Relatório Detalhado</Button>
+            <Button 
+              variant="outline" 
+              className="w-full" 
+              onClick={handleViewDetailedReport}
+            >
+              Ver Relatório Detalhado
+            </Button>
           </div>
         </div>
       </CardContent>
