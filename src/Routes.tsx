@@ -13,6 +13,7 @@ import AIAnalytics from "@/pages/AIAnalytics";
 import Affiliates from "@/pages/Affiliates";
 import ApiIntegrations from "@/pages/ApiIntegrations";
 import OrderTracking from "@/pages/OrderTracking";
+import CrmPipeline from "@/pages/CrmPipeline";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import MainLayout from "@/components/layout/MainLayout";
 import WbuyAffiliation from "@/pages/wbuy-affiliation/WbuyAffiliation";
@@ -53,6 +54,8 @@ export const Routes = () => {
           <Route path="/integrations" element={<ApiIntegrations />} />
           <Route path="/wbuy-affiliation" element={<WbuyAffiliation />} />
           <Route path="/order-tracking" element={<OrderTracking />} />
+          {/* Nova página de Pipeline CRM */}
+          <Route path="/orders" element={<CrmPipeline />} />
         </Route>
       </Route>
 
