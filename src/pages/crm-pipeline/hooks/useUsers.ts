@@ -77,9 +77,14 @@ export const useUsers = () => {
         const firstName = nameParts[0];
         const lastName = nameParts.slice(1).join(' ');
         
+        // Importante: O Supabase Auth cria automaticamente registros na tabela profile
+        // Para inserir diretamente, precisamos gerar um UUID
+        const generatedUuid = crypto.randomUUID();
+        
         const { data, error } = await supabase
           .from('profiles')
           .insert({
+            id: generatedUuid, // Fornecemos um UUID válido
             first_name: firstName,
             last_name: lastName,
             role: userData.role
