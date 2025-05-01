@@ -24,7 +24,11 @@ export class TrackingService {
       value: 397.00,
       date: new Date().toISOString(),
       affiliateCode: "JOAO123",
-      status: "approved"
+      status: "approved",
+      paymentMethod: "credit_card",
+      products: ["Curso Digital Marketing Pro", "E-book SEO Avançado"],
+      customerName: "Maria Silva",
+      phoneNumber: "+5511999998888"
     };
   }
 
@@ -45,7 +49,10 @@ export class TrackingService {
       utmSource: "facebook",
       utmMedium: "cpc",
       utmCampaign: "promo-junho",
-      affiliateCode: "JOAO123"
+      affiliateCode: "JOAO123",
+      tags: ["lead-quente", "interesse-marketing"],
+      score: 85,
+      lastEngagement: new Date(Date.now() - 86400000 * 1).toISOString()
     };
   }
 
@@ -66,7 +73,11 @@ export class TrackingService {
       source: "facebook.com",
       medium: "cpc",
       campaign: "promo-junho",
-      conversionValue: 397.00
+      conversionValue: 397.00,
+      device: "mobile",
+      browser: "Chrome",
+      country: "Brasil",
+      city: "São Paulo"
     };
   }
 
@@ -87,7 +98,10 @@ export class TrackingService {
       firstClickSource: "facebook.com",
       lastClickSource: "instagram.com",
       affiliateParam: "JOAO123",
-      conversionValue: 397.00
+      conversionValue: 397.00,
+      userIp: "187.xxx.xxx.xxx",
+      pixelId: "FB-123456789",
+      eventSequence: ["page_view", "view_content", "add_to_cart", "initiate_checkout", "purchase"]
     };
   }
 
@@ -107,13 +121,44 @@ export class TrackingService {
       matchingPlatforms.push('Wbuy-Stape');
     }
     
+    // Verificar correspondência de campanha entre ActiveCampaign e Google Analytics
+    if (data.activeCampaign.utmCampaign === data.googleAnalytics.campaign) {
+      matchingPlatforms.push('ActiveCampaign-Google Analytics');
+    }
+    
+    // Calcular confiança com base nas correspondências
+    let confidence = matchingPlatforms.length * 33;
+    // Garantir que não ultrapasse 100%
+    confidence = Math.min(confidence, 99);
+    
     // Criar resumo dos dados
     return {
       firstClick: data.stape.firstClickSource,
       lastClick: data.stape.lastClickSource,
       affiliateCode: data.wbuy.affiliateCode,
-      confidence: matchingPlatforms.length >= 2 ? 99 : matchingPlatforms.length * 50,
+      confidence: confidence,
       matchingPlatforms: matchingPlatforms
+    };
+  }
+  
+  /**
+   * Em ambiente de produção, essa função faria a chamada para a API da OpenAI
+   * para análise inteligente dos dados de rastreamento
+   */
+  static async analyzeWithOpenAI(data: any) {
+    // Simulação - em ambiente real seria uma chamada à API da OpenAI
+    
+    // Simular tempo de processamento da IA
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Exemplo de resposta da IA
+    return {
+      conclusion: `Este pedido foi originado por uma campanha de ${data.googleAnalytics.campaign} no ${data.stape.firstClickSource} e convertido após interação final com conteúdo do afiliado ${data.wbuy.affiliateCode}.`,
+      attribution: `A venda deve ser atribuída ao afiliado ${data.wbuy.affiliateCode} com alto grau de confiança.`,
+      confidence: data.summary.confidence > 80 ? "Alta" : data.summary.confidence > 50 ? "Média" : "Baixa",
+      recommendedAction: data.summary.confidence > 80 
+        ? "Processar comissão normalmente" 
+        : "Verificar manualmente os dados de atribuição"
     };
   }
 }
