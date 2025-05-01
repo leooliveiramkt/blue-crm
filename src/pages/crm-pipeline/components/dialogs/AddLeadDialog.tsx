@@ -56,19 +56,21 @@ export const AddLeadDialog = ({ open, onOpenChange }: AddLeadDialogProps) => {
   });
   
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
+    // Garantindo que todos os campos obrigatórios estejam presentes
     addLead({
       name: values.name,
       email: values.email,
-      phone: values.phone || '',  // Garantindo que phone sempre tenha um valor
+      phone: values.phone || '',
       source: values.source,
       stageId: values.stageId,
       priority: values.priority,
       assignedTo: values.assignedTo,
-      tags: [],                   // Definindo valores obrigatórios
+      tags: [],
       potentialValue: 0,
       lastContactDays: 0,
       unreadMessages: 0,
     });
+    
     form.reset();
     onOpenChange(false);
   };
