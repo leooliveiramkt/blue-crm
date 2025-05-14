@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { TenantProvider } from "@/hooks/useTenant";
-import { Routes } from "./Routes";
+import Routes from "./Routes";
 import { useSupabaseConnection } from "@/hooks/useSupabaseConnection";
 import "./App.css";
 

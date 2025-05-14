@@ -1,60 +1,125 @@
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useUsersState } from './useUsersState';
 import { userService } from './userService';
-import { useWbuyApi } from '@/hooks/useWbuyApi';
-import { User } from '../../types';
+import type { User } from './types';
+import { toast } from '@/components/ui/use-toast';
 
 export const useUsers = () => {
-  const { users, setUsers } = useUsersState();
+  const { users, setUsers, selectedUser, setSelectedUser } = useUsersState();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const { getUsers: fetchWbuyUsers } = useWbuyApi();
 
-  // Carregar usuários ao inicializar
-  useEffect(() => {
-    loadUsers();
-  }, []);
-
-  // Carrega usuários de múltiplas fontes
-  const loadUsers = async () => {
+  const fetchUsers = async () => {
     setIsLoading(true);
-    setError(null);
-
     try {
-      // Primeiro tenta carregar da API Wbuy
-      const wbuyUsers = await fetchWbuyUsers();
-
-      if (wbuyUsers && typeof wbuyUsers === 'object' && 'data' in wbuyUsers && Array.isArray(wbuyUsers.data)) {
-        // Mapeia usuários da Wbuy para o formato interno
-        const mappedUsers = wbuyUsers.data.map((user: any) => ({
-          id: user.id || `wbuy-${Date.now()}`,
-          name: user.name || 'Usuário Wbuy',
-          role: user.role || 'Usuário',
-        }));
-        
-        setUsers(mappedUsers);
-      } else {
-        // Se não conseguir da Wbuy, carrega do serviço local
-        const localUsers = await userService.fetchUsers();
-        setUsers(localUsers);
-      }
-    } catch (err) {
-      console.error('Erro ao carregar usuários:', err);
-      setError('Falha ao carregar usuários');
-      
-      // Em caso de falha, carrega dados locais
-      const localUsers = await userService.fetchUsers();
-      setUsers(localUsers);
+      const fetchedUsers = await userService.getUsers();
+      setUsers(fetchedUsers);
+      return fetchedUsers;
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      toast({
+        title: 'Erro',
+        description: 'Não foi possível carregar os usuários',
+        variant: 'destructive'
+      });
+      return [];
     } finally {
       setIsLoading(false);
     }
   };
 
+  const getUserById = (id: string): User | undefined => {
+    return users.find(user => user.id === id);
+  };
+
+  const addUser = async (user: Omit<User, 'id'>) => {
+    setIsLoading(true);
+    try {
+      const newUser = await userService.addUser(user);
+      setUsers([...users, newUser]);
+      toast({
+        title: 'Sucesso',
+        description: 'Usuário adicionado com sucesso',
+      });
+      return newUser;
+    } catch (error) {
+      console.error('Error adding user:', error);
+      toast({
+        title: 'Erro',
+        description: 'Não foi possível adicionar o usuário',
+        variant: 'destructive'
+      });
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const updateUser = async (id: string, user: Partial<User>) => {
+    setIsLoading(true);
+    try {
+      const updatedUser = await userService.updateUser(id, user);
+      setUsers(users.map(u => u.id === id ? updatedUser : u));
+      if (selectedUser && selectedUser.id === id) {
+        setSelectedUser(updatedUser);
+      }
+      toast({
+        title: 'Sucesso',
+        description: 'Usuário atualizado com sucesso',
+      });
+      return updatedUser;
+    } catch (error) {
+      console.error('Error updating user:', error);
+      toast({
+        title: 'Erro',
+        description: 'Não foi possível atualizar o usuário',
+        variant: 'destructive'
+      });
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const deleteUser = async (id: string) => {
+    setIsLoading(true);
+    try {
+      await userService.deleteUser(id);
+      setUsers(users.filter(u => u.id !== id));
+      if (selectedUser && selectedUser.id === id) {
+        setSelectedUser(null);
+      }
+      toast({
+        title: 'Sucesso',
+        description: 'Usuário removido com sucesso',
+      });
+      return true;
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      toast({
+        title: 'Erro',
+        description: 'Não foi possível remover o usuário',
+        variant: 'destructive'
+      });
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const selectUser = (user: User | null) => {
+    setSelectedUser(user);
+  };
+
   return {
     users,
+    selectedUser,
     isLoading,
-    error,
-    refreshUsers: loadUsers
+    fetchUsers,
+    getUserById,
+    addUser,
+    updateUser,
+    deleteUser,
+    selectUser
   };
 };
