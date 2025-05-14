@@ -1,6 +1,8 @@
 
 import { User } from '../../types';
 
+export { User };  // Exportando o tipo User explicitamente
+
 export interface UserCreateData extends Omit<User, 'id'> {}
 export interface UserUpdateData extends Partial<Omit<User, 'id'>> {}
 

@@ -31,6 +31,7 @@ export const useUsersState = () => {
 
   return {
     users,
+    setUsers, // Expondo explicitamente setUsers
     loading,
     setLoading,
     error,

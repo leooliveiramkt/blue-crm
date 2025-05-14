@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useUsersState } from './useUsersState';
 import { userService } from './userService';
 import { useWbuyApi } from '@/hooks/useWbuyApi';
-import { User } from './types';
+import { User } from '../../types';
 
 export const useUsers = () => {
   const { users, setUsers } = useUsersState();
@@ -25,23 +25,18 @@ export const useUsers = () => {
       // Primeiro tenta carregar da API Wbuy
       const wbuyUsers = await fetchWbuyUsers();
 
-      if (wbuyUsers && Array.isArray(wbuyUsers.data)) {
+      if (wbuyUsers && typeof wbuyUsers === 'object' && 'data' in wbuyUsers && Array.isArray(wbuyUsers.data)) {
         // Mapeia usuários da Wbuy para o formato interno
         const mappedUsers = wbuyUsers.data.map((user: any) => ({
           id: user.id || `wbuy-${Date.now()}`,
           name: user.name || 'Usuário Wbuy',
-          email: user.email || '',
           role: user.role || 'Usuário',
-          avatar: user.avatar_url || null,
-          department: user.department || 'Geral',
-          status: 'active',
-          source: 'wbuy'
         }));
         
         setUsers(mappedUsers);
       } else {
         // Se não conseguir da Wbuy, carrega do serviço local
-        const localUsers = await userService.getUsers();
+        const localUsers = await userService.fetchUsers();
         setUsers(localUsers);
       }
     } catch (err) {
@@ -49,7 +44,7 @@ export const useUsers = () => {
       setError('Falha ao carregar usuários');
       
       // Em caso de falha, carrega dados locais
-      const localUsers = await userService.getUsers();
+      const localUsers = await userService.fetchUsers();
       setUsers(localUsers);
     } finally {
       setIsLoading(false);
