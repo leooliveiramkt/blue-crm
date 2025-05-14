@@ -59,9 +59,9 @@ export const useUsers = () => {
     setIsLoading(true);
     try {
       const updatedUser = await userService.updateUser(id, user);
-      setUsers(users.map(u => u.id === id ? updatedUser : u));
+      setUsers(users.map(u => u.id === id ? { ...u, ...updatedUser } : u));
       if (selectedUser && selectedUser.id === id) {
-        setSelectedUser(updatedUser);
+        setSelectedUser({ ...selectedUser, ...updatedUser });
       }
       toast({
         title: 'Sucesso',

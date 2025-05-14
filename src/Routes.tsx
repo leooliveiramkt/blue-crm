@@ -25,110 +25,59 @@ const Routes = () => {
       <Route path="/" element={<Index />} />
       <Route path="/login" element={<Login />} />
 
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/marketing/*"
-        element={
-          <ProtectedRoute>
-            <Marketing />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/commercial"
-        element={
-          <ProtectedRoute>
-            <Commercial />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/affiliates"
-        element={
-          <ProtectedRoute>
-            <Affiliates />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/crm-pipeline"
-        element={
-          <ProtectedRoute>
-            <CrmPipeline />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/ai-analytics"
-        element={
-          <ProtectedRoute>
-            <AIAnalytics />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/reports"
-        element={
-          <ProtectedRoute>
-            <Reports />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/settings"
-        element={
-          <ProtectedRoute>
-            <Settings />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/shipping"
-        element={
-          <ProtectedRoute>
-            <Shipping />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/order-tracking"
-        element={
-          <ProtectedRoute>
-            <OrderTracking />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/wbuy-affiliation"
-        element={
-          <ProtectedRoute>
-            <WbuyAffiliation />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/wbuy-sync"
-        element={
-          <ProtectedRoute>
-            <WbuySync />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/api-integrations"
-        element={
-          <ProtectedRoute>
-            <ApiIntegrations />
-          </ProtectedRoute>
-        }
-      />
+      {/* Rotas protegidas usando o padrão outlet do React Router */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute />}>
+        <Route path="/marketing/*" element={<Marketing />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute />}>
+        <Route path="/commercial" element={<Commercial />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute />}>
+        <Route path="/affiliates" element={<Affiliates />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute />}>
+        <Route path="/crm-pipeline" element={<CrmPipeline />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute />}>
+        <Route path="/ai-analytics" element={<AIAnalytics />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute />}>
+        <Route path="/reports" element={<Reports />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute />}>
+        <Route path="/settings" element={<Settings />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute />}>
+        <Route path="/shipping" element={<Shipping />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute />}>
+        <Route path="/order-tracking" element={<OrderTracking />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute />}>
+        <Route path="/wbuy-affiliation" element={<WbuyAffiliation />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute />}>
+        <Route path="/wbuy-sync" element={<WbuySync />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute />}>
+        <Route path="/api-integrations" element={<ApiIntegrations />} />
+      </Route>
+      
       <Route path="/unauthorized" element={<Unauthorized />} />
       <Route path="*" element={<NotFound />} />
     </RouterRoutes>

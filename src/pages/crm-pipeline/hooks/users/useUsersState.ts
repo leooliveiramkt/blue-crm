@@ -7,6 +7,7 @@ export const useUsersState = () => {
   const [users, setUsers] = useState<User[]>(initialUsers);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   const updateUsers = (newUsers: User[]) => {
     setUsers(newUsers);
@@ -31,11 +32,13 @@ export const useUsersState = () => {
 
   return {
     users,
-    setUsers, // Expondo explicitamente setUsers
+    setUsers,
     loading,
     setLoading,
     error,
     setError,
+    selectedUser,
+    setSelectedUser,
     updateUsers,
     addUserToState,
     updateUserInState,
