@@ -1,4 +1,5 @@
 
+import { wbuyConfig } from "@/config/wbuy";
 import { integrationManager } from "@/lib/integrations/integrationManager";
 
 /**
@@ -7,29 +8,33 @@ import { integrationManager } from "@/lib/integrations/integrationManager";
 export class WbuyApiService {
   /**
    * Obtém as credenciais de integração Wbuy do tenant atual
-   * @returns Credenciais da API Wbuy ou null se não configurado
+   * @returns Credenciais da API Wbuy ou credenciais padrão
    */
-  async getCredentials(): Promise<{ apiKey: string; domain: string } | null> {
+  async getCredentials(): Promise<{ apiKey: string; domain: string }> {
     try {
       const integration = await integrationManager.getIntegration('wbuy');
       
-      if (!integration || integration.status !== 'connected') {
-        console.error('Integração Wbuy não configurada ou desconectada');
-        return null;
+      if (integration && integration.status === 'connected') {
+        const apiKey = integration.credentials.apiKey;
+        const domain = integration.credentials.domain;
+
+        if (apiKey && domain) {
+          return { apiKey, domain };
+        }
       }
 
-      const apiKey = integration.credentials.apiKey;
-      const domain = integration.credentials.domain;
-
-      if (!apiKey || !domain) {
-        console.error('Credenciais Wbuy incompletas');
-        return null;
-      }
-
-      return { apiKey, domain };
+      // Retorna as credenciais padrão definidas no config
+      console.log('Usando credenciais padrão para Wbuy API');
+      return { 
+        apiKey: wbuyConfig.api_token, 
+        domain: wbuyConfig.api_url 
+      };
     } catch (error) {
-      console.error('Erro ao obter credenciais Wbuy:', error);
-      return null;
+      console.error('Erro ao obter credenciais Wbuy, usando padrão:', error);
+      return { 
+        apiKey: wbuyConfig.api_token, 
+        domain: wbuyConfig.api_url 
+      };
     }
   }
 
@@ -42,13 +47,8 @@ export class WbuyApiService {
    */
   async callApi<T>(endpoint: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', body?: any): Promise<T | null> {
     const credentials = await this.getCredentials();
-    
-    if (!credentials) {
-      throw new Error('Credenciais Wbuy não disponíveis');
-    }
-
     const { apiKey, domain } = credentials;
-    const url = `${domain}${endpoint}`;
+    const url = `${domain}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
 
     try {
       const headers = {
@@ -62,6 +62,7 @@ export class WbuyApiService {
         body: body ? JSON.stringify(body) : undefined,
       };
 
+      console.log(`Chamando Wbuy API: ${url}`);
       const response = await fetch(url, options);
       
       if (!response.ok) {
@@ -82,7 +83,7 @@ export class WbuyApiService {
    */
   async getOrderData(orderCode: string) {
     try {
-      return await this.callApi(`/api/orders/${orderCode}`);
+      return await this.callApi(`/orders/${orderCode}`);
     } catch (error) {
       console.error('Erro ao buscar dados do pedido:', error);
       return null;
@@ -97,12 +98,54 @@ export class WbuyApiService {
   async getAffiliates(searchTerm?: string) {
     try {
       const endpoint = searchTerm 
-        ? `/api/affiliates?search=${encodeURIComponent(searchTerm)}` 
-        : '/api/affiliates';
+        ? `/affiliates?search=${encodeURIComponent(searchTerm)}` 
+        : '/affiliates';
       
       return await this.callApi(endpoint);
     } catch (error) {
       console.error('Erro ao buscar afiliados:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Busca lista de produtos
+   * @param page Número da página
+   * @param limit Itens por página
+   * @returns Lista de produtos ou null em caso de erro
+   */
+  async getProducts(page = 1, limit = 20) {
+    try {
+      return await this.callApi(`/${wbuyConfig.endpoints.products}?page=${page}&limit=${limit}`);
+    } catch (error) {
+      console.error('Erro ao buscar produtos:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Busca detalhes de um produto específico
+   * @param productId ID do produto
+   * @returns Detalhes do produto ou null em caso de erro
+   */
+  async getProductDetails(productId: string) {
+    try {
+      return await this.callApi(`/${wbuyConfig.endpoints.product_detail}/${productId}`);
+    } catch (error) {
+      console.error('Erro ao buscar detalhes do produto:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Busca categorias de produtos
+   * @returns Lista de categorias ou null em caso de erro
+   */
+  async getCategories() {
+    try {
+      return await this.callApi(`/${wbuyConfig.endpoints.categories}`);
+    } catch (error) {
+      console.error('Erro ao buscar categorias:', error);
       return null;
     }
   }
@@ -117,7 +160,7 @@ export class WbuyApiService {
   async updateAffiliateAttribute(affiliateId: string, attributeName: string, attributeValue: string) {
     try {
       return await this.callApi(
-        `/api/affiliates/${affiliateId}/attributes`,
+        `/affiliates/${affiliateId}/attributes`,
         'PUT',
         { name: attributeName, value: attributeValue }
       );
