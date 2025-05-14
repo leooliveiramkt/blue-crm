@@ -258,6 +258,123 @@ export type Database = {
         }
         Relationships: []
       }
+      wbuy_orders: {
+        Row: {
+          affiliate_code: string | null
+          created_at: string | null
+          customer_email: string | null
+          customer_name: string | null
+          id: string
+          month: number | null
+          order_date: string
+          order_id: string
+          payment_method: string | null
+          products: Json | null
+          status: string
+          updated_at: string | null
+          value: number
+          year: number | null
+        }
+        Insert: {
+          affiliate_code?: string | null
+          created_at?: string | null
+          customer_email?: string | null
+          customer_name?: string | null
+          id?: string
+          month?: number | null
+          order_date: string
+          order_id: string
+          payment_method?: string | null
+          products?: Json | null
+          status: string
+          updated_at?: string | null
+          value: number
+          year?: number | null
+        }
+        Update: {
+          affiliate_code?: string | null
+          created_at?: string | null
+          customer_email?: string | null
+          customer_name?: string | null
+          id?: string
+          month?: number | null
+          order_date?: string
+          order_id?: string
+          payment_method?: string | null
+          products?: Json | null
+          status?: string
+          updated_at?: string | null
+          value?: number
+          year?: number | null
+        }
+        Relationships: []
+      }
+      wbuy_stats: {
+        Row: {
+          affiliate_distribution: Json | null
+          created_at: string | null
+          id: string
+          payment_methods_distribution: Json | null
+          period_type: string
+          period_value: string
+          product_distribution: Json | null
+          total_affiliates: number | null
+          total_orders: number
+          total_revenue: number
+          updated_at: string | null
+        }
+        Insert: {
+          affiliate_distribution?: Json | null
+          created_at?: string | null
+          id?: string
+          payment_methods_distribution?: Json | null
+          period_type: string
+          period_value: string
+          product_distribution?: Json | null
+          total_affiliates?: number | null
+          total_orders?: number
+          total_revenue?: number
+          updated_at?: string | null
+        }
+        Update: {
+          affiliate_distribution?: Json | null
+          created_at?: string | null
+          id?: string
+          payment_methods_distribution?: Json | null
+          period_type?: string
+          period_value?: string
+          product_distribution?: Json | null
+          total_affiliates?: number | null
+          total_orders?: number
+          total_revenue?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      wbuy_sync_status: {
+        Row: {
+          details: Json | null
+          id: string
+          last_sync: string | null
+          status: string
+          total_records_processed: number | null
+        }
+        Insert: {
+          details?: Json | null
+          id?: string
+          last_sync?: string | null
+          status?: string
+          total_records_processed?: number | null
+        }
+        Update: {
+          details?: Json | null
+          id?: string
+          last_sync?: string | null
+          status?: string
+          total_records_processed?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       monthly_ranking: {

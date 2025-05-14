@@ -1,73 +1,138 @@
 
-import React, { useEffect } from "react";
-import { Route, Routes as RouterRoutes, Navigate } from "react-router-dom";
-import Index from "@/pages/Index";
-import Login from "@/pages/Login";
-import Dashboard from "@/pages/Dashboard";
-import Settings from "@/pages/Settings";
-import NotFound from "@/pages/NotFound";
-import Unauthorized from "@/pages/Unauthorized";
-import Marketing from "@/pages/Marketing";
-import Reports from "@/pages/Reports";
-import AIAnalytics from "@/pages/AIAnalytics";
-import Affiliates from "@/pages/Affiliates";
-import ApiIntegrations from "@/pages/ApiIntegrations";
-import OrderTracking from "@/pages/OrderTracking";
-import CrmPipeline from "@/pages/CrmPipeline";
-import Commercial from "@/pages/Commercial";
-import Shipping from "@/pages/Shipping";
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
-import MainLayout from "@/components/layout/MainLayout";
-import WbuyAffiliation from "@/pages/wbuy-affiliation/WbuyAffiliation";
-import { useAuth } from "@/context/AuthContext";
+import { Routes as RouterRoutes, Route } from 'react-router-dom';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import Index from './pages/Index';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import Marketing from './pages/Marketing';
+import Commercial from './pages/Commercial';
+import Affiliates from './pages/Affiliates';
+import CrmPipeline from './pages/CrmPipeline';
+import AIAnalytics from './pages/AIAnalytics';
+import Reports from './pages/Reports';
+import NotFound from './pages/NotFound';
+import Unauthorized from './pages/Unauthorized';
+import Settings from './pages/Settings';
+import Shipping from './pages/Shipping';
+import OrderTracking from './pages/OrderTracking';
+import WbuyAffiliation from './pages/wbuy-affiliation/WbuyAffiliation';
+import WbuySync from './pages/WbuySync';
+import ApiIntegrations from './pages/ApiIntegrations';
 
-export const Routes = () => {
-  const { isAuthenticated, userRole } = useAuth();
-  
-  // Log para debug
-  useEffect(() => {
-    console.log("Routes: Estado de autenticação:", isAuthenticated);
-    console.log("Routes: Papel do usuário:", userRole);
-    
-    // Verificar se há usuários de demonstração
-    const demoType = localStorage.getItem('demo_user_type');
-    if (demoType) {
-      console.log("Routes: Usuário de demonstração:", demoType);
-    }
-  }, [isAuthenticated, userRole]);
-  
+const Routes = () => {
   return (
     <RouterRoutes>
-      {/* Rota inicial - sempre mostra a página Index, independente do estado de autenticação */}
       <Route path="/" element={<Index />} />
-      
-      {/* Rota de login - NÃO redireciona para dashboard mesmo se autenticado */}
       <Route path="/login" element={<Login />} />
-      
-      {/* Rotas protegidas */}
-      <Route element={<ProtectedRoute />}>
-        <Route element={<MainLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/marketing" element={<Marketing />} />
-          <Route path="/affiliates" element={<Affiliates />} />
-          <Route path="/analytics" element={<AIAnalytics />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/integrations" element={<ApiIntegrations />} />
-          <Route path="/wbuy-affiliation" element={<WbuyAffiliation />} />
-          <Route path="/order-tracking" element={<OrderTracking />} />
-          <Route path="/orders" element={<CrmPipeline />} />
-          <Route path="/commercial" element={<Commercial />} />
-          {/* Nova página de Expedição */}
-          <Route path="/shipping" element={<Shipping />} />
-        </Route>
-      </Route>
 
-      {/* Rotas com restrições de acesso */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/marketing/*"
+        element={
+          <ProtectedRoute>
+            <Marketing />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/commercial"
+        element={
+          <ProtectedRoute>
+            <Commercial />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/affiliates"
+        element={
+          <ProtectedRoute>
+            <Affiliates />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/crm-pipeline"
+        element={
+          <ProtectedRoute>
+            <CrmPipeline />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/ai-analytics"
+        element={
+          <ProtectedRoute>
+            <AIAnalytics />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/reports"
+        element={
+          <ProtectedRoute>
+            <Reports />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          <ProtectedRoute>
+            <Settings />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/shipping"
+        element={
+          <ProtectedRoute>
+            <Shipping />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/order-tracking"
+        element={
+          <ProtectedRoute>
+            <OrderTracking />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/wbuy-affiliation"
+        element={
+          <ProtectedRoute>
+            <WbuyAffiliation />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/wbuy-sync"
+        element={
+          <ProtectedRoute>
+            <WbuySync />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/api-integrations"
+        element={
+          <ProtectedRoute>
+            <ApiIntegrations />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/unauthorized" element={<Unauthorized />} />
-      
-      {/* Rota 404 */}
       <Route path="*" element={<NotFound />} />
     </RouterRoutes>
   );
 };
+
+export default Routes;
