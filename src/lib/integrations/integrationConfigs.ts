@@ -1,4 +1,3 @@
-
 import { IntegrationConfig, IntegrationType } from './types';
 
 /**
@@ -23,7 +22,7 @@ export const integrationConfigs: Record<IntegrationType, IntegrationConfig> = {
         name: 'domain',
         label: 'Domínio',
         type: 'text',
-        placeholder: 'https://seudominio.wbuy.io',
+        placeholder: 'https://sistema.sistemawbuy.com.br/api/v1',
         required: true
       }
     ],
