@@ -167,7 +167,7 @@ const ApiIntegrations = () => {
       return {
         ...staticIntegration,
         connected: realIntegration?.status === 'connected',
-        lastSync: realIntegration?.last_sync,
+        lastSync: realIntegration?.lastSync,
         syncStatus: realIntegration?.metadata?.last_sync_status,
       };
     });

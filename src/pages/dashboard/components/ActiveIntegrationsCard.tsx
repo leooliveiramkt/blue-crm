@@ -71,8 +71,8 @@ const ActiveIntegrationsCard = () => {
             statusClass = 'text-green-600';
             
             // Se houver informação de sincronização, atualiza o status
-            if (realInteg.last_sync) {
-              status = `Ativo (${formatLastSync(realInteg.last_sync)})`;
+            if (realInteg.lastSync) {
+              status = `Ativo (${formatLastSync(realInteg.lastSync)})`;
             }
             
             // Se houver erro na última sincronização, atualiza a classe
