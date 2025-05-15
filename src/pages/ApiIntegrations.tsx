@@ -1,5 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { format, formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -7,7 +9,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Database, Facebook, Globe, Mail, BarChart3, Archive } from 'lucide-react';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
+import { useIntegrations } from '@/hooks/useIntegration';
+import { supabase } from '@/lib/supabase';
 
 // Define the ShoppingCart component at the top before it's used
 const ShoppingCart = () => (
@@ -28,64 +32,15 @@ const ShoppingCart = () => (
   </svg>
 );
 
-const integrations = [
-  {
-    id: 'wbuy',
-    name: 'Wbuy',
-    description: 'Sistema de vendas e gestão de afiliados',
-    icon: ShoppingCart,
-    color: 'bg-blue-100 text-blue-700',
-    connected: true,
-  },
-  {
-    id: 'facebook',
-    name: 'Facebook',
-    description: 'Integração com API de anúncios do Facebook',
-    icon: Facebook,
-    color: 'bg-blue-100 text-blue-700',
-    connected: true,
-  },
-  {
-    id: 'activecampaign',
-    name: 'Active Campaign',
-    description: 'Automação de marketing e gestão de leads',
-    icon: Mail,
-    color: 'bg-green-100 text-green-700',
-    connected: true,
-  },
-  {
-    id: 'google',
-    name: 'Google Analytics',
-    description: 'Análise de tráfego e conversões',
-    icon: BarChart3,
-    color: 'bg-yellow-100 text-yellow-700',
-    connected: false,
-  },
-  {
-    id: 'stape',
-    name: 'Stape.io',
-    description: 'Servidor de tags e rastreamento',
-    icon: Globe,
-    color: 'bg-purple-100 text-purple-700',
-    connected: false,
-  },
-  {
-    id: 'tiny',
-    name: 'Tiny',
-    description: 'Sistema de gestão empresarial',
-    icon: Archive,
-    color: 'bg-pink-100 text-pink-700',
-    connected: false,
-  },
-  {
-    id: 'airtable',
-    name: 'Airtable',
-    description: 'Base de dados colaborativa',
-    icon: Database,
-    color: 'bg-green-100 text-green-700',
-    connected: false,
-  },
-];
+const integrationIcons = {
+  'wbuy': ShoppingCart,
+  'facebook': Facebook,
+  'activecampaign': Mail,
+  'google': BarChart3,
+  'stape': Globe,
+  'tiny': Archive,
+  'airtable': Database,
+};
 
 const ApiIntegrations = () => {
   const { toast } = useToast();
@@ -99,6 +54,39 @@ const ApiIntegrations = () => {
     tiny: '',
     airtable: '',
   });
+
+  const { integrations, isLoading, refreshIntegrations } = useIntegrations();
+
+  // Formata o momento da última sincronização
+  const formatLastSync = (lastSync) => {
+    if (!lastSync) return 'Nunca sincronizado';
+    
+    try {
+      const date = new Date(lastSync);
+      return formatDistanceToNow(date, { addSuffix: true, locale: ptBR });
+    } catch (error) {
+      return 'Data inválida';
+    }
+  };
+
+  // Retorna a classe CSS baseada no status de sincronização
+  const getSyncStatusClass = (integration) => {
+    if (!integration?.metadata?.last_sync_status) return 'text-amber-600';
+    return integration.metadata.last_sync_status === 'success' ? 'text-green-600' : 'text-red-600';
+  };
+
+  // Efeito para atualizar as integrações periodicamente
+  useEffect(() => {
+    // Carrega as integrações ao montar o componente
+    refreshIntegrations();
+    
+    // Define um intervalo para atualizar as integrações a cada minuto
+    const interval = setInterval(() => {
+      refreshIntegrations();
+    }, 60000); // 60000 ms = 1 minuto
+    
+    return () => clearInterval(interval);
+  }, [refreshIntegrations]);
 
   const handleConnect = (integrationId) => {
     toast({
@@ -119,6 +107,74 @@ const ApiIntegrations = () => {
     });
   };
 
+  // Combina os dados estáticos com os dados reais das integrações
+  const getIntegrationsData = () => {
+    const staticIntegrations = [
+      {
+        id: 'wbuy',
+        name: 'Wbuy',
+        description: 'Sistema de vendas e gestão de afiliados',
+        color: 'bg-blue-100 text-blue-700',
+        connected: false,
+      },
+      {
+        id: 'facebook',
+        name: 'Facebook',
+        description: 'Integração com API de anúncios do Facebook',
+        color: 'bg-blue-100 text-blue-700',
+        connected: false,
+      },
+      {
+        id: 'activecampaign',
+        name: 'Active Campaign',
+        description: 'Automação de marketing e gestão de leads',
+        color: 'bg-green-100 text-green-700',
+        connected: false,
+      },
+      {
+        id: 'google',
+        name: 'Google Analytics',
+        description: 'Análise de tráfego e conversões',
+        color: 'bg-yellow-100 text-yellow-700',
+        connected: false,
+      },
+      {
+        id: 'stape',
+        name: 'Stape.io',
+        description: 'Servidor de tags e rastreamento',
+        color: 'bg-purple-100 text-purple-700',
+        connected: false,
+      },
+      {
+        id: 'tiny',
+        name: 'Tiny',
+        description: 'Sistema de gestão empresarial',
+        color: 'bg-pink-100 text-pink-700',
+        connected: false,
+      },
+      {
+        id: 'airtable',
+        name: 'Airtable',
+        description: 'Base de dados colaborativa',
+        color: 'bg-green-100 text-green-700',
+        connected: false,
+      },
+    ];
+
+    // Combina os dados estáticos com os dados reais
+    return staticIntegrations.map(staticIntegration => {
+      const realIntegration = integrations.find(i => i.id === staticIntegration.id);
+      return {
+        ...staticIntegration,
+        connected: realIntegration?.status === 'connected',
+        lastSync: realIntegration?.last_sync,
+        syncStatus: realIntegration?.metadata?.last_sync_status,
+      };
+    });
+  };
+
+  const integrationsData = getIntegrationsData();
+
   return (
     <div className="space-y-6">
       <div>
@@ -136,12 +192,12 @@ const ApiIntegrations = () => {
         
         <TabsContent value="overview" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {integrations.map((integration) => (
+            {integrationsData.map((integration) => (
               <Card key={integration.id}>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <div className="flex items-center space-x-3">
                     <div className={`p-2.5 rounded-full ${integration.color}`}>
-                      <integration.icon className="h-4 w-4" />
+                      {integration.id in integrationIcons && React.createElement(integrationIcons[integration.id], { className: "h-4 w-4" })}
                     </div>
                     <CardTitle className="text-md font-medium">
                       {integration.name}
@@ -156,11 +212,17 @@ const ApiIntegrations = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-xs text-muted-foreground">{integration.description}</p>
-                  <div className="mt-3">
+                  <div className="mt-3 space-y-1">
                     <p className="text-xs font-medium text-muted-foreground">
                       Status: 
                       <span className={integration.connected ? "text-green-600 ml-1" : "text-amber-600 ml-1"}>
                         {integration.connected ? "Conectado" : "Não conectado"}
+                      </span>
+                    </p>
+                    <p className="text-xs font-medium text-muted-foreground">
+                      Última atualização: 
+                      <span className={`ml-1 ${getSyncStatusClass(integration)}`}>
+                        {formatLastSync(integration.lastSync)}
                       </span>
                     </p>
                   </div>
@@ -184,11 +246,11 @@ const ApiIntegrations = () => {
               <CardDescription>Gerencie suas chaves e tokens de API para cada integração.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              {integrations.map((integration) => (
+              {integrationsData.map((integration) => (
                 <div key={integration.id} className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Label htmlFor={`${integration.id}-api-key`} className="flex items-center gap-2">
-                      <integration.icon className="h-4 w-4" />
+                      {integration.id in integrationIcons && React.createElement(integrationIcons[integration.id], { className: "h-4 w-4" })}
                       {integration.name}
                     </Label>
                     <span className={`text-xs font-medium ${integration.connected ? "text-green-600" : "text-amber-600"}`}>
