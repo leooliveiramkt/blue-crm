@@ -50,7 +50,7 @@ import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { CalendarIcon, Check, CheckCircle, Clock, Download, RefreshCcw, X } from 'lucide-react';
-import { wbuySyncService } from '@/services/wbuy-sync-service';
+import { wbuySyncService } from '@/services/wbuy';
 import { useToast } from '@/components/ui/use-toast';
 
 const formatDate = (dateString: string) => {

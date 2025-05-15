@@ -38,7 +38,7 @@ export const useSyncStatus = () => {
           status: data.status as SyncStatusType,
           last_sync: data.last_sync,
           total_records_processed: data.total_records_processed,
-          details: data.details
+          details: data.details ? data.details as { summary?: string; errors?: any[] } : undefined
         };
         setLatestSync(syncStatus);
       } else {
@@ -81,7 +81,7 @@ export const useSyncStatus = () => {
           status: item.status as SyncStatusType,
           last_sync: item.last_sync,
           total_records_processed: item.total_records_processed,
-          details: item.details
+          details: item.details ? item.details as { summary?: string; errors?: any[] } : undefined
         }));
         setSyncHistory(syncItems);
       } else {
