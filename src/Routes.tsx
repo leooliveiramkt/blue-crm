@@ -18,67 +18,34 @@ import OrderTracking from './pages/OrderTracking';
 import WbuyAffiliation from './pages/wbuy-affiliation/WbuyAffiliation';
 import WbuySync from './pages/WbuySync';
 import ApiIntegrations from './pages/ApiIntegrations';
+import MainLayout from './components/layout/MainLayout';
 
 const Routes = () => {
   return (
     <RouterRoutes>
       <Route path="/" element={<Index />} />
       <Route path="/login" element={<Login />} />
-
-      {/* Rotas protegidas usando o padrão outlet do React Router */}
-      <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Route>
-      
-      <Route element={<ProtectedRoute />}>
-        <Route path="/marketing/*" element={<Marketing />} />
-      </Route>
-      
-      <Route element={<ProtectedRoute />}>
-        <Route path="/commercial" element={<Commercial />} />
-      </Route>
-      
-      <Route element={<ProtectedRoute />}>
-        <Route path="/affiliates" element={<Affiliates />} />
-      </Route>
-      
-      <Route element={<ProtectedRoute />}>
-        <Route path="/crm-pipeline" element={<CrmPipeline />} />
-      </Route>
-      
-      <Route element={<ProtectedRoute />}>
-        <Route path="/ai-analytics" element={<AIAnalytics />} />
-      </Route>
-      
-      <Route element={<ProtectedRoute />}>
-        <Route path="/reports" element={<Reports />} />
-      </Route>
-      
-      <Route element={<ProtectedRoute />}>
-        <Route path="/settings" element={<Settings />} />
-      </Route>
-      
-      <Route element={<ProtectedRoute />}>
-        <Route path="/shipping" element={<Shipping />} />
-      </Route>
-      
-      <Route element={<ProtectedRoute />}>
-        <Route path="/order-tracking" element={<OrderTracking />} />
-      </Route>
-      
-      <Route element={<ProtectedRoute />}>
-        <Route path="/wbuy-affiliation" element={<WbuyAffiliation />} />
-      </Route>
-      
-      <Route element={<ProtectedRoute />}>
-        <Route path="/wbuy-sync" element={<WbuySync />} />
-      </Route>
-      
-      <Route element={<ProtectedRoute />}>
-        <Route path="/api-integrations" element={<ApiIntegrations />} />
-      </Route>
-      
       <Route path="/unauthorized" element={<Unauthorized />} />
+      
+      {/* Rotas protegidas usando o MainLayout para garantir que o menu esteja presente */}
+      <Route element={<ProtectedRoute />}>
+        <Route element={<MainLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/marketing/*" element={<Marketing />} />
+          <Route path="/commercial" element={<Commercial />} />
+          <Route path="/affiliates" element={<Affiliates />} />
+          <Route path="/crm-pipeline" element={<CrmPipeline />} />
+          <Route path="/ai-analytics" element={<AIAnalytics />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/shipping" element={<Shipping />} />
+          <Route path="/order-tracking" element={<OrderTracking />} />
+          <Route path="/wbuy-affiliation" element={<WbuyAffiliation />} />
+          <Route path="/wbuy-sync" element={<WbuySync />} />
+          <Route path="/api-integrations" element={<ApiIntegrations />} />
+        </Route>
+      </Route>
+      
       <Route path="*" element={<NotFound />} />
     </RouterRoutes>
   );
