@@ -44,7 +44,7 @@ export const IntegrationCard: React.FC<IntegrationCardProps> = ({
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <div className="flex items-center space-x-3">
           <div className={`p-2.5 rounded-full ${color}`}>
-            {IconComponent && <IconComponent className="h-4 w-4" />}
+            {IconComponent && <IconComponent size={16} />}
           </div>
           <CardTitle className="text-md font-medium">
             {name}
@@ -174,11 +174,11 @@ function useIntegrationIcon(integrationId: IntegrationType) {
 
 // Hook para criar e retornar ícones personalizados
 function useIntegrationIcons() {
-  const ShoppingCart = () => (
+  const ShoppingCart = (props: { size?: number }) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      width={props.size || 24}
+      height={props.size || 24}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
