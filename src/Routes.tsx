@@ -16,7 +16,6 @@ import Settings from './pages/Settings';
 import Shipping from './pages/Shipping';
 import OrderTracking from './pages/OrderTracking';
 import WbuyAffiliation from './pages/wbuy-affiliation/WbuyAffiliation';
-import WbuySync from './pages/WbuySync';
 import ApiIntegrations from './pages/ApiIntegrations';
 import MainLayout from './components/layout/MainLayout';
 
@@ -41,7 +40,6 @@ const Routes = () => {
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/order-tracking" element={<OrderTracking />} />
           <Route path="/wbuy-affiliation" element={<WbuyAffiliation />} />
-          <Route path="/wbuy-sync" element={<WbuySync />} />
           <Route path="/api-integrations" element={<ApiIntegrations />} />
         </Route>
       </Route>
