@@ -66,7 +66,9 @@ export const UsersIntegrationTest: React.FC = () => {
                   </div>
                   <div>
                     <p className="font-medium">{user.name}</p>
-                    <p className="text-sm text-muted-foreground">{user.email}</p>
+                    {user.email && (
+                      <p className="text-sm text-muted-foreground">{user.email}</p>
+                    )}
                     {user.role && (
                       <Badge variant="outline" className="mt-1">
                         {user.role}

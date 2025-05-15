@@ -8,7 +8,7 @@ import { User } from '../../types';
 export type WbuyUser = {
   id: string;
   name: string;
-  email: string;
+  email?: string;
   role?: string;
   status?: string;
   created_at?: string;
@@ -48,8 +48,8 @@ export const useUsers = () => {
         const formattedUsers: User[] = response.map((user: any) => ({
           id: user.id || String(Math.random()),
           name: user.name || user.full_name || 'Nome não disponível',
-          email: user.email || 'Email não disponível',
           role: user.role || user.user_type || 'Usuário', // Garantindo que role sempre exista
+          email: user.email || undefined // Adicionando email como opcional
         }));
         
         setUsers(formattedUsers);
@@ -87,20 +87,20 @@ export const useUsers = () => {
       {
         id: '1',
         name: 'João Silva',
-        email: 'joao@wbuy.com.br',
         role: 'Administrador',
+        email: 'joao@wbuy.com.br'
       },
       {
         id: '2',
         name: 'Maria Souza',
-        email: 'maria@wbuy.com.br',
         role: 'Suporte',
+        email: 'maria@wbuy.com.br'
       },
       {
         id: '3',
         name: 'Carlos Mendes',
-        email: 'carlos@wbuy.com.br',
         role: 'Financeiro',
+        email: 'carlos@wbuy.com.br'
       }
     ];
     
