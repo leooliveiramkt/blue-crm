@@ -52,7 +52,9 @@ const WbuySyncPage = () => {
           loadLastSync();
         }, 5000); // Verifica a cada 5 segundos
         
-        return () => clearTimeout(timer);
+        // Corrigindo o retorno para não retornar uma função
+        // Anteriormente estava retornando uma cleanup function, o que causava o erro de tipo
+        return;
       } else {
         setSyncInProgress(false);
       }
