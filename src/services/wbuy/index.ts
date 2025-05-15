@@ -8,3 +8,4 @@ export { wbuyLeadsService } from './leads';
 export { wbuyUsersService } from './users';
 export { wbuyReportsService } from './reports';
 export { wbuySettingsService } from './settings';
+export { wbuySyncService } from './sync';

@@ -8,3 +8,4 @@ export { useWbuyLeads } from './use-leads';
 export { useWbuyUsers } from './use-users';
 export { useWbuyReports } from './use-reports';
 export { useWbuySettings } from './use-settings';
+export { useSyncStatus } from '@/services/wbuy/sync';

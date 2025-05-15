@@ -1,6 +1,7 @@
 
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/supabase';
 import { toast } from '@/hooks/use-toast';
+import { OrderFilters, OrdersResult, LatestStats } from './types';
 
 /**
  * Serviço para sincronização de dados da Wbuy
@@ -151,14 +152,7 @@ export class WbuySyncService {
    * @param page Página (padrão: 1)
    * @param limit Limite de registros por página (padrão: 20)
    */
-  async getOrders(filters?: {
-    startDate?: string;
-    endDate?: string;
-    affiliateCode?: string;
-    status?: string;
-    year?: number;
-    month?: number;
-  }, page: number = 1, limit: number = 20) {
+  async getOrders(filters?: OrderFilters, page: number = 1, limit: number = 20): Promise<OrdersResult> {
     try {
       // Calcula o offset baseado na página
       const offset = (page - 1) * limit;
@@ -222,7 +216,7 @@ export class WbuySyncService {
   /**
    * Busca últimas estatísticas disponíveis
    */
-  async getLatestStats() {
+  async getLatestStats(): Promise<LatestStats> {
     try {
       // Obtém estatísticas do ano atual
       const currentYear = new Date().getFullYear();

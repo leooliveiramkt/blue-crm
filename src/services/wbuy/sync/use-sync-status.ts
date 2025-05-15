@@ -2,17 +2,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useToast } from '@/hooks/use-toast';
-
-export interface SyncStatus {
-  id: string;
-  status: 'em_andamento' | 'processando' | 'concluido' | 'concluido_com_erros' | 'erro';
-  last_sync: string;
-  total_records_processed: number;
-  details?: {
-    summary?: string;
-    errors?: any[];
-  };
-}
+import { SyncStatus, SyncStatusType } from './types';
 
 /**
  * Hook para obter informações sobre o status da sincronização automática
@@ -41,7 +31,19 @@ export const useSyncStatus = () => {
         throw error;
       }
 
-      setLatestSync(data || null);
+      // Convertendo o status para o tipo correto
+      if (data) {
+        const syncStatus: SyncStatus = {
+          id: data.id,
+          status: data.status as SyncStatusType,
+          last_sync: data.last_sync,
+          total_records_processed: data.total_records_processed,
+          details: data.details
+        };
+        setLatestSync(syncStatus);
+      } else {
+        setLatestSync(null);
+      }
     } catch (error) {
       console.error('Erro ao carregar última sincronização:', error);
       toast({
@@ -72,7 +74,19 @@ export const useSyncStatus = () => {
         throw error;
       }
 
-      setSyncHistory(data || []);
+      // Convertendo o status para o tipo correto para cada item
+      if (data) {
+        const syncItems: SyncStatus[] = data.map(item => ({
+          id: item.id,
+          status: item.status as SyncStatusType,
+          last_sync: item.last_sync,
+          total_records_processed: item.total_records_processed,
+          details: item.details
+        }));
+        setSyncHistory(syncItems);
+      } else {
+        setSyncHistory([]);
+      }
     } catch (error) {
       console.error('Erro ao carregar histórico de sincronização:', error);
       toast({
