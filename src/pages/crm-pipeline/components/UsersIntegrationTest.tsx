@@ -20,7 +20,7 @@ export const UsersIntegrationTest: React.FC = () => {
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <span>Teste de Integração Wbuy - Usuários</span>
-          <Badge variant={users.length > 0 ? "success" : "destructive"}>
+          <Badge variant={users.length > 0 ? "default" : "destructive"} className={users.length > 0 ? "bg-green-500" : ""}>
             {users.length > 0 ? "Integração Ativa" : "Verificando"}
           </Badge>
         </CardTitle>

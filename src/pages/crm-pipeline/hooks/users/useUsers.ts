@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { wbuyApiService } from '@/services/wbuy-api';
 import { useIntegrationCheck } from '../useIntegrationCheck';
+import { User } from '../../types';
 
 export type WbuyUser = {
   id: string;
@@ -14,7 +15,7 @@ export type WbuyUser = {
 };
 
 export const useUsers = () => {
-  const [users, setUsers] = useState<WbuyUser[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
@@ -44,13 +45,11 @@ export const useUsers = () => {
       
       if (response && Array.isArray(response)) {
         // Formatar dados da API para o formato esperado
-        const formattedUsers = response.map((user: any) => ({
+        const formattedUsers: User[] = response.map((user: any) => ({
           id: user.id || String(Math.random()),
           name: user.name || user.full_name || 'Nome não disponível',
           email: user.email || 'Email não disponível',
-          role: user.role || user.user_type || 'Usuário',
-          status: user.status || 'active',
-          created_at: user.created_at || new Date().toISOString()
+          role: user.role || user.user_type || 'Usuário', // Garantindo que role sempre exista
         }));
         
         setUsers(formattedUsers);
@@ -84,30 +83,24 @@ export const useUsers = () => {
     // Simula tempo de resposta da API
     await new Promise(resolve => setTimeout(resolve, 800));
     
-    const mockUsers: WbuyUser[] = [
+    const mockUsers: User[] = [
       {
         id: '1',
         name: 'João Silva',
         email: 'joao@wbuy.com.br',
         role: 'Administrador',
-        status: 'active',
-        created_at: '2023-05-10T14:30:00Z'
       },
       {
         id: '2',
         name: 'Maria Souza',
         email: 'maria@wbuy.com.br',
         role: 'Suporte',
-        status: 'active',
-        created_at: '2023-06-15T09:20:00Z'
       },
       {
         id: '3',
         name: 'Carlos Mendes',
         email: 'carlos@wbuy.com.br',
         role: 'Financeiro',
-        status: 'active',
-        created_at: '2023-07-22T11:45:00Z'
       }
     ];
     
