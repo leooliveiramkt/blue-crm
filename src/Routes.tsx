@@ -16,7 +16,7 @@ import Settings from './pages/Settings';
 import Shipping from './pages/Shipping';
 import OrderTracking from './pages/OrderTracking';
 import WbuyAffiliation from './pages/wbuy-affiliation/WbuyAffiliation';
-import ApiIntegrations from './pages/ApiIntegrations';
+import ApiIntegrations from './pages/api-integrations';
 import MainLayout from './components/layout/MainLayout';
 
 const Routes = () => {

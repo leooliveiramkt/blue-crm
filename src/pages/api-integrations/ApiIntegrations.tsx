@@ -6,6 +6,7 @@ import { IntegrationsOverview } from './components/IntegrationsOverview';
 import { ApiSettingsContent } from './components/ApiSettingsContent';
 import { WebhooksForm } from './components/WebhooksForm';
 import { ApiLogsTable } from './components/ApiLogsTable';
+import ApiStatisticsCard from './components/ApiStatisticsCard';
 
 const ApiIntegrations: React.FC = () => {
   const {
@@ -29,6 +30,7 @@ const ApiIntegrations: React.FC = () => {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
         <TabsList>
           <TabsTrigger value="overview">Visão Geral</TabsTrigger>
+          <TabsTrigger value="statistics">Estatísticas</TabsTrigger>
           <TabsTrigger value="settings">Configurações</TabsTrigger>
           <TabsTrigger value="webhooks">Webhooks</TabsTrigger>
           <TabsTrigger value="logs">Logs</TabsTrigger>
@@ -41,6 +43,10 @@ const ApiIntegrations: React.FC = () => {
               onConnect: handleConnect
             }))} 
           />
+        </TabsContent>
+        
+        <TabsContent value="statistics" className="space-y-4">
+          <ApiStatisticsCard />
         </TabsContent>
         
         <TabsContent value="settings" className="space-y-4">

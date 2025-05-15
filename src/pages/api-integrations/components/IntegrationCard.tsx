@@ -6,6 +6,7 @@ import { Switch } from '@/components/ui/switch';
 import { IntegrationCardProps } from '../types';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { IntegrationType } from '@/lib/integrations/types';
 
 // Formata o momento da última sincronização
 const formatLastSync = (lastSync?: string) => {
