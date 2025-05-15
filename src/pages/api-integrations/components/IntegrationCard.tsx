@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
@@ -7,6 +7,7 @@ import { IntegrationCardProps } from '../types';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { IntegrationType } from '@/lib/integrations/types';
+import { IntegrationConfigDialog } from './IntegrationConfigDialog';
 
 // Formata o momento da última sincronização
 const formatLastSync = (lastSync?: string) => {
@@ -36,52 +37,73 @@ export const IntegrationCard: React.FC<IntegrationCardProps> = ({
   syncStatus,
   onConnect
 }) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
   // Obtenha o componente de ícone apropriado usando o utilitário
   const IconComponent = useIntegrationIcon(id);
 
+  const handleOpenConfig = () => {
+    setDialogOpen(true);
+  };
+
+  const handleSuccess = () => {
+    // Opcionalmente, podemos atualizar algo após a conexão bem-sucedida
+    // Como a prop onConnect é usada apenas para notificar o componente pai
+    onConnect(id);
+  };
+
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <div className="flex items-center space-x-3">
-          <div className={`p-2.5 rounded-full ${color}`}>
-            {IconComponent && <IconComponent size={16} />}
+    <>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <div className="flex items-center space-x-3">
+            <div className={`p-2.5 rounded-full ${color}`}>
+              {IconComponent && <IconComponent size={16} />}
+            </div>
+            <CardTitle className="text-md font-medium">
+              {name}
+            </CardTitle>
           </div>
-          <CardTitle className="text-md font-medium">
-            {name}
-          </CardTitle>
-        </div>
-        <div className="flex items-center space-x-2">
-          <Switch
-            id={`${id}-switch`}
-            checked={connected}
-          />
-        </div>
-      </CardHeader>
-      <CardContent>
-        <p className="text-xs text-muted-foreground">{description}</p>
-        <div className="mt-3 space-y-1">
-          <p className="text-xs font-medium text-muted-foreground">
-            Status: 
-            <span className={connected ? "text-green-600 ml-1" : "text-amber-600 ml-1"}>
-              {connected ? "Conectado" : "Não conectado"}
-            </span>
-          </p>
-          <p className="text-xs font-medium text-muted-foreground">
-            Última atualização: 
-            <span className={`ml-1 ${getSyncStatusClass(syncStatus)}`}>
-              {formatLastSync(lastSync)}
-            </span>
-          </p>
-        </div>
-      </CardContent>
-      <CardFooter>
-        {connected ? (
-          <Button variant="outline" className="w-full">Configurar</Button>
-        ) : (
-          <Button className="w-full" onClick={() => onConnect(id)}>Conectar</Button>
-        )}
-      </CardFooter>
-    </Card>
+          <div className="flex items-center space-x-2">
+            <Switch
+              id={`${id}-switch`}
+              checked={connected}
+              disabled
+            />
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="text-xs text-muted-foreground">{description}</p>
+          <div className="mt-3 space-y-1">
+            <p className="text-xs font-medium text-muted-foreground">
+              Status: 
+              <span className={connected ? "text-green-600 ml-1" : "text-amber-600 ml-1"}>
+                {connected ? "Conectado" : "Não conectado"}
+              </span>
+            </p>
+            <p className="text-xs font-medium text-muted-foreground">
+              Última atualização: 
+              <span className={`ml-1 ${getSyncStatusClass(syncStatus)}`}>
+                {formatLastSync(lastSync)}
+              </span>
+            </p>
+          </div>
+        </CardContent>
+        <CardFooter>
+          {connected ? (
+            <Button variant="outline" className="w-full" onClick={handleOpenConfig}>Configurar</Button>
+          ) : (
+            <Button className="w-full" onClick={handleOpenConfig}>Conectar</Button>
+          )}
+        </CardFooter>
+      </Card>
+
+      <IntegrationConfigDialog
+        integrationId={id}
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        onSuccess={handleSuccess}
+      />
+    </>
   );
 };
 

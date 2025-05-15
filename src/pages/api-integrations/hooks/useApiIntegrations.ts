@@ -35,7 +35,7 @@ export const useApiIntegrations = () => {
   const handleConnect = (integrationId: IntegrationType) => {
     toast({
       title: 'Solicitação de conexão',
-      description: `Iniciando processo de conexão com ${integrationId.charAt(0).toUpperCase() + integrationId.slice(1)}...`,
+      description: `Inicializando configuração para ${integrationId.charAt(0).toUpperCase() + integrationId.slice(1)}...`,
     });
   };
 
@@ -48,6 +48,13 @@ export const useApiIntegrations = () => {
     toast({
       title: 'Chave API Salva',
       description: `A chave API para ${integrationId.charAt(0).toUpperCase() + integrationId.slice(1)} foi salva com sucesso.`,
+    });
+
+    // Aviso ao usuário sobre a limitação da interface antiga
+    toast({
+      title: 'Recomendação',
+      description: `Para configuração completa, use a opção "Conectar" na visualização de cards.`,
+      duration: 5000,
     });
   };
 
