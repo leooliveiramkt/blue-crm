@@ -11,6 +11,14 @@ export class ConnectionService {
    */
   public async testConnection(integrationId: IntegrationType, credentials: Record<string, string>): Promise<boolean> {
     console.log(`[ConnectionService] Iniciando teste de conexão para ${integrationId}`);
+    console.log(`[ConnectionService] Credenciais fornecidas:`, {
+      campos: Object.keys(credentials),
+      temApiKey: !!credentials.apiKey,
+      temSenha: !!credentials.password,
+      temDomain: !!credentials.domain,
+      domain: credentials.domain,
+      storeId: credentials.storeId
+    });
     
     const config = getIntegrationConfig(integrationId);
     if (!config) {
@@ -62,6 +70,7 @@ export class ConnectionService {
       console.error('[ConnectionService] Token de autorização inválido: deve começar com "Bearer "');
       return false;
     }
+    console.log('[ConnectionService] Token de autorização válido (começa com "Bearer ")');
 
     // Verificar se o domínio é válido
     const isValidDomain = credentials.domain && (
@@ -73,6 +82,7 @@ export class ConnectionService {
       console.error(`[ConnectionService] Domínio inválido para Wbuy: ${credentials.domain}`);
       return false;
     }
+    console.log(`[ConnectionService] Domínio válido: ${credentials.domain}`);
     
     // Tentar fazer uma chamada real para validar as credenciais
     try {
@@ -87,7 +97,7 @@ export class ConnectionService {
       
       // Aqui poderíamos fazer uma chamada real à API Wbuy para validar as credenciais
       // Por enquanto, vamos apenas verificar o formato das credenciais
-      
+      console.log("[ConnectionService] Credenciais no formato correto, retornando sucesso");
       return true; // Simulando conexão bem-sucedida
     } catch (error) {
       console.error("[ConnectionService] Erro ao testar conexão com Wbuy:", error);

@@ -23,26 +23,33 @@ export const useIntegration = (integrationType: IntegrationType) => {
   const loadIntegration = async () => {
     setIsLoading(true);
     try {
+      console.log(`[useIntegration] Carregando integração ${integrationType} para tenant ${tenantId}`);
       const data = await integrationManager.getIntegration(integrationType, tenantId);
+      console.log(`[useIntegration] Integração ${integrationType} carregada:`, data ? 'Dados encontrados' : 'Nenhum dado');
       setIntegration(data);
     } catch (error) {
-      console.error(`Erro ao carregar integração ${integrationType}:`, error);
+      console.error(`[useIntegration] Erro ao carregar integração ${integrationType}:`, error);
     } finally {
       setIsLoading(false);
     }
   };
 
   const connectIntegration = async (credentials: Record<string, string>): Promise<boolean> => {
+    console.log(`[useIntegration] Iniciando conexão para ${integrationType} com tenant ${tenantId}`);
     setIsConnecting(true);
     try {
       // Testa a conexão
+      console.log(`[useIntegration] Testando conexão para ${integrationType}...`);
       const isValid = await integrationManager.testConnection(integrationType, credentials);
+      console.log(`[useIntegration] Resultado do teste de conexão: ${isValid ? 'Válida' : 'Inválida'}`);
       
       if (!isValid) {
+        console.error(`[useIntegration] Credenciais inválidas para ${integrationType}`);
         return false;
       }
 
       // Se a conexão for válida, salva a integração
+      console.log(`[useIntegration] Conexão válida, salvando integração ${integrationType}`);
       const now = new Date().toISOString();
       
       const result = await integrationManager.saveIntegration({
@@ -55,13 +62,15 @@ export const useIntegration = (integrationType: IntegrationType) => {
       });
 
       if (result) {
+        console.log(`[useIntegration] Integração ${integrationType} salva com sucesso`);
         setIntegration(result);
         return true;
       }
       
+      console.error(`[useIntegration] Falha ao salvar integração ${integrationType}`);
       return false;
     } catch (error) {
-      console.error(`Erro ao conectar integração ${integrationType}:`, error);
+      console.error(`[useIntegration] Erro ao conectar integração ${integrationType}:`, error);
       return false;
     } finally {
       setIsConnecting(false);

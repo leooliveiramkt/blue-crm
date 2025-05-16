@@ -81,10 +81,12 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
     console.log(`[IntegrationConfigDialog] Iniciando conexão com ${integrationId}`, {
       camposPreenchidos: Object.keys(credentials),
       contemSenha: !!credentials.password,
-      contemApiKey: !!credentials.apiKey
+      contemApiKey: !!credentials.apiKey,
+      dominio: credentials.domain
     });
     
     try {
+      console.log(`[IntegrationConfigDialog] Chamando connectIntegration() para ${integrationId}...`);
       const success = await connectIntegration(credentials);
       console.log(`[IntegrationConfigDialog] Resposta da tentativa de conexão: ${success ? 'Sucesso' : 'Falha'}`);
       
@@ -117,6 +119,8 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
         description: `Ocorreu um erro ao tentar conectar com ${configData.name}: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
         variant: "destructive"
       });
+    } finally {
+      setSaveStatus('idle');
     }
   };
 
