@@ -16,8 +16,7 @@ export class ConnectionService {
       temApiKey: !!credentials.apiKey,
       temSenha: !!credentials.password,
       temDomain: !!credentials.domain,
-      domain: credentials.domain,
-      storeId: credentials.storeId
+      domain: credentials.domain
     });
     
     const config = getIntegrationConfig(integrationId);
@@ -54,6 +53,7 @@ export class ConnectionService {
 
   /**
    * Testa específicamente a conexão com a API da Wbuy
+   * Implementado conforme documentação: https://documenter.getpostman.com/view/4141833/RWTsquyN
    */
   private async testWbuyConnection(credentials: Record<string, string>): Promise<boolean> {
     // Verifique se todos os campos obrigatórios estão presentes
@@ -89,9 +89,10 @@ export class ConnectionService {
     }
     console.log(`[ConnectionService] Domínio válido: ${credentials.domain}`);
     
-    // Tentar fazer uma chamada real para validar as credenciais
+    // Fazer uma chamada real à API para verificar as credenciais
+    // Conforme documentação Wbuy, usar endpoint de "settings" que é leve e adequado para teste
     try {
-      console.log("[ConnectionService] Simulando conexão à API Wbuy com credenciais:", {
+      console.log("[ConnectionService] Testando conexão à API Wbuy com credenciais:", {
         domain: credentials.domain,
         storeId: credentials.storeId,
         username: credentials.username,
@@ -100,14 +101,37 @@ export class ConnectionService {
         hasPassword: !!credentials.password
       });
       
-      // Aqui poderíamos fazer uma chamada real à API Wbuy para validar as credenciais
-      // Por enquanto, simulamos uma requisição bem-sucedida se todos os dados estiverem no formato correto
+      const testEndpoint = `${credentials.domain}/settings`;
       
-      // Simulando uma pausa para parecer que está fazendo uma chamada real
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await fetch(testEndpoint, {
+        method: 'GET',
+        headers: {
+          'Authorization': credentials.apiKey,
+          'Content-Type': 'application/json',
+          'X-Store-ID': credentials.storeId,
+        }
+      });
       
-      console.log("[ConnectionService] Credenciais no formato correto, retornando sucesso");
-      return true; // Simulando conexão bem-sucedida
+      if (!response.ok) {
+        console.error(`[ConnectionService] Falha na verificação: ${response.status} ${response.statusText}`);
+        
+        // Log detalhado baseado no código de erro da API Wbuy
+        if (response.status === 401) {
+          console.error('[ConnectionService] Falha de autenticação: Token inválido ou expirado');
+        } else if (response.status === 403) {
+          console.error('[ConnectionService] Permissão negada: Verifique as permissões da credencial');
+        } else if (response.status === 404) {
+          console.error('[ConnectionService] Endpoint não encontrado. Verifique o domain/URL');
+        }
+        
+        return false;
+      }
+      
+      // Tentando ler o corpo da resposta para verificar formato
+      const data = await response.json();
+      console.log("[ConnectionService] Resposta da API Wbuy:", data ? "Dados recebidos" : "Sem dados");
+      
+      return true; // Conexão bem-sucedida
     } catch (error) {
       console.error("[ConnectionService] Erro ao testar conexão com Wbuy:", error);
       return false;

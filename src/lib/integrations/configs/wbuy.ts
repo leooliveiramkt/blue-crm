@@ -45,9 +45,48 @@ export const wbuyConfig: IntegrationConfig = {
       defaultValue: 'https://sistema.sistemawbuy.com.br/api/v1'
     }
   ],
+  // Endpoints conforme documentação da API Wbuy
   endpoints: {
-    orders: '/api/orders',
-    products: '/api/products',
-    affiliates: '/api/affiliates'
+    // Produtos
+    products: 'products',
+    productDetail: 'products',
+    categories: 'categories',
+    
+    // Pedidos
+    orders: 'orders',
+    orderDetail: 'orders',
+    
+    // Afiliados
+    affiliates: 'affiliates',
+    affiliateDetail: 'affiliates',
+    affiliateCommissions: 'affiliates/commissions',
+    
+    // Comissões
+    commissions: 'commissions',
+    
+    // Financeiro
+    payments: 'payments',
+    invoices: 'invoices',
+    
+    // Leads
+    leads: 'leads',
+    
+    // Configurações
+    settings: 'settings',
+    
+    // Usuários
+    users: 'users',
+    userDetail: 'users',
+    
+    // Dashboard e Relatórios
+    dashboard: 'dashboard',
+    reports: 'reports',
+    
+    // Webhooks e Integrações
+    webhooks: 'webhooks',
+    integrations: 'integrations',
+    
+    // Notificações
+    notifications: 'notifications'
   }
 };

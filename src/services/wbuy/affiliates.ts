@@ -4,6 +4,7 @@ import { wbuyApiCore } from "./core";
 
 /**
  * Serviço para gerenciar afiliados da Wbuy
+ * Implementado conforme documentação: https://documenter.getpostman.com/view/4141833/RWTsquyN
  */
 export class WbuyAffiliatesService {
   /**
@@ -16,24 +17,32 @@ export class WbuyAffiliatesService {
    */
   async getAffiliates(searchTerm?: string, page = 1, limit = 20, filters?: Record<string, any>) {
     try {
-      let queryParams = `?page=${page}&limit=${limit}`;
+      const queryParams: Record<string, string | number> = {
+        page,
+        limit
+      };
       
       if (searchTerm) {
-        queryParams += `&search=${encodeURIComponent(searchTerm)}`;
+        queryParams.search = searchTerm;
       }
       
       if (filters) {
         Object.entries(filters).forEach(([key, value]) => {
           if (value !== undefined && value !== null) {
-            queryParams += `&${key}=${encodeURIComponent(String(value))}`;
+            queryParams[key] = String(value);
           }
         });
       }
       
-      return await wbuyApiCore.callApi(`/${wbuyConfig.endpoints.affiliates}${queryParams}`);
+      return await wbuyApiCore.callApi(
+        `/${wbuyConfig.endpoints.affiliates}`,
+        'GET',
+        undefined,
+        queryParams
+      );
     } catch (error) {
       console.error('Erro ao buscar afiliados:', error);
-      return null;
+      throw error;
     }
   }
 
@@ -44,10 +53,16 @@ export class WbuyAffiliatesService {
    */
   async getAffiliateDetails(affiliateId: string) {
     try {
-      return await wbuyApiCore.callApi(`/${wbuyConfig.endpoints.affiliate_detail}/${affiliateId}`);
+      if (!affiliateId) {
+        throw new Error('ID do afiliado não fornecido');
+      }
+
+      return await wbuyApiCore.callApi(
+        `/${wbuyConfig.endpoints.affiliateDetail}/${affiliateId}`
+      );
     } catch (error) {
       console.error('Erro ao buscar detalhes do afiliado:', error);
-      return null;
+      throw error;
     }
   }
 
@@ -58,10 +73,27 @@ export class WbuyAffiliatesService {
    */
   async createAffiliate(affiliateData: any) {
     try {
-      return await wbuyApiCore.callApi(`/${wbuyConfig.endpoints.create_affiliate}`, 'POST', affiliateData);
+      // Validação de dados do afiliado conforme documentação
+      if (!affiliateData || typeof affiliateData !== 'object') {
+        throw new Error('Dados do afiliado inválidos');
+      }
+
+      // Campos obrigatórios conforme documentação Wbuy
+      const requiredFields = ['name', 'email'];
+      const missingFields = requiredFields.filter(field => !affiliateData[field]);
+      
+      if (missingFields.length > 0) {
+        throw new Error(`Campos obrigatórios faltando: ${missingFields.join(', ')}`);
+      }
+
+      return await wbuyApiCore.callApi(
+        `/${wbuyConfig.endpoints.affiliates}`,
+        'POST',
+        affiliateData
+      );
     } catch (error) {
       console.error('Erro ao criar afiliado:', error);
-      return null;
+      throw error;
     }
   }
 
@@ -73,10 +105,18 @@ export class WbuyAffiliatesService {
    */
   async updateAffiliate(affiliateId: string, affiliateData: any) {
     try {
-      return await wbuyApiCore.callApi(`/${wbuyConfig.endpoints.update_affiliate}/${affiliateId}`, 'PUT', affiliateData);
+      if (!affiliateId) {
+        throw new Error('ID do afiliado não fornecido');
+      }
+
+      return await wbuyApiCore.callApi(
+        `/${wbuyConfig.endpoints.affiliates}/${affiliateId}`,
+        'PUT',
+        affiliateData
+      );
     } catch (error) {
       console.error('Erro ao atualizar afiliado:', error);
-      return null;
+      throw error;
     }
   }
 
@@ -89,6 +129,10 @@ export class WbuyAffiliatesService {
    */
   async updateAffiliateAttribute(affiliateId: string, attributeName: string, attributeValue: string) {
     try {
+      if (!affiliateId || !attributeName) {
+        throw new Error('ID do afiliado ou nome do atributo não fornecido');
+      }
+
       return await wbuyApiCore.callApi(
         `/${wbuyConfig.endpoints.affiliates}/${affiliateId}/attributes`,
         'PUT',
@@ -96,33 +140,95 @@ export class WbuyAffiliatesService {
       );
     } catch (error) {
       console.error('Erro ao atualizar atributo do afiliado:', error);
-      return null;
+      throw error;
     }
   }
 
   /**
    * Busca comissões de um afiliado
    * @param affiliateId ID do afiliado
-   * @param startDate Data inicial
-   * @param endDate Data final
+   * @param startDate Data inicial (formato YYYY-MM-DD)
+   * @param endDate Data final (formato YYYY-MM-DD)
+   * @param page Número da página
+   * @param limit Itens por página
    * @returns Lista de comissões ou null em caso de erro
    */
-  async getAffiliateCommissions(affiliateId: string, startDate?: string, endDate?: string) {
+  async getAffiliateCommissions(
+    affiliateId: string, 
+    startDate?: string, 
+    endDate?: string,
+    page = 1,
+    limit = 20
+  ) {
     try {
-      let queryParams = '';
+      if (!affiliateId) {
+        throw new Error('ID do afiliado não fornecido');
+      }
+
+      const queryParams: Record<string, string | number> = {
+        page,
+        limit
+      };
       
-      if (startDate || endDate) {
-        queryParams = '?';
-        if (startDate) queryParams += `start_date=${encodeURIComponent(startDate)}`;
-        if (endDate) {
-          queryParams += startDate ? `&end_date=${encodeURIComponent(endDate)}` : `end_date=${encodeURIComponent(endDate)}`;
-        }
+      if (startDate) {
+        queryParams.start_date = startDate;
       }
       
-      return await wbuyApiCore.callApi(`/${wbuyConfig.endpoints.affiliate_commissions}/${affiliateId}${queryParams}`);
+      if (endDate) {
+        queryParams.end_date = endDate;
+      }
+      
+      return await wbuyApiCore.callApi(
+        `/${wbuyConfig.endpoints.affiliateCommissions}/${affiliateId}`,
+        'GET',
+        undefined,
+        queryParams
+      );
     } catch (error) {
       console.error('Erro ao buscar comissões do afiliado:', error);
-      return null;
+      throw error;
+    }
+  }
+  
+  /**
+   * Desativa um afiliado
+   * @param affiliateId ID do afiliado
+   * @returns Resultado da operação ou null em caso de erro
+   */
+  async deactivateAffiliate(affiliateId: string) {
+    try {
+      if (!affiliateId) {
+        throw new Error('ID do afiliado não fornecido');
+      }
+
+      return await wbuyApiCore.callApi(
+        `/${wbuyConfig.endpoints.affiliates}/${affiliateId}/deactivate`,
+        'POST'
+      );
+    } catch (error) {
+      console.error('Erro ao desativar afiliado:', error);
+      throw error;
+    }
+  }
+  
+  /**
+   * Ativa um afiliado
+   * @param affiliateId ID do afiliado
+   * @returns Resultado da operação ou null em caso de erro
+   */
+  async activateAffiliate(affiliateId: string) {
+    try {
+      if (!affiliateId) {
+        throw new Error('ID do afiliado não fornecido');
+      }
+
+      return await wbuyApiCore.callApi(
+        `/${wbuyConfig.endpoints.affiliates}/${affiliateId}/activate`,
+        'POST'
+      );
+    } catch (error) {
+      console.error('Erro ao ativar afiliado:', error);
+      throw error;
     }
   }
 }
