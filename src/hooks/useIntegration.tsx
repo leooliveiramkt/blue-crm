@@ -1,9 +1,9 @@
 
 import { useState, useEffect } from 'react';
 import { integrationManager } from '@/lib/integrations/integrationManager';
-import { IntegrationType, IntegrationData, IntegrationStatus } from '@/lib/integrations/types';
+import { IntegrationType, IntegrationData, IntegrationStatus, IntegrationConfig } from '@/lib/integrations/types';
 import { useCurrentTenantId } from '@/hooks/useTenant';
-import { getIntegrationConfig } from '@/lib/integrations/integrationConfigs';
+import { getIntegrationConfig } from '@/lib/integrations/configs';
 
 /**
  * Hook para gerenciar uma integração específica

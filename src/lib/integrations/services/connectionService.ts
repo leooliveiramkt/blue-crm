@@ -1,6 +1,6 @@
 
 import { IntegrationType } from '../types';
-import { getIntegrationConfig } from '../integrationConfigs';
+import { getIntegrationConfig } from '../configs';
 
 /**
  * Serviço para testar conexões com APIs externas

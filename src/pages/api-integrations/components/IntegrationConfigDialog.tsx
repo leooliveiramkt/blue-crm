@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Loader2, Check } from 'lucide-react';
-import { getIntegrationConfig } from '@/lib/integrations/integrationConfigs';
+import { getIntegrationConfig } from '@/lib/integrations/configs';
 import { useIntegration } from '@/hooks/useIntegration';
 import { IntegrationType } from '@/lib/integrations/types';
 import { useToast } from '@/hooks/use-toast';
