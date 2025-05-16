@@ -1,4 +1,3 @@
-
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { IntegrationType, IntegrationData, IntegrationStatus } from '../types';
 
@@ -97,7 +96,10 @@ export class IntegrationStorage {
    * Salva ou atualiza uma integração
    */
   public async saveIntegration(integration: IntegrationData): Promise<IntegrationData | null> {
+    console.log(`[IntegrationStorage] Salvando integração ${integration.id} para tenant ${integration.tenantId}`);
+    
     if (!isSupabaseConfigured) {
+      console.log(`[IntegrationStorage] Supabase não configurado, salvando no localStorage`);
       // Salva no localStorage
       const savedIntegrations = localStorage.getItem(`integrations_${integration.tenantId}`);
       let integrations = savedIntegrations ? JSON.parse(savedIntegrations) as IntegrationData[] : [];
@@ -107,9 +109,11 @@ export class IntegrationStorage {
       if (existingIndex >= 0) {
         // Atualiza integração existente
         integrations[existingIndex] = integration;
+        console.log(`[IntegrationStorage] Atualizada integração existente no localStorage: ${integration.id}`);
       } else {
         // Adiciona nova integração
         integrations.push(integration);
+        console.log(`[IntegrationStorage] Adicionada nova integração no localStorage: ${integration.id}`);
       }
       
       localStorage.setItem(`integrations_${integration.tenantId}`, JSON.stringify(integrations));
@@ -129,15 +133,21 @@ export class IntegrationStorage {
         updated_at: integration.updatedAt
       };
 
+      console.log(`[IntegrationStorage] Enviando requisição para Supabase: ${integration.id}`);
+
       const { data, error } = await supabase
         .from('integrations')
         .upsert(dbData)
         .select()
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error(`[IntegrationStorage] Erro Supabase ao salvar integração:`, error);
+        throw error;
+      }
 
       if (data) {
+        console.log(`[IntegrationStorage] Integração salva com sucesso no Supabase: ${integration.id}`);
         // Converte de volta para o formato IntegrationData com casting adequado
         return {
           id: data.id as IntegrationType,
@@ -151,9 +161,10 @@ export class IntegrationStorage {
         };
       }
       
+      console.error(`[IntegrationStorage] Nenhum dado retornado do Supabase após salvar integração: ${integration.id}`);
       return null;
     } catch (error) {
-      console.error('Erro ao salvar integração:', error);
+      console.error(`[IntegrationStorage] Erro ao salvar integração ${integration.id}:`, error);
       return null;
     }
   }

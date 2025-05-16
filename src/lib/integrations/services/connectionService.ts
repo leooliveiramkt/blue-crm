@@ -10,22 +10,33 @@ export class ConnectionService {
    * Testa uma conexão de API com base nas credenciais fornecidas
    */
   public async testConnection(integrationId: IntegrationType, credentials: Record<string, string>): Promise<boolean> {
+    console.log(`[ConnectionService] Iniciando teste de conexão para ${integrationId}`);
+    
     const config = getIntegrationConfig(integrationId);
-    if (!config) return false;
+    if (!config) {
+      console.error(`[ConnectionService] Configuração não encontrada para ${integrationId}`);
+      return false;
+    }
 
     // Verificação especial para Wbuy
     if (integrationId === 'wbuy') {
-      console.log("Testando conexão com Wbuy:", credentials);
+      console.log(`[ConnectionService] Testando conexão com Wbuy:`, {
+        campos: Object.keys(credentials),
+        domain: credentials.domain,
+        storeId: credentials.storeId
+      });
       return this.testWbuyConnection(credentials);
     }
 
     // Implementação simulada para outras integrações
     return new Promise((resolve) => {
+      console.log(`[ConnectionService] Testando conexão para ${integrationId}`);
       setTimeout(() => {
         // Simula sucesso se todas as credenciais necessárias estiverem presentes
         const allFieldsFilled = config.requiredFields.every(
           field => field.required ? !!credentials[field.name] : true
         );
+        console.log(`[ConnectionService] Resultado do teste para ${integrationId}: ${allFieldsFilled}`);
         resolve(allFieldsFilled);
       }, 1000);
     });
@@ -40,23 +51,39 @@ export class ConnectionService {
     const missingFields = requiredFields.filter(field => !credentials[field]);
     
     if (missingFields.length > 0) {
-      console.error("Campos obrigatórios faltando para Wbuy:", missingFields);
+      console.error(`[ConnectionService] Campos obrigatórios faltando para Wbuy: ${missingFields.join(', ')}`);
       return false;
     }
 
-    // Simular uma tentativa de conexão à API
+    console.log(`[ConnectionService] Todos os campos obrigatórios para Wbuy estão presentes`);
+
+    // Tentar fazer uma chamada real para validar as credenciais
+    // Por enquanto estamos apenas simulando, mas isso pode ser implementado depois
     return new Promise((resolve) => {
-      console.log("Simulando conexão à API Wbuy com credenciais:", {
+      console.log("[ConnectionService] Simulando conexão à API Wbuy com credenciais:", {
         domain: credentials.domain,
         storeId: credentials.storeId,
+        username: credentials.username,
         // Ocultando dados sensíveis do log
         apiKey: "***********",
-        username: credentials.username,
         hasPassword: !!credentials.password
       });
       
+      // Para testes, vamos verificar se pelo menos todos os campos estão preenchidos e o domain parece válido
+      const isValidDomain = credentials.domain && (
+        credentials.domain.startsWith('http://') || 
+        credentials.domain.startsWith('https://')
+      );
+      
+      if (!isValidDomain) {
+        console.error(`[ConnectionService] Domínio inválido para Wbuy: ${credentials.domain}`);
+        resolve(false);
+        return;
+      }
+      
       setTimeout(() => {
-        // Consideramos bem-sucedido se todos os campos estiverem preenchidos
+        // Em produção, aqui você faria uma chamada real à API para verificar as credenciais
+        console.log("[ConnectionService] Conexão simulada com Wbuy concluída com sucesso");
         resolve(true);
       }, 1500);
     });

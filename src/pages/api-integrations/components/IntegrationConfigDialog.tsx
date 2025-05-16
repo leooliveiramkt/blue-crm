@@ -32,6 +32,8 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
   
   useEffect(() => {
     if (integration?.credentials) {
+      console.log(`[IntegrationConfigDialog] Carregando credenciais existentes para ${integrationId}:`, 
+        Object.keys(integration.credentials).length > 0 ? 'Credenciais encontradas' : 'Sem credenciais');
       setCredentials(integration.credentials);
     }
   }, [integration, open]);
@@ -39,10 +41,12 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
   const configData = config || getIntegrationConfig(integrationId);
   
   if (!configData) {
+    console.error(`[IntegrationConfigDialog] Configuração não encontrada para ${integrationId}`);
     return null;
   }
 
   const handleInputChange = (fieldName: string, value: string) => {
+    console.log(`[IntegrationConfigDialog] Campo alterado: ${fieldName}`);
     setCredentials(prev => ({ ...prev, [fieldName]: value }));
   };
 
@@ -53,6 +57,7 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
       .map(field => field.label);
 
     if (missingFields.length > 0) {
+      console.error(`[IntegrationConfigDialog] Campos obrigatórios não preenchidos: ${missingFields.join(', ')}`);
       toast({
         title: "Campos obrigatórios",
         description: `Por favor, preencha os seguintes campos: ${missingFields.join(', ')}`,
@@ -62,26 +67,43 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
     }
 
     setSaveStatus('saving');
-    const success = await connectIntegration(credentials);
+    console.log(`[IntegrationConfigDialog] Iniciando conexão com ${integrationId}`, {
+      camposPreenchidos: Object.keys(credentials),
+      contemSenha: !!credentials.password,
+      contemApiKey: !!credentials.apiKey
+    });
     
-    if (success) {
-      setSaveStatus('success');
-      toast({
-        title: "Integração conectada",
-        description: `A integração com ${configData.name} foi configurada com sucesso.`
-      });
+    try {
+      const success = await connectIntegration(credentials);
+      console.log(`[IntegrationConfigDialog] Resposta da tentativa de conexão: ${success ? 'Sucesso' : 'Falha'}`);
       
-      // Deixar a mensagem de sucesso visível por um momento antes de fechar
-      setTimeout(() => {
-        if (onSuccess) onSuccess();
-        onOpenChange(false);
-        setSaveStatus('idle');
-      }, 1500);
-    } else {
+      if (success) {
+        setSaveStatus('success');
+        toast({
+          title: "Integração conectada",
+          description: `A integração com ${configData.name} foi configurada com sucesso.`
+        });
+        
+        // Deixar a mensagem de sucesso visível por um momento antes de fechar
+        setTimeout(() => {
+          if (onSuccess) onSuccess();
+          onOpenChange(false);
+          setSaveStatus('idle');
+        }, 1500);
+      } else {
+        setSaveStatus('error');
+        toast({
+          title: "Erro na conexão",
+          description: `Não foi possível estabelecer conexão com ${configData.name}. Verifique as credenciais.`,
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      console.error(`[IntegrationConfigDialog] Erro durante a conexão:`, error);
       setSaveStatus('error');
       toast({
-        title: "Erro na conexão",
-        description: `Não foi possível estabelecer conexão com ${configData.name}. Verifique as credenciais.`,
+        title: "Erro inesperado",
+        description: `Ocorreu um erro ao tentar conectar com ${configData.name}: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
         variant: "destructive"
       });
     }

@@ -1,4 +1,3 @@
-
 import { IntegrationType, IntegrationData, IntegrationStatus, IntegrationConfig } from './types';
 import { getIntegrationConfig } from './integrationConfigs';
 import { integrationStorage } from './storage/integrationStorage';
@@ -90,12 +89,16 @@ class IntegrationManager {
     const tid = tenantId || this.tenantId;
     
     if (!tid) {
+      console.error('[IntegrationManager] Erro: Tenant ID não especificado');
       throw new Error('Tenant ID não especificado');
     }
 
     if (!integration.id) {
+      console.error('[IntegrationManager] Erro: ID da integração não especificado');
       throw new Error('ID da integração não especificado');
     }
+
+    console.log(`[IntegrationManager] Salvando integração ${integration.id} para tenant ${tid}`);
 
     // Cria o objeto de integração completo
     const now = new Date().toISOString();
@@ -111,13 +114,19 @@ class IntegrationManager {
     };
 
     try {
+      console.log(`[IntegrationManager] Iniciando salvamento da integração ${integration.id}`);
       const savedIntegration = await integrationStorage.saveIntegration(completeIntegration);
+      
       if (savedIntegration) {
+        console.log(`[IntegrationManager] Integração ${integration.id} salva com sucesso`);
         integrationCache.set(tid, savedIntegration);
+      } else {
+        console.error(`[IntegrationManager] Falha ao salvar integração ${integration.id}`);
       }
+      
       return savedIntegration;
     } catch (error) {
-      console.error('Erro ao salvar integração:', error);
+      console.error(`[IntegrationManager] Erro ao salvar integração ${integration.id}:`, error);
       return null;
     }
   }
