@@ -49,17 +49,17 @@ export const wbuyConfig: IntegrationConfig = {
   endpoints: {
     // Produtos
     products: 'products',
-    productDetail: 'products',
+    product_detail: 'products',
     categories: 'categories',
     
     // Pedidos
     orders: 'orders',
-    orderDetail: 'orders',
+    order_detail: 'orders',
     
     // Afiliados
     affiliates: 'affiliates',
-    affiliateDetail: 'affiliates',
-    affiliateCommissions: 'affiliates/commissions',
+    affiliate_detail: 'affiliates',
+    affiliate_commissions: 'affiliates/commissions',
     
     // Comissões
     commissions: 'commissions',
@@ -76,7 +76,7 @@ export const wbuyConfig: IntegrationConfig = {
     
     // Usuários
     users: 'users',
-    userDetail: 'users',
+    user_detail: 'users',
     
     // Dashboard e Relatórios
     dashboard: 'dashboard',

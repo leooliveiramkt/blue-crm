@@ -58,7 +58,7 @@ export class WbuyAffiliatesService {
       }
 
       return await wbuyApiCore.callApi(
-        `/${wbuyConfig.endpoints.affiliateDetail}/${affiliateId}`
+        `/${wbuyConfig.endpoints.affiliate_detail}/${affiliateId}`
       );
     } catch (error) {
       console.error('Erro ao buscar detalhes do afiliado:', error);
@@ -179,7 +179,7 @@ export class WbuyAffiliatesService {
       }
       
       return await wbuyApiCore.callApi(
-        `/${wbuyConfig.endpoints.affiliateCommissions}/${affiliateId}`,
+        `/${wbuyConfig.endpoints.affiliate_commissions}/${affiliateId}`,
         'GET',
         undefined,
         queryParams
