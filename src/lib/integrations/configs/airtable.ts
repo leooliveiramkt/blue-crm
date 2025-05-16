@@ -21,13 +21,6 @@ export const airtableConfig: IntegrationConfig = {
       type: 'text',
       placeholder: 'ID da base do Airtable',
       required: true
-    },
-    {
-      name: 'tableName',
-      label: 'Nome da Tabela',
-      type: 'text',
-      placeholder: 'Nome da tabela principal',
-      required: false
     }
   ]
 };

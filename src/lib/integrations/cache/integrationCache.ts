@@ -2,60 +2,75 @@
 import { IntegrationType, IntegrationData } from '../types';
 
 /**
- * Classe para gerenciar o cache de integrações
+ * Cache em memória para integrações
  */
-export class IntegrationCache {
-  private cache: Map<string, IntegrationData> = new Map();
+class IntegrationCache {
+  private cache: Map<string, Map<IntegrationType, IntegrationData>> = new Map();
 
   /**
-   * Obter uma integração do cache
-   */
-  public get(tenantId: string, integrationId: IntegrationType): IntegrationData | undefined {
-    return this.cache.get(this.getCacheKey(tenantId, integrationId));
-  }
-
-  /**
-   * Verificar se uma integração existe no cache
+   * Verifica se uma integração existe no cache
    */
   public has(tenantId: string, integrationId: IntegrationType): boolean {
-    return this.cache.has(this.getCacheKey(tenantId, integrationId));
+    const tenantCache = this.cache.get(tenantId);
+    return tenantCache ? tenantCache.has(integrationId) : false;
   }
 
   /**
-   * Adicionar uma integração ao cache
+   * Obtém uma integração do cache
    */
-  public set(tenantId: string, integrationData: IntegrationData): void {
-    this.cache.set(this.getCacheKey(tenantId, integrationData.id), integrationData);
+  public get(tenantId: string, integrationId: IntegrationType): IntegrationData | undefined {
+    const tenantCache = this.cache.get(tenantId);
+    return tenantCache ? tenantCache.get(integrationId) : undefined;
   }
 
   /**
-   * Adicionar múltiplas integrações ao cache
+   * Define ou atualiza uma integração no cache
    */
-  public setMany(tenantId: string, integrations: IntegrationData[]): void {
-    integrations.forEach(integration => {
-      this.set(tenantId, integration);
-    });
+  public set(tenantId: string, integration: IntegrationData): void {
+    if (!this.cache.has(tenantId)) {
+      this.cache.set(tenantId, new Map());
+    }
+    
+    const tenantCache = this.cache.get(tenantId)!;
+    console.log(`[IntegrationCache] Armazenando ${integration.id} no cache para tenant ${tenantId}`);
+    tenantCache.set(integration.id, {...integration});
   }
 
   /**
-   * Remover uma integração do cache
+   * Remove uma integração do cache
    */
-  public delete(tenantId: string, integrationId: IntegrationType): void {
-    this.cache.delete(this.getCacheKey(tenantId, integrationId));
+  public delete(tenantId: string, integrationId: IntegrationType): boolean {
+    const tenantCache = this.cache.get(tenantId);
+    return tenantCache ? tenantCache.delete(integrationId) : false;
   }
 
   /**
-   * Limpar todo o cache
+   * Limpa todo o cache para um tenant específico
+   */
+  public clearTenant(tenantId: string): boolean {
+    return this.cache.delete(tenantId);
+  }
+
+  /**
+   * Limpa todo o cache
    */
   public clear(): void {
     this.cache.clear();
   }
-
+  
   /**
-   * Gerar chave única para o cache
+   * Armazena múltiplas integrações no cache
    */
-  private getCacheKey(tenantId: string, integrationId: IntegrationType): string {
-    return `${tenantId}_${integrationId}`;
+  public setMany(tenantId: string, integrations: IntegrationData[]): void {
+    integrations.forEach(integration => this.set(tenantId, integration));
+  }
+  
+  /**
+   * Retorna todas as integrações de um tenant
+   */
+  public getAllForTenant(tenantId: string): IntegrationData[] {
+    const tenantCache = this.cache.get(tenantId);
+    return tenantCache ? Array.from(tenantCache.values()) : [];
   }
 }
 
