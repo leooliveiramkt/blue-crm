@@ -16,4 +16,5 @@ export interface AuthContextType {
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => Promise<void>;
   hasPermission: (requiredRole: UserRole | UserRole[]) => boolean;
+  createUser?: (email: string, password: string, role: UserRole, name: string) => Promise<boolean>;
 }
