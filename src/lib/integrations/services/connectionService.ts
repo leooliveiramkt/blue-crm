@@ -57,36 +57,42 @@ export class ConnectionService {
 
     console.log(`[ConnectionService] Todos os campos obrigatórios para Wbuy estão presentes`);
 
+    // Verificar se a apiKey começa com "Bearer "
+    if (!credentials.apiKey.trim().startsWith('Bearer ')) {
+      console.error('[ConnectionService] Token de autorização inválido: deve começar com "Bearer "');
+      return false;
+    }
+
+    // Verificar se o domínio é válido
+    const isValidDomain = credentials.domain && (
+      credentials.domain.startsWith('http://') || 
+      credentials.domain.startsWith('https://')
+    );
+    
+    if (!isValidDomain) {
+      console.error(`[ConnectionService] Domínio inválido para Wbuy: ${credentials.domain}`);
+      return false;
+    }
+    
     // Tentar fazer uma chamada real para validar as credenciais
-    // Por enquanto estamos apenas simulando, mas isso pode ser implementado depois
-    return new Promise((resolve) => {
+    try {
       console.log("[ConnectionService] Simulando conexão à API Wbuy com credenciais:", {
         domain: credentials.domain,
         storeId: credentials.storeId,
         username: credentials.username,
         // Ocultando dados sensíveis do log
-        apiKey: "***********",
+        apiKey: credentials.apiKey.substring(0, 15) + "...",
         hasPassword: !!credentials.password
       });
       
-      // Para testes, vamos verificar se pelo menos todos os campos estão preenchidos e o domain parece válido
-      const isValidDomain = credentials.domain && (
-        credentials.domain.startsWith('http://') || 
-        credentials.domain.startsWith('https://')
-      );
+      // Aqui poderíamos fazer uma chamada real à API Wbuy para validar as credenciais
+      // Por enquanto, vamos apenas verificar o formato das credenciais
       
-      if (!isValidDomain) {
-        console.error(`[ConnectionService] Domínio inválido para Wbuy: ${credentials.domain}`);
-        resolve(false);
-        return;
-      }
-      
-      setTimeout(() => {
-        // Em produção, aqui você faria uma chamada real à API para verificar as credenciais
-        console.log("[ConnectionService] Conexão simulada com Wbuy concluída com sucesso");
-        resolve(true);
-      }, 1500);
-    });
+      return true; // Simulando conexão bem-sucedida
+    } catch (error) {
+      console.error("[ConnectionService] Erro ao testar conexão com Wbuy:", error);
+      return false;
+    }
   }
 }
 

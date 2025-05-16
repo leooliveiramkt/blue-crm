@@ -14,9 +14,9 @@ export const integrationConfigs: Record<IntegrationType, IntegrationConfig> = {
     requiredFields: [
       {
         name: 'apiKey',
-        label: 'Chave da API',
+        label: 'Authorization (Bearer Token)',
         type: 'password',
-        placeholder: 'Insira sua chave API da Wbuy',
+        placeholder: 'Bearer ZjlkMWNkMGUtMjgyNi00Yjc5LTg5N2ItYTIxNjljY2Y3ZjllOmI3ZDU3...',
         required: true
       },
       {
@@ -45,7 +45,8 @@ export const integrationConfigs: Record<IntegrationType, IntegrationConfig> = {
         label: 'Endpoint da API',
         type: 'text',
         placeholder: 'https://sistema.sistemawbuy.com.br/api/v1',
-        required: true
+        required: true,
+        defaultValue: 'https://sistema.sistemawbuy.com.br/api/v1'
       }
     ],
     endpoints: {

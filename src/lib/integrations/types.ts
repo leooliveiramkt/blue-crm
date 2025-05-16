@@ -22,6 +22,7 @@ export interface IntegrationConfig {
     type: 'text' | 'password' | 'email' | 'url';
     placeholder?: string;
     required: boolean;
+    defaultValue?: string;
   }>;
   endpoints?: Record<string, string>;
 }

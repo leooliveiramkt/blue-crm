@@ -25,21 +25,32 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
 }) => {
   const { toast } = useToast();
   const { isConnecting, connectIntegration, integration, config, isConnected } = useIntegration(integrationId);
-  const [credentials, setCredentials] = useState<Record<string, string>>(
-    integration?.credentials || {}
-  );
+  const [credentials, setCredentials] = useState<Record<string, string>>({});
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
   
-  useEffect(() => {
-    if (integration?.credentials) {
-      console.log(`[IntegrationConfigDialog] Carregando credenciais existentes para ${integrationId}:`, 
-        Object.keys(integration.credentials).length > 0 ? 'Credenciais encontradas' : 'Sem credenciais');
-      setCredentials(integration.credentials);
-    }
-  }, [integration, open]);
-
+  // Obter a configuração para acessar valores padrão
   const configData = config || getIntegrationConfig(integrationId);
   
+  useEffect(() => {
+    if (open) {
+      // Se integração já existe, usar suas credenciais
+      if (integration?.credentials) {
+        console.log(`[IntegrationConfigDialog] Carregando credenciais existentes para ${integrationId}:`, 
+          Object.keys(integration.credentials).length > 0 ? 'Credenciais encontradas' : 'Sem credenciais');
+        setCredentials(integration.credentials);
+      } else {
+        // Inicializar com valores padrão se disponíveis
+        const defaultValues: Record<string, string> = {};
+        configData?.requiredFields.forEach(field => {
+          if (field.defaultValue) {
+            defaultValues[field.name] = field.defaultValue;
+          }
+        });
+        setCredentials(defaultValues);
+      }
+    }
+  }, [integration, integrationId, open, configData]);
+
   if (!configData) {
     console.error(`[IntegrationConfigDialog] Configuração não encontrada para ${integrationId}`);
     return null;
@@ -129,6 +140,16 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
                 onChange={(e) => handleInputChange(field.name, e.target.value)}
                 required={field.required}
               />
+              {field.name === 'apiKey' && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  Importante: O token deve começar com "Bearer " seguido pelo valor do token.
+                </p>
+              )}
+              {field.name === 'domain' && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  URL padrão da API Wbuy: https://sistema.sistemawbuy.com.br/api/v1
+                </p>
+              )}
             </div>
           ))}
         </div>
