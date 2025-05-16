@@ -1,3 +1,4 @@
+
 import { IntegrationConfig, IntegrationType } from './types';
 
 /**
@@ -19,8 +20,29 @@ export const integrationConfigs: Record<IntegrationType, IntegrationConfig> = {
         required: true
       },
       {
+        name: 'storeId',
+        label: 'ID da Loja',
+        type: 'text',
+        placeholder: 'ID da sua loja na Wbuy (formato UUID)',
+        required: true
+      },
+      {
+        name: 'username',
+        label: 'Usuário da API',
+        type: 'text',
+        placeholder: 'Nome de usuário da API',
+        required: true
+      },
+      {
+        name: 'password',
+        label: 'Senha da API',
+        type: 'password',
+        placeholder: 'Senha da API',
+        required: true
+      },
+      {
         name: 'domain',
-        label: 'Domínio',
+        label: 'Endpoint da API',
         type: 'text',
         placeholder: 'https://sistema.sistemawbuy.com.br/api/v1',
         required: true

@@ -10,16 +10,31 @@ export class WbuyApiCore {
    * Obtém as credenciais de integração Wbuy do tenant atual
    * @returns Credenciais da API Wbuy ou credenciais padrão
    */
-  async getCredentials(): Promise<{ apiKey: string; domain: string }> {
+  async getCredentials(): Promise<{ 
+    apiKey: string; 
+    domain: string;
+    storeId: string;
+    username: string;
+    password: string;
+  }> {
     try {
       const integration = await integrationManager.getIntegration('wbuy');
       
       if (integration && integration.status === 'connected') {
         const apiKey = integration.credentials.apiKey;
         const domain = integration.credentials.domain;
+        const storeId = integration.credentials.storeId;
+        const username = integration.credentials.username;
+        const password = integration.credentials.password;
 
-        if (apiKey && domain) {
-          return { apiKey, domain };
+        if (apiKey && domain && storeId) {
+          return { 
+            apiKey, 
+            domain, 
+            storeId, 
+            username: username || '', 
+            password: password || '' 
+          };
         }
       }
 
@@ -27,13 +42,19 @@ export class WbuyApiCore {
       console.log('Usando credenciais padrão para Wbuy API');
       return { 
         apiKey: wbuyConfig.api_token, 
-        domain: wbuyConfig.api_url 
+        domain: wbuyConfig.api_url,
+        storeId: wbuyConfig.store_id,
+        username: '',
+        password: ''
       };
     } catch (error) {
       console.error('Erro ao obter credenciais Wbuy, usando padrão:', error);
       return { 
         apiKey: wbuyConfig.api_token, 
-        domain: wbuyConfig.api_url 
+        domain: wbuyConfig.api_url,
+        storeId: wbuyConfig.store_id,
+        username: '',
+        password: ''
       };
     }
   }
@@ -47,14 +68,19 @@ export class WbuyApiCore {
    */
   async callApi<T>(endpoint: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', body?: any): Promise<T | null> {
     const credentials = await this.getCredentials();
-    const { apiKey, domain } = credentials;
+    const { apiKey, domain, storeId } = credentials;
     const url = `${domain}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
 
     try {
-      const headers = {
+      const headers: Record<string, string> = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
       };
+      
+      // Adicionar cabeçalhos específicos se disponíveis
+      if (storeId) {
+        headers['X-Store-ID'] = storeId;
+      }
 
       const options: RequestInit = {
         method,

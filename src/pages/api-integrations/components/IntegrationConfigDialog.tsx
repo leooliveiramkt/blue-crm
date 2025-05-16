@@ -1,10 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Check } from 'lucide-react';
 import { getIntegrationConfig } from '@/lib/integrations/integrationConfigs';
 import { useIntegration } from '@/hooks/useIntegration';
 import { IntegrationType } from '@/lib/integrations/types';
@@ -24,10 +24,17 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
   onSuccess
 }) => {
   const { toast } = useToast();
-  const { isConnecting, connectIntegration, integration, config } = useIntegration(integrationId);
+  const { isConnecting, connectIntegration, integration, config, isConnected } = useIntegration(integrationId);
   const [credentials, setCredentials] = useState<Record<string, string>>(
     integration?.credentials || {}
   );
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
+  
+  useEffect(() => {
+    if (integration?.credentials) {
+      setCredentials(integration.credentials);
+    }
+  }, [integration, open]);
 
   const configData = config || getIntegrationConfig(integrationId);
   
@@ -54,16 +61,24 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
       return;
     }
 
+    setSaveStatus('saving');
     const success = await connectIntegration(credentials);
     
     if (success) {
+      setSaveStatus('success');
       toast({
         title: "Integração conectada",
         description: `A integração com ${configData.name} foi configurada com sucesso.`
       });
-      if (onSuccess) onSuccess();
-      onOpenChange(false);
+      
+      // Deixar a mensagem de sucesso visível por um momento antes de fechar
+      setTimeout(() => {
+        if (onSuccess) onSuccess();
+        onOpenChange(false);
+        setSaveStatus('idle');
+      }, 1500);
     } else {
+      setSaveStatus('error');
       toast({
         title: "Erro na conexão",
         description: `Não foi possível estabelecer conexão com ${configData.name}. Verifique as credenciais.`,
@@ -74,11 +89,11 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
           <DialogTitle>Configurar integração: {configData.name}</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+        <div className="grid gap-4 py-4 max-h-[60vh] overflow-y-auto">
           {configData.requiredFields.map((field) => (
             <div key={field.name} className="space-y-2">
               <Label htmlFor={field.name}>
@@ -98,19 +113,28 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
         <DialogFooter>
           <Button 
             variant="outline" 
-            onClick={() => onOpenChange(false)} 
-            disabled={isConnecting}
+            onClick={() => {
+              setSaveStatus('idle');
+              onOpenChange(false);
+            }} 
+            disabled={isConnecting || saveStatus === 'saving' || saveStatus === 'success'}
           >
             Cancelar
           </Button>
           <Button 
             onClick={handleSubmit} 
-            disabled={isConnecting}
+            disabled={isConnecting || saveStatus === 'saving' || saveStatus === 'success'}
+            className="min-w-[140px]"
           >
-            {isConnecting ? (
+            {saveStatus === 'saving' || isConnecting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Conectando...
+              </>
+            ) : saveStatus === 'success' ? (
+              <>
+                <Check className="mr-2 h-4 w-4" />
+                Conectado!
               </>
             ) : 'Salvar e Conectar'}
           </Button>
