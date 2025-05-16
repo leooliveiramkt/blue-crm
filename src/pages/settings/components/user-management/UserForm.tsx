@@ -44,6 +44,8 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit, isSubmitting }) => {
     },
   });
   
+  console.log("Formulário renderizado, isSubmitting:", isSubmitting);
+  
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -115,7 +117,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit, isSubmitting }) => {
           )}
         />
         
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={isSubmitting}>
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

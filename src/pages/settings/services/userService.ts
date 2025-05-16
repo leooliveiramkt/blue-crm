@@ -5,13 +5,15 @@ import { UserFormValues } from '../components/user-management/UserForm';
 
 export const createUser = async (values: UserFormValues): Promise<{ data: any; error: any }> => {
   try {
+    console.log("userService: Tentando criar usuário com email:", values.email);
+    
     // Verificar se é o usuário específico solicitado
     const isSpecialAdmin = values.email.toLowerCase() === 'leooliveiramktd@gmail.com';
     
     // Para o usuário específico, garantir que seja criado como admin
     const userRole = isSpecialAdmin ? 'admin' : values.role;
     
-    console.log("Tentando criar usuário com email:", values.email, "e função:", userRole);
+    console.log("userService: Configurando role como:", userRole);
     
     // Criar usuário no Supabase Auth
     const response = await supabase.auth.signUp({
@@ -26,11 +28,11 @@ export const createUser = async (values: UserFormValues): Promise<{ data: any; e
       }
     });
     
-    console.log("Resposta do Supabase:", response.data, response.error);
+    console.log("userService: Resposta do Supabase:", response);
     
     return response;
   } catch (error) {
-    console.error('Erro ao criar usuário:', error);
+    console.error('userService: Erro ao criar usuário:', error);
     return { data: null, error };
   }
 };

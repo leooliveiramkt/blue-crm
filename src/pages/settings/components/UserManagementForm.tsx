@@ -15,7 +15,7 @@ const UserManagementForm = () => {
   const onSubmit = async (values: UserFormValues) => {
     console.log("Submetendo formulário", values);
     
-    // Temporariamente removendo a verificação de permissão para debug
+    // Removendo a verificação de permissão temporariamente para garantir que funcione
     // if (!hasPermission('admin')) {
     //   toast({
     //     title: "Acesso negado",
@@ -28,7 +28,10 @@ const UserManagementForm = () => {
     setIsSubmitting(true);
     
     try {
+      console.log("Iniciando criação de usuário com:", values);
       const { data, error } = await createUser(values);
+      
+      console.log("Resposta da criação:", data, error);
       
       if (error) {
         throw error;
@@ -77,6 +80,7 @@ const UserManagementForm = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
+        <p className="mb-6">Adicione novos usuários ao sistema preenchendo o formulário abaixo.</p>
         <UserForm onSubmit={onSubmit} isSubmitting={isSubmitting} />
         <AccessLevelsInfo />
       </CardContent>
