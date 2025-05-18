@@ -66,7 +66,7 @@ const navItems: NavItem[] = [
   },
   {
     title: "Pipeline",
-    href: "/orders",
+    href: "/crm-pipeline",
     icon: FileText,
   },
   {
@@ -81,7 +81,7 @@ const navItems: NavItem[] = [
   },
   {
     title: "Integrações API",
-    href: "/integrations",
+    href: "/api-integrations",
     icon: Database,
   },
   {
@@ -131,8 +131,9 @@ const Sidebar = () => {
                 <NavLink 
                   to={item.href}
                   className={({ isActive }) => cn(
+                    "flex items-center gap-2 rounded-md px-3 py-2 text-sidebar-foreground transition-all hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                     isActive 
-                      ? "data-[active=true]" 
+                      ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium" 
                       : ""
                   )}
                 >

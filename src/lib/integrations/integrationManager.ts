@@ -25,6 +25,7 @@ class IntegrationManager {
    * Define o tenant ID atual para operações
    */
   public setTenantId(tenantId: string): void {
+    console.log(`[IntegrationManager] Definindo tenant ID: ${tenantId}`);
     this.tenantId = tenantId;
   }
 
@@ -51,7 +52,7 @@ class IntegrationManager {
       integrationCache.setMany(tid, integrations);
       return integrations;
     } catch (error) {
-      console.error('Erro ao carregar integrações:', error);
+      console.error('[IntegrationManager] Erro ao carregar integrações:', error);
       return [];
     }
   }
@@ -63,7 +64,8 @@ class IntegrationManager {
     const tid = tenantId || this.tenantId;
     
     if (!tid) {
-      throw new Error('Tenant ID não especificado');
+      console.warn('[IntegrationManager] Tenant ID não especificado ao buscar integração');
+      return null;
     }
 
     // Verifica o cache primeiro
@@ -72,13 +74,17 @@ class IntegrationManager {
     }
 
     try {
+      console.log(`[IntegrationManager] Buscando integração ${integrationId} para tenant ${tid}`);
       const integration = await integrationStorage.getIntegration(integrationId, tid);
       if (integration) {
+        console.log(`[IntegrationManager] Integração ${integrationId} encontrada no armazenamento`);
         integrationCache.set(tid, integration);
+      } else {
+        console.log(`[IntegrationManager] Integração ${integrationId} não encontrada para tenant ${tid}`);
       }
       return integration;
     } catch (error) {
-      console.error(`Erro ao buscar integração ${integrationId}:`, error);
+      console.error(`[IntegrationManager] Erro ao buscar integração ${integrationId}:`, error);
       return null;
     }
   }
@@ -87,15 +93,22 @@ class IntegrationManager {
    * Atualiza ou cria uma integração
    */
   public async saveIntegration(integration: Partial<IntegrationData>, tenantId?: string): Promise<IntegrationData | null> {
-    const tid = tenantId || this.tenantId;
+    const tid = tenantId || this.tenantId || integration.tenantId;
     
     if (!tid) {
+      console.error('[IntegrationManager] Erro: Tenant ID não especificado');
       throw new Error('Tenant ID não especificado');
     }
 
     if (!integration.id) {
+      console.error('[IntegrationManager] Erro: ID da integração não especificado');
       throw new Error('ID da integração não especificado');
     }
+
+    console.log(`[IntegrationManager] Salvando integração ${integration.id} para tenant ${tid}`, {
+      credentialsSize: integration.credentials ? Object.keys(integration.credentials).length : 0,
+      temCredenciais: !!integration.credentials
+    });
 
     // Cria o objeto de integração completo
     const now = new Date().toISOString();
@@ -111,13 +124,20 @@ class IntegrationManager {
     };
 
     try {
+      console.log(`[IntegrationManager] Iniciando salvamento da integração ${integration.id} para o storage`);
       const savedIntegration = await integrationStorage.saveIntegration(completeIntegration);
+      
       if (savedIntegration) {
+        console.log(`[IntegrationManager] Integração ${integration.id} salva com sucesso no storage`);
         integrationCache.set(tid, savedIntegration);
+        return savedIntegration;
+      } else {
+        console.error(`[IntegrationManager] Falha ao salvar integração ${integration.id} no storage`);
       }
+      
       return savedIntegration;
     } catch (error) {
-      console.error('Erro ao salvar integração:', error);
+      console.error(`[IntegrationManager] Erro ao salvar integração ${integration.id}:`, error);
       return null;
     }
   }
@@ -168,6 +188,7 @@ class IntegrationManager {
    * Testa uma conexão de API com base nas credenciais fornecidas
    */
   public async testConnection(integrationId: IntegrationType, credentials: Record<string, string>): Promise<boolean> {
+    console.log(`[IntegrationManager] Testando conexão para ${integrationId}`);
     return connectionService.testConnection(integrationId, credentials);
   }
 

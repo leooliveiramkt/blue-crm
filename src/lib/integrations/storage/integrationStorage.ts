@@ -10,25 +10,37 @@ export class IntegrationStorage {
    * Carrega todas as integrações para um tenant específico
    */
   public async loadIntegrations(tenantId: string): Promise<IntegrationData[]> {
+    console.log(`[IntegrationStorage] Carregando integrações para tenant ${tenantId}`);
+    console.log(`[IntegrationStorage] Supabase configurado: ${isSupabaseConfigured}`);
+
     if (!isSupabaseConfigured) {
       // Fallback para localStorage
+      console.log(`[IntegrationStorage] Usando localStorage para carregar integrações`);
       const savedIntegrations = localStorage.getItem(`integrations_${tenantId}`);
       if (savedIntegrations) {
-        return JSON.parse(savedIntegrations) as IntegrationData[];
+        const parsedData = JSON.parse(savedIntegrations) as IntegrationData[];
+        console.log(`[IntegrationStorage] Encontradas ${parsedData.length} integrações no localStorage`);
+        return parsedData;
       }
+      console.log(`[IntegrationStorage] Nenhuma integração encontrada no localStorage`);
       return [];
     }
 
     try {
       // Consulta Supabase para obter todas as integrações do tenant
+      console.log(`[IntegrationStorage] Consultando tabela 'integrations' no Supabase para tenant ${tenantId}`);
       const { data, error } = await supabase
         .from('integrations')
         .select('*')
         .eq('tenant_id', tenantId);
 
-      if (error) throw error;
+      if (error) {
+        console.error(`[IntegrationStorage] Erro do Supabase ao carregar integrações:`, error);
+        throw error;
+      }
 
       if (data && data.length > 0) {
+        console.log(`[IntegrationStorage] Encontradas ${data.length} integrações no Supabase`);
         // Converte os dados para o formato IntegrationData com casting adequado
         return data.map(item => ({
           id: item.id as IntegrationType,
@@ -42,9 +54,10 @@ export class IntegrationStorage {
         }));
       }
       
+      console.log(`[IntegrationStorage] Nenhuma integração encontrada no Supabase para tenant ${tenantId}`);
       return [];
     } catch (error) {
-      console.error('Erro ao carregar integrações:', error);
+      console.error('[IntegrationStorage] Erro ao carregar integrações do Supabase:', error);
       return [];
     }
   }
@@ -53,16 +66,23 @@ export class IntegrationStorage {
    * Busca uma integração específica
    */
   public async getIntegration(integrationId: IntegrationType, tenantId: string): Promise<IntegrationData | null> {
+    console.log(`[IntegrationStorage] Buscando integração ${integrationId} para tenant ${tenantId}`);
+    console.log(`[IntegrationStorage] Supabase configurado: ${isSupabaseConfigured}`);
+
     if (!isSupabaseConfigured) {
+      console.log(`[IntegrationStorage] Usando localStorage para buscar integração ${integrationId}`);
       const savedIntegrations = localStorage.getItem(`integrations_${tenantId}`);
       if (savedIntegrations) {
         const integrations = JSON.parse(savedIntegrations) as IntegrationData[];
-        return integrations.find(i => i.id === integrationId) || null;
+        const found = integrations.find(i => i.id === integrationId);
+        console.log(`[IntegrationStorage] Integração ${integrationId} ${found ? 'encontrada' : 'não encontrada'} no localStorage`);
+        return found || null;
       }
       return null;
     }
 
     try {
+      console.log(`[IntegrationStorage] Consultando Supabase para a integração ${integrationId}`);
       const { data, error } = await supabase
         .from('integrations')
         .select('*')
@@ -70,9 +90,18 @@ export class IntegrationStorage {
         .eq('id', integrationId)
         .single();
 
-      if (error) throw error;
+      if (error) {
+        // Se o erro for devido à ausência de registros, apenas registramos
+        if (error.code === 'PGRST116') {
+          console.log(`[IntegrationStorage] Integração ${integrationId} não encontrada no Supabase`);
+          return null;
+        }
+        console.error(`[IntegrationStorage] Erro do Supabase ao buscar integração ${integrationId}:`, error);
+        throw error;
+      }
 
       if (data) {
+        console.log(`[IntegrationStorage] Integração ${integrationId} encontrada no Supabase`);
         // Converte para o formato IntegrationData com casting adequado
         return {
           id: data.id as IntegrationType,
@@ -86,9 +115,10 @@ export class IntegrationStorage {
         };
       }
       
+      console.log(`[IntegrationStorage] Nenhum dado retornado do Supabase para integração ${integrationId}`);
       return null;
     } catch (error) {
-      console.error(`Erro ao buscar integração ${integrationId}:`, error);
+      console.error(`[IntegrationStorage] Erro ao buscar integração ${integrationId} do Supabase:`, error);
       return null;
     }
   }
@@ -97,7 +127,11 @@ export class IntegrationStorage {
    * Salva ou atualiza uma integração
    */
   public async saveIntegration(integration: IntegrationData): Promise<IntegrationData | null> {
+    console.log(`[IntegrationStorage] Salvando integração ${integration.id} para tenant ${integration.tenantId}`);
+    console.log(`[IntegrationStorage] Supabase configurado: ${isSupabaseConfigured}`);
+    
     if (!isSupabaseConfigured) {
+      console.log(`[IntegrationStorage] Supabase não configurado, salvando no localStorage`);
       // Salva no localStorage
       const savedIntegrations = localStorage.getItem(`integrations_${integration.tenantId}`);
       let integrations = savedIntegrations ? JSON.parse(savedIntegrations) as IntegrationData[] : [];
@@ -107,9 +141,11 @@ export class IntegrationStorage {
       if (existingIndex >= 0) {
         // Atualiza integração existente
         integrations[existingIndex] = integration;
+        console.log(`[IntegrationStorage] Atualizada integração existente no localStorage: ${integration.id}`);
       } else {
         // Adiciona nova integração
         integrations.push(integration);
+        console.log(`[IntegrationStorage] Adicionada nova integração no localStorage: ${integration.id}`);
       }
       
       localStorage.setItem(`integrations_${integration.tenantId}`, JSON.stringify(integrations));
@@ -129,15 +165,24 @@ export class IntegrationStorage {
         updated_at: integration.updatedAt
       };
 
+      console.log(`[IntegrationStorage] Enviando requisição para Supabase: ${integration.id}`, {
+        temCredenciais: !!integration.credentials,
+        credentialsKeys: Object.keys(integration.credentials)
+      });
+
       const { data, error } = await supabase
         .from('integrations')
         .upsert(dbData)
         .select()
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error(`[IntegrationStorage] Erro Supabase ao salvar integração:`, error);
+        throw error;
+      }
 
       if (data) {
+        console.log(`[IntegrationStorage] Integração salva com sucesso no Supabase: ${integration.id}`);
         // Converte de volta para o formato IntegrationData com casting adequado
         return {
           id: data.id as IntegrationType,
@@ -151,9 +196,10 @@ export class IntegrationStorage {
         };
       }
       
+      console.error(`[IntegrationStorage] Nenhum dado retornado do Supabase após salvar integração: ${integration.id}`);
       return null;
     } catch (error) {
-      console.error('Erro ao salvar integração:', error);
+      console.error(`[IntegrationStorage] Erro ao salvar integração ${integration.id}:`, error);
       return null;
     }
   }

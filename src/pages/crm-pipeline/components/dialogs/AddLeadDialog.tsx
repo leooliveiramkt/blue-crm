@@ -9,6 +9,8 @@ import {
 } from '@/components/ui/dialog';
 import { usePipelineData } from '../../hooks/usePipelineData';
 import { LeadForm, LeadFormValues } from './LeadForm';
+import { useUsers } from '../../hooks/users';
+import { useEffect } from 'react';
 
 interface AddLeadDialogProps {
   open: boolean;
@@ -16,7 +18,14 @@ interface AddLeadDialogProps {
 }
 
 export const AddLeadDialog = ({ open, onOpenChange }: AddLeadDialogProps) => {
-  const { stages, users, addLead } = usePipelineData();
+  const { stages, addLead } = usePipelineData();
+  const { users, fetchUsers } = useUsers();
+  
+  useEffect(() => {
+    if (open) {
+      fetchUsers();
+    }
+  }, [open, fetchUsers]);
   
   const handleSubmit = (values: LeadFormValues) => {
     // Garantindo que todos os campos obrigatórios estejam presentes

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 
-export const useSupabaseConnection = () => {
+export function useSupabaseConnection() {
   const [debugInfo, setDebugInfo] = useState<string | null>(null);
   
   useEffect(() => {
@@ -36,4 +36,4 @@ export const useSupabaseConnection = () => {
   }, []);
 
   return { debugInfo };
-};
+}

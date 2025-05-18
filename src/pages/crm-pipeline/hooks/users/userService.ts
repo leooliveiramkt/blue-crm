@@ -4,7 +4,7 @@ import { User } from '../../types';
 import { UserCreateData, UserUpdateData, UserOperationResult } from './types';
 
 export const userService = {
-  async fetchUsers(): Promise<User[]> {
+  async getUsers(): Promise<User[]> {
     const { data, error } = await supabase
       .from('profiles')
       .select('id, first_name, last_name, role')
@@ -24,7 +24,7 @@ export const userService = {
     return [];
   },
 
-  async createUser(userData: UserCreateData): Promise<UserOperationResult> {
+  async addUser(userData: UserCreateData): Promise<User> {
     try {
       // Separando o nome completo em primeiro nome e sobrenome
       const nameParts = userData.name.split(' ');
@@ -55,23 +55,17 @@ export const userService = {
           role: userData.role
         };
         
-        return { 
-          success: true, 
-          user: newUser 
-        };
+        return newUser;
       }
       
       throw new Error('Falha ao criar usuário: nenhum dado retornado');
     } catch (err) {
       console.error('Erro no serviço ao criar usuário:', err);
-      return { 
-        success: false, 
-        error: err 
-      };
+      throw err;
     }
   },
 
-  async updateUser(id: string, userData: UserUpdateData): Promise<UserOperationResult> {
+  async updateUser(id: string, userData: UserUpdateData): Promise<User> {
     try {
       // Prepara os dados para atualização
       const updateData: Record<string, any> = {};
@@ -93,17 +87,19 @@ export const userService = {
         
       if (error) throw error;
 
-      return { success: true };
+      // Retorna o usuário atualizado
+      return {
+        id,
+        name: userData.name || '', // Este valor deve ser preenchido pelo chamador se necessário
+        role: userData.role || '' // Este valor deve ser preenchido pelo chamador se necessário
+      };
     } catch (err) {
       console.error('Erro no serviço ao atualizar usuário:', err);
-      return { 
-        success: false, 
-        error: err 
-      };
+      throw err;
     }
   },
 
-  async deleteUser(id: string): Promise<UserOperationResult> {
+  async deleteUser(id: string): Promise<boolean> {
     try {
       const { error } = await supabase
         .from('profiles')
@@ -112,13 +108,21 @@ export const userService = {
         
       if (error) throw error;
       
-      return { success: true };
+      return true;
     } catch (err) {
       console.error('Erro no serviço ao excluir usuário:', err);
-      return { 
-        success: false, 
-        error: err 
-      };
+      throw err;
+    }
+  },
+  
+  // Mantemos os métodos antigos para compatibilidade
+  fetchUsers: function() { return this.getUsers(); },
+  createUser: async function(userData: UserCreateData) {
+    try {
+      const user = await this.addUser(userData);
+      return { success: true, user };
+    } catch (error) {
+      return { success: false, error };
     }
   }
 };
