@@ -1,11 +1,10 @@
-
-import { BrowserRouter } from "react-router-dom";
-import { Toaster } from "@/components/ui/toaster";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { TenantProvider } from "@/hooks/useTenant";
-import { Routes } from "./Routes";
-import { useSupabaseConnection } from "@/hooks/useSupabaseConnection";
+import ApiIntegrations from '@/pages/ApiIntegrations';
+import { useSupabaseConnection } from '@/hooks/useSupabaseConnection';
 import "./App.css";
 
 function App() {
@@ -25,16 +24,22 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <Router>
       <ThemeProvider>
         <AuthProvider>
           <TenantProvider>
-            <Routes />
-            <Toaster />
+            <div className="min-h-screen bg-background">
+              <Routes>
+                <Route path="/" element={<ApiIntegrations />} />
+                <Route path="/integrations" element={<ApiIntegrations />} />
+                {/* Adicionar mais rotas aqui */}
+              </Routes>
+              <Toaster />
+            </div>
           </TenantProvider>
         </AuthProvider>
       </ThemeProvider>
-    </BrowserRouter>
+    </Router>
   );
 }
 
