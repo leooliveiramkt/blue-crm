@@ -2,33 +2,54 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blue CRM - Sistema de Gestão</title>
-    <meta name="description" content="Sistema de gerenciamento para afiliados" />
-    <meta name="author" content="Léo Oliveira" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!-- Favicon -->
     <link id="dynamic-favicon" rel="icon" href="/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png" type="image/png">
-    <!-- Fallback favicon se o dinâmico não funcionar -->
     <link rel="alternate icon" href="/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png" type="image/png">
-
-    <meta property="og:title" content="Blue CRM" />
-    <meta property="og:description" content="Sistema de gerenciamento para afiliados" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Blue CRM - Sistema de Gestão</title>
+    <meta name="title" content="Blue CRM - Sistema de Gestão">
+    <meta name="description" content="Sistema de gerenciamento para afiliados e gestão de relacionamento com clientes">
+    <meta name="author" content="Léo Oliveira">
+    <meta name="theme-color" content="#ffffff">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blue-crm.vercel.app/">
+    <meta property="og:title" content="Blue CRM - Sistema de Gestão">
+    <meta property="og:description" content="Sistema de gerenciamento para afiliados e gestão de relacionamento com clientes">
+    <meta property="og:image" content="/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://blue-crm.vercel.app/">
+    <meta property="twitter:title" content="Blue CRM - Sistema de Gestão">
+    <meta property="twitter:description" content="Sistema de gerenciamento para afiliados e gestão de relacionamento com clientes">
+    <meta property="twitter:image" content="/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png">
+    
+    <!-- Preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.gpteng.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
   </head>
 
   <body>
     <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    
+    <!-- Scripts -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
     
+    <!-- Favicon Handler -->
     <script>
-      // Garante que o favicon seja carregado corretamente
       document.addEventListener('DOMContentLoaded', () => {
         const faviconPath = '/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png';
         const dynamicFavicon = document.getElementById('dynamic-favicon');
@@ -36,6 +57,14 @@
           dynamicFavicon.href = faviconPath;
         }
       });
+    </script>
+    
+    <!-- Error Handler -->
+    <script>
+      window.onerror = function(msg, url, lineNo, columnNo, error) {
+        console.error('Error: ' + msg + '\nURL: ' + url + '\nLine: ' + lineNo + '\nColumn: ' + columnNo + '\nError object: ' + JSON.stringify(error));
+        return false;
+      };
     </script>
   </body>
 </html>
