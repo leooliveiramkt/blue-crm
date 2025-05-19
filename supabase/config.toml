@@ -1,0 +1,6 @@
+
+project_id = "zkjpzwrcuauieaaktzbk"
+
+[wbuy_sync_auto_cron]
+schedule = "* * * * *"  # Executa a cada minuto
+

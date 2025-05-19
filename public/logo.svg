@@ -1,0 +1,39 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="50" viewBox="0 0 200 50">
+  <style>
+    .text { font: bold 24px sans-serif; fill: #131b40; }
+    .background { fill: #001440; }
+    .butterfly { fill: none; stroke: #ddcdc0; stroke-width: 2.5; }
+    
+    @keyframes flutter {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-2px); }
+    }
+    .butterfly-container {
+      transform-origin: center;
+      animation: flutter 3s ease-in-out infinite;
+    }
+  </style>
+  
+  <!-- Fundo azul retangular com cantos arredondados -->
+  <rect width="40" height="40" x="5" y="5" rx="8" class="background" />
+  
+  <!-- Borboleta elegante com animação -->
+  <g class="butterfly-container">
+    <path d="M12,25 
+           C14,13 22,10 28,18
+           C32,10 40,13 42,25
+           C42,32 32,28 28,30
+           C24,28 14,32 12,25
+           M28,18
+           C30,14 27,12 25,10
+           M28,18
+           C26,14 29,12 31,10"
+        class="butterfly" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" />
+  </g>
+  
+  <!-- Texto "Blue CRM" -->
+  <text x="50" y="33" class="text">Blue CRM</text>
+</svg>
