@@ -11,7 +11,15 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\""
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "prepare": "husky install",
+    "tag": "lovable-tagger",
+    "tag:check": "lovable-tagger --check",
+    "tag:fix": "lovable-tagger --fix",
+    "release": "standard-version",
+    "release:alpha": "standard-version --prerelease alpha",
+    "release:beta": "standard-version --prerelease beta",
+    "release:rc": "standard-version --prerelease rc"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.4",

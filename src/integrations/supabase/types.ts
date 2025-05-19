@@ -375,6 +375,54 @@ export type Database = {
         }
         Relationships: []
       }
+      tenants: {
+        Row: {
+          id: string
+          name: string
+          plan: string
+          status: string
+          created_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          name: string
+          plan: string
+          status: string
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          name?: string
+          plan?: string
+          status?: string
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      },
+      tenant_users: {
+        Row: {
+          tenant_id: string
+          user_id: string
+          role: string
+          created_at: string | null
+        }
+        Insert: {
+          tenant_id: string
+          user_id: string
+          role: string
+          created_at?: string | null
+        }
+        Update: {
+          tenant_id?: string
+          user_id?: string
+          role?: string
+          created_at?: string | null
+        }
+        Relationships: []
+      },
     }
     Views: {
       monthly_ranking: {
