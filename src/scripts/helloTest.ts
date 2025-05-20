@@ -1,0 +1,1 @@
+console.log('Script TypeScript executado com sucesso!'); 

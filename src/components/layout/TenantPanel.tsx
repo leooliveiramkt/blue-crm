@@ -1,5 +1,4 @@
-
-import { Tenant } from '@/lib/tenancy/types';
+import { Tenant } from '@/lib/tenants/tenantManager';
 import { useTenant } from '@/hooks/useTenant';
 import { TenantSelector } from '@/components/tenant/TenantSelector';
 import { Badge } from '@/components/ui/badge';

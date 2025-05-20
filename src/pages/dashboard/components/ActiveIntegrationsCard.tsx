@@ -1,12 +1,11 @@
-
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useIntegrations } from '@/hooks/useIntegration';
+import { useIntegration } from '@/hooks/useIntegration';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 const ActiveIntegrationsCard = () => {
-  const { integrations, isLoading, refreshIntegrations } = useIntegrations();
+  const { integration, isLoading, refreshIntegration } = useIntegration('wbuy');
   const [staticIntegrations, setStaticIntegrations] = useState([
     { name: 'Wbuy', status: 'Ativo', statusClass: 'text-green-600' },
     { name: 'Facebook', status: 'Ativo', statusClass: 'text-green-600' },
@@ -19,15 +18,15 @@ const ActiveIntegrationsCard = () => {
   // Efeito para atualizar as integrações periodicamente
   useEffect(() => {
     // Carrega as integrações ao montar o componente
-    refreshIntegrations();
+    refreshIntegration();
     
     // Define um intervalo para atualizar as integrações a cada minuto
     const interval = setInterval(() => {
-      refreshIntegrations();
+      refreshIntegration();
     }, 60000); // 60000 ms = 1 minuto
     
     return () => clearInterval(interval);
-  }, [refreshIntegrations]);
+  }, [refreshIntegration]);
 
   // Formata o momento da última sincronização
   const formatLastSync = (lastSync) => {
@@ -54,10 +53,10 @@ const ActiveIntegrationsCard = () => {
 
   // Atualiza os dados das integrações quando eles mudarem
   useEffect(() => {
-    if (integrations && integrations.length > 0) {
+    if (integration && integration.length > 0) {
       const updatedIntegrations = staticIntegrations.map(staticInteg => {
         // Encontra a integração correspondente no array de integrações reais
-        const realInteg = integrations.find(
+        const realInteg = integration.find(
           i => integrationNames[i.id] === staticInteg.name
         );
         
@@ -96,7 +95,7 @@ const ActiveIntegrationsCard = () => {
       
       setStaticIntegrations(updatedIntegrations);
     }
-  }, [integrations]);
+  }, [integration]);
 
   return (
     <Card>

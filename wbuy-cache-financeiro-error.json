@@ -1,0 +1,15 @@
+{
+  "message": "Request failed with status code 404",
+  "response": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>404 Not Found</title>\n</head><body>\n<h1>Not Found</h1>\n<p>The requested URL was not found on this server.</p>\n</body></html>\n",
+  "status": 404,
+  "headers": {
+    "date": "Tue, 20 May 2025 02:57:22 GMT",
+    "content-type": "text/html; charset=iso-8859-1",
+    "content-length": "196",
+    "connection": "keep-alive",
+    "set-cookie": "AWSALB=wv2fMfnmwSNzXjkueRbbhnJBXoYOdNZwxNvLXCUKFYmJGlauSmr+F20JBnQl8wu6R5xTtTKATw4Ph1YJkAcijrH00XpkDkknuEZHHMBt7sPq2piNMYnLp57doBg0; Expires=Tue, 27 May 2025 02:57:22 GMT; Path=/, AWSALBCORS=wv2fMfnmwSNzXjkueRbbhnJBXoYOdNZwxNvLXCUKFYmJGlauSmr+F20JBnQl8wu6R5xTtTKATw4Ph1YJkAcijrH00XpkDkknuEZHHMBt7sPq2piNMYnLp57doBg0; Expires=Tue, 27 May 2025 02:57:22 GMT; Path=/; SameSite=None; Secure",
+    "server": "Apache/2.4.62 () OpenSSL/1.0.2k-fips",
+    "x-frame-options": "SAMEORIGIN, SAMEORIGIN",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload"
+  }
+}

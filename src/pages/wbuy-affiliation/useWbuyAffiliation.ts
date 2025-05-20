@@ -1,7 +1,5 @@
-
 import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
-import { isSupabaseConfigured } from '@/lib/supabase';
 import { Affiliate, AffiliateAttribute } from './types';
 import { useWbuyApi } from '@/hooks/useWbuyApi';
 

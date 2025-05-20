@@ -1,14 +1,13 @@
-
 import { useState, useEffect, createContext, useContext } from 'react';
-import { tenantManager } from '@/lib/tenancy/tenantManager';
-import { Tenant, TenantUser } from '@/lib/tenancy/types';
+import { tenantManager } from '@/lib/tenants/tenantManager';
+import { Tenant, TenantUser } from '@/lib/tenants/tenantManager';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 
 // Contexto para gerenciar o tenant atual
 interface TenantContextType {
   currentTenant: Tenant | null;
-  userTenants: TenantUser[];
+  userTenants: Tenant[];
   setTenant: (tenantId: string) => Promise<boolean>;
   createNewTenant: (tenant: Partial<Tenant>) => Promise<Tenant | null>;
   isLoading: boolean;
@@ -22,7 +21,7 @@ export const TenantProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const { isAuthenticated, userRole, userName } = useAuth();
   const { toast } = useToast();
   const [currentTenant, setCurrentTenant] = useState<Tenant | null>(null);
-  const [userTenants, setUserTenants] = useState<TenantUser[]>([]);
+  const [userTenants, setUserTenants] = useState<Tenant[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Inicializa o tenant atual

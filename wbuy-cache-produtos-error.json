@@ -1,0 +1,36 @@
+{
+  "message": "Request failed with status code 403",
+  "response": {
+    "code": "000",
+    "message": "Forbidden",
+    "responseCode": 403,
+    "total": 0,
+    "data": {
+      "auth": "Basic ZjlkMWNkMGUtMjgyNi00Yjc5LTg5N2ItYTIxNjljY2Y3ZjllOmI3ZDU3Yjk4ZmUxMzRjOWY5OGI1NmM2Zjg3YjRjNTA3"
+    }
+  },
+  "status": 403,
+  "headers": {
+    "date": "Tue, 20 May 2025 03:06:20 GMT",
+    "content-type": "application/json",
+    "content-length": "179",
+    "connection": "keep-alive",
+    "set-cookie": "AWSALB=7O21exq1wTiDp+6EcOa7AFEHKIfpRSw5AP3aeEAI2m1/Se1Yfyow0+WvU0vr59oxn+PvjW/1EdwrveJcAm0/zP4aAz/wIswPXo5weLBitacv1wZkf/GigNNbjqFg; Expires=Tue, 27 May 2025 03:06:20 GMT; Path=/, AWSALBCORS=7O21exq1wTiDp+6EcOa7AFEHKIfpRSw5AP3aeEAI2m1/Se1Yfyow0+WvU0vr59oxn+PvjW/1EdwrveJcAm0/zP4aAz/wIswPXo5weLBitacv1wZkf/GigNNbjqFg; Expires=Tue, 27 May 2025 03:06:20 GMT; Path=/; SameSite=None; Secure, PHPSESSID=k6tmri8vud948antptt92crhb4; path=/; secure; HttpOnly; SameSite=Lax",
+    "server": "Apache/2.4.62 () OpenSSL/1.0.2k-fips",
+    "x-powered-by": "wBuy, wBuy",
+    "expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+    "cache-control": "no-store, no-cache, must-revalidate",
+    "pragma": "no-cache",
+    "x-frame-options": "SAMEORIGIN, SAMEORIGIN",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "vary": "Accept-Encoding",
+    "x-xss-protection": "1; mode=block",
+    "x-content-type-options": "nosniff",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "expect-ct": "max-age=86400, enforce",
+    "access-control-allow-origin": "*",
+    "access-control-allow-methods": "POST, GET, DELETE, PUT",
+    "access-control-allow-headers": "*",
+    "content-security-policy": "default-src 'self' 'unsafe-inline' *.cloudfront.net *.wbuy.com.br *.sistemawbuy.com.br *.cloudfront.net; img-src * data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.cloudfront.net *.wbuy.com.br *.sistemawbuy.com.br; frame-ancestors 'self'; frame-src 'self' *.localhost *.wbuy.com.br *.sistemawbuy.com.br; style-src 'self' 'unsafe-inline' *.cloudfront.net *.sistemawbuy.com.br"
+  }
+}

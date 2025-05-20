@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Loader2, SearchIcon, CircleAlert } from 'lucide-react';
+import { Loader2, SearchIcon, AlertCircle } from 'lucide-react';
 
 interface SearchOrderFormProps {
   orderCode: string;
@@ -59,7 +58,7 @@ export const SearchOrderForm: React.FC<SearchOrderFormProps> = ({
 
         {error && (
           <div className="mt-4 p-4 bg-destructive/10 text-destructive rounded-md flex items-center">
-            <CircleAlert className="h-5 w-5 mr-2" />
+            <AlertCircle className="h-5 w-5 mr-2" />
             {error}
           </div>
         )}

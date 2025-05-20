@@ -1,21 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { TenantProvider } from "@/hooks/useTenant";
-import ApiIntegrations from '@/pages/ApiIntegrations';
-import { useSupabaseConnection } from '@/hooks/useSupabaseConnection';
+import Routes from './Routes';
 import "./App.css";
 
 function App() {
   // Verificar se o cliente está conectando com a API
   console.log("[App] App iniciado - Verificando ambiente");
-  
-  // Verificar conexão com Supabase
-  const { debugInfo } = useSupabaseConnection();
-  if (debugInfo) {
-    console.warn("[App] Problema de conexão detectado:", debugInfo);
-  }
   
   // Verificar se há usuários de demonstração
   const demoType = localStorage.getItem('demo_user_type');
@@ -29,11 +23,7 @@ function App() {
         <AuthProvider>
           <TenantProvider>
             <div className="min-h-screen bg-background">
-              <Routes>
-                <Route path="/" element={<ApiIntegrations />} />
-                <Route path="/integrations" element={<ApiIntegrations />} />
-                {/* Adicionar mais rotas aqui */}
-              </Routes>
+              <Routes />
               <Toaster />
             </div>
           </TenantProvider>

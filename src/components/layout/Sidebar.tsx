@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -93,6 +92,11 @@ const navItems: NavItem[] = [
     title: "Configurações",
     href: "/settings",
     icon: Settings,
+  },
+  {
+    title: 'Configurações WBuy',
+    href: '/wbuy-config',
+    icon: Settings
   },
 ];
 

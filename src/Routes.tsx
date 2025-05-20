@@ -1,4 +1,3 @@
-
 import { Routes as RouterRoutes, Route } from 'react-router-dom';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import Index from './pages/Index';
@@ -18,6 +17,7 @@ import OrderTracking from './pages/OrderTracking';
 import WbuyAffiliation from './pages/wbuy-affiliation/WbuyAffiliation';
 import ApiIntegrations from './pages/api-integrations';
 import MainLayout from './components/layout/MainLayout';
+import { WBuyConfigPage } from './pages/wbuy-config';
 
 const Routes = () => {
   return (
@@ -41,6 +41,7 @@ const Routes = () => {
           <Route path="/order-tracking" element={<OrderTracking />} />
           <Route path="/wbuy-affiliation" element={<WbuyAffiliation />} />
           <Route path="/api-integrations" element={<ApiIntegrations />} />
+          <Route path="/wbuy-config" element={<WBuyConfigPage />} />
         </Route>
       </Route>
       

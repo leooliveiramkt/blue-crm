@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { IntegrationType } from '@/lib/integrations/types';
-import { useIntegrations } from '@/hooks/useIntegration';
+import { useIntegration } from '@/hooks/useIntegration';
 import { useToast } from '@/hooks/use-toast';
 
 export const useApiIntegrations = () => {
@@ -17,20 +16,20 @@ export const useApiIntegrations = () => {
     airtable: '',
   });
 
-  const { integrations, isLoading, refreshIntegrations } = useIntegrations();
+  const { integration, isLoading, refreshIntegration } = useIntegration('wbuy'); // Exemplo: ajuste o parâmetro conforme necessário
 
   // Efeito para atualizar as integrações periodicamente
   useEffect(() => {
     // Carrega as integrações ao montar o componente
-    refreshIntegrations();
+    refreshIntegration();
     
     // Define um intervalo para atualizar as integrações a cada minuto
     const interval = setInterval(() => {
-      refreshIntegrations();
+      refreshIntegration();
     }, 60000); // 60000 ms = 1 minuto
     
     return () => clearInterval(interval);
-  }, [refreshIntegrations]);
+  }, [refreshIntegration]);
 
   const handleConnect = (integrationId: IntegrationType) => {
     toast({
@@ -114,7 +113,7 @@ export const useApiIntegrations = () => {
 
     // Combina os dados estáticos com os dados reais
     return staticIntegrations.map(staticIntegration => {
-      const realIntegration = integrations.find(i => i.id === staticIntegration.id);
+      const realIntegration = integration.find(i => i.id === staticIntegration.id);
       return {
         ...staticIntegration,
         connected: realIntegration?.status === 'connected',

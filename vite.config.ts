@@ -4,25 +4,27 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server: {
-    host: true,
-    port: 8080,
-  },
   plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    port: 8080,
+    host: true,
+    strictPort: true,
+    hmr: {
+      overlay: true,
+    },
+  },
   build: {
     outDir: 'dist',
     sourcemap: true,
-    // Configuração adicional para evitar conflitos com tsconfig.node.json
-    rollupOptions: {
-      external: [],
-    },
   },
   optimizeDeps: {
-    exclude: [],
+    include: ['cmdk'],
   },
+  root: path.resolve(__dirname),
+  publicDir: 'public',
 });
