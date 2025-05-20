@@ -31,6 +31,7 @@
     "test:wbuy": "ts-node --transpile-only src/scripts/testWBuyConnection.ts"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.0.1",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
