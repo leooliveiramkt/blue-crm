@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Loader2, Check, AlertCircle } from 'lucide-react';
+import { Loader2, Check, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { getIntegrationConfig } from '@/lib/integrations/configs';
 import { useIntegration } from '@/hooks/useIntegration';
 import { IntegrationType } from '@/lib/integrations/types';
@@ -28,6 +27,7 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
   const [credentials, setCredentials] = useState<Record<string, string>>({});
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showApiKey, setShowApiKey] = useState(false);
   
   // Obter a configuração para acessar valores padrão
   const configData = config || getIntegrationConfig(integrationId);
@@ -141,7 +141,7 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[525px]">
+      <DialogContent className="sm:max-w-[525px] bg-white shadow-lg border">
         <DialogHeader>
           <DialogTitle>Configurar integração: {configData.name}</DialogTitle>
         </DialogHeader>
@@ -158,15 +158,36 @@ export const IntegrationConfigDialog: React.FC<IntegrationConfigDialogProps> = (
               <Label htmlFor={field.name}>
                 {field.label} {field.required && <span className="text-red-500">*</span>}
               </Label>
-              <Input
-                id={field.name}
-                type={field.type}
-                placeholder={field.placeholder}
-                value={credentials[field.name] || ''}
-                onChange={(e) => handleInputChange(field.name, e.target.value)}
-                required={field.required}
-                className={field.name === 'apiKey' ? 'font-mono text-sm' : ''}
-              />
+              {field.name === 'apiKey' ? (
+                <div className="relative">
+                  <Input
+                    id={field.name}
+                    type={showApiKey ? 'text' : 'password'}
+                    placeholder={field.placeholder}
+                    value={credentials[field.name] || ''}
+                    onChange={(e) => handleInputChange(field.name, e.target.value)}
+                    required={field.required}
+                    className="font-mono text-sm pr-10"
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary"
+                    tabIndex={-1}
+                    onClick={() => setShowApiKey((v) => !v)}
+                  >
+                    {showApiKey ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
+                </div>
+              ) : (
+                <Input
+                  id={field.name}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  value={credentials[field.name] || ''}
+                  onChange={(e) => handleInputChange(field.name, e.target.value)}
+                  required={field.required}
+                />
+              )}
               {field.name === 'apiKey' && (
                 <p className="text-xs text-muted-foreground mt-1">
                   Importante: O token deve começar com "Bearer " seguido pelo valor do token.

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -32,7 +31,10 @@ export const SalesRanking: React.FC = () => {
             <TableBody>
               {salespeople.map((person, index) => (
                 <TableRow key={person.id}>
-                  <TableCell className="font-medium">{index + 1}</TableCell>
+                  <TableCell className="font-medium flex items-center">
+                    <span className={`inline-block w-3 h-3 rounded-full mr-2 ${person.goalPercentage >= 100 ? 'bg-emerald-500' : person.goalPercentage >= 70 ? 'bg-yellow-400' : 'bg-rose-500'}`}></span>
+                    {index + 1}
+                  </TableCell>
                   <TableCell>{person.name}</TableCell>
                   <TableCell>{person.sales}</TableCell>
                   <TableCell>R$ {person.totalValue.toLocaleString('pt-BR')}</TableCell>

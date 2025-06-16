@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -32,8 +31,8 @@ export const IntegrationCard: React.FC<IntegrationCardProps> = ({
 
   return (
     <>
-      <Card>
-        <CardHeader className="pb-2">
+      <Card className="overflow-hidden">
+        <CardHeader className="p-6 pb-2">
           <IntegrationCardHeader
             id={id}
             name={name}
@@ -41,19 +40,30 @@ export const IntegrationCard: React.FC<IntegrationCardProps> = ({
             connected={connected}
           />
         </CardHeader>
-        <CardContent>
-          <p className="text-xs text-muted-foreground">{description}</p>
+        <CardContent className="p-6 pt-0">
+          <p className="text-sm text-muted-foreground mb-4">{description}</p>
           <SyncStatus
             lastSync={lastSync}
             syncStatus={syncStatus}
             connected={connected}
           />
         </CardContent>
-        <CardFooter>
+        <CardFooter className="p-6 pt-0">
           {connected ? (
-            <Button variant="outline" className="w-full" onClick={handleOpenConfig}>Configurar</Button>
+            <Button 
+              variant="outline" 
+              className="w-full h-10 font-medium" 
+              onClick={handleOpenConfig}
+            >
+              Configurar
+            </Button>
           ) : (
-            <Button className="w-full" onClick={handleOpenConfig}>Conectar</Button>
+            <Button 
+              className="w-full h-10 font-medium bg-primary hover:bg-primary/90" 
+              onClick={handleOpenConfig}
+            >
+              Conectar
+            </Button>
           )}
         </CardFooter>
       </Card>

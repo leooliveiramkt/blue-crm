@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -36,8 +35,8 @@ const getSyncStatusInfo = (syncStatus?: string) => {
     case 'success':
     case 'concluido':
       return {
-        color: 'text-green-600',
-        bgColor: 'bg-green-50',
+        color: 'text-emerald-600',
+        bgColor: 'bg-emerald-50',
         icon: CheckCircle,
         label: 'Concluído'
       };
@@ -78,8 +77,8 @@ const getSyncStatusInfo = (syncStatus?: string) => {
 // Retorna as informações de status de conexão
 const getConnectionInfo = (connected: boolean) => {
   return {
-    color: connected ? 'text-green-600' : 'text-amber-600',
-    bgColor: connected ? 'bg-green-50' : 'bg-amber-50',
+    color: connected ? 'text-emerald-600' : 'text-amber-600',
+    bgColor: connected ? 'bg-emerald-50' : 'bg-amber-50',
     icon: connected ? CheckCircle : AlertCircle,
     label: connected ? 'Conectado' : 'Não conectado'
   };
@@ -95,19 +94,19 @@ export const SyncStatus: React.FC<SyncStatusProps> = ({
   const isProcessing = syncStatus === 'em_andamento' || syncStatus === 'processando';
 
   return (
-    <div className="mt-3 space-y-2">
+    <div className="space-y-2.5">
       {/* Status de Conexão */}
-      <div className={`flex items-center p-1.5 rounded-md ${connectionInfo.bgColor}`}>
-        <connectionInfo.icon className={`mr-1.5 h-4 w-4 ${connectionInfo.color}`} />
+      <div className={`flex items-center px-2 py-1.5 rounded-md ${connectionInfo.bgColor}`}>
+        <connectionInfo.icon className={`mr-2 h-4 w-4 ${connectionInfo.color}`} />
         <span className={`text-xs font-medium ${connectionInfo.color}`}>
           {connectionInfo.label}
         </span>
       </div>
       
       {/* Status de Sincronização */}
-      <div className={`flex items-center p-1.5 rounded-md ${syncInfo.bgColor}`}>
+      <div className={`flex items-center px-2 py-1.5 rounded-md ${syncInfo.bgColor}`}>
         <syncInfo.icon 
-          className={`mr-1.5 h-4 w-4 ${syncInfo.color} ${syncInfo.animate ? 'animate-spin' : ''}`} 
+          className={`mr-2 h-4 w-4 ${syncInfo.color} ${syncInfo.animate ? 'animate-spin' : ''}`} 
         />
         <span className={`text-xs font-medium ${syncInfo.color}`}>
           {syncInfo.label}
@@ -116,15 +115,15 @@ export const SyncStatus: React.FC<SyncStatusProps> = ({
       
       {/* Barra de Progresso para sincronização em andamento */}
       {isProcessing && (
-        <div className="mt-1">
-          <Progress value={65} className="h-1.5" />
+        <div className="mt-2">
+          <Progress value={65} className="h-1.5 bg-gray-100" />
         </div>
       )}
       
       {/* Última sincronização */}
-      <div className="text-xs font-medium text-muted-foreground">
+      <div className="text-xs text-gray-500">
         Última atualização: 
-        <span className={`ml-1 ${syncInfo.color}`}>
+        <span className={`ml-1.5 font-medium ${syncInfo.color}`}>
           {formatLastSync(lastSync)}
         </span>
       </div>

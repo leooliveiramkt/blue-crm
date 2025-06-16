@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { IntegrationType } from '@/lib/integrations/types';
-import { useIntegration } from '@/hooks/useIntegration';
+import { useAllIntegrations } from '@/hooks/useAllIntegrations';
 import { useToast } from '@/hooks/use-toast';
 
 export const useApiIntegrations = () => {
@@ -16,20 +16,7 @@ export const useApiIntegrations = () => {
     airtable: '',
   });
 
-  const { integration, isLoading, refreshIntegration } = useIntegration('wbuy'); // Exemplo: ajuste o parâmetro conforme necessário
-
-  // Efeito para atualizar as integrações periodicamente
-  useEffect(() => {
-    // Carrega as integrações ao montar o componente
-    refreshIntegration();
-    
-    // Define um intervalo para atualizar as integrações a cada minuto
-    const interval = setInterval(() => {
-      refreshIntegration();
-    }, 60000); // 60000 ms = 1 minuto
-    
-    return () => clearInterval(interval);
-  }, [refreshIntegration]);
+  const { integrations, isLoading, reload } = useAllIntegrations();
 
   const handleConnect = (integrationId: IntegrationType) => {
     toast({
@@ -43,13 +30,10 @@ export const useApiIntegrations = () => {
       ...apiKeys,
       [integrationId]: apiKey,
     });
-    
     toast({
       title: 'Chave API Salva',
       description: `A chave API para ${integrationId.charAt(0).toUpperCase() + integrationId.slice(1)} foi salva com sucesso.`,
     });
-
-    // Aviso ao usuário sobre a limitação da interface antiga
     toast({
       title: 'Recomendação',
       description: `Para configuração completa, use a opção "Conectar" na visualização de cards.`,
@@ -113,7 +97,7 @@ export const useApiIntegrations = () => {
 
     // Combina os dados estáticos com os dados reais
     return staticIntegrations.map(staticIntegration => {
-      const realIntegration = integration.find(i => i.id === staticIntegration.id);
+      const realIntegration = integrations.find(i => i.integration_id === staticIntegration.id);
       return {
         ...staticIntegration,
         connected: realIntegration?.status === 'connected',
@@ -130,6 +114,7 @@ export const useApiIntegrations = () => {
     isLoading,
     handleConnect,
     handleSaveApiKey,
-    getIntegrationsData
+    getIntegrationsData,
+    reloadIntegrations: reload,
   };
 };

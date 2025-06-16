@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -41,7 +40,7 @@ export const ProductAnalytics: React.FC = () => {
                 </TableHeader>
                 <TableBody>
                   {topProducts.map((product, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} className={index % 2 === 0 ? 'bg-secondary/20' : 'bg-white'}>
                       <TableCell className="font-medium">{product.name}</TableCell>
                       <TableCell>{product.quantity}</TableCell>
                       <TableCell>R$ {product.value.toLocaleString('pt-BR')}</TableCell>
@@ -72,7 +71,7 @@ export const ProductAnalytics: React.FC = () => {
                 </TableHeader>
                 <TableBody>
                   {lowProducts.map((product, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} className={index % 2 === 0 ? 'bg-secondary/20' : 'bg-white'}>
                       <TableCell className="font-medium">{product.name}</TableCell>
                       <TableCell>{product.quantity}</TableCell>
                       <TableCell>R$ {product.value.toLocaleString('pt-BR')}</TableCell>
@@ -159,7 +158,7 @@ export const ProductAnalytics: React.FC = () => {
                 </TableHeader>
                 <TableBody>
                   {abcAnalysis.map((product, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} className={index % 2 === 0 ? 'bg-secondary/20' : 'bg-white'}>
                       <TableCell className="font-medium">{product.name}</TableCell>
                       <TableCell>R$ {product.value.toLocaleString('pt-BR')}</TableCell>
                       <TableCell>{product.accumPercentage}%</TableCell>

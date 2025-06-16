@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Switch } from '@/components/ui/switch';
 import { IntegrationType } from '@/lib/integrations/types';
@@ -20,20 +19,21 @@ export const IntegrationCardHeader: React.FC<CardHeaderProps> = ({
   const IconComponent = useIntegrationIcon(id);
 
   return (
-    <div className="flex flex-row items-center justify-between space-y-0 pb-2">
+    <div className="flex flex-row items-center justify-between">
       <div className="flex items-center space-x-3">
-        <div className={`p-2.5 rounded-full ${color}`}>
-          {IconComponent && <IconComponent size={16} />}
+        <div className={`p-2.5 rounded-full ${color} bg-opacity-10`}>
+          {IconComponent && <IconComponent className={`${color} text-opacity-100`} size={20} />}
         </div>
-        <div className="text-md font-medium">
+        <div className="text-base font-medium text-gray-900">
           {name}
         </div>
       </div>
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center">
         <Switch
           id={`${id}-switch`}
           checked={connected}
           disabled
+          className="data-[state=checked]:bg-primary"
         />
       </div>
     </div>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -47,8 +46,8 @@ export const InventoryControl: React.FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredInventory.map((item) => (
-                <TableRow key={item.id}>
+              {filteredInventory.map((item, index) => (
+                <TableRow key={item.id} className={index % 2 === 0 ? 'bg-secondary/20' : 'bg-white'}>
                   <TableCell className="font-medium">{item.name}</TableCell>
                   <TableCell>{item.sku}</TableCell>
                   <TableCell>{item.category}</TableCell>

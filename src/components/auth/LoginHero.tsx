@@ -1,13 +1,18 @@
-
 import React from 'react';
 import { ThemeConfig } from '@/config/theme';
 
 export const LoginHero: React.FC = () => {
+  // Detecta se é cor ou imagem
+  const isColor = ThemeConfig.loginBackground?.startsWith('#');
   return (
     <div 
-      className="hidden md:flex md:w-1/2 bg-sidebar items-center justify-center p-12"
+      className="hidden md:flex md:w-1/2 items-center justify-center p-12"
       style={{
-        backgroundImage: ThemeConfig.loginBackground ? `url(${ThemeConfig.loginBackground})` : 'none',
+        background: isColor
+          ? ThemeConfig.loginBackground
+          : ThemeConfig.loginBackground
+            ? `url(${ThemeConfig.loginBackground})`
+            : '#0a1124',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

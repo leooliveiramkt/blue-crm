@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Bell, Search, Menu, LogOut, Settings, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -25,7 +24,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background px-4 md:px-6">
-      <SidebarTrigger className="md:hidden" />
+      <SidebarTrigger className="text-primary hover:text-primary-foreground" />
       <div className="hidden md:block">
         <div className="relative">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -53,7 +52,7 @@ const Header = () => {
               </span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="menu-perfil-dropdown bg-white shadow-lg border rounded-md">
             <DropdownMenuLabel>
               <div className="flex flex-col">
                 <span>{userName}</span>

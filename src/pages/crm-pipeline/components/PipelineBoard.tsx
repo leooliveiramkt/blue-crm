@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   DragOverlay, 
@@ -45,7 +44,7 @@ const StageColumn = ({ stage, leads, activeLead, onLeadClick }: StageColumnProps
 
   return (
     <div className="flex-shrink-0 w-72">
-      <div className="bg-muted rounded-t-md p-3 flex items-center justify-between">
+      <div className="bg-secondary rounded-t-md p-3 flex items-center justify-between">
         <div className="flex items-center">
           <div 
             className="w-3 h-3 rounded-full mr-2" 
@@ -60,7 +59,7 @@ const StageColumn = ({ stage, leads, activeLead, onLeadClick }: StageColumnProps
       
       <div 
         ref={setNodeRef}
-        className="bg-muted/50 rounded-b-md h-full overflow-y-auto p-2 flex flex-col gap-2"
+        className="bg-secondary/40 rounded-b-md h-full overflow-y-auto p-2 flex flex-col gap-2"
       >
         {leads.map((lead) => (
           <DraggableLeadCard 

@@ -27,6 +27,20 @@ export const getIntegrationConfig = (integrationId: string): IntegrationConfig |
           type: 'text',
           required: true,
           placeholder: 'ID da sua loja na WBuy'
+        },
+        {
+          name: 'username',
+          label: 'Usuário da API',
+          type: 'text',
+          required: true,
+          placeholder: 'Usuário de acesso à API WBuy'
+        },
+        {
+          name: 'password',
+          label: 'Senha da API',
+          type: 'password',
+          required: true,
+          placeholder: 'Senha de acesso à API WBuy'
         }
       ]
     },
