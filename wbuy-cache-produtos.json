@@ -1,0 +1,3147 @@
+{
+  "code": "010",
+  "message": "success",
+  "responseCode": 200,
+  "total": 122,
+  "data": [
+    {
+      "id": "1334444",
+      "is_simple": "1",
+      "parent_id": "0",
+      "cod": "10",
+      "digital": "0",
+      "produto": "NATURAL FIT TRADICIONAL (EMAGRECEDOR)",
+      "produto_url": "natural-fit",
+      "video": "",
+      "url_download": "",
+      "link_externo": "",
+      "caracteristicas": "",
+      "descricao": "<p>&#127807; Voc&ecirc; sente que j&aacute; tentou de tudo, mas a balan&ccedil;a insiste em te desafiar?<br>Aquela barriga inchada, o cansa&ccedil;o que n&atilde;o passa e o espelho que n&atilde;o reflete quem voc&ecirc; sente ser... Calma, mulher, voc&ecirc; n&atilde;o t&aacute; sozinha, o Natural Fit Tradicional exatamente pra esse momento.</p><p> <br>&#127811; <strong><span style=\"color: rgb(0, 0, 0);\">O que &eacute; o Natural Fit Tradicional?</span></strong><br>Um suplemento natural em c&aacute;psulas com f&oacute;rmula potente e equilibrada, unindo ingredientes que atuam no emagrecimento saud&aacute;vel, sem promessas milagrosas &mdash; s&oacute; resultado com consist&ecirc;ncia, sa&uacute;de e autoestima.</p><p> <br>&#128165; <strong>Benef&iacute;cios que voc&ecirc; sente no corpo e no humor:</strong><br>&bull; Queima de gordura corporal sem agredir o corpo<br>&bull; Digest&atilde;o leve, metabolismo ativado e adeus incha&ccedil;o<br>&bull; Controle do apetite sem neura ou ansiedade<br>&bull; Mais energia pra se sentir viva e confiante<br>&bull; Redu&ccedil;&atilde;o de reten&ccedil;&atilde;o l&iacute;quida com eleg&acirc;ncia</p><p> <br>&#10024; <strong>Ingredientes que trabalham por voc&ecirc;:</strong><br>Laranja Moro: age direto na gordura abdominal<br>Psyllium: te deixa saciada de forma natural<br>C&uacute;rcuma: anti-inflamat&oacute;rio natural pro corpo funcionar<br>Vitamina C + Zinco: refor&ccedil;o na imunidade e disposi&ccedil;&atilde;o<br>Antocianina: antioxidante poderosa pra renovar de dentro pra fora<br> <br>&#128105;&zwj;&#129456;<strong> Pra quem &eacute;?</strong><br>Mulheres de 25 a 45 anos que querem emagrecer com equil&iacute;brio, sem perder sa&uacute;de, brilho no olhar e amor-pr&oacute;prio. Se voc&ecirc; busca leveza, rotina pr&aacute;tica e autoestima elevada &mdash; esse &eacute; o seu match.</p><p> <br>&#129496;&zwj;&#9792;&#65039; <strong>Por que escolher o Natural Fit?</strong><br>Porque a gente n&atilde;o vende milagre, vende ci&ecirc;ncia com alma. A f&oacute;rmula &eacute; pensada com carinho, aprovada por especialistas e acolhe o seu processo com respeito, seguran&ccedil;a e sofistica&ccedil;&atilde;o. Sem press&atilde;o est&eacute;tica, s&oacute; transforma&ccedil;&atilde;o real.</p><p> <br>&#128344; <strong>Modo de uso:</strong><br>1 c&aacute;psula por dia, &agrave;s 9h, com um caf&eacute; da manh&atilde; nutritivo. Simples, f&aacute;cil, eficiente.</p><p> <br>&#9888;&#65039;<strong> Avisos importantes:</strong><br>N&atilde;o recomendado para gestantes, lactantes, pessoas com problemas card&iacute;acos, menores de 18 e maiores de 60 anos. Sempre leia a bula e, se puder, converse com seu profissional de sa&uacute;de.</p><p> <br>&#128142; <strong>Bora cuidar de voc&ecirc; com carinho e compromisso?</strong><br>Sua melhor vers&atilde;o come&ccedil;a em voc&ecirc;.<br>Clique em comprar e sinta na pele o poder de um suplemento que respeita o seu tempo, seu corpo e sua hist&oacute;ria.</p>",
+      "especificacoes": "",
+      "itens_inclusos": "",
+      "garantia": "",
+      "peso": "0.015",
+      "comprimento": "15",
+      "largura": "15",
+      "altura": "8",
+      "valor_promo": "0",
+      "data_promo_de": "0000-00-00",
+      "data_promo": "0000-00-00",
+      "multiplo": "1",
+      "equivalencia": {
+        "id": "0",
+        "tipo": "",
+        "qtd": "0",
+        "tamanho": "",
+        "cor": "",
+        "fundo": ""
+      },
+      "equivalencia_tamanho": "",
+      "equivalencia_cor": "",
+      "equivalencia_fundo": "",
+      "ativo": "1",
+      "venda": "1",
+      "oculto": "0",
+      "frete_gratis": "0",
+      "palavras_substitutas": "",
+      "prazo_producao": "0",
+      "categorias_adicionais": [
+        {
+          "id": "230990",
+          "nome": "TODOS OS PRODUTOS",
+          "url": "todos-os-produtos",
+          "tabela": "1",
+          "subs": [
+            {
+              "id": "347706",
+              "nome": "EMAGRECEDOR",
+              "url": "emagrecedor"
+            }
+          ]
+        }
+      ],
+      "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/todos-os-produtos-25-67d433dc76fd8.png",
+      "tipo_fotos": "1",
+      "ncm": "2106.90.30",
+      "mpn": "",
+      "gtin": "7795906747403",
+      "genero": {
+        "tipo": "unisex",
+        "nome": "Unissex"
+      },
+      "modelagem": {
+        "tipo": "regular",
+        "nome": "Tamanho normal"
+      },
+      "grupo_etario": {
+        "tipo": "adult",
+        "nome": "Adulto"
+      },
+      "marca": {
+        "id": "110214",
+        "nome": "World Fit",
+        "url": "world-fit/",
+        "logo": ""
+      },
+      "marca_logo": "",
+      "atributos": "[]",
+      "tabela_preco": {
+        "id": "0",
+        "tabela": "Todas as tabelas"
+      },
+      "campos_adicionais": "",
+      "curtidas": "464",
+      "quantidade_total_em_estoque": "1334",
+      "grade_tipo": "1",
+      "selos": "",
+      "relacionados": "1335346",
+      "campo_anotacao": "",
+      "valor_unidade_tipo": "",
+      "owner_id": "19539",
+      "created": "2022-10-29 15:47:42",
+      "updated": "2025-05-23 13:49:33",
+      "estoque_cor_id": "0",
+      "estoque_id": "3835972",
+      "tabela_medidas": {
+        "id": "",
+        "tipo": "",
+        "titulo": "",
+        "imagem": ""
+      },
+      "permite_embalagem": "0",
+      "permite_arquivo": "0",
+      "permite_recorrencia": "0",
+      "recorrencia_desconto": "0",
+      "tem_grade_adicional": "0",
+      "video_capa": "0",
+      "video_flutuante": "0",
+      "valores_base": {
+        "varejo": "",
+        "comparativo": "",
+        "custo": "",
+        "atacado": "",
+        "atacadomin": "",
+        "valorpromo": "0,00",
+        "data_promo_de": "",
+        "data_promo": ""
+      },
+      "seo_title": "",
+      "seo_description": "",
+      "seo_metatags": "",
+      "seo_scripts": "",
+      "seo_banner": {
+        "banner": "",
+        "banner_mobile": "",
+        "link": "",
+        "folder": "SUA4VU4"
+      },
+      "nome_cor": "",
+      "formato_cor": "0",
+      "termo_agrupador": "",
+      "localizacao": "",
+      "data_lancamento": "0000-00-00",
+      "total_comentarios": "345",
+      "comentarios_media": "4.98",
+      "marketplace_has_outros_anuncios": "0",
+      "campos_adicionais_raw": "",
+      "categoria_level1": {
+        "id": "293041",
+        "nome": "Emagrecimento e Saciedade",
+        "url": "emagrecimento-e-saciedade",
+        "tabela": "1",
+        "google_category": ""
+      },
+      "categoria_level2": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "categoria_level3": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "google_category": "Emagrecimento e Saciedade",
+      "site_category": "Emagrecimento e Saciedade",
+      "embalagem": {
+        "id": "35228",
+        "sigla": "sedex",
+        "nome": "Sedex"
+      },
+      "combo": [],
+      "personalizador": [],
+      "isPromo": "",
+      "cat_add": "-230990;347706-",
+      "biquini": [],
+      "tem_lancamento": "",
+      "prazo_lancamento": "0",
+      "produto_online": "1",
+      "adicional_info": [],
+      "url_relative": "natural-fit/",
+      "url_absolute": "https://www.belabluebeauty.com.br/natural-fit/",
+      "isChild": "",
+      "is_schedule": "",
+      "estoque": [
+        {
+          "id": "3835972",
+          "sku": "1334444.293041.0",
+          "cod_estoque": "10-1",
+          "peso": "0.015",
+          "comprimento": "15",
+          "largura": "15",
+          "altura": "8",
+          "visualizacoes": "133756",
+          "ativo": "1",
+          "variacao_posicao": "",
+          "preco_custo": "0",
+          "qtd_maxima": "0",
+          "gtin": "7795906747403",
+          "atributos": [],
+          "reserva": [],
+          "erp_id": "945720605",
+          "prazo_producao": "0",
+          "quantidade_em_estoque": "1334",
+          "cor": {
+            "id": "",
+            "nome": "",
+            "primaria": "",
+            "secundaria": "",
+            "img": "",
+            "ativo": "",
+            "posicao": "0",
+            "nome_simples": ""
+          },
+          "variacao": {
+            "id": "",
+            "variacao_id": "",
+            "nome": "",
+            "valor": "",
+            "posicao": "",
+            "ativo": ""
+          },
+          "adicional_info": [],
+          "valores": [
+            {
+              "tabela_id": "1",
+              "tabela_nome": "Varejo",
+              "quantidade_minima": "1",
+              "valor": "289",
+              "valor_promo": "229.99",
+              "data_promo_de": "2025-05-12",
+              "data_promo": "2025-05-31",
+              "codigo": "1334444.293041.0",
+              "valor_comparativo": "0",
+              "isPromo": "1",
+              "valor_loja": []
+            }
+          ],
+          "fotos": [
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/todos-os-produtos-25-67d433dc76fd8.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/todos-os-produtos-25-67d433dc76fd8_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/indicado-para-2-670670e555849.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/indicado-para-2-670670e555849_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/indicado-para-3-670670e592ee5.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/indicado-para-3-670670e592ee5_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/indicado-para-670670e5c951b.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/indicado-para-670670e5c951b_mini.png"
+            }
+          ]
+        }
+      ],
+      "quantidade_total_variacoes": "1",
+      "fotos": [
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/todos-os-produtos-25-67d433dc76fd8.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/todos-os-produtos-25-67d433dc76fd8_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/indicado-para-2-670670e555849.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/indicado-para-2-670670e555849_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/indicado-para-3-670670e592ee5.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/indicado-para-3-670670e592ee5_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/indicado-para-670670e5c951b.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/SUA4VU4/indicado-para-670670e5c951b_mini.png"
+        }
+      ],
+      "quantidade_total_visualizacoes": "133756",
+      "loja": {
+        "id": "19539",
+        "identificacao": "belabluebeauty",
+        "cidade": "Itajaí",
+        "uf": "SC",
+        "multiloja": "0",
+        "multicd": "0",
+        "nome_matriz": "BELA BLUE BEAUTY",
+        "nome": "BELA BLUE BEAUTY",
+        "cep_origem": "88301-100",
+        "url": "https://www.belabluebeauty.com.br",
+        "url_interna_matriz": "",
+        "logo": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/config/logo-bela-blue-66d75766d8d4f1.png",
+        "isFilial": ""
+      }
+    },
+    {
+      "id": "1334570",
+      "is_simple": "1",
+      "parent_id": "0",
+      "cod": "11",
+      "digital": "0",
+      "produto": "NATURAL FIT TURBO (EMAGRECEDOR TURBO)",
+      "produto_url": "natural-fit-turbo",
+      "video": "",
+      "url_download": "",
+      "link_externo": "",
+      "caracteristicas": "",
+      "descricao": "<p>&#9889; SUPLEMENTO TURBO &ndash; Acelere sua queima, regule seu intestino e ganhe mais energia no dia.<br>Se t&aacute; dif&iacute;cil emagrecer, o intestino t&aacute; lento e a energia anda em baixa... voc&ecirc; precisa de um empurr&atilde;o inteligente.<br>O SUPLEMENTO TURBO &eacute; uma f&oacute;rmula completa que une ingredientes naturais com a&ccedil;&atilde;o termog&ecirc;nica, digestiva e antioxidante, ideal pra quem quer resultados vis&iacute;veis com mais leveza, foco e sa&uacute;de.<br>Ele atua no metabolismo, na queima de gordura e na sa&uacute;de intestinal, promovendo energia de manh&atilde;, saciedade durante o dia e menos incha&ccedil;o sempre.</p><p>&nbsp;<br>&#128165; Benef&iacute;cios que voc&ecirc; sente e v&ecirc;:<br>Acelera o metabolismo e a queima de gordura<br>Promove energia leve e duradoura<br>Reduz a reten&ccedil;&atilde;o de l&iacute;quidos e incha&ccedil;o<br>Regula o intestino com a&ccedil;&atilde;o prebi&oacute;tica natural<br>Ajuda a controlar o apetite e a ansiedade alimentar<br>Fortalece a imunidade com a&ccedil;&atilde;o antioxidante<br>Ideal pra come&ccedil;ar o dia no modo turbo<br>&nbsp;<br>&#127807; F&oacute;rmula com ativos potentes e naturais:<br>&#127818; Laranja Moro: ajuda na queima da gordura abdominal e acelera o metabolismo<br>&#9749; Caf&eacute; Verde: fonte de &aacute;cido clorog&ecirc;nico, ajuda a regular o a&ccedil;&uacute;car no sangue e queimar gordura<br>&#127793; Psyllium: fibra natural que regula o intestino e aumenta a saciedade<br>&#9889; Guaran&aacute;: estimula o foco e a energia sem causar pico brusco<br>&#127806; C&uacute;rcuma: anti-inflamat&oacute;ria, reduz incha&ccedil;o e melhora a digest&atilde;o<br>&#127815; Antocianina: antioxidante que protege as c&eacute;lulas e apoia a sa&uacute;de metab&oacute;lica<br>&#128170; Vitamina C + Zinco: fortalecem o sistema imune e ajudam no combate &agrave; fadiga<br>&nbsp;<br>&#129504; Indicado para:<br>&#10004;&#65039; Quem quer emagrecer com sa&uacute;de e praticidade<br>&#10004;&#65039; Pessoas com intestino lento, reten&ccedil;&atilde;o e dificuldade de desinchar<br>&#10004;&#65039; Quem busca energia ao acordar e menos fome ao longo do dia<br>&#10004;&#65039; Quem sofre com compuls&atilde;o por comida ou a&ccedil;&uacute;car</p><p>&nbsp;<br>&#128338; Como usar:<br>Tomar 1 c&aacute;psula ao dia, &agrave;s 9h da manh&atilde;, ap&oacute;s o caf&eacute;.</p><p>&nbsp;<br>&#128230; Informa&ccedil;&otilde;es do Produto:<br>Quantidade: 30 c&aacute;psulas<br>Peso L&iacute;q.: 15g<br>Rendimento: 30 dias<br>Uso di&aacute;rio e cont&iacute;nuo<br>&nbsp;<br>&#9888;&#65039; Contraindica&ccedil;&otilde;es:<br>N&atilde;o indicado para:<br>&#10060; Gestantes, lactantes, menores de 18 ou maiores de 60 anos<br>&#10060; Pessoas com press&atilde;o alta, problemas card&iacute;acos ou sens&iacute;veis &agrave; cafe&iacute;na<br>&#10060; Quem consome bebidas alco&oacute;licas junto ao suplemento<br>&nbsp;<br>&#128717;&#65039; &Eacute; hora de colocar o corpo em movimento com apoio natural e funcional.<br>Clique em &ldquo;Comprar Agora&rdquo; e ative sua rotina com o SUPLEMENTO TURBO.<br>Seu metabolismo merece um refor&ccedil;o. Seu intestino tamb&eacute;m.</p><p>&nbsp;</p>",
+      "especificacoes": "",
+      "itens_inclusos": "",
+      "garantia": "",
+      "peso": "0.04",
+      "comprimento": "16",
+      "largura": "12",
+      "altura": "8",
+      "valor_promo": "0",
+      "data_promo_de": "0000-00-00",
+      "data_promo": "0000-00-00",
+      "multiplo": "1",
+      "equivalencia": {
+        "id": "0",
+        "tipo": "",
+        "qtd": "0",
+        "tamanho": "",
+        "cor": "",
+        "fundo": ""
+      },
+      "equivalencia_tamanho": "",
+      "equivalencia_cor": "",
+      "equivalencia_fundo": "",
+      "ativo": "1",
+      "venda": "1",
+      "oculto": "0",
+      "frete_gratis": "0",
+      "palavras_substitutas": "",
+      "prazo_producao": "0",
+      "categorias_adicionais": [
+        {
+          "id": "230990",
+          "nome": "TODOS OS PRODUTOS",
+          "url": "todos-os-produtos",
+          "tabela": "1",
+          "subs": [
+            {
+              "id": "347706",
+              "nome": "EMAGRECEDOR",
+              "url": "emagrecedor"
+            }
+          ]
+        }
+      ],
+      "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/todos-os-produtos-23-67d0b0515b538.png",
+      "tipo_fotos": "1",
+      "ncm": "2106.90.30",
+      "mpn": "",
+      "gtin": "",
+      "genero": {
+        "tipo": "unisex",
+        "nome": "Unissex"
+      },
+      "modelagem": {
+        "tipo": "regular",
+        "nome": "Tamanho normal"
+      },
+      "grupo_etario": {
+        "tipo": "adult",
+        "nome": "Adulto"
+      },
+      "marca": {
+        "id": "110214",
+        "nome": "World Fit",
+        "url": "world-fit/",
+        "logo": ""
+      },
+      "marca_logo": "",
+      "atributos": "[]",
+      "tabela_preco": {
+        "id": "0",
+        "tabela": "Todas as tabelas"
+      },
+      "campos_adicionais": "",
+      "curtidas": "402",
+      "quantidade_total_em_estoque": "192",
+      "grade_tipo": "1",
+      "selos": "",
+      "relacionados": "",
+      "campo_anotacao": "",
+      "valor_unidade_tipo": "",
+      "owner_id": "19539",
+      "created": "2022-10-29 17:06:20",
+      "updated": "2025-05-16 00:32:56",
+      "estoque_cor_id": "0",
+      "estoque_id": "3836251",
+      "tabela_medidas": {
+        "id": "",
+        "tipo": "",
+        "titulo": "",
+        "imagem": ""
+      },
+      "permite_embalagem": "0",
+      "permite_arquivo": "0",
+      "permite_recorrencia": "0",
+      "recorrencia_desconto": "0",
+      "tem_grade_adicional": "0",
+      "video_capa": "0",
+      "video_flutuante": "0",
+      "valores_base": {
+        "varejo": "",
+        "comparativo": "",
+        "custo": "",
+        "atacado": "",
+        "atacadomin": "",
+        "valorpromo": "0,00",
+        "data_promo_de": "",
+        "data_promo": ""
+      },
+      "seo_title": "",
+      "seo_description": "",
+      "seo_metatags": "",
+      "seo_scripts": "",
+      "seo_banner": {
+        "banner": "",
+        "banner_mobile": "",
+        "link": "",
+        "folder": "HOU2WUA2"
+      },
+      "nome_cor": "",
+      "formato_cor": "0",
+      "termo_agrupador": "",
+      "localizacao": "",
+      "data_lancamento": "0000-00-00",
+      "total_comentarios": "224",
+      "comentarios_media": "4.96",
+      "marketplace_has_outros_anuncios": "0",
+      "campos_adicionais_raw": "",
+      "categoria_level1": {
+        "id": "293041",
+        "nome": "Emagrecimento e Saciedade",
+        "url": "emagrecimento-e-saciedade",
+        "tabela": "1",
+        "google_category": ""
+      },
+      "categoria_level2": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "categoria_level3": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "google_category": "Emagrecimento e Saciedade",
+      "site_category": "Emagrecimento e Saciedade",
+      "embalagem": {
+        "id": "23668",
+        "sigla": "Sedex 1",
+        "nome": "Pequena"
+      },
+      "combo": [],
+      "personalizador": [],
+      "isPromo": "",
+      "cat_add": "-230990;347706-",
+      "biquini": [],
+      "tem_lancamento": "",
+      "prazo_lancamento": "0",
+      "produto_online": "1",
+      "adicional_info": [],
+      "url_relative": "natural-fit-turbo/",
+      "url_absolute": "https://www.belabluebeauty.com.br/natural-fit-turbo/",
+      "isChild": "",
+      "is_schedule": "",
+      "estoque": [
+        {
+          "id": "3836251",
+          "sku": "1334570.293041.0",
+          "cod_estoque": "",
+          "peso": "0.04",
+          "comprimento": "16",
+          "largura": "12",
+          "altura": "8",
+          "visualizacoes": "90899",
+          "ativo": "1",
+          "variacao_posicao": "",
+          "preco_custo": "249.99",
+          "qtd_maxima": "0",
+          "gtin": "",
+          "atributos": [],
+          "reserva": [],
+          "erp_id": "",
+          "prazo_producao": "0",
+          "quantidade_em_estoque": "192",
+          "cor": {
+            "id": "",
+            "nome": "",
+            "primaria": "",
+            "secundaria": "",
+            "img": "",
+            "ativo": "",
+            "posicao": "0",
+            "nome_simples": ""
+          },
+          "variacao": {
+            "id": "",
+            "variacao_id": "",
+            "nome": "",
+            "valor": "",
+            "posicao": "",
+            "ativo": ""
+          },
+          "adicional_info": [],
+          "valores": [
+            {
+              "tabela_id": "1",
+              "tabela_nome": "Varejo",
+              "quantidade_minima": "1",
+              "valor": "299.99",
+              "valor_promo": "249.9",
+              "data_promo_de": "2025-05-07",
+              "data_promo": "2025-05-31",
+              "codigo": "1334570.293041.0",
+              "valor_comparativo": "299.99",
+              "isPromo": "1",
+              "valor_loja": []
+            },
+            {
+              "tabela_id": "2",
+              "tabela_nome": "Atacado",
+              "quantidade_minima": "1",
+              "valor": "155",
+              "valor_promo": "0",
+              "data_promo_de": "0000-00-00",
+              "data_promo": "0000-00-00",
+              "codigo": "1334570.293041.0",
+              "valor_comparativo": "0",
+              "isPromo": "0",
+              "valor_loja": []
+            }
+          ],
+          "fotos": [
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/todos-os-produtos-23-67d0b0515b538.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/todos-os-produtos-23-67d0b0515b538_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/indicado-para-2-6706716e4a475.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/indicado-para-2-6706716e4a475_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/indicado-para-3-6706716eddf42.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/indicado-para-3-6706716eddf42_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/indicado-para-6706716e836ad.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/indicado-para-6706716e836ad_mini.png"
+            }
+          ]
+        }
+      ],
+      "quantidade_total_variacoes": "1",
+      "fotos": [
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/todos-os-produtos-23-67d0b0515b538.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/todos-os-produtos-23-67d0b0515b538_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/indicado-para-2-6706716e4a475.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/indicado-para-2-6706716e4a475_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/indicado-para-3-6706716eddf42.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/indicado-para-3-6706716eddf42_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/indicado-para-6706716e836ad.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/HOU2WUA2/indicado-para-6706716e836ad_mini.png"
+        }
+      ],
+      "quantidade_total_visualizacoes": "90899",
+      "loja": {
+        "id": "19539",
+        "identificacao": "belabluebeauty",
+        "cidade": "Itajaí",
+        "uf": "SC",
+        "multiloja": "0",
+        "multicd": "0",
+        "nome_matriz": "BELA BLUE BEAUTY",
+        "nome": "BELA BLUE BEAUTY",
+        "cep_origem": "88301-100",
+        "url": "https://www.belabluebeauty.com.br",
+        "url_interna_matriz": "",
+        "logo": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/config/logo-bela-blue-66d75766d8d4f1.png",
+        "isFilial": ""
+      }
+    },
+    {
+      "id": "1335346",
+      "is_simple": "1",
+      "parent_id": "0",
+      "cod": "13",
+      "digital": "0",
+      "produto": "NATURAL FIT ACTION (GORDURA LOCALIZADA)",
+      "produto_url": "natural-fit-action",
+      "video": "",
+      "url_download": "",
+      "link_externo": "",
+      "caracteristicas": "",
+      "descricao": "<p>&#9889; SUPLEMENTO ACTION &ndash; Energia limpa, foco total e metabolismo ativo.<br>Precisa de mais energia, foco e controle de apetite sem exageros?<br>O SUPLEMENTO ACTION &eacute; a escolha certa pra quem busca mais disposi&ccedil;&atilde;o f&iacute;sica e mental, com equil&iacute;brio.<br>Sua f&oacute;rmula une ingredientes naturais e funcionais que ativam o metabolismo, melhoram o desempenho e ainda ajudam no controle da ansiedade alimentar &mdash; tudo com efeito leve e cont&iacute;nuo.</p><p>Ideal pra quem treina, vive no corre ou quer mais energia no dia sem apelar pra estimulantes pesados.</p><p>&nbsp;<br>&#128165; Benef&iacute;cios do ACTION no seu corpo:<br>Melhora a disposi&ccedil;&atilde;o f&iacute;sica e mental<br>Aumenta a energia de forma gradual<br>Ajuda no controle da fome e compuls&atilde;o alimentar<br>Apoia a performance em treinos e na rotina agitada<br>Contribui pra sa&uacute;de muscular e cerebral<br>Ativa o metabolismo e auxilia no controle de peso<br>&nbsp;<br>&#127807; Composi&ccedil;&atilde;o inteligente:<br>&#127793; Spirulina: rica em prote&iacute;nas e antioxidantes, melhora a energia, saciedade e imunidade<br>&#9889; Taurina: aumenta o foco, reduz a fadiga e melhora a resist&ecirc;ncia muscular<br>&#129504; Colina: estimula a fun&ccedil;&atilde;o cognitiva e contribui para mem&oacute;ria e concentra&ccedil;&atilde;o<br>&#129516; Magn&eacute;sio: essencial pro relaxamento muscular, metabolismo energ&eacute;tico e redu&ccedil;&atilde;o do estresse<br>&#128293; Cromo: regula o a&ccedil;&uacute;car no sangue e ajuda a reduzir a vontade de doces<br>&nbsp;<br>&#128338; Como usar:<br>Consumir 2 c&aacute;psulas ao dia, 30 minutos antes do treino ou antes do almo&ccedil;o/jantar.<br>Dica da Boss: Use antes dos treinos pra energia top, ou nos dias corridos pra aguentar o tranco com foco.</p><p>&nbsp;<br>&#128230; Informa&ccedil;&otilde;es do Produto:<br>Quantidade: 60 c&aacute;psulas<br>Peso L&iacute;q: 24g<br>Rendimento: 30 dias<br>&nbsp;<br>&#9888;&#65039; Contraindica&ccedil;&otilde;es:<br>N&atilde;o indicado para gestantes, lactantes ou menores de 18 anos<br>Produto n&atilde;o &eacute; medicamento<br>N&atilde;o exceder a dose di&aacute;ria recomendada<br>Ap&oacute;s aberto, consumir em at&eacute; 60 dias<br>&nbsp;<br>&#128717;&#65039; Energia leve, foco na medida e apoio real pro seu dia.<br>Clique em &ldquo;Comprar Agora&rdquo; e experimente o SUPLEMENTO ACTION.<br>Porque sua rotina exige mais... e voc&ecirc; merece energia na medida certa.</p>",
+      "especificacoes": "",
+      "itens_inclusos": "",
+      "garantia": "",
+      "peso": "0.5",
+      "comprimento": "16",
+      "largura": "12",
+      "altura": "8",
+      "valor_promo": "0",
+      "data_promo_de": "0000-00-00",
+      "data_promo": "0000-00-00",
+      "multiplo": "1",
+      "equivalencia": {
+        "id": "0",
+        "tipo": "",
+        "qtd": "0",
+        "tamanho": "",
+        "cor": "",
+        "fundo": ""
+      },
+      "equivalencia_tamanho": "",
+      "equivalencia_cor": "",
+      "equivalencia_fundo": "",
+      "ativo": "1",
+      "venda": "1",
+      "oculto": "0",
+      "frete_gratis": "0",
+      "palavras_substitutas": "",
+      "prazo_producao": "0",
+      "categorias_adicionais": [
+        {
+          "id": "230990",
+          "nome": "TODOS OS PRODUTOS",
+          "url": "todos-os-produtos",
+          "tabela": "1",
+          "subs": [
+            {
+              "id": "347706",
+              "nome": "EMAGRECEDOR",
+              "url": "emagrecedor"
+            }
+          ]
+        }
+      ],
+      "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/todos-os-produtos-22-67d0af19a07cd.png",
+      "tipo_fotos": "1",
+      "ncm": "2106.90.30",
+      "mpn": "",
+      "gtin": "",
+      "genero": {
+        "tipo": "unisex",
+        "nome": "Unissex"
+      },
+      "modelagem": {
+        "tipo": "regular",
+        "nome": "Tamanho normal"
+      },
+      "grupo_etario": {
+        "tipo": "adult",
+        "nome": "Adulto"
+      },
+      "marca": {
+        "id": "110214",
+        "nome": "World Fit",
+        "url": "world-fit/",
+        "logo": ""
+      },
+      "marca_logo": "",
+      "atributos": "[]",
+      "tabela_preco": {
+        "id": "0",
+        "tabela": "Todas as tabelas"
+      },
+      "campos_adicionais": "",
+      "curtidas": "101",
+      "quantidade_total_em_estoque": "16",
+      "grade_tipo": "1",
+      "selos": "",
+      "relacionados": "",
+      "campo_anotacao": "",
+      "valor_unidade_tipo": "",
+      "owner_id": "19539",
+      "created": "2022-10-30 17:06:01",
+      "updated": "2025-05-16 00:34:03",
+      "estoque_cor_id": "0",
+      "estoque_id": "3838625",
+      "tabela_medidas": {
+        "id": "",
+        "tipo": "",
+        "titulo": "",
+        "imagem": ""
+      },
+      "permite_embalagem": "0",
+      "permite_arquivo": "0",
+      "permite_recorrencia": "0",
+      "recorrencia_desconto": "0",
+      "tem_grade_adicional": "0",
+      "video_capa": "0",
+      "video_flutuante": "0",
+      "valores_base": {
+        "varejo": "",
+        "comparativo": "",
+        "custo": "",
+        "atacado": "",
+        "atacadomin": "",
+        "valorpromo": "0,00",
+        "data_promo_de": "",
+        "data_promo": ""
+      },
+      "seo_title": "",
+      "seo_description": "",
+      "seo_metatags": "",
+      "seo_scripts": "",
+      "seo_banner": {
+        "banner": "",
+        "banner_mobile": "",
+        "link": "",
+        "folder": "WUA3FEI7"
+      },
+      "nome_cor": "",
+      "formato_cor": "0",
+      "termo_agrupador": "",
+      "localizacao": "",
+      "data_lancamento": "0000-00-00",
+      "total_comentarios": "58",
+      "comentarios_media": "5",
+      "marketplace_has_outros_anuncios": "0",
+      "campos_adicionais_raw": "",
+      "categoria_level1": {
+        "id": "293041",
+        "nome": "Emagrecimento e Saciedade",
+        "url": "emagrecimento-e-saciedade",
+        "tabela": "1",
+        "google_category": ""
+      },
+      "categoria_level2": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "categoria_level3": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "google_category": "Emagrecimento e Saciedade",
+      "site_category": "Emagrecimento e Saciedade",
+      "embalagem": {
+        "id": "23668",
+        "sigla": "Sedex 1",
+        "nome": "Pequena"
+      },
+      "combo": [],
+      "personalizador": [],
+      "isPromo": "",
+      "cat_add": "-230990;347706-",
+      "biquini": [],
+      "tem_lancamento": "",
+      "prazo_lancamento": "0",
+      "produto_online": "1",
+      "adicional_info": [],
+      "url_relative": "natural-fit-action/",
+      "url_absolute": "https://www.belabluebeauty.com.br/natural-fit-action/",
+      "isChild": "",
+      "is_schedule": "",
+      "estoque": [
+        {
+          "id": "3838625",
+          "sku": "1335346.293041.0",
+          "cod_estoque": "",
+          "peso": "0.5",
+          "comprimento": "16",
+          "largura": "12",
+          "altura": "8",
+          "visualizacoes": "45396",
+          "ativo": "1",
+          "variacao_posicao": "",
+          "preco_custo": "189.99",
+          "qtd_maxima": "0",
+          "gtin": "",
+          "atributos": [],
+          "reserva": [],
+          "erp_id": "",
+          "prazo_producao": "0",
+          "quantidade_em_estoque": "16",
+          "cor": {
+            "id": "",
+            "nome": "",
+            "primaria": "",
+            "secundaria": "",
+            "img": "",
+            "ativo": "",
+            "posicao": "0",
+            "nome_simples": ""
+          },
+          "variacao": {
+            "id": "",
+            "variacao_id": "",
+            "nome": "",
+            "valor": "",
+            "posicao": "",
+            "ativo": ""
+          },
+          "adicional_info": [],
+          "valores": [
+            {
+              "tabela_id": "1",
+              "tabela_nome": "Varejo",
+              "quantidade_minima": "1",
+              "valor": "259.99",
+              "valor_promo": "189.9",
+              "data_promo_de": "2025-04-26",
+              "data_promo": "2029-01-01",
+              "codigo": "1335346.293041.0",
+              "valor_comparativo": "259.99",
+              "isPromo": "1",
+              "valor_loja": []
+            }
+          ],
+          "fotos": [
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/todos-os-produtos-22-67d0af19a07cd.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/todos-os-produtos-22-67d0af19a07cd_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/whatsapp-image-2024-05-20-at-09-47-01-1-666ef7039eef9.jpeg",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/whatsapp-image-2024-05-20-at-09-47-01-1-666ef7039eef9_mini.jpeg"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-1-666ef6fd6571b.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-1-666ef6fd6571b_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-2-666ef6fbe2e9e.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-2-666ef6fbe2e9e_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-3-666ef6ff8ee6d.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-3-666ef6ff8ee6d_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-4-666ef7019816d.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-4-666ef7019816d_mini.png"
+            }
+          ]
+        }
+      ],
+      "quantidade_total_variacoes": "1",
+      "fotos": [
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/todos-os-produtos-22-67d0af19a07cd.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/todos-os-produtos-22-67d0af19a07cd_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/whatsapp-image-2024-05-20-at-09-47-01-1-666ef7039eef9.jpeg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/whatsapp-image-2024-05-20-at-09-47-01-1-666ef7039eef9_mini.jpeg"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-1-666ef6fd6571b.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-1-666ef6fd6571b_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-2-666ef6fbe2e9e.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-2-666ef6fbe2e9e_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-3-666ef6ff8ee6d.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-3-666ef6ff8ee6d_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-4-666ef7019816d.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/WUA3FEI7/natural-fit-action-4-666ef7019816d_mini.png"
+        }
+      ],
+      "quantidade_total_visualizacoes": "45396",
+      "loja": {
+        "id": "19539",
+        "identificacao": "belabluebeauty",
+        "cidade": "Itajaí",
+        "uf": "SC",
+        "multiloja": "0",
+        "multicd": "0",
+        "nome_matriz": "BELA BLUE BEAUTY",
+        "nome": "BELA BLUE BEAUTY",
+        "cep_origem": "88301-100",
+        "url": "https://www.belabluebeauty.com.br",
+        "url_interna_matriz": "",
+        "logo": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/config/logo-bela-blue-66d75766d8d4f1.png",
+        "isFilial": ""
+      }
+    },
+    {
+      "id": "1352933",
+      "is_simple": "1",
+      "parent_id": "0",
+      "cod": "00001352932",
+      "digital": "0",
+      "produto": "15 CÁPSULAS DE NATURAL FIT TRADICIONAL (FRACIONADO)",
+      "produto_url": "15-unidades-capsulas-tradicional",
+      "video": "",
+      "url_download": "",
+      "link_externo": "",
+      "caracteristicas": "",
+      "descricao": "<p>&#9989; SUPLEMENTO ALIMENTAR NATURAL FIT TRADICIONAL &ndash; 15 C&Aacute;PSULAS (FRACIONADO)<br>&#128248; Imagem ilustrativa &ndash; o produto ser&aacute; enviado em pacote fracionado</p><p>&#128154; NATURAL FIT TRADICIONAL &ndash; Intestino regulado, metabolismo ativado, corpo mais leve!</p><p>Esse suplemento &eacute; ideal pra quem quer iniciar um processo de emagrecimento com foco em equil&iacute;brio digestivo, saciedade e redu&ccedil;&atilde;o de incha&ccedil;o. &Eacute; a escolha certa pra come&ccedil;ar leve, sem compromisso e j&aacute; sentir os primeiros resultados!</p><p>&nbsp;<br>&#128230; Cont&eacute;m:<br>15 c&aacute;psulas fracionadas<br>Peso l&iacute;quido: 15g<br>&nbsp;<br>&#128338; Como usar:<br>Tomar 1 c&aacute;psula ao dia, &agrave;s 9h da manh&atilde;, ap&oacute;s o caf&eacute;<br>&nbsp;<br>&#127807; Composi&ccedil;&atilde;o funcional:<br>Laranja Moro, Psyllium, C&uacute;rcuma, Vitamina C, Zinco, Antocianinas</p><p>&nbsp;<br>&#10024; Benef&iacute;cios principais:<br>&#10004;&#65039; Regula o intestino e reduz o incha&ccedil;o<br>&#10004;&#65039; Melhora a digest&atilde;o e promove saciedade<br>&#10004;&#65039; Ativa o metabolismo de forma natural<br>&#10004;&#65039; Ajuda na perda de peso sem agress&atilde;o ao corpo<br>&#10004;&#65039; A&ccedil;&atilde;o antioxidante e anti-inflamat&oacute;ria leve</p><p>&nbsp;<br>&#9888;&#65039; Contraindicado para:<br>Gestantes, lactantes, menores de 18 anos, maiores de 60 anos, pessoas com problemas card&iacute;acos ou hipertens&atilde;o.<br>Evite o uso com bebidas alco&oacute;licas.</p><p>&nbsp;<br>Comece agora com 15 c&aacute;psulas fracionadas e experimente os benef&iacute;cios do Natural Fit Tradicional!<br>&#127807; Emagre&ccedil;a com equil&iacute;brio e qualidade de vida.</p><p>&nbsp;</p>",
+      "especificacoes": "",
+      "itens_inclusos": "",
+      "garantia": "",
+      "peso": "0.05",
+      "comprimento": "16",
+      "largura": "12",
+      "altura": "8",
+      "valor_promo": "0",
+      "data_promo_de": "0000-00-00",
+      "data_promo": "0000-00-00",
+      "multiplo": "1",
+      "equivalencia": {
+        "id": "0",
+        "tipo": "",
+        "qtd": "0",
+        "tamanho": "",
+        "cor": "",
+        "fundo": ""
+      },
+      "equivalencia_tamanho": "",
+      "equivalencia_cor": "",
+      "equivalencia_fundo": "",
+      "ativo": "1",
+      "venda": "1",
+      "oculto": "0",
+      "frete_gratis": "0",
+      "palavras_substitutas": "",
+      "prazo_producao": "0",
+      "categorias_adicionais": [
+        {
+          "id": "230990",
+          "nome": "TODOS OS PRODUTOS",
+          "url": "todos-os-produtos",
+          "tabela": "1",
+          "subs": [
+            {
+              "id": "347723",
+              "nome": "KIT TESTE",
+              "url": "kit-teste"
+            }
+          ]
+        }
+      ],
+      "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DEI9ROU8/carnaval-1-67bc6bd2b420e.png",
+      "tipo_fotos": "1",
+      "ncm": "2106.90.30",
+      "mpn": "",
+      "gtin": "",
+      "genero": {
+        "tipo": "unisex",
+        "nome": "Unissex"
+      },
+      "modelagem": {
+        "tipo": "regular",
+        "nome": "Tamanho normal"
+      },
+      "grupo_etario": {
+        "tipo": "adult",
+        "nome": "Adulto"
+      },
+      "marca": {
+        "id": "110214",
+        "nome": "World Fit",
+        "url": "world-fit/",
+        "logo": ""
+      },
+      "marca_logo": "",
+      "atributos": "[]",
+      "tabela_preco": {
+        "id": "0",
+        "tabela": "Todas as tabelas"
+      },
+      "campos_adicionais": "",
+      "curtidas": "32",
+      "quantidade_total_em_estoque": "1330",
+      "grade_tipo": "1",
+      "selos": "",
+      "relacionados": "",
+      "campo_anotacao": "",
+      "valor_unidade_tipo": "",
+      "owner_id": "19539",
+      "created": "2022-11-07 19:59:09",
+      "updated": "2025-05-01 13:54:45",
+      "estoque_cor_id": "0",
+      "estoque_id": "3892913",
+      "tabela_medidas": {
+        "id": "",
+        "tipo": "",
+        "titulo": "",
+        "imagem": ""
+      },
+      "permite_embalagem": "0",
+      "permite_arquivo": "0",
+      "permite_recorrencia": "0",
+      "recorrencia_desconto": "0",
+      "tem_grade_adicional": "0",
+      "video_capa": "0",
+      "video_flutuante": "0",
+      "valores_base": {
+        "varejo": "",
+        "comparativo": "",
+        "custo": "",
+        "atacado": "",
+        "atacadomin": "",
+        "valorpromo": "0,00",
+        "data_promo_de": "",
+        "data_promo": ""
+      },
+      "seo_title": "",
+      "seo_description": "",
+      "seo_metatags": "",
+      "seo_scripts": "",
+      "seo_banner": {
+        "banner": "",
+        "banner_mobile": "",
+        "link": "",
+        "folder": "DEI9ROU8"
+      },
+      "nome_cor": "",
+      "formato_cor": "0",
+      "termo_agrupador": "",
+      "localizacao": "",
+      "data_lancamento": "0000-00-00",
+      "total_comentarios": "17",
+      "comentarios_media": "5",
+      "marketplace_has_outros_anuncios": "0",
+      "campos_adicionais_raw": "",
+      "categoria_level1": {
+        "id": "293048",
+        "nome": "Kit teste",
+        "url": "kit-teste-dos-produtos",
+        "tabela": "1",
+        "google_category": ""
+      },
+      "categoria_level2": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "categoria_level3": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "google_category": "Kit teste",
+      "site_category": "Kit teste",
+      "embalagem": {
+        "id": "23668",
+        "sigla": "Sedex 1",
+        "nome": "Pequena"
+      },
+      "combo": [],
+      "personalizador": [],
+      "isPromo": "",
+      "cat_add": "-230990;347723-",
+      "biquini": [],
+      "tem_lancamento": "",
+      "prazo_lancamento": "0",
+      "produto_online": "1",
+      "adicional_info": [],
+      "url_relative": "15-unidades-capsulas-tradicional/",
+      "url_absolute": "https://www.belabluebeauty.com.br/15-unidades-capsulas-tradicional/",
+      "isChild": "",
+      "is_schedule": "",
+      "estoque": [
+        {
+          "id": "3892913",
+          "sku": "1352933.293048.0",
+          "cod_estoque": "",
+          "peso": "0.05",
+          "comprimento": "16",
+          "largura": "12",
+          "altura": "8",
+          "visualizacoes": "23938",
+          "ativo": "1",
+          "variacao_posicao": "",
+          "preco_custo": "120",
+          "qtd_maxima": "0",
+          "gtin": "",
+          "atributos": [],
+          "reserva": [],
+          "erp_id": "",
+          "prazo_producao": "0",
+          "quantidade_em_estoque": "1330",
+          "cor": {
+            "id": "",
+            "nome": "",
+            "primaria": "",
+            "secundaria": "",
+            "img": "",
+            "ativo": "",
+            "posicao": "0",
+            "nome_simples": ""
+          },
+          "variacao": {
+            "id": "",
+            "variacao_id": "",
+            "nome": "",
+            "valor": "",
+            "posicao": "",
+            "ativo": ""
+          },
+          "adicional_info": [],
+          "valores": [
+            {
+              "tabela_id": "1",
+              "tabela_nome": "Varejo",
+              "quantidade_minima": "1",
+              "valor": "120",
+              "valor_promo": "0",
+              "data_promo_de": "0000-00-00",
+              "data_promo": "0000-00-00",
+              "codigo": "1352933.293048.0",
+              "valor_comparativo": "0",
+              "isPromo": "0",
+              "valor_loja": []
+            }
+          ],
+          "fotos": [
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DEI9ROU8/carnaval-1-67bc6bd2b420e.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DEI9ROU8/carnaval-1-67bc6bd2b420e_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DEI9ROU8/3d291c2a-8667-4656-a85a-633177329260-63698dbd4f350.jpeg",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DEI9ROU8/3d291c2a-8667-4656-a85a-633177329260-63698dbd4f350_mini.jpeg"
+            }
+          ]
+        }
+      ],
+      "quantidade_total_variacoes": "1",
+      "fotos": [
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DEI9ROU8/carnaval-1-67bc6bd2b420e.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DEI9ROU8/carnaval-1-67bc6bd2b420e_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DEI9ROU8/3d291c2a-8667-4656-a85a-633177329260-63698dbd4f350.jpeg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DEI9ROU8/3d291c2a-8667-4656-a85a-633177329260-63698dbd4f350_mini.jpeg"
+        }
+      ],
+      "quantidade_total_visualizacoes": "23938",
+      "loja": {
+        "id": "19539",
+        "identificacao": "belabluebeauty",
+        "cidade": "Itajaí",
+        "uf": "SC",
+        "multiloja": "0",
+        "multicd": "0",
+        "nome_matriz": "BELA BLUE BEAUTY",
+        "nome": "BELA BLUE BEAUTY",
+        "cep_origem": "88301-100",
+        "url": "https://www.belabluebeauty.com.br",
+        "url_interna_matriz": "",
+        "logo": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/config/logo-bela-blue-66d75766d8d4f1.png",
+        "isFilial": ""
+      }
+    },
+    {
+      "id": "1352934",
+      "is_simple": "1",
+      "parent_id": "0",
+      "cod": "00001352934",
+      "digital": "0",
+      "produto": "15 CÁPSULAS DE NATURAL FIT TRADICIONAL + 15 CÁPSULAS DE NATURAL FIT TURBO (FRACIONADO)",
+      "produto_url": "15-tradicional-15-turbo",
+      "video": "",
+      "url_download": "",
+      "link_externo": "",
+      "caracteristicas": "",
+      "descricao": "<p>&#9989; KIT TESTE NATURAL FIT TRADICIONAL + NATURAL FIT TURBO (FRACIONADO)<br>&#128248; Imagem meramente ilustrativa &ndash; produto ser&aacute; enviado em pacote fracionado</p><p>&#128138; Quer testar antes de investir no pote completo? Esse kit &eacute; pra voc&ecirc;!</p><p>Sabemos que cada corpo reage de um jeito. Por isso, criamos esse combo fracionado com os dois suplementos da linha Natural Fit. Voc&ecirc; experimenta os dois e sente na pele (ou melhor, na balan&ccedil;a) qual se adapta melhor ao seu objetivo!</p><p>&nbsp;<br>&#128230; O Kit cont&eacute;m:<br>15 c&aacute;psulas de Natural Fit Tradicional<br>15 c&aacute;psulas de Natural Fit Turbo<br>&nbsp;<br>&#128338; Modo de uso:<br>Tomar 1 c&aacute;psula ao dia, &agrave;s 9h da manh&atilde;, ap&oacute;s o caf&eacute;<br>&nbsp;<br>&#127807; Natural Fit Tradicional:<br>Foco em digest&atilde;o equilibrada, regula&ccedil;&atilde;o do intestino e leveza.<br>Composi&ccedil;&atilde;o: Laranja Moro, Psyllium, C&uacute;rcuma, Vitamina C, Zinco, Antocianinas</p><p>&nbsp;<br>&#128293; Natural Fit Turbo:<br>Foco em acelera&ccedil;&atilde;o da queima de gordura, energia e desempenho f&iacute;sico.<br>Composi&ccedil;&atilde;o: Laranja Moro, Caf&eacute; Verde, Psyllium, Guaran&aacute;, C&uacute;rcuma, Vitamina C, Zinco, Antocianinas</p><p>&nbsp;<br>&#10024; Ideal para quem:<br>&#10004;&#65039; Quer testar os dois antes de comprar o pote inteiro<br>&#10004;&#65039; Est&aacute; em busca de um suplemento pra acelerar o metabolismo e desinchar<br>&#10004;&#65039; Quer regular o intestino e sentir mais disposi&ccedil;&atilde;o no dia a dia</p><p>&nbsp;<br>&#9888;&#65039; Contraindica&ccedil;&otilde;es:<br>N&atilde;o recomendado para gestantes, lactantes, menores de 18 anos, maiores de 60 anos, card&iacute;acos e hipertensos.<br>Evite consumir com bebida alco&oacute;lica.</p><p>&nbsp;<br>Testa, sente e escolhe o que funciona melhor pra voc&ecirc;!<br>Emagrecimento natural, leve e com resultado real. &#128154;</p>",
+      "especificacoes": "",
+      "itens_inclusos": "",
+      "garantia": "",
+      "peso": "0.05",
+      "comprimento": "16",
+      "largura": "12",
+      "altura": "8",
+      "valor_promo": "0",
+      "data_promo_de": "0000-00-00",
+      "data_promo": "0000-00-00",
+      "multiplo": "1",
+      "equivalencia": {
+        "id": "0",
+        "tipo": "",
+        "qtd": "0",
+        "tamanho": "",
+        "cor": "",
+        "fundo": ""
+      },
+      "equivalencia_tamanho": "",
+      "equivalencia_cor": "",
+      "equivalencia_fundo": "",
+      "ativo": "1",
+      "venda": "1",
+      "oculto": "0",
+      "frete_gratis": "0",
+      "palavras_substitutas": "",
+      "prazo_producao": "0",
+      "categorias_adicionais": [
+        {
+          "id": "230990",
+          "nome": "TODOS OS PRODUTOS",
+          "url": "todos-os-produtos",
+          "tabela": "1",
+          "subs": [
+            {
+              "id": "347723",
+              "nome": "KIT TESTE",
+              "url": "kit-teste"
+            }
+          ]
+        }
+      ],
+      "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/MIO2MU6/tradiconal-turbo-15caps-1-67bc6ca9d458e.png",
+      "tipo_fotos": "1",
+      "ncm": "",
+      "mpn": "",
+      "gtin": "",
+      "genero": {
+        "tipo": "unisex",
+        "nome": "Unissex"
+      },
+      "modelagem": {
+        "tipo": "regular",
+        "nome": "Tamanho normal"
+      },
+      "grupo_etario": {
+        "tipo": "adult",
+        "nome": "Adulto"
+      },
+      "marca": {
+        "id": "110214",
+        "nome": "World Fit",
+        "url": "world-fit/",
+        "logo": ""
+      },
+      "marca_logo": "",
+      "atributos": "[]",
+      "tabela_preco": {
+        "id": "0",
+        "tabela": "Todas as tabelas"
+      },
+      "campos_adicionais": "",
+      "curtidas": "19",
+      "quantidade_total_em_estoque": "83",
+      "grade_tipo": "1",
+      "selos": "",
+      "relacionados": "",
+      "campo_anotacao": "",
+      "valor_unidade_tipo": "",
+      "owner_id": "19539",
+      "created": "2022-11-07 20:00:40",
+      "updated": "2025-05-01 13:54:08",
+      "estoque_cor_id": "0",
+      "estoque_id": "3892914",
+      "tabela_medidas": {
+        "id": "",
+        "tipo": "",
+        "titulo": "",
+        "imagem": ""
+      },
+      "permite_embalagem": "0",
+      "permite_arquivo": "0",
+      "permite_recorrencia": "0",
+      "recorrencia_desconto": "0",
+      "tem_grade_adicional": "0",
+      "video_capa": "0",
+      "video_flutuante": "0",
+      "valores_base": {
+        "varejo": "",
+        "comparativo": "",
+        "custo": "",
+        "atacado": "",
+        "atacadomin": "",
+        "valorpromo": "0,00",
+        "data_promo_de": "",
+        "data_promo": ""
+      },
+      "seo_title": "",
+      "seo_description": "",
+      "seo_metatags": "",
+      "seo_scripts": "",
+      "seo_banner": {
+        "banner": "",
+        "banner_mobile": "",
+        "link": "",
+        "folder": "MIO2MU6"
+      },
+      "nome_cor": "",
+      "formato_cor": "0",
+      "termo_agrupador": "",
+      "localizacao": "",
+      "data_lancamento": "0000-00-00",
+      "total_comentarios": "3",
+      "comentarios_media": "5",
+      "marketplace_has_outros_anuncios": "0",
+      "campos_adicionais_raw": "",
+      "categoria_level1": {
+        "id": "293048",
+        "nome": "Kit teste",
+        "url": "kit-teste-dos-produtos",
+        "tabela": "1",
+        "google_category": ""
+      },
+      "categoria_level2": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "categoria_level3": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "google_category": "Kit teste",
+      "site_category": "Kit teste",
+      "embalagem": {
+        "id": "23668",
+        "sigla": "Sedex 1",
+        "nome": "Pequena"
+      },
+      "combo": [],
+      "personalizador": [],
+      "isPromo": "",
+      "cat_add": "-230990;347723-",
+      "biquini": [],
+      "tem_lancamento": "",
+      "prazo_lancamento": "0",
+      "produto_online": "1",
+      "adicional_info": [],
+      "url_relative": "15-tradicional-15-turbo/",
+      "url_absolute": "https://www.belabluebeauty.com.br/15-tradicional-15-turbo/",
+      "isChild": "",
+      "is_schedule": "",
+      "estoque": [
+        {
+          "id": "3892914",
+          "sku": "1352934.293048.0",
+          "cod_estoque": "",
+          "peso": "0.05",
+          "comprimento": "16",
+          "largura": "12",
+          "altura": "8",
+          "visualizacoes": "20482",
+          "ativo": "1",
+          "variacao_posicao": "",
+          "preco_custo": "260",
+          "qtd_maxima": "0",
+          "gtin": "",
+          "atributos": [],
+          "reserva": [],
+          "erp_id": "",
+          "prazo_producao": "0",
+          "quantidade_em_estoque": "83",
+          "cor": {
+            "id": "",
+            "nome": "",
+            "primaria": "",
+            "secundaria": "",
+            "img": "",
+            "ativo": "",
+            "posicao": "0",
+            "nome_simples": ""
+          },
+          "variacao": {
+            "id": "",
+            "variacao_id": "",
+            "nome": "",
+            "valor": "",
+            "posicao": "",
+            "ativo": ""
+          },
+          "adicional_info": [],
+          "valores": [
+            {
+              "tabela_id": "1",
+              "tabela_nome": "Varejo",
+              "quantidade_minima": "1",
+              "valor": "260",
+              "valor_promo": "0",
+              "data_promo_de": "0000-00-00",
+              "data_promo": "0000-00-00",
+              "codigo": "1352934.293048.0",
+              "valor_comparativo": "0",
+              "isPromo": "0",
+              "valor_loja": []
+            }
+          ],
+          "fotos": [
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/MIO2MU6/tradiconal-turbo-15caps-1-67bc6ca9d458e.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/MIO2MU6/tradiconal-turbo-15caps-1-67bc6ca9d458e_mini.png"
+            }
+          ]
+        }
+      ],
+      "quantidade_total_variacoes": "1",
+      "fotos": [
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/MIO2MU6/tradiconal-turbo-15caps-1-67bc6ca9d458e.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/MIO2MU6/tradiconal-turbo-15caps-1-67bc6ca9d458e_mini.png"
+        }
+      ],
+      "quantidade_total_visualizacoes": "20482",
+      "loja": {
+        "id": "19539",
+        "identificacao": "belabluebeauty",
+        "cidade": "Itajaí",
+        "uf": "SC",
+        "multiloja": "0",
+        "multicd": "0",
+        "nome_matriz": "BELA BLUE BEAUTY",
+        "nome": "BELA BLUE BEAUTY",
+        "cep_origem": "88301-100",
+        "url": "https://www.belabluebeauty.com.br",
+        "url_interna_matriz": "",
+        "logo": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/config/logo-bela-blue-66d75766d8d4f1.png",
+        "isFilial": ""
+      }
+    },
+    {
+      "id": "1419090",
+      "is_simple": "1",
+      "parent_id": "0",
+      "cod": "00001419088",
+      "digital": "0",
+      "produto": "15 CÁPSULAS DE EMAGRECEDOR TURBO (FRACIONADO)",
+      "produto_url": "15-capsulas-turbo",
+      "video": "",
+      "url_download": "",
+      "link_externo": "",
+      "caracteristicas": "",
+      "descricao": "<p>&#9989; SUPLEMENTO ALIMENTAR TURBO &ndash; 15 C&Aacute;PSULAS (FRACIONADO)<br>&#128248; Imagem ilustrativa &ndash; produto enviado em embalagem fracionada</p><p>&#128163; TURBO &ndash; Acelera o metabolismo, seca gordura e reduz o incha&ccedil;o naturalmente!<br>Esse suplemento &eacute; ideal pra quem busca emagrecimento com foco, energia e menos barriga. Com ativos termog&ecirc;nicos, antioxidantes e fibras naturais, ele ajuda a dar aquele empurr&atilde;o que o corpo precisa pra sair do plat&ocirc; e derreter a gordura acumulada!</p><p>&nbsp;<br>&#128230; Cont&eacute;m:<br>15 c&aacute;psulas fracionadas<br>Peso L&iacute;quido: 15g<br>&nbsp;<br>&#128338; Como usar:<br>1 c&aacute;psula por dia, &agrave;s 9h da manh&atilde;, ap&oacute;s o caf&eacute;<br>&nbsp;<br>&#127807; Ingredientes ativos:<br>Laranja Moro, Caf&eacute; Verde, Psyllium, Guaran&aacute;, C&uacute;rcuma, Vitamina C, Zinco, Antocianinas</p><p>&nbsp;<br>&#10024; Benef&iacute;cios:<br>&#10004;&#65039; Acelera a queima de gordura e o metabolismo<br>&#10004;&#65039; Reduz o apetite e aumenta a saciedade<br>&#10004;&#65039; Elimina reten&ccedil;&atilde;o de l&iacute;quidos<br>&#10004;&#65039; D&aacute; energia e melhora o desempenho f&iacute;sico<br>&#10004;&#65039; A&ccedil;&atilde;o antioxidante e anti-inflamat&oacute;ria natural</p><p>&nbsp;<br>&#9888;&#65039; Contraindicado para:<br>Gestantes, lactantes, menores de 18 e maiores de 60 anos, card&iacute;acos e hipertensos.<br>Evite o consumo com bebidas alco&oacute;licas.</p><p>&nbsp;<br>&nbsp;</p>",
+      "especificacoes": "",
+      "itens_inclusos": "",
+      "garantia": "",
+      "peso": "0.05",
+      "comprimento": "16",
+      "largura": "12",
+      "altura": "8",
+      "valor_promo": "0",
+      "data_promo_de": "0000-00-00",
+      "data_promo": "0000-00-00",
+      "multiplo": "1",
+      "equivalencia": {
+        "id": "0",
+        "tipo": "",
+        "qtd": "0",
+        "tamanho": "",
+        "cor": "",
+        "fundo": ""
+      },
+      "equivalencia_tamanho": "",
+      "equivalencia_cor": "",
+      "equivalencia_fundo": "",
+      "ativo": "1",
+      "venda": "1",
+      "oculto": "0",
+      "frete_gratis": "0",
+      "palavras_substitutas": "",
+      "prazo_producao": "0",
+      "categorias_adicionais": [
+        {
+          "id": "230990",
+          "nome": "TODOS OS PRODUTOS",
+          "url": "todos-os-produtos",
+          "tabela": "1",
+          "subs": [
+            {
+              "id": "347723",
+              "nome": "KIT TESTE",
+              "url": "kit-teste"
+            }
+          ]
+        }
+      ],
+      "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DUA3LIO2/carnaval-3-67bc6c958e388.png",
+      "tipo_fotos": "1",
+      "ncm": "",
+      "mpn": "",
+      "gtin": "",
+      "genero": {
+        "tipo": "unisex",
+        "nome": "Unissex"
+      },
+      "modelagem": {
+        "tipo": "regular",
+        "nome": "Tamanho normal"
+      },
+      "grupo_etario": {
+        "tipo": "adult",
+        "nome": "Adulto"
+      },
+      "marca": {
+        "id": "110214",
+        "nome": "World Fit",
+        "url": "world-fit/",
+        "logo": ""
+      },
+      "marca_logo": "",
+      "atributos": "[]",
+      "tabela_preco": {
+        "id": "0",
+        "tabela": "Todas as tabelas"
+      },
+      "campos_adicionais": "",
+      "curtidas": "11",
+      "quantidade_total_em_estoque": "710",
+      "grade_tipo": "1",
+      "selos": "",
+      "relacionados": "",
+      "campo_anotacao": "",
+      "valor_unidade_tipo": "",
+      "owner_id": "19539",
+      "created": "2022-12-01 20:01:22",
+      "updated": "2025-05-01 13:53:30",
+      "estoque_cor_id": "0",
+      "estoque_id": "4064127",
+      "tabela_medidas": {
+        "id": "",
+        "tipo": "",
+        "titulo": "",
+        "imagem": ""
+      },
+      "permite_embalagem": "0",
+      "permite_arquivo": "0",
+      "permite_recorrencia": "0",
+      "recorrencia_desconto": "0",
+      "tem_grade_adicional": "0",
+      "video_capa": "0",
+      "video_flutuante": "0",
+      "valores_base": {
+        "varejo": "",
+        "comparativo": "",
+        "custo": "",
+        "atacado": "",
+        "atacadomin": "",
+        "valorpromo": "0,00",
+        "data_promo_de": "",
+        "data_promo": ""
+      },
+      "seo_title": "",
+      "seo_description": "",
+      "seo_metatags": "",
+      "seo_scripts": "",
+      "seo_banner": {
+        "banner": "",
+        "banner_mobile": "",
+        "link": "",
+        "folder": "DUA3LIO2"
+      },
+      "nome_cor": "",
+      "formato_cor": "0",
+      "termo_agrupador": "",
+      "localizacao": "",
+      "data_lancamento": "0000-00-00",
+      "total_comentarios": "3",
+      "comentarios_media": "5",
+      "marketplace_has_outros_anuncios": "0",
+      "campos_adicionais_raw": "",
+      "categoria_level1": {
+        "id": "293048",
+        "nome": "Kit teste",
+        "url": "kit-teste-dos-produtos",
+        "tabela": "1",
+        "google_category": ""
+      },
+      "categoria_level2": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "categoria_level3": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "google_category": "Kit teste",
+      "site_category": "Kit teste",
+      "embalagem": {
+        "id": "23668",
+        "sigla": "Sedex 1",
+        "nome": "Pequena"
+      },
+      "combo": [],
+      "personalizador": [],
+      "isPromo": "",
+      "cat_add": "-230990;347723-",
+      "biquini": [],
+      "tem_lancamento": "",
+      "prazo_lancamento": "0",
+      "produto_online": "1",
+      "adicional_info": [],
+      "url_relative": "15-capsulas-turbo/",
+      "url_absolute": "https://www.belabluebeauty.com.br/15-capsulas-turbo/",
+      "isChild": "",
+      "is_schedule": "",
+      "estoque": [
+        {
+          "id": "4064127",
+          "sku": "1419090.293048.0",
+          "cod_estoque": "",
+          "peso": "0.05",
+          "comprimento": "16",
+          "largura": "12",
+          "altura": "8",
+          "visualizacoes": "10028",
+          "ativo": "1",
+          "variacao_posicao": "",
+          "preco_custo": "140",
+          "qtd_maxima": "0",
+          "gtin": "",
+          "atributos": [],
+          "reserva": [],
+          "erp_id": "",
+          "prazo_producao": "0",
+          "quantidade_em_estoque": "710",
+          "cor": {
+            "id": "",
+            "nome": "",
+            "primaria": "",
+            "secundaria": "",
+            "img": "",
+            "ativo": "",
+            "posicao": "0",
+            "nome_simples": ""
+          },
+          "variacao": {
+            "id": "",
+            "variacao_id": "",
+            "nome": "",
+            "valor": "",
+            "posicao": "",
+            "ativo": ""
+          },
+          "adicional_info": [],
+          "valores": [
+            {
+              "tabela_id": "1",
+              "tabela_nome": "Varejo",
+              "quantidade_minima": "1",
+              "valor": "140",
+              "valor_promo": "0",
+              "data_promo_de": "0000-00-00",
+              "data_promo": "0000-00-00",
+              "codigo": "1419090.293048.0",
+              "valor_comparativo": "0",
+              "isPromo": "0",
+              "valor_loja": []
+            }
+          ],
+          "fotos": [
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DUA3LIO2/carnaval-3-67bc6c958e388.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DUA3LIO2/carnaval-3-67bc6c958e388_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DUA3LIO2/ec7c1c00-f5c3-4cdf-837f-8685efc489ff-63893242e27f7.jpeg",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DUA3LIO2/ec7c1c00-f5c3-4cdf-837f-8685efc489ff-63893242e27f7_mini.jpeg"
+            }
+          ]
+        }
+      ],
+      "quantidade_total_variacoes": "1",
+      "fotos": [
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DUA3LIO2/carnaval-3-67bc6c958e388.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DUA3LIO2/carnaval-3-67bc6c958e388_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DUA3LIO2/ec7c1c00-f5c3-4cdf-837f-8685efc489ff-63893242e27f7.jpeg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/DUA3LIO2/ec7c1c00-f5c3-4cdf-837f-8685efc489ff-63893242e27f7_mini.jpeg"
+        }
+      ],
+      "quantidade_total_visualizacoes": "10028",
+      "loja": {
+        "id": "19539",
+        "identificacao": "belabluebeauty",
+        "cidade": "Itajaí",
+        "uf": "SC",
+        "multiloja": "0",
+        "multicd": "0",
+        "nome_matriz": "BELA BLUE BEAUTY",
+        "nome": "BELA BLUE BEAUTY",
+        "cep_origem": "88301-100",
+        "url": "https://www.belabluebeauty.com.br",
+        "url_interna_matriz": "",
+        "logo": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/config/logo-bela-blue-66d75766d8d4f1.png",
+        "isFilial": ""
+      }
+    },
+    {
+      "id": "1502406",
+      "is_simple": "1",
+      "parent_id": "0",
+      "cod": "00001502401",
+      "digital": "0",
+      "produto": "FITTOX CAPS (EMAGRECEDOR *SEM CONTRAINDICAÇÕES*)",
+      "produto_url": "fit-detox-emagrecedor-sem-contraindicacoes-regula-intestino",
+      "video": "",
+      "url_download": "",
+      "link_externo": "",
+      "caracteristicas": "",
+      "descricao": "<p>A combina&ccedil;&atilde;o de ervas do <strong>Fittox Caps</strong> tem a&ccedil;&atilde;o diur&eacute;tica, promove a saciedade e e controla a ansiedade e compuls&atilde;o alimentar, direcionando assim a comer com modera&ccedil;&atilde;o.</p><p><strong>Quantidade:</strong> 60 c&aacute;psulas</p><p><strong>Peso l&iacute;q: </strong>30g</p><p><em><strong>Benef&iacute;cios:</strong></em></p><ul><li>Diminui&ccedil;&atilde;o a compuls&atilde;o alimentar</li><li>Diminui&ccedil;&atilde;o a compuls&atilde;o por doces</li><li>Ajuda a reduzir o n&iacute;vel de colestorel ruim</li><li>Absorve e elimina godura</li><li>Reduz o efeito sanfona</li><li>Desintoxicante</li><li>Adeus ao efeito sanfona</li></ul><p><strong>Modo de Uso: </strong>Consumir 2 c&aacute;psulas ao dia. Uma antes do caf&eacute; da manh&atilde; e outra &agrave;s 17 horas.</p><p><em><strong>SEM CONTRAINDICA&Ccedil;&Otilde;ES</strong></em></p>",
+      "especificacoes": "",
+      "itens_inclusos": "",
+      "garantia": "",
+      "peso": "0.3",
+      "comprimento": "16",
+      "largura": "12",
+      "altura": "8",
+      "valor_promo": "0",
+      "data_promo_de": "0000-00-00",
+      "data_promo": "0000-00-00",
+      "multiplo": "1",
+      "equivalencia": {
+        "id": "0",
+        "tipo": "",
+        "qtd": "0",
+        "tamanho": "",
+        "cor": "",
+        "fundo": ""
+      },
+      "equivalencia_tamanho": "",
+      "equivalencia_cor": "",
+      "equivalencia_fundo": "",
+      "ativo": "0",
+      "venda": "1",
+      "oculto": "0",
+      "frete_gratis": "0",
+      "palavras_substitutas": "",
+      "prazo_producao": "0",
+      "categorias_adicionais": [
+        {
+          "id": "250866",
+          "nome": "BRINDES",
+          "url": "brindes",
+          "tabela": "1"
+        }
+      ],
+      "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/6-674e7bcac21a2.jpg",
+      "tipo_fotos": "1",
+      "ncm": "2106.90.30",
+      "mpn": "",
+      "gtin": "",
+      "genero": {
+        "tipo": "unisex",
+        "nome": "Unissex"
+      },
+      "modelagem": {
+        "tipo": "regular",
+        "nome": "Tamanho normal"
+      },
+      "grupo_etario": {
+        "tipo": "adult",
+        "nome": "Adulto"
+      },
+      "marca": {
+        "id": "95350",
+        "nome": "ARRAZUZ",
+        "url": "arrazuz/",
+        "logo": ""
+      },
+      "marca_logo": "",
+      "atributos": "[]",
+      "tabela_preco": {
+        "id": "0",
+        "tabela": "Todas as tabelas"
+      },
+      "campos_adicionais": "",
+      "curtidas": "47",
+      "quantidade_total_em_estoque": "0",
+      "grade_tipo": "1",
+      "selos": "",
+      "relacionados": "1456529,1456510",
+      "campo_anotacao": "",
+      "valor_unidade_tipo": "",
+      "owner_id": "19539",
+      "created": "2023-01-10 21:52:18",
+      "updated": "2025-04-24 12:09:25",
+      "estoque_cor_id": "0",
+      "estoque_id": "4270431",
+      "tabela_medidas": {
+        "id": "",
+        "tipo": "",
+        "titulo": "",
+        "imagem": ""
+      },
+      "permite_embalagem": "0",
+      "permite_arquivo": "0",
+      "permite_recorrencia": "0",
+      "recorrencia_desconto": "0",
+      "tem_grade_adicional": "0",
+      "video_capa": "0",
+      "video_flutuante": "0",
+      "valores_base": {
+        "varejo": "",
+        "comparativo": "",
+        "custo": "",
+        "atacado": "",
+        "atacadomin": "",
+        "valorpromo": "0,00",
+        "data_promo_de": "",
+        "data_promo": ""
+      },
+      "seo_title": "",
+      "seo_description": "",
+      "seo_metatags": "",
+      "seo_scripts": "",
+      "seo_banner": {
+        "banner": "",
+        "banner_mobile": "",
+        "link": "",
+        "folder": "GOU6WIO4"
+      },
+      "nome_cor": "",
+      "formato_cor": "0",
+      "termo_agrupador": "",
+      "localizacao": "",
+      "data_lancamento": "0000-00-00",
+      "total_comentarios": "26",
+      "comentarios_media": "4.85",
+      "marketplace_has_outros_anuncios": "0",
+      "campos_adicionais_raw": "",
+      "categoria_level1": {
+        "id": "250866",
+        "nome": "BRINDES",
+        "url": "brindes",
+        "tabela": "1",
+        "google_category": ""
+      },
+      "categoria_level2": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "categoria_level3": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "google_category": "BRINDES",
+      "site_category": "BRINDES",
+      "embalagem": {
+        "id": "23668",
+        "sigla": "Sedex 1",
+        "nome": "Pequena"
+      },
+      "combo": [],
+      "personalizador": [],
+      "isPromo": "",
+      "cat_add": "-250866-",
+      "biquini": [],
+      "tem_lancamento": "",
+      "prazo_lancamento": "0",
+      "produto_online": "1",
+      "adicional_info": [],
+      "url_relative": "fit-detox-emagrecedor-sem-contraindicacoes-regula-intestino/",
+      "url_absolute": "https://www.belabluebeauty.com.br/fit-detox-emagrecedor-sem-contraindicacoes-regula-intestino/",
+      "isChild": "",
+      "is_schedule": "",
+      "estoque": [
+        {
+          "id": "4270431",
+          "sku": "1502406.250866.0",
+          "cod_estoque": "",
+          "peso": "0.3",
+          "comprimento": "16",
+          "largura": "12",
+          "altura": "8",
+          "visualizacoes": "25149",
+          "ativo": "1",
+          "variacao_posicao": "",
+          "preco_custo": "38",
+          "qtd_maxima": "0",
+          "gtin": "",
+          "atributos": [],
+          "reserva": [],
+          "erp_id": "",
+          "prazo_producao": "0",
+          "quantidade_em_estoque": "0",
+          "cor": {
+            "id": "",
+            "nome": "",
+            "primaria": "",
+            "secundaria": "",
+            "img": "",
+            "ativo": "",
+            "posicao": "0",
+            "nome_simples": ""
+          },
+          "variacao": {
+            "id": "",
+            "variacao_id": "",
+            "nome": "",
+            "valor": "",
+            "posicao": "",
+            "ativo": ""
+          },
+          "adicional_info": [],
+          "valores": [
+            {
+              "tabela_id": "1",
+              "tabela_nome": "Varejo",
+              "quantidade_minima": "1",
+              "valor": "145.9",
+              "valor_promo": "0",
+              "data_promo_de": "0000-00-00",
+              "data_promo": "0000-00-00",
+              "codigo": "1502406.250866.0",
+              "valor_comparativo": "0",
+              "isPromo": "0",
+              "valor_loja": []
+            }
+          ],
+          "fotos": [
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/6-674e7bcac21a2.jpg",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/6-674e7bcac21a2_mini.jpg"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0001-6450232bbd6ca.jpg",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0001-6450232bbd6ca_mini.jpg"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0005-6450232d10342.jpg",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0005-6450232d10342_mini.jpg"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0003-645023293b70b.jpg",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0003-645023293b70b_mini.jpg"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0002-645023281b268.jpg",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0002-645023281b268_mini.jpg"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0004-6450232a808e4.jpg",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0004-6450232a808e4_mini.jpg"
+            }
+          ]
+        }
+      ],
+      "quantidade_total_variacoes": "1",
+      "fotos": [
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/6-674e7bcac21a2.jpg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/6-674e7bcac21a2_mini.jpg"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0001-6450232bbd6ca.jpg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0001-6450232bbd6ca_mini.jpg"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0005-6450232d10342.jpg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0005-6450232d10342_mini.jpg"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0003-645023293b70b.jpg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0003-645023293b70b_mini.jpg"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0002-645023281b268.jpg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0002-645023281b268_mini.jpg"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0004-6450232a808e4.jpg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/GOU6WIO4/fittox-caps_page-0004-6450232a808e4_mini.jpg"
+        }
+      ],
+      "quantidade_total_visualizacoes": "25149",
+      "loja": {
+        "id": "19539",
+        "identificacao": "belabluebeauty",
+        "cidade": "Itajaí",
+        "uf": "SC",
+        "multiloja": "0",
+        "multicd": "0",
+        "nome_matriz": "BELA BLUE BEAUTY",
+        "nome": "BELA BLUE BEAUTY",
+        "cep_origem": "88301-100",
+        "url": "https://www.belabluebeauty.com.br",
+        "url_interna_matriz": "",
+        "logo": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/config/logo-bela-blue-66d75766d8d4f1.png",
+        "isFilial": ""
+      }
+    },
+    {
+      "id": "1506134",
+      "is_simple": "1",
+      "parent_id": "0",
+      "cod": "5",
+      "digital": "0",
+      "produto": "FITTOX CAPS (cartela com 10 unidades)",
+      "produto_url": "fittox-capsulas-soltas",
+      "video": "",
+      "url_download": "",
+      "link_externo": "",
+      "caracteristicas": "",
+      "descricao": "<p>A combina&ccedil;&atilde;o de ervas do <strong>Fittox Caps</strong> tem a&ccedil;&atilde;o diur&eacute;tica, promove a saciedade e controla a ansiedade e compuls&atilde;o alimentar, direcionando assim a comer com modera&ccedil;&atilde;o.</p><p><strong>Quantidade:</strong> 10 c&aacute;psulas. Benef&iacute;cios:</p><p>&bull; Diminui&ccedil;&atilde;o da compuls&atilde;o alimentar <br>&bull; Diminui&ccedil;&atilde;o da compuls&atilde;o por doces<br>&bull; Ajuda a reduzir o n&iacute;vel de colesterol ruim<br>&bull; Absorve e elimina gordura<br>&bull; Reduz o efeito sanfona<br>&bull; Desintoxicante<br>&bull; Adeus ao efeito sanfona<br><br></p><p><strong>Modo de Uso:</strong> Consumir 2 c&aacute;psulas ao dia. Uma antes do caf&eacute; da manh&atilde; e outra &agrave;s 17 horas.</p><p><strong>SEM CONTRAINDICA&Ccedil;&Otilde;ES</strong></p><p><strong>Temos a op&ccedil;&atilde;o com 60 c&aacute;psulas por R$120,00</strong></p>",
+      "especificacoes": "",
+      "itens_inclusos": "",
+      "garantia": "",
+      "peso": "0.005",
+      "comprimento": "0.016",
+      "largura": "0.012",
+      "altura": "0.008",
+      "valor_promo": "0",
+      "data_promo_de": "0000-00-00",
+      "data_promo": "0000-00-00",
+      "multiplo": "1",
+      "equivalencia": {
+        "id": "0",
+        "tipo": "",
+        "qtd": "0",
+        "tamanho": "",
+        "cor": "",
+        "fundo": ""
+      },
+      "equivalencia_tamanho": "",
+      "equivalencia_cor": "",
+      "equivalencia_fundo": "",
+      "ativo": "1",
+      "venda": "1",
+      "oculto": "0",
+      "frete_gratis": "0",
+      "palavras_substitutas": "",
+      "prazo_producao": "0",
+      "categorias_adicionais": "",
+      "foto": "",
+      "tipo_fotos": "1",
+      "ncm": "",
+      "mpn": "",
+      "gtin": "",
+      "genero": {
+        "tipo": "unisex",
+        "nome": "Unissex"
+      },
+      "modelagem": {
+        "tipo": "regular",
+        "nome": "Tamanho normal"
+      },
+      "grupo_etario": {
+        "tipo": "adult",
+        "nome": "Adulto"
+      },
+      "marca": [],
+      "marca_logo": "",
+      "atributos": "[]",
+      "tabela_preco": {
+        "id": "0",
+        "tabela": "Todas as tabelas"
+      },
+      "campos_adicionais": "",
+      "curtidas": "11",
+      "quantidade_total_em_estoque": "0",
+      "grade_tipo": "1",
+      "selos": "",
+      "relacionados": "",
+      "campo_anotacao": "",
+      "valor_unidade_tipo": "",
+      "owner_id": "19539",
+      "created": "2023-01-11 13:16:17",
+      "updated": "2024-09-10 13:53:58",
+      "estoque_cor_id": "0",
+      "estoque_id": "4285926",
+      "tabela_medidas": {
+        "id": "",
+        "tipo": "",
+        "titulo": "",
+        "imagem": ""
+      },
+      "permite_embalagem": "0",
+      "permite_arquivo": "0",
+      "permite_recorrencia": "0",
+      "recorrencia_desconto": "0",
+      "tem_grade_adicional": "0",
+      "video_capa": "0",
+      "video_flutuante": "0",
+      "valores_base": {
+        "varejo": "",
+        "comparativo": "",
+        "custo": "",
+        "atacado": "",
+        "atacadomin": "",
+        "valorpromo": "0,00",
+        "data_promo_de": "",
+        "data_promo": ""
+      },
+      "seo_title": "",
+      "seo_description": "",
+      "seo_metatags": "",
+      "seo_scripts": "",
+      "seo_banner": {
+        "banner": "",
+        "banner_mobile": "",
+        "link": "",
+        "folder": "TIO3JEI1"
+      },
+      "nome_cor": "",
+      "formato_cor": "0",
+      "termo_agrupador": "",
+      "localizacao": "",
+      "data_lancamento": "0000-00-00",
+      "total_comentarios": "19",
+      "comentarios_media": "5",
+      "marketplace_has_outros_anuncios": "0",
+      "campos_adicionais_raw": "",
+      "categoria_level1": {
+        "id": "230990",
+        "nome": "TODOS OS PRODUTOS",
+        "url": "todos-os-produtos",
+        "tabela": "1",
+        "google_category": ""
+      },
+      "categoria_level2": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "categoria_level3": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "google_category": "TODOS OS PRODUTOS",
+      "site_category": "TODOS OS PRODUTOS",
+      "embalagem": {
+        "id": "23668",
+        "sigla": "Sedex 1",
+        "nome": "Pequena"
+      },
+      "combo": [],
+      "personalizador": [],
+      "isPromo": "",
+      "cat_add": "",
+      "biquini": [],
+      "tem_lancamento": "",
+      "prazo_lancamento": "0",
+      "produto_online": "0",
+      "adicional_info": [],
+      "url_relative": "fittox-capsulas-soltas/",
+      "url_absolute": "https://www.belabluebeauty.com.br/fittox-capsulas-soltas/",
+      "isChild": "",
+      "is_schedule": "",
+      "estoque": [],
+      "quantidade_total_variacoes": "0",
+      "fotos": [
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/TIO3JEI1/d4e81903-24f2-478f-9b05-280d99c013b7-63bee1091deac.jpg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/TIO3JEI1/d4e81903-24f2-478f-9b05-280d99c013b7-63bee1091deac_mini.jpg"
+        }
+      ],
+      "quantidade_total_visualizacoes": "0",
+      "loja": {
+        "id": "19539",
+        "identificacao": "belabluebeauty",
+        "cidade": "Itajaí",
+        "uf": "SC",
+        "multiloja": "0",
+        "multicd": "0",
+        "nome_matriz": "BELA BLUE BEAUTY",
+        "nome": "BELA BLUE BEAUTY",
+        "cep_origem": "88301-100",
+        "url": "https://www.belabluebeauty.com.br",
+        "url_interna_matriz": "",
+        "logo": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/config/logo-bela-blue-66d75766d8d4f1.png",
+        "isFilial": ""
+      }
+    },
+    {
+      "id": "1664112",
+      "is_simple": "1",
+      "parent_id": "0",
+      "cod": "00001664067",
+      "digital": "0",
+      "produto": "GARRAFINHA COM PORTA CAPSULAS E PORTA PÓ",
+      "produto_url": "garrafinha-com-porta-capsulas-e-porta-po",
+      "video": "",
+      "url_download": "",
+      "link_externo": "",
+      "caracteristicas": "",
+      "descricao": "<p>COQUETELEIRA BELA BLUE 500ML<br />PORTA CAPSULAS E PORTA P&Oacute;<br />CORES AZUL E BRANCO</p>",
+      "especificacoes": "",
+      "itens_inclusos": "",
+      "garantia": "",
+      "peso": "0.02",
+      "comprimento": "32",
+      "largura": "25",
+      "altura": "12",
+      "valor_promo": "0",
+      "data_promo_de": "0000-00-00",
+      "data_promo": "0000-00-00",
+      "multiplo": "1",
+      "equivalencia": {
+        "id": "0",
+        "tipo": "",
+        "qtd": "0",
+        "tamanho": "",
+        "cor": "",
+        "fundo": ""
+      },
+      "equivalencia_tamanho": "",
+      "equivalencia_cor": "",
+      "equivalencia_fundo": "",
+      "ativo": "1",
+      "venda": "1",
+      "oculto": "0",
+      "frete_gratis": "0",
+      "palavras_substitutas": "",
+      "prazo_producao": "0",
+      "categorias_adicionais": [
+        {
+          "id": "230990",
+          "nome": "TODOS OS PRODUTOS",
+          "url": "todos-os-produtos",
+          "tabela": "1",
+          "subs": [
+            {
+              "id": "347721",
+              "nome": "GARRAFINHA",
+              "url": "garrafinha"
+            }
+          ]
+        }
+      ],
+      "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/4-640c77382f3bd.png",
+      "tipo_fotos": "1",
+      "ncm": "39233090",
+      "mpn": "",
+      "gtin": "",
+      "genero": {
+        "tipo": "unisex",
+        "nome": "Unissex"
+      },
+      "modelagem": {
+        "tipo": "regular",
+        "nome": "Tamanho normal"
+      },
+      "grupo_etario": {
+        "tipo": "adult",
+        "nome": "Adulto"
+      },
+      "marca": {
+        "id": "74112",
+        "nome": "BELA BLUE BEAUTY",
+        "url": "bela-blue-beauty/",
+        "logo": ""
+      },
+      "marca_logo": "",
+      "atributos": "[]",
+      "tabela_preco": {
+        "id": "0",
+        "tabela": "Todas as tabelas"
+      },
+      "campos_adicionais": "",
+      "curtidas": "4",
+      "quantidade_total_em_estoque": "1347",
+      "grade_tipo": "1",
+      "selos": "",
+      "relacionados": "",
+      "campo_anotacao": "",
+      "valor_unidade_tipo": "",
+      "owner_id": "19539",
+      "created": "2023-03-10 11:37:40",
+      "updated": "2025-05-01 11:37:57",
+      "estoque_cor_id": "0",
+      "estoque_id": "4711075",
+      "tabela_medidas": {
+        "id": "",
+        "tipo": "",
+        "titulo": "",
+        "imagem": ""
+      },
+      "permite_embalagem": "0",
+      "permite_arquivo": "0",
+      "permite_recorrencia": "0",
+      "recorrencia_desconto": "0",
+      "tem_grade_adicional": "0",
+      "video_capa": "0",
+      "video_flutuante": "0",
+      "valores_base": {
+        "varejo": "",
+        "comparativo": "",
+        "custo": "",
+        "atacado": "",
+        "atacadomin": "",
+        "valorpromo": "0,00",
+        "data_promo_de": "",
+        "data_promo": ""
+      },
+      "seo_title": "",
+      "seo_description": "",
+      "seo_metatags": "",
+      "seo_scripts": "",
+      "seo_banner": {
+        "banner": "",
+        "banner_mobile": "",
+        "link": "",
+        "folder": "640b40b4460f3"
+      },
+      "nome_cor": "",
+      "formato_cor": "0",
+      "termo_agrupador": "",
+      "localizacao": "",
+      "data_lancamento": "0000-00-00",
+      "total_comentarios": "18",
+      "comentarios_media": "4.94",
+      "marketplace_has_outros_anuncios": "0",
+      "campos_adicionais_raw": "",
+      "categoria_level1": {
+        "id": "220109",
+        "nome": "BELA LOVERS",
+        "url": "bela-lovers",
+        "tabela": "1",
+        "google_category": ""
+      },
+      "categoria_level2": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "categoria_level3": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "google_category": "BELA LOVERS",
+      "site_category": "BELA LOVERS",
+      "embalagem": {
+        "id": "23670",
+        "sigla": "Sedex 14 Branca",
+        "nome": "Combo + Garrafa"
+      },
+      "combo": [],
+      "personalizador": [],
+      "isPromo": "",
+      "cat_add": "-230990;347721-",
+      "biquini": [],
+      "tem_lancamento": "",
+      "prazo_lancamento": "0",
+      "produto_online": "1",
+      "adicional_info": [],
+      "url_relative": "garrafinha-com-porta-capsulas-e-porta-po/",
+      "url_absolute": "https://www.belabluebeauty.com.br/garrafinha-com-porta-capsulas-e-porta-po/",
+      "isChild": "",
+      "is_schedule": "",
+      "estoque": [
+        {
+          "id": "4711075",
+          "sku": "1664112.220109.0",
+          "cod_estoque": "",
+          "peso": "0.02",
+          "comprimento": "32",
+          "largura": "25",
+          "altura": "12",
+          "visualizacoes": "3548",
+          "ativo": "1",
+          "variacao_posicao": "",
+          "preco_custo": "49.9",
+          "qtd_maxima": "0",
+          "gtin": "",
+          "atributos": [],
+          "reserva": [],
+          "erp_id": "",
+          "prazo_producao": "0",
+          "quantidade_em_estoque": "1347",
+          "cor": {
+            "id": "",
+            "nome": "",
+            "primaria": "",
+            "secundaria": "",
+            "img": "",
+            "ativo": "",
+            "posicao": "0",
+            "nome_simples": ""
+          },
+          "variacao": {
+            "id": "",
+            "variacao_id": "",
+            "nome": "",
+            "valor": "",
+            "posicao": "",
+            "ativo": ""
+          },
+          "adicional_info": [],
+          "valores": [
+            {
+              "tabela_id": "1",
+              "tabela_nome": "Varejo",
+              "quantidade_minima": "1",
+              "valor": "49.9",
+              "valor_promo": "0",
+              "data_promo_de": "0000-00-00",
+              "data_promo": "0000-00-00",
+              "codigo": "1664112.220109.0",
+              "valor_comparativo": "0",
+              "isPromo": "0",
+              "valor_loja": []
+            }
+          ],
+          "fotos": [
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/4-640c77382f3bd.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/4-640c77382f3bd_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/10-640c773b86111.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/10-640c773b86111_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/garrafinha-640b42dc8a959.jpg",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/garrafinha-640b42dc8a959_mini.jpg"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/c7b3b48f-05d9-450c-b25e-090698758e43-640b40b481cb6.jpg",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/c7b3b48f-05d9-450c-b25e-090698758e43-640b40b481cb6_mini.jpg"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/abcdacc7-7a5b-465a-89d6-2e21c2f9efaf-640b40b4c3941.jpg",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/abcdacc7-7a5b-465a-89d6-2e21c2f9efaf-640b40b4c3941_mini.jpg"
+            }
+          ]
+        }
+      ],
+      "quantidade_total_variacoes": "1",
+      "fotos": [
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/4-640c77382f3bd.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/4-640c77382f3bd_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/10-640c773b86111.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/10-640c773b86111_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/garrafinha-640b42dc8a959.jpg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/garrafinha-640b42dc8a959_mini.jpg"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/c7b3b48f-05d9-450c-b25e-090698758e43-640b40b481cb6.jpg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/c7b3b48f-05d9-450c-b25e-090698758e43-640b40b481cb6_mini.jpg"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/abcdacc7-7a5b-465a-89d6-2e21c2f9efaf-640b40b4c3941.jpg",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640b40b4460f3/abcdacc7-7a5b-465a-89d6-2e21c2f9efaf-640b40b4c3941_mini.jpg"
+        }
+      ],
+      "quantidade_total_visualizacoes": "3548",
+      "loja": {
+        "id": "19539",
+        "identificacao": "belabluebeauty",
+        "cidade": "Itajaí",
+        "uf": "SC",
+        "multiloja": "0",
+        "multicd": "0",
+        "nome_matriz": "BELA BLUE BEAUTY",
+        "nome": "BELA BLUE BEAUTY",
+        "cep_origem": "88301-100",
+        "url": "https://www.belabluebeauty.com.br",
+        "url_interna_matriz": "",
+        "logo": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/config/logo-bela-blue-66d75766d8d4f1.png",
+        "isFilial": ""
+      }
+    },
+    {
+      "id": "1665328",
+      "is_simple": "1",
+      "parent_id": "0",
+      "cod": "00001665328",
+      "digital": "0",
+      "produto": "BELATONINA - MELATONINA PARA SONO",
+      "produto_url": "melatonina-para-sono",
+      "video": "",
+      "url_download": "",
+      "link_externo": "",
+      "caracteristicas": "",
+      "descricao": "<p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">Belatonina &eacute; um suplemento alimentar a base de melatonina, que &eacute; um horm&ocirc;nio produzido naturalmente pelo organismo, que possui como principal fun&ccedil;&atilde;o, regular o ciclo circadiano, fazendo com que funcione normalmente. Al&eacute;m disso, a melatonina promove o bom funcionamento do organismo e atua como antioxidante. Com o passar dos anos nosso corpo produz em menos quantidade a melatonina, por isso, h&aacute; necessidade de suplementar para voltar a dormir normalmente, sem ter ins&ocirc;nia.</span></p><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">Benef&iacute;cios:</span></p><ul><li style=\"text-align: justify; color: rgb(0, 0, 0); font-size: 16px;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">Maior qualidade de sono e bem-estar noturno;</span></li><li style=\"text-align: justify; color: rgb(0, 0, 0); font-size: 16px;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">Facilidade para dormir, devido &agrave; indu&ccedil;&atilde;o de sono;</span></li><li style=\"text-align: justify; color: rgb(0, 0, 0); font-size: 16px;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">Combate &agrave; ins&ocirc;nia;</span></li><li style=\"text-align: justify; color: rgb(0, 0, 0); font-size: 16px;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">Resultados de um sono reparador;</span></li><li style=\"text-align: justify; color: rgb(0, 0, 0); font-size: 16px;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">Redu&ccedil;&atilde;o dos efeitos de jet-leg durante viagens.</span></li></ul><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">Quantidade: 30ml (360 gotas)</span></p><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">Sabor: Morango</span></p><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">Modo de Uso: Ingerir 1 gota ao dia, 2 horas antes de dormir.</span></p><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">Contraindica&ccedil;&otilde;es: Este produto n&atilde;o deve ser consumido por gestantes, lactantes, crian&ccedil;as e pessoas envoldas em atividades que requerem aten&ccedil;&atilde;o constante. Pessoas com enfermidades e/ou sob o uso de medicamentos, consulte seu m&eacute;dico.</span></p><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">Ingredientes: &aacute;gua purificada, melatonina, agente de massa glicerina bidestilada, aroma id&ecirc;ntico ao natural, acidulante &aacute;cido c&iacute;trico, conservantes benzoato de s&oacute;dio e sorbato de pot&aacute;ssio e edulcorante sucralose.</span></p><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\"><img src=\"https://sistema.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/uploads/images/mceclip1-65907ec12a0271.png\" width=\"308\" height=\"293\"></span></p><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">ATEN&Ccedil;&Atilde;O: PODE CONTER LEITE, SOJA, PINOLI (Pinus spp.) E CRUST&Aacute;CEOS (CARANGUEJO). N&Atilde;O CONT&Eacute;M GLUTEN.</span></p><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0); font-size: 16px;\">PRODUTO ISENTO DE REGISTRO CONFORME RDC 27/2010 E 240/2018.</span></p>",
+      "especificacoes": "",
+      "itens_inclusos": "",
+      "garantia": "",
+      "peso": "0.05",
+      "comprimento": "16",
+      "largura": "12",
+      "altura": "8",
+      "valor_promo": "0",
+      "data_promo_de": "0000-00-00",
+      "data_promo": "0000-00-00",
+      "multiplo": "1",
+      "equivalencia": {
+        "id": "0",
+        "tipo": "",
+        "qtd": "0",
+        "tamanho": "",
+        "cor": "",
+        "fundo": ""
+      },
+      "equivalencia_tamanho": "",
+      "equivalencia_cor": "",
+      "equivalencia_fundo": "",
+      "ativo": "1",
+      "venda": "1",
+      "oculto": "0",
+      "frete_gratis": "0",
+      "palavras_substitutas": "",
+      "prazo_producao": "0",
+      "categorias_adicionais": [
+        {
+          "id": "230990",
+          "nome": "TODOS OS PRODUTOS",
+          "url": "todos-os-produtos",
+          "tabela": "1",
+          "subs": [
+            {
+              "id": "347719",
+              "nome": "SONO",
+              "url": "sono"
+            }
+          ]
+        }
+      ],
+      "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/todos-os-produtos-20-67d0aed5d2a59.png",
+      "tipo_fotos": "1",
+      "ncm": "2937.29.90",
+      "mpn": "",
+      "gtin": "",
+      "genero": {
+        "tipo": "unisex",
+        "nome": "Unissex"
+      },
+      "modelagem": {
+        "tipo": "regular",
+        "nome": "Tamanho normal"
+      },
+      "grupo_etario": {
+        "tipo": "adult",
+        "nome": "Adulto"
+      },
+      "marca": {
+        "id": "92422",
+        "nome": "RUMIE",
+        "url": "rumie/",
+        "logo": ""
+      },
+      "marca_logo": "",
+      "atributos": "[]",
+      "tabela_preco": {
+        "id": "0",
+        "tabela": "Todas as tabelas"
+      },
+      "campos_adicionais": "",
+      "curtidas": "15",
+      "quantidade_total_em_estoque": "519",
+      "grade_tipo": "1",
+      "selos": "",
+      "relacionados": "1664112",
+      "campo_anotacao": "",
+      "valor_unidade_tipo": "",
+      "owner_id": "19539",
+      "created": "2023-03-11 08:14:31",
+      "updated": "2025-05-01 11:38:54",
+      "estoque_cor_id": "0",
+      "estoque_id": "4714378",
+      "tabela_medidas": {
+        "id": "",
+        "tipo": "",
+        "titulo": "",
+        "imagem": ""
+      },
+      "permite_embalagem": "0",
+      "permite_arquivo": "0",
+      "permite_recorrencia": "0",
+      "recorrencia_desconto": "0",
+      "tem_grade_adicional": "0",
+      "video_capa": "0",
+      "video_flutuante": "0",
+      "valores_base": {
+        "varejo": "",
+        "comparativo": "",
+        "custo": "",
+        "atacado": "",
+        "atacadomin": "",
+        "valorpromo": "0,00",
+        "data_promo_de": "",
+        "data_promo": ""
+      },
+      "seo_title": "",
+      "seo_description": "",
+      "seo_metatags": "",
+      "seo_scripts": "",
+      "seo_banner": {
+        "banner": "",
+        "banner_mobile": "",
+        "link": "",
+        "folder": "640c6297d2954"
+      },
+      "nome_cor": "",
+      "formato_cor": "0",
+      "termo_agrupador": "",
+      "localizacao": "",
+      "data_lancamento": "0000-00-00",
+      "total_comentarios": "11",
+      "comentarios_media": "5",
+      "marketplace_has_outros_anuncios": "0",
+      "campos_adicionais_raw": "",
+      "categoria_level1": {
+        "id": "293044",
+        "nome": "Sono e bem estar mental",
+        "url": "sono-e-bem-estar-mental",
+        "tabela": "1",
+        "google_category": ""
+      },
+      "categoria_level2": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "categoria_level3": {
+        "id": "0",
+        "nome": "",
+        "url": "",
+        "google_category": ""
+      },
+      "google_category": "Sono e bem estar mental",
+      "site_category": "Sono e bem estar mental",
+      "embalagem": {
+        "id": "23668",
+        "sigla": "Sedex 1",
+        "nome": "Pequena"
+      },
+      "combo": [],
+      "personalizador": [],
+      "isPromo": "",
+      "cat_add": "-230990;347719-",
+      "biquini": [],
+      "tem_lancamento": "",
+      "prazo_lancamento": "0",
+      "produto_online": "1",
+      "adicional_info": [],
+      "url_relative": "melatonina-para-sono/",
+      "url_absolute": "https://www.belabluebeauty.com.br/melatonina-para-sono/",
+      "isChild": "",
+      "is_schedule": "",
+      "estoque": [
+        {
+          "id": "4714378",
+          "sku": "1665328.293044.0",
+          "cod_estoque": "",
+          "peso": "0.05",
+          "comprimento": "16",
+          "largura": "12",
+          "altura": "8",
+          "visualizacoes": "19716",
+          "ativo": "1",
+          "variacao_posicao": "",
+          "preco_custo": "89.9",
+          "qtd_maxima": "0",
+          "gtin": "",
+          "atributos": [],
+          "reserva": [],
+          "erp_id": "",
+          "prazo_producao": "0",
+          "quantidade_em_estoque": "519",
+          "cor": {
+            "id": "",
+            "nome": "",
+            "primaria": "",
+            "secundaria": "",
+            "img": "",
+            "ativo": "",
+            "posicao": "0",
+            "nome_simples": ""
+          },
+          "variacao": {
+            "id": "",
+            "variacao_id": "",
+            "nome": "",
+            "valor": "",
+            "posicao": "",
+            "ativo": ""
+          },
+          "adicional_info": [],
+          "valores": [
+            {
+              "tabela_id": "1",
+              "tabela_nome": "Varejo",
+              "quantidade_minima": "1",
+              "valor": "120",
+              "valor_promo": "99",
+              "data_promo_de": "2025-04-26",
+              "data_promo": "2029-01-01",
+              "codigo": "1665328.293044.0",
+              "valor_comparativo": "120",
+              "isPromo": "1",
+              "valor_loja": []
+            }
+          ],
+          "fotos": [
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/todos-os-produtos-20-67d0aed5d2a59.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/todos-os-produtos-20-67d0aed5d2a59_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/indicado-para-2-67067291b7ab1.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/indicado-para-2-67067291b7ab1_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/indicado-para-3-670672924c93f.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/indicado-para-3-670672924c93f_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/indicado-para-670672920764b.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/indicado-para-670672920764b_mini.png"
+            },
+            {
+              "cor_id": "0",
+              "codigo": "",
+              "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/5-670672928ba2e.png",
+              "legenda": "",
+              "oculto": "0",
+              "video": "",
+              "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/5-670672928ba2e_mini.png"
+            }
+          ]
+        }
+      ],
+      "quantidade_total_variacoes": "1",
+      "fotos": [
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/todos-os-produtos-20-67d0aed5d2a59.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/todos-os-produtos-20-67d0aed5d2a59_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/indicado-para-2-67067291b7ab1.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/indicado-para-2-67067291b7ab1_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/indicado-para-3-670672924c93f.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/indicado-para-3-670672924c93f_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/indicado-para-670672920764b.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/indicado-para-670672920764b_mini.png"
+        },
+        {
+          "cor_id": "0",
+          "codigo": "",
+          "foto": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/5-670672928ba2e.png",
+          "legenda": "",
+          "oculto": "0",
+          "video": "",
+          "foto_mini": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/produtos/640c6297d2954/5-670672928ba2e_mini.png"
+        }
+      ],
+      "quantidade_total_visualizacoes": "19716",
+      "loja": {
+        "id": "19539",
+        "identificacao": "belabluebeauty",
+        "cidade": "Itajaí",
+        "uf": "SC",
+        "multiloja": "0",
+        "multicd": "0",
+        "nome_matriz": "BELA BLUE BEAUTY",
+        "nome": "BELA BLUE BEAUTY",
+        "cep_origem": "88301-100",
+        "url": "https://www.belabluebeauty.com.br",
+        "url_interna_matriz": "",
+        "logo": "https://cdn.sistemawbuy.com.br/arquivos/151fdeb7edfb1cd4d7dc3ef125d94060/config/logo-bela-blue-66d75766d8d4f1.png",
+        "isFilial": ""
+      }
+    }
+  ]
+}

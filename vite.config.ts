@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     port: 8080,
     host: true,
-    strictPort: true,
+    strictPort: false,
     hmr: {
       overlay: true,
     },

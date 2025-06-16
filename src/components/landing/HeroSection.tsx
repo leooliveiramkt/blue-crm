@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
@@ -71,7 +70,14 @@ export const HeroSection = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/10"></div>
           <div className="relative z-10 aspect-video p-2">
             <img
-              src="/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png"
+              src={
+                window.location.origin + '/lovable-uploads/d26651de-acd9-4751-833d-885496a264ea.png'
+              }
+              onError={e => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.src = '/logo.svg';
+              }}
               alt="Bela Blue CRM Dashboard"
               className="w-full rounded-lg shadow-xl transform hover:scale-[1.02] transition-all duration-500 ease-out hover:rotate-1"
             />

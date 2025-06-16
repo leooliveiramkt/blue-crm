@@ -17,11 +17,11 @@ export class WBuyService {
 
   private constructor() {
     // Carrega credenciais das variáveis de ambiente
-    this.apiUrl = process.env.WBUY_API_URL || '';
-    this.apiKey = process.env.WBUY_API_KEY || '';
-    this.storeId = process.env.WBUY_STORE_ID || '';
-    this.apiUser = process.env.WBUY_API_USER || '';
-    this.apiPassword = process.env.WBUY_API_PASSWORD || '';
+    this.apiUrl = process.env.WBUY_API_URL || 'https://sistema.sistemawbuy.com.br/api/v1';
+    this.apiKey = process.env.WBUY_API_KEY || 'eba83af0e5b1415182d267ef174cc2a9';
+    this.storeId = process.env.WBUY_STORE_ID || '384388';
+    this.apiUser = process.env.WBUY_API_USER || '61691da4-7fc8-419e-a06d-b9e021d75efc';
+    this.apiPassword = process.env.WBUY_API_PASSWORD || 'eba83af0e5b1415182d267ef174cc2a9';
 
     // Validação de segurança
     if (!this.apiUrl || !this.apiKey || !this.storeId || !this.apiUser || !this.apiPassword) {
@@ -38,8 +38,9 @@ export class WBuyService {
 
   private getHeaders() {
     return {
-      'Authorization': `Bearer ${process.env.WBUY_API_TOKEN}`,
-      'Content-Type': 'application/json'
+      'Authorization': `Bearer ${process.env.WBUY_API_TOKEN || 'NjE2OTFkYTQtN2ZjOC00MTllLWEwNmQtYjllMDIxZDc1ZWZjOmViYTgzYWYwZTViMTQxNTE4MmQyNjdlZjE3NGNjMmE5'}`,
+      'Content-Type': 'application/json',
+      'X-Store-ID': this.storeId
     };
   }
 

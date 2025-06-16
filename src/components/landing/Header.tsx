@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
@@ -15,23 +14,19 @@ export const Header = () => {
   return (
     <header className="container mx-auto px-4 py-6 flex justify-between items-center">
       <div className="flex items-center">
-        {themeConfig.logo ? (
-          <div className="logo-animated h-10 relative">
-            <div className="absolute -inset-1 rounded-lg bg-white/10 blur-lg"></div>
-            <img 
-              src={themeConfig.logo} 
-              alt={themeConfig.companyName} 
-              className="h-full w-auto object-contain relative brightness-125 filter" 
-            />
-          </div>
-        ) : (
-          <div className="relative">
-            <div className="absolute -inset-1 rounded-lg bg-white/10 blur"></div>
-            <span className="text-2xl font-bold relative text-white">
-              {themeConfig.companyName || "Blue CRM"}
-            </span>
-          </div>
-        )}
+        <div className="logo-animated h-10 relative">
+          <div className="absolute -inset-1 rounded-lg bg-white/10 blur-lg"></div>
+          <img 
+            src={themeConfig.logo || '/logo.png'}
+            alt={themeConfig.companyName || 'Blue CRM'}
+            className="h-full w-auto object-contain relative brightness-125 filter"
+            onError={e => {
+              const target = e.target as HTMLImageElement;
+              target.onerror = null;
+              target.src = '/logo.png';
+            }}
+          />
+        </div>
       </div>
       <Button 
         variant="outline" 

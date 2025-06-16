@@ -1,9 +1,9 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="50" viewBox="0 0 200 50">
   <style>
-    .text { font: bold 24px sans-serif; fill: #131b40; }
-    .background { fill: #001440; }
-    .butterfly { fill: none; stroke: #ddcdc0; stroke-width: 2.5; }
+    .text { font: bold 24px sans-serif; fill: #1A5F7A; }
+    .background { fill: #1A5F7A; }
+    .butterfly { fill: none; stroke: #86C8BC; stroke-width: 2.5; }
     
     @keyframes flutter {
       0%, 100% { transform: translateY(0); }
@@ -34,6 +34,6 @@
         stroke-linejoin="round" />
   </g>
   
-  <!-- Texto "Blue CRM" -->
-  <text x="50" y="33" class="text">Blue CRM</text>
+  <!-- Texto "Bela Blue" -->
+  <text x="50" y="33" class="text">Bela Blue</text>
 </svg>
