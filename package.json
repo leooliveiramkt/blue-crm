@@ -28,7 +28,9 @@
     "sync:stop": "pm2 stop wbuy-sync",
     "sync:logs": "pm2 logs wbuy-sync",
     "sync:status": "pm2 status wbuy-sync",
-    "test:wbuy": "ts-node --transpile-only src/scripts/testWBuyConnection.ts"
+    "test:wbuy": "ts-node --transpile-only src/scripts/testWBuyConnection.ts",
+    "preload:data": "ts-node --transpile-only src/scripts/preload-data.ts",
+    "preload:bela-blue": "ts-node --transpile-only src/scripts/preload-data.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
