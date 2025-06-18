@@ -65,7 +65,7 @@
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "cmdk": "^0.2.0",
+    "cmdk": "^1.1.1",
     "date-fns": "^3.0.0",
     "esbuild": "^0.25.4",
     "lovable-tagger": "^1.1.8",
