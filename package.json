@@ -69,7 +69,7 @@
     "date-fns": "^3.0.0",
     "esbuild": "^0.25.4",
     "lovable-tagger": "^1.1.8",
-    "lucide-react": "^0.323.0",
+    "lucide-react": "^0.522.0",
     "react": "^18.2.0",
     "react-day-picker": "^9.7.0",
     "react-dom": "^18.2.0",
