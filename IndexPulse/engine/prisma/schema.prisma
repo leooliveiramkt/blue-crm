@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id         String   @id @default(uuid())
+  nome       String
+  url        String   @unique
+  nicho      String
+  concorrente String?
+  cidade     String?
+  termo      String?
+  cargo      String?
+  email      String?
+  whatsapp   String?
+  faturamento String?
+  tamanho    String?
+  trafego    String?
+  ia         String?
+  wpUrl        String?
+  wpUser       String?
+  wpAppPass    String?
+  brandGuidelines String?
+  aiCurrentKnowledge String?
+  lastAiScanAt     DateTime?
+  agendouCall Boolean  @default(false)
+  isCustomer Boolean  @default(false)
+  autoPublishPills Boolean @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  reports    RadarReport[]
+  users      User[]
+  transponder Transponder?
+  pillulas   PillulaAutoridade[]
+  prLinks    PR_Link[]
+}
+
+model RadarReport {
+  id         String   @id @default(uuid())
+  numero     Int      @default(autoincrement()) @unique
+  companyId  String
+  status     String   // "CRÍTICO", "ALERTA", "SOBERANO"
+  radarScore Int      // 0-100
+  htmlDossier String
+  createdAt  DateTime @default(now())
+
+  company    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id         String   @id @default(uuid())
+  companyId  String
+  nome       String
+  email      String   @unique
+  senhaHash  String
+  isActive   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  company    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+model Transponder {
+  id         String   @id @default(uuid())
+  companyId  String   @unique
+  jsonLd     String   // O código Schema.org gerado
+  isInstalled Boolean @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  company    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+model PillulaAutoridade {
+  id         String   @id @default(uuid())
+  companyId  String
+  titulo     String
+  conteudoHtml String
+  status     String   @default("PENDING_APPROVAL") // "PENDING_APPROVAL", "APPROVED", "PUBLISHED"
+  plataforma String   // "LINKEDIN", "BLOG", "MEDIUM"
+  publicadoEm DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  company    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+model PR_Link {
+  id         String   @id @default(uuid())
+  companyId  String
+  titulo     String
+  url        String   @unique
+  plataforma String   // "LINKEDIN", "MEDIUM", "SUBSTACK", "REDDIT"
+  publicadoEm DateTime @default(now())
+  createdAt  DateTime @default(now())
+
+  company    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
