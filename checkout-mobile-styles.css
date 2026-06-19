@@ -1,0 +1,455 @@
+/**
+ * CHECKOUT MOBILE STYLES - CSS para Formulário Flutuante
+ * Design responsivo e otimizado para UX mobile
+ * Autor: Cursor AI para Marília Miranda
+ */
+
+/* ========== RESET E VARIÁVEIS ========== */
+:root {
+    --primary-color: #e91e63;
+    --secondary-color: #4ecdc4;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --error-color: #f44336;
+    --text-dark: #333;
+    --text-light: #666;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow: 0 4px 20px rgba(0,0,0,0.1);
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+/* ========== BOTÃO PARA ABRIR FORMULÁRIO FLUTUANTE ========== */
+.open-floating-checkout {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 18px 25px;
+    background: linear-gradient(135deg, var(--primary-color), #c2185b);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    display: block;
+    text-align: center;
+}
+
+.open-floating-checkout:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(233, 30, 99, 0.3);
+}
+
+/* ========== OVERLAY DO FORMULÁRIO FLUTUANTE ========== */
+.floating-form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 999999;
+    overflow-y: auto;
+    padding: 10px;
+    backdrop-filter: blur(5px);
+}
+
+/* ========== CONTAINER DO FORMULÁRIO ========== */
+.floating-form-container {
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    width: 100%;
+    max-width: 450px;
+    max-height: 95vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    margin: 20px 0;
+    animation: slideInUp 0.4s ease;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== CABEÇALHO DO FORMULÁRIO ========== */
+.floating-form-header {
+    background: linear-gradient(135deg, var(--primary-color), #c2185b);
+    color: white;
+    padding: 20px 25px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.floating-form-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.close-floating-form {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-floating-form:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* ========== CONTEÚDO DO FORMULÁRIO ========== */
+.floating-form-content {
+    padding: 25px;
+}
+
+/* ========== SEÇÕES DO FORMULÁRIO ========== */
+.form-section {
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.form-section h4 {
+    margin: 0 0 20px 0;
+    color: var(--text-dark);
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary-color);
+    display: inline-block;
+}
+
+/* ========== CAMPOS DE INPUT ========== */
+.floating-form-content input,
+.floating-form-content select {
+    width: 100%;
+    padding: 15px 18px;
+    margin-bottom: 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: var(--transition);
+    background: var(--bg-white);
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.floating-form-content input:focus,
+.floating-form-content select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+}
+
+.floating-form-content input::placeholder {
+    color: var(--text-light);
+    font-size: 15px;
+}
+
+/* ========== CAMPOS DE CARTÃO ========== */
+.card-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.card-row input {
+    margin-bottom: 0;
+}
+
+/* ========== OPÇÕES DE PAGAMENTO ========== */
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    background: var(--bg-white);
+}
+
+.payment-option:hover {
+    border-color: var(--secondary-color);
+    background: rgba(78, 205, 196, 0.05);
+}
+
+.payment-option input[type="radio"] {
+    width: auto;
+    margin: 0 12px 0 0;
+    transform: scale(1.2);
+}
+
+.payment-option span {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.payment-option input[type="radio"]:checked + span {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+/* ========== DIVISÃO DE VALORES (DOIS CARTÕES) ========== */
+.split-amount {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.split-amount label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.split-amount input {
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+/* ========== BOTÃO DE FINALIZAR COMPRA ========== */
+.complete-purchase-btn {
+    width: 100%;
+    padding: 18px 25px;
+    background: linear-gradient(135deg, var(--success-color), #388e3c);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 20px;
+    box-shadow: var(--shadow);
+}
+
+.complete-purchase-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(76, 175, 80, 0.3);
+}
+
+.complete-purchase-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ========== VALIDAÇÃO VISUAL ========== */
+.floating-form-content input.valid {
+    border-color: var(--success-color);
+    background: rgba(76, 175, 80, 0.05);
+}
+
+.floating-form-content input.invalid {
+    border-color: var(--error-color);
+    background: rgba(244, 67, 54, 0.05);
+}
+
+.floating-form-content input.valid:focus {
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.floating-form-content input.invalid:focus {
+    box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
+}
+
+/* ========== INDICADORES DE SEGURANÇA ========== */
+.security-badges {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    opacity: 0.7;
+}
+
+.security-badge {
+    font-size: 12px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ========== LOADING STATE ========== */
+.loading .complete-purchase-btn {
+    background: var(--text-light);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* ========== RESPONSIVIDADE ========== */
+@media (max-width: 480px) {
+    .floating-form-overlay {
+        padding: 5px;
+    }
+    
+    .floating-form-container {
+        margin: 10px 0;
+        border-radius: 8px;
+    }
+    
+    .floating-form-header {
+        padding: 15px 20px;
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .floating-form-header h3 {
+        font-size: 18px;
+    }
+    
+    .floating-form-content {
+        padding: 20px;
+    }
+    
+    .form-section {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+    }
+    
+    .floating-form-content input,
+    .floating-form-content select {
+        padding: 12px 15px;
+        font-size: 16px; /* Evita zoom no iOS */
+    }
+    
+    .card-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .payment-option {
+        padding: 12px;
+    }
+    
+    .complete-purchase-btn {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+}
+
+/* ========== LANDSCAPE MOBILE ========== */
+@media (max-height: 600px) and (orientation: landscape) {
+    .floating-form-container {
+        max-height: 90vh;
+    }
+    
+    .floating-form-header {
+        position: sticky;
+        top: 0;
+    }
+}
+
+/* ========== MELHORIAS DE ACESSIBILIDADE ========== */
+.floating-form-content input:focus,
+.floating-form-content select:focus,
+.payment-option:focus-within,
+.complete-purchase-btn:focus {
+    outline: 3px solid rgba(78, 205, 196, 0.3);
+    outline-offset: 2px;
+}
+
+/* ========== ANIMAÇÕES SUAVES ========== */
+.form-section {
+    animation: fadeInUp 0.6s ease;
+    animation-fill-mode: both;
+}
+
+.form-section:nth-child(1) { animation-delay: 0.1s; }
+.form-section:nth-child(2) { animation-delay: 0.2s; }
+.form-section:nth-child(3) { animation-delay: 0.3s; }
+.form-section:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== DARK MODE (OPCIONAL) ========== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-dark: #ffffff;
+        --text-light: #cccccc;
+        --bg-light: #2c2c2c;
+        --bg-white: #1e1e1e;
+        --border-color: #404040;
+    }
+    
+    .floating-form-container {
+        background: var(--bg-white);
+        border: 1px solid var(--border-color);
+    }
+    
+    .floating-form-content input,
+    .floating-form-content select {
+        background: var(--bg-white);
+        color: var(--text-dark);
+        border-color: var(--border-color);
+    }
+    
+    .payment-option {
+        background: var(--bg-white);
+        border-color: var(--border-color);
+    }
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+    .floating-form-overlay {
+        display: none !important;
+    }
+}
